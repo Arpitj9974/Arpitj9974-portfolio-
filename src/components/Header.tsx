@@ -35,9 +35,10 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, onToggle
   return (
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-300">
       {/* Top micro-banner */}
-      <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[10px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center">
-        <span>[ SURAT, GUJARAT, INDIA // FULL-STACK BUILDER & FINANCE ]</span>
-        <div className="flex items-center space-x-4">
+      <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
+        <span className="hidden sm:inline">[ SURAT, GUJARAT, INDIA // FULL-STACK BUILDER & FINANCE ]</span>
+        <span className="inline sm:hidden">[ SURAT, IN // BUILDER & FINANCE ]</span>
+        <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
           <span className="hidden md:inline text-accent font-medium">• LIVE PORTFOLIO TERMINAL</span>
           <span className="text-paper/60">IST {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' })}</span>
         </div>
@@ -59,7 +60,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, onToggle
 
         {/* Navigation */}
         <div className="flex flex-wrap items-center gap-4 md:gap-6 w-full md:w-auto">
-          <nav className="flex items-center space-x-5 text-sm font-medium">
+          <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 md:gap-x-5 text-xs md:text-sm font-medium">
             {navItems.map((item) => (
               <button
                 key={item.id}

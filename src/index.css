@@ -43,6 +43,11 @@
   --color-charcoal-900: #14110e;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
