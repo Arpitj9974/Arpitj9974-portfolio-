@@ -66,3 +66,36 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--color-accent) !important;
   box-ring: 2px var(--color-accent);
 }
+
+/* Print CSS to download resume seamlessly and beautifully with exact formatting */
+@media print {
+  /* Hide every single layout item */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Show only the target resume container and its contents */
+  #resume-print-root, #resume-print-root * {
+    visibility: visible !important;
+  }
+  
+  /* Position target container perfectly */
+  #resume-print-root {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    visibility: visible !important;
+  }
+
+  /* Specific sizing for pristine standard A4 pages */
+  @page {
+    size: A4;
+    margin: 0.4in 0.5in;
+  }
+}
+

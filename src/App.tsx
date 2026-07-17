@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ResumeModal from "./components/ResumeModal";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
 import { 
@@ -37,6 +38,11 @@ export default function App() {
   const [contactMessage, setContactMessage] = useState("");
   const [contactSuccess, setContactSuccess] = useState(false);
   const [messagesLog, setMessagesLog] = useState<{ name: string; email: string; message: string; date: string }[]>([]);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+
+  const handleDownloadResume = () => {
+    setIsResumeModalOpen(true);
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -120,22 +126,11 @@ export default function App() {
                       <ArrowRight size={14} />
                     </button>
                     <button 
-                      onClick={() => {
-                        // Trigger a professional formatted text resume download
-                        const element = document.createElement("a");
-                        const file = new Blob([
-                          `ARPIT JAISWAL\n====================\n\nFull-Stack Builder & Finance Specialist\nLocation: Surat, Gujarat, India\nEmail: jaiswalarpit428@gmail.com\nPhone: +91 9624997427\nLinkedIn: https://linkedin.com/in/Arpit-Jaiswal9974\nGitHub: https://github.com/Arpitj9974\n\nSUMMARY\n--------------------\nFull-stack builder with a deep finance background. Eight products shipped and running.\n\nEDUCATION\n--------------------\n* BCA (Batch of 2026)\n* MBA in Analytics & Data Science + Project Management - Manipal University Jaipur\n\nTECHNICAL SKACK & TOOLKIT\n--------------------\n* Frontend: React, TypeScript, Tailwind CSS, Vite, Framer Motion\n* Backend: Node.js, Express, Firebase Firestore, REST APIs\n* Data: Financial Modelling, SQL, Data Analytics, Python\n\nSHIPPED PRODUCTS\n--------------------\n1. Study Tracker AJ (Exam prep management platform)\n2. FreshStamp (AI-Powered Household Expiry Tracker)\n3. Career Library (Comprehensive Career Exploration Platform)\n4. Career Assessment Test - WSCAT (AI-powered psychometric assessment & roadmap generator)\n5. ARWS RAW (HR Call Intelligence background application)\n6. medicine-extraction (AI pharmaceutical data digitalizer)\n7. ar-auagpt (Precious metals live pricing engine)`
-                        ], {type: 'text/plain;charset=utf-8'});
-                        element.href = URL.createObjectURL(file);
-                        element.download = "Arpit_Jaiswal_Resume.txt";
-                        document.body.appendChild(element);
-                        element.click();
-                        document.body.removeChild(element);
-                      }}
+                      onClick={handleDownloadResume}
                       className="px-5 py-3 border border-ink/25 hover:border-ink text-ink text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer"
                     >
                       <FileText size={14} />
-                      <span>Download Resume</span>
+                      <span>View &amp; Print Resume</span>
                     </button>
                     
                     <div className="flex items-center gap-3 sm:ml-2 border-t sm:border-t-0 sm:border-l border-ink/10 pt-4 sm:pt-0 sm:pl-5">
@@ -2394,6 +2389,9 @@ export default function App() {
 
       {/* Footer Element */}
       <Footer scrollToTop={scrollToTop} />
+
+      {/* Interactive Printable Resume Modal */}
+      <ResumeModal isOpen={isResumeModalOpen} onClose={() => setIsResumeModalOpen(false)} />
 
     </div>
   );
