@@ -220,7 +220,7 @@ export default function App() {
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">FOCUS:</span>
-                      <span className="text-ink font-bold">Full-Stack & Finance</span>
+                      <span className="text-ink font-bold">Full-Stack, Finance & PM</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted">STATUS:</span>
