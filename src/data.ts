@@ -326,7 +326,7 @@ export const PROJECTS: Project[] = [
     subtitle: "The Invisible HR Call Intelligence Layer",
     description: "HR staff were spending 30–60 minutes a day typing call logs into a spreadsheet. RAW does it invisibly.",
     longDescription: "Runs in the background, detects when a call ends, filters it by the company SIM, and pushes it to a Google Sheet in real time. Personal SIM calls never leave the phone — that boundary is enforced at two independent points in the code, by design. No internet? The call is stored locally and uploaded when the network returns. A four-layer duplicate-prevention system means the same call can never appear twice, even after a failed retry. The entire backend is a 133-line Google Apps Script — zero hosting cost, because the client had no infrastructure and no budget.",
-    year: "2024",
+    year: "2026",
     category: "Mobile",
     stack: [
       "Kotlin",
@@ -336,7 +336,7 @@ export const PROJECTS: Project[] = [
       "Google Sheets"
     ],
     role: "Lead Systems & Mobile Architect",
-    timeline: "2 Months (Q3 2024)",
+    timeline: "2 Months (Completed Q3 2026)",
     client: "ARWS HR Operations",
     outcome: "Successfully automated 100% of candidate tracking logs across company devices, saving 45–60 minutes of daily administrative overhead per HR personnel with a provable 0% duplicate record rate.",
     problem: "In high-volume SME recruitment, HR staff carry dual-SIM phones (personal and company). They are expected to manually log dozens of candidate and client calls (number, duration, time, type) into spreadsheets daily. This manual reporting causes memory-loss errors, delayed intelligence, and wastes 30–60 minutes of daily productive time.",
