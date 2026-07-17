@@ -203,7 +203,7 @@ export default function App() {
                 </div>
 
                 {/* Right portrait / details card */}
-                <div className="lg:col-span-4 bg-surface-container p-6 space-y-4 border border-ink/5 relative group">
+                <div className="lg:col-span-4 bg-surface-container p-6 space-y-4 border border-ink/5 relative group max-w-sm lg:max-w-none mx-auto lg:mx-0 w-full">
                   <div className="aspect-[4/5] bg-ink/10 overflow-hidden relative border border-ink/10">
                     <img 
                       src={PORTFOLIO_OWNER.portraitUrl}
