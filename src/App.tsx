@@ -282,7 +282,7 @@ export default function App() {
               <section className="space-y-8" id="home-selected-work">
                 <div className="flex justify-between items-end border-b border-ink/15 pb-4">
                   <div>
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// 04 / PORTFOLIO SHIPPED PRODUCTS</span>
+                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// PORTFOLIO SHIPPED PRODUCTS</span>
                     <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink mt-1">
                       Selected Systems Work
                     </h2>
@@ -2163,7 +2163,7 @@ export default function App() {
                   <div className="bg-surface-container p-6 border border-ink/5 space-y-4">
                     <div className="flex items-center gap-2">
                       <BookOpen size={16} className="text-accent" />
-                      <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">07 // EDUCATION</span>
+                      <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">EDUCATION</span>
                     </div>
                     
                     <div className="space-y-4">
@@ -2184,7 +2184,7 @@ export default function App() {
                   <div className="bg-surface-container p-6 border border-ink/5 space-y-4">
                     <div className="flex items-center gap-2">
                       <Award size={16} className="text-accent" />
-                      <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">08 // CERTIFICATIONS</span>
+                      <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">CERTIFICATIONS</span>
                     </div>
                     
                     <div className="space-y-3.5">
