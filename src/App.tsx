@@ -211,9 +211,6 @@ export default function App() {
                       className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute bottom-2 left-2 bg-ink/80 text-paper px-2 py-0.5 text-[9px] font-mono tracking-widest uppercase">
-                      FIG 01. SYSTEMS & ANALYTICS WORKSPACE
-                    </div>
                   </div>
                   
                   <div className="space-y-2 font-mono text-xs">
