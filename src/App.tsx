@@ -21,7 +21,8 @@ import {
   Mail,
   Linkedin,
   Github,
-  Award
+  Award,
+  BookOpen
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -369,25 +370,59 @@ export default function App() {
                 </div>
               </section>
 
-              {/* SECTION 06: TOOLKIT */}
-              <section className="space-y-6" id="home-toolkit">
-                <span className="text-xs font-mono text-accent tracking-widest block uppercase">// 06 / THE TOOLKIT</span>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {PORTFOLIO_OWNER.toolkit.map((col, idx) => (
-                    <div key={idx} className="border border-ink/10 p-5 bg-paper space-y-4">
-                      <h3 className="font-mono text-xs font-bold text-ink border-b border-ink/10 pb-2 uppercase tracking-wider">
-                        {col.category}
-                      </h3>
-                      <ul className="space-y-2.5">
-                        {col.items.map((item, i) => (
-                          <li key={i} className="flex items-center gap-2 text-xs font-mono text-muted">
-                            <span className="h-1.5 w-1.5 bg-accent" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+              {/* SECTION 06: SKILLS & ARCHITECTURE */}
+              <section className="space-y-10" id="home-toolkit">
+                <div className="space-y-2">
+                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// 06 / SKILLS & TECHNICAL CAPABILITIES</span>
+                  <h2 className="text-2xl md:text-3xl font-serif font-bold text-ink tracking-tight">
+                    Professional Capabilities
+                  </h2>
+                </div>
+
+                {/* Subsection A: What I Do */}
+                <div className="space-y-4">
+                  <h3 className="text-xs font-mono font-bold text-muted uppercase tracking-widest flex items-center gap-2">
+                    <span className="h-1 w-3 bg-accent" />
+                    <span>What I Do — Strategic Domains</span>
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {PORTFOLIO_OWNER.skills.whatIDo.map((col, idx) => (
+                      <div key={idx} className="border border-ink/10 p-5 bg-paper space-y-4 flex flex-col justify-between">
+                        <div className="space-y-3">
+                          <h4 className="font-mono text-xs font-bold text-ink border-b border-ink/5 pb-2 uppercase tracking-wider flex items-center justify-between">
+                            <span>{col.category}</span>
+                            <span className="text-accent/65 font-light text-[10px]">0{idx + 1}</span>
+                          </h4>
+                          <ul className="space-y-2">
+                            {col.items.map((item, i) => (
+                              <li key={i} className="flex items-start gap-2 text-xs font-sans text-muted leading-relaxed">
+                                <span className="h-1 w-1 bg-accent/60 rounded-full mt-1.5 shrink-0" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Subsection B: Tech I Build With */}
+                <div className="space-y-4 border-t border-ink/10 pt-8">
+                  <h3 className="text-xs font-mono font-bold text-muted uppercase tracking-widest flex items-center gap-2">
+                    <span className="h-1 w-3 bg-accent" />
+                    <span>Tech I Build With — Tools & Systems</span>
+                  </h3>
+                  <div className="flex flex-wrap gap-2.5">
+                    {PORTFOLIO_OWNER.skills.techBuildWith.map((tech, idx) => (
+                      <span 
+                        key={idx} 
+                        className="bg-surface-container border border-ink/5 text-xs font-mono text-ink px-3 py-1.5 rounded-sm hover:border-accent/30 hover:bg-surface-container-high transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </section>
 
@@ -2121,24 +2156,64 @@ export default function App() {
                   ))}
                 </div>
 
-                {/* Right side Certifications & Toolkit list (Span 4) */}
+                 {/* Right side Education & Certifications (Span 4) */}
                 <div className="lg:col-span-4 space-y-6">
                   
+                  {/* Education Section */}
+                  <div className="bg-surface-container p-6 border border-ink/5 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <BookOpen size={16} className="text-accent" />
+                      <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">07 // EDUCATION</span>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {PORTFOLIO_OWNER.education.map((edu, idx) => (
+                        <div key={idx} className="p-3 bg-paper border border-ink/5 space-y-1.5 rounded-sm">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-serif font-bold text-sm text-ink">{edu.degree}</span>
+                            <span className="text-[10px] font-mono text-accent bg-accent/5 px-1.5 py-0.5 rounded-sm">{edu.duration}</span>
+                          </div>
+                          <p className="text-xs font-sans text-ink leading-relaxed">{edu.specialization}</p>
+                          <p className="text-[11px] font-mono text-muted">{edu.institution}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Credentials / Certifications */}
                   <div className="bg-surface-container p-6 border border-ink/5 space-y-4">
                     <div className="flex items-center gap-2">
                       <Award size={16} className="text-accent" />
-                      <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">CERTIFICATIONS & TRAINING</span>
+                      <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">08 // CERTIFICATIONS</span>
                     </div>
                     
-                    <ul className="space-y-3 font-mono text-xs">
+                    <div className="space-y-3.5">
                       {PORTFOLIO_OWNER.certifications.map((cert, idx) => (
-                        <li key={idx} className="p-2.5 bg-paper border border-ink/5 flex items-start gap-2 text-ink/90">
-                          <span className="text-accent">✔</span>
-                          <span>{cert}</span>
-                        </li>
+                        <div key={idx} className="p-3 bg-paper border border-ink/5 space-y-2 rounded-sm hover:border-accent/15 transition-colors">
+                          <div className="space-y-0.5">
+                            <h4 className="font-sans font-bold text-xs text-ink leading-tight">{cert.name}</h4>
+                            <div className="flex items-center gap-2 text-[10px] font-mono text-muted">
+                              <span>{cert.issuer}</span>
+                              <span>•</span>
+                              <span>{cert.date}</span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-1.5 pt-1 border-t border-ink/5">
+                            <div className="text-[10px] font-mono text-muted flex items-center justify-between">
+                              <span>ID: <code className="text-ink">{cert.credentialId}</code></span>
+                            </div>
+                            <a 
+                              href={cert.url} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="text-[10px] font-mono text-accent hover:text-accent-high font-bold flex items-center gap-0.5 transition-colors cursor-pointer self-start"
+                            >
+                              Show credential ↗
+                            </a>
+                          </div>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
                   {/* Systems logic sidebar card */}

@@ -23,11 +23,96 @@ export const PORTFOLIO_OWNER = {
     { label: "Active Integrations", value: "05" },
     { label: "Data Science Skills", value: "Expert" }
   ],
-  toolkit: [
-    { category: "SYSTEMS DESIGN", items: ["Information Architecture", "Interface Mechanics", "Figma Prototyping", "State Management Flow"] },
-    { category: "TECHNICAL STACK", items: ["React / TypeScript", "Tailwind CSS / Vite", "Node.js & Express", "D3.js / Recharts"] },
-    { category: "FINANCE & DATA", items: ["Financial Modelling", "Data Analytics", "SQL / Databases", "Project Management"] }
-  ],
+  skills: {
+    whatIDo: [
+      {
+        category: "Project & Product",
+        items: [
+          "Project coordination",
+          "Requirement gathering",
+          "Scope definition",
+          "Stakeholder communication",
+          "Product roadmapping",
+          "Documentation & technical specs",
+          "Delivery ownership"
+        ]
+      },
+      {
+        category: "Systems & Process",
+        items: [
+          "Business process analysis",
+          "Process automation",
+          "Workflow design",
+          "Systems design",
+          "Data infrastructure",
+          "Requirements-to-architecture translation"
+        ]
+      },
+      {
+        category: "Data & Analysis",
+        items: [
+          "SQL",
+          "Python",
+          "Power BI",
+          "Tableau",
+          "Advanced Excel",
+          "Decision-making & analysis",
+          "Reporting"
+        ]
+      },
+      {
+        category: "Automation",
+        items: [
+          "n8n",
+          "Make",
+          "Google Apps Script",
+          "SheetDB",
+          "API integration"
+        ]
+      },
+      {
+        category: "AI Orchestration",
+        items: [
+          "Prompt engineering",
+          "Structured output design",
+          "Multi-provider AI routing",
+          "AI IDE agents (Antigravity)",
+          "Google Gemini",
+          "Claude",
+          "Groq",
+          "NotebookLM"
+        ]
+      },
+      {
+        category: "Domain",
+        items: [
+          "Finance operations",
+          "Lending operations",
+          "EdTech",
+          "AgriTech",
+          "Retail"
+        ]
+      }
+    ],
+    techBuildWith: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "MongoDB",
+      "Firebase",
+      "Supabase",
+      "Kotlin (Android)",
+      "Python (FastAPI)",
+      "Tailwind CSS",
+      "Vite",
+      "Git",
+      "Vercel",
+      "Render",
+      "Railway"
+    ]
+  },
   experience: [
     {
       role: "Finance Operations Lead & Systems Builder",
@@ -65,11 +150,49 @@ export const PORTFOLIO_OWNER = {
       skills: ["Gemini AI", "AI Automation", "System Design", "API Integration"]
     }
   ],
+  education: [
+    {
+      degree: "MBA",
+      specialization: "Analytics & Data Science + Project Management (dual specialization)",
+      institution: "Manipal University Jaipur",
+      duration: "2026 – 2028"
+    },
+    {
+      degree: "BCA",
+      specialization: "Bachelor of Computer Applications",
+      institution: "Bhagwan Mahavir University, Surat",
+      duration: "2023 – 2026"
+    }
+  ],
   certifications: [
-    "MBA Candidate (Analytics & Data Science + Project Management)",
-    "BCA Graduate (Batch of 2026)",
-    "Google UX Design Professional Certificate",
-    "Systems Architecture Master Class"
+    {
+      name: "Google Prompting Essentials Specialization",
+      issuer: "Google",
+      date: "Aug 2025",
+      credentialId: "NFF6BEFXNP9X",
+      url: "https://coursera.org/verify/specialization/NFF6BEFXNP9X"
+    },
+    {
+      name: "Mastering Data Structures and Algorithms in C and C++",
+      issuer: "Udemy",
+      date: "Oct 2025",
+      credentialId: "UC-0e9d4f63-26db-4803-8381-ffd8971f1863",
+      url: "https://www.udemy.com/certificate/UC-0e9d4f63-26db-4803-8381-ffd8971f1863/"
+    },
+    {
+      name: "Java Programming — Beginner to Master",
+      issuer: "Udemy",
+      date: "Jan 2025",
+      credentialId: "UC-53933d4d-b063-4c0d-a818-ecd3ecb92ba4",
+      url: "https://www.udemy.com/certificate/UC-53933d4d-b063-4c0d-a818-ecd3ecb92ba4/"
+    },
+    {
+      name: "C++ Programming — Beginner to Advance, Deep Dive in C++",
+      issuer: "Udemy",
+      date: "Dec 2024",
+      credentialId: "UC-bfe2b6ce-8811-4c45-a332-c11a2fc357b4",
+      url: "https://www.udemy.com/certificate/UC-bfe2b6ce-8811-4c45-a332-c11a2fc357b4/"
+    }
   ]
 };
 
