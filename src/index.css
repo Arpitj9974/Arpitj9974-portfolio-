@@ -1,16 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  
+/* Light theme (default) */
+:root {
   --color-paper: #fdf8f7;
   --color-surface-container: #f1edec;
   --color-ink: #1c1b1b;
   --color-muted: #635e55;
   --color-accent: #ba1a1a;
+}
+
+/* Dark theme */
+:root.dark {
+  --color-paper: #121111;
+  --color-surface-container: #1e1c1c;
+  --color-ink: #ede0de;
+  --color-muted: #a09a90;
+  --color-accent: #ff6b6b;
+}
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  
+  --color-paper: var(--color-paper);
+  --color-surface-container: var(--color-surface-container);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-accent: var(--color-accent);
   
   /* Additional neutral palettes for transitions and sub-elements */
   --color-charcoal-50: #fcfbfb;
@@ -31,6 +49,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom editorial borders and structural grids */

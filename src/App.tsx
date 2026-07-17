@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ResumeModal from "./components/ResumeModal";
 import PrintableResume from "./components/PrintableResume";
+import TypingText from "./components/TypingText";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
 import { 
@@ -42,6 +43,27 @@ export default function App() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [contactError, setContactError] = useState("");
+
+  // Dark mode
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDarkMode) {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDarkMode]);
+
+  const toggleTheme = () => setIsDarkMode(prev => !prev);
 
 
   const handleDownloadResume = () => {
@@ -109,7 +131,11 @@ export default function App() {
         setCurrentTab={(tab) => {
           setCurrentTab(tab);
           setSelectedCaseStudy(null);
-        }} 
+        }}
+        isDarkMode={isDarkMode}
+        onToggleTheme={toggleTheme}
+        onOpenResumeModal={() => setIsResumeModalOpen(true)}
+        onDownloadResume={handleDownloadResume}
       />
 
       {/* Main Container Content */}
@@ -132,7 +158,7 @@ export default function App() {
                 <div className="lg:col-span-8 space-y-6">
                   <span className="text-xs font-mono text-accent tracking-widest block uppercase">// THE MISSION STATEMENT</span>
                   <h1 className="font-serif text-4xl md:text-6xl font-extrabold tracking-tight text-ink leading-[1.1]">
-                    {PORTFOLIO_OWNER.tagline}
+                    <TypingText text={PORTFOLIO_OWNER.tagline} speed={40} />
                   </h1>
                   <p className="text-sm md:text-base text-muted font-light leading-relaxed max-w-3xl">
                     {PORTFOLIO_OWNER.subLine}
@@ -209,7 +235,7 @@ export default function App() {
               </section>
 
               {/* SECTION 02: THE BACKSTORY */}
-              <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 pt-6" id="home-backstory">
+              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 pt-6" id="home-backstory">
                 <div className="lg:col-span-4 space-y-4">
                   <span className="text-xs font-mono text-accent tracking-widest block uppercase">// THE BACKSTORY</span>
                   <h2 className="text-3xl md:text-4xl font-serif font-extrabold tracking-tight text-ink leading-tight">
@@ -268,10 +294,10 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-              </section>
+              </motion.section>
 
               {/* SECTION 03: PROOF IN NUMBERS */}
-              <section className="bg-surface-container py-12 px-6 md:px-12 border border-ink/5" id="home-numbers">
+              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="bg-surface-container py-12 px-6 md:px-12 border border-ink/5" id="home-numbers">
                 <span className="text-xs font-mono text-accent tracking-widest block uppercase mb-8">// PROOF IN NUMBERS</span>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 divide-y lg:divide-y-0 lg:divide-x divide-ink/10">
                   {PORTFOLIO_OWNER.stats.map((stat, idx) => (
@@ -285,10 +311,10 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-              </section>
+              </motion.section>
 
               {/* SECTION 04: SELECTED WORK PREVIEW */}
-              <section className="space-y-8" id="home-selected-work">
+              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="space-y-8" id="home-selected-work">
                 <div className="flex justify-between items-end border-b border-ink/15 pb-4">
                   <div>
                     <span className="text-xs font-mono text-accent tracking-widest block uppercase">// PORTFOLIO SHIPPED PRODUCTS</span>
@@ -351,10 +377,10 @@ export default function App() {
                     </div>
                   )}
                 </div>
-              </section>
+              </motion.section>
 
               {/* SECTION 05: HOW I WORK / PHILOSOPHY */}
-              <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12" id="home-philosophy">
+              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12" id="home-philosophy">
                 <div className="lg:col-span-4 space-y-4">
                   <span className="text-xs font-mono text-accent tracking-widest block uppercase">// WORK PHILOSOPHY</span>
                   <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink">
@@ -377,10 +403,10 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-              </section>
+              </motion.section>
 
               {/* SECTION 06: SKILLS & ARCHITECTURE */}
-              <section className="space-y-10" id="home-toolkit">
+              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="space-y-10" id="home-toolkit">
                 <div className="space-y-2">
                   <span className="text-xs font-mono text-accent tracking-widest block uppercase">// SKILLS & TECHNICAL CAPABILITIES</span>
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-ink tracking-tight">
@@ -433,7 +459,7 @@ export default function App() {
                     ))}
                   </div>
                 </div>
-              </section>
+              </motion.section>
 
             </motion.div>
           )}
@@ -2424,15 +2450,12 @@ export default function App() {
       {/* Footer Element */}
       <Footer scrollToTop={scrollToTop} />
 
-      {/* Interactive Printable Resume Modal */}
-      <ResumeModal isOpen={isResumeModalOpen} onClose={() => setIsResumeModalOpen(false)} />
-
-      {/* Hidden high-fidelity template for single-click PDF generation */}
-      <div style={{ position: "absolute", top: "-10000px", left: "-10000px" }}>
-        <div id="resume-download-target" style={{ width: "7.47in" }}>
-          <PrintableResume isModal={false} />
-        </div>
-      </div>
+      {/* Interactive PDF Resume Modal */}
+      <ResumeModal 
+        isOpen={isResumeModalOpen} 
+        onClose={() => setIsResumeModalOpen(false)} 
+        onDownload={handleDownloadResume}
+      />
 
     </div>
   );
