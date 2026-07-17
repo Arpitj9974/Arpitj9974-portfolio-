@@ -1,5 +1,5 @@
 import React from "react";
-import { Terminal, LineChart } from "lucide-react";
+import { Terminal, LineChart, Download } from "lucide-react";
 
 interface HeaderProps {
   currentTab: string;
@@ -13,6 +13,15 @@ export default function Header({ currentTab, setCurrentTab }: HeaderProps) {
     { id: "experience", label: "Experience" },
     { id: "contact", label: "Contact" }
   ];
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/Arpit_Jaiswal_Resume_.pdf';
+    link.download = 'Arpit_Jaiswal_Resume_.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-200">
@@ -58,6 +67,16 @@ export default function Header({ currentTab, setCurrentTab }: HeaderProps) {
                 )}
               </button>
             ))}
+
+            {/* Resume Download Button */}
+            <button
+              onClick={handleDownloadResume}
+              title="Download Resume"
+              className="flex items-center gap-1.5 px-3 py-1.5 border border-ink/30 hover:border-accent hover:text-accent text-muted text-xs font-mono tracking-wider transition-all duration-150 cursor-pointer"
+            >
+              <Download size={13} />
+              <span>Resume</span>
+            </button>
           </nav>
         </div>
       </div>

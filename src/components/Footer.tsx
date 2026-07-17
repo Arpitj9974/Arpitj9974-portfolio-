@@ -42,7 +42,7 @@ export default function Footer({ scrollToTop }: FooterProps) {
               </li>
               <li>
                 <a 
-                  href="https://linkedin.com" 
+                  href={`https://${PORTFOLIO_OWNER.contactInfo.linkedin}`} 
                   target="_blank" 
                   rel="noreferrer"
                   className="flex items-center gap-2 text-muted hover:text-accent transition-colors"
@@ -53,7 +53,7 @@ export default function Footer({ scrollToTop }: FooterProps) {
               </li>
               <li>
                 <a 
-                  href="https://github.com" 
+                  href={`https://${PORTFOLIO_OWNER.contactInfo.github}`} 
                   target="_blank" 
                   rel="noreferrer"
                   className="flex items-center gap-2 text-muted hover:text-accent transition-colors"

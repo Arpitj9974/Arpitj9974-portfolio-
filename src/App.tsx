@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ResumeModal from "./components/ResumeModal";
+import PrintableResume from "./components/PrintableResume";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
 import { 
@@ -39,9 +40,17 @@ export default function App() {
   const [contactSuccess, setContactSuccess] = useState(false);
   const [messagesLog, setMessagesLog] = useState<{ name: string; email: string; message: string; date: string }[]>([]);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [contactError, setContactError] = useState("");
+
 
   const handleDownloadResume = () => {
-    setIsResumeModalOpen(true);
+    const link = document.createElement('a');
+    link.href = '/Arpit_Jaiswal_Resume_.pdf';
+    link.download = 'Arpit_Jaiswal_Resume_.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const scrollToTop = () => {
@@ -52,26 +61,38 @@ export default function App() {
     scrollToTop();
   }, [currentTab, selectedCaseStudy]);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactEmail.trim() || !contactMessage.trim()) return;
 
-    const newMsg = {
-      name: contactName || "Anonymous Visitor",
-      email: contactEmail,
-      message: contactMessage,
-      date: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
-    };
+    setIsSending(true);
+    setContactError("");
 
-    setMessagesLog([newMsg, ...messagesLog]);
-    setContactSuccess(true);
-    setContactName("");
-    setContactEmail("");
-    setContactMessage("");
+    try {
+      const response = await fetch("https://formspree.io/f/xqerpwoz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          name: contactName || "Anonymous Visitor",
+          email: contactEmail,
+          message: contactMessage
+        })
+      });
 
-    setTimeout(() => {
-      setContactSuccess(false);
-    }, 5000);
+      if (response.ok) {
+        setContactSuccess(true);
+        setContactName("");
+        setContactEmail("");
+        setContactMessage("");
+        setTimeout(() => setContactSuccess(false), 6000);
+      } else {
+        setContactError("Transmission failed. Please try emailing directly.");
+      }
+    } catch {
+      setContactError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   // Filter project listing
@@ -109,7 +130,7 @@ export default function App() {
               {/* SECTION 01: HERO STATEMENT */}
               <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start" id="home-hero">
                 <div className="lg:col-span-8 space-y-6">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// 01 / THE MISSION STATEMENT</span>
+                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// THE MISSION STATEMENT</span>
                   <h1 className="font-serif text-4xl md:text-6xl font-extrabold tracking-tight text-ink leading-[1.1]">
                     {PORTFOLIO_OWNER.tagline}
                   </h1>
@@ -124,13 +145,6 @@ export default function App() {
                     >
                       <span>View Work</span>
                       <ArrowRight size={14} />
-                    </button>
-                    <button 
-                      onClick={handleDownloadResume}
-                      className="px-5 py-3 border border-ink/25 hover:border-ink text-ink text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer"
-                    >
-                      <FileText size={14} />
-                      <span>View &amp; Print Resume</span>
                     </button>
                     
                     <div className="flex items-center gap-3 sm:ml-2 border-t sm:border-t-0 sm:border-l border-ink/10 pt-4 sm:pt-0 sm:pl-5">
@@ -197,7 +211,7 @@ export default function App() {
               {/* SECTION 02: THE BACKSTORY */}
               <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 pt-6" id="home-backstory">
                 <div className="lg:col-span-4 space-y-4">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// 02 / THE BACKSTORY</span>
+                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// THE BACKSTORY</span>
                   <h2 className="text-3xl md:text-4xl font-serif font-extrabold tracking-tight text-ink leading-tight">
                     I did not start in tech.<br />
                     <span className="text-accent">I started in money.</span>
@@ -258,7 +272,7 @@ export default function App() {
 
               {/* SECTION 03: PROOF IN NUMBERS */}
               <section className="bg-surface-container py-12 px-6 md:px-12 border border-ink/5" id="home-numbers">
-                <span className="text-xs font-mono text-accent tracking-widest block uppercase mb-8">// 03 / PROOF IN NUMBERS</span>
+                <span className="text-xs font-mono text-accent tracking-widest block uppercase mb-8">// PROOF IN NUMBERS</span>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 divide-y lg:divide-y-0 lg:divide-x divide-ink/10">
                   {PORTFOLIO_OWNER.stats.map((stat, idx) => (
                     <div key={idx} className="space-y-2 pt-6 lg:pt-0 lg:pl-6 first:pl-0 first:pt-0">
@@ -342,7 +356,7 @@ export default function App() {
               {/* SECTION 05: HOW I WORK / PHILOSOPHY */}
               <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12" id="home-philosophy">
                 <div className="lg:col-span-4 space-y-4">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// 05 / WORK PHILOSOPHY</span>
+                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// WORK PHILOSOPHY</span>
                   <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink">
                     Rigorous logic, intentional beauty.
                   </h2>
@@ -368,7 +382,7 @@ export default function App() {
               {/* SECTION 06: SKILLS & ARCHITECTURE */}
               <section className="space-y-10" id="home-toolkit">
                 <div className="space-y-2">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// 06 / SKILLS & TECHNICAL CAPABILITIES</span>
+                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// SKILLS & TECHNICAL CAPABILITIES</span>
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-ink tracking-tight">
                     Professional Capabilities
                   </h2>
@@ -2265,7 +2279,17 @@ export default function App() {
                         exit={{ opacity: 0, y: -10 }}
                         className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono"
                       >
-                        ✔ Your transmission has been successfully dispatched. We will review your systems request and respond within 24 operational hours.
+                        ✔ Your message has been dispatched! I'll respond within 24 hours.
+                      </motion.div>
+                    )}
+                    {contactError && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="p-4 bg-red-50 border border-red-200 text-red-700 text-xs font-mono"
+                      >
+                        ✘ {contactError}
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -2309,11 +2333,21 @@ export default function App() {
 
                     <button 
                       type="submit"
-                      className="px-5 py-3 bg-ink hover:bg-accent text-paper text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
+                      disabled={isSending}
+                      className="px-5 py-3 bg-ink hover:bg-accent disabled:opacity-60 text-paper text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
                       id="contact-submit-btn"
                     >
-                      <Send size={12} />
-                      <span>SEND DISPATCH</span>
+                      {isSending ? (
+                        <>
+                          <span className="animate-spin inline-block h-3 w-3 border-2 border-current border-t-transparent rounded-full" />
+                          <span>SENDING...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={12} />
+                          <span>SEND DISPATCH</span>
+                        </>
+                      )}
                     </button>
                   </form>
                 </div>
@@ -2392,6 +2426,13 @@ export default function App() {
 
       {/* Interactive Printable Resume Modal */}
       <ResumeModal isOpen={isResumeModalOpen} onClose={() => setIsResumeModalOpen(false)} />
+
+      {/* Hidden high-fidelity template for single-click PDF generation */}
+      <div style={{ position: "absolute", top: "-10000px", left: "-10000px" }}>
+        <div id="resume-download-target" style={{ width: "7.47in" }}>
+          <PrintableResume isModal={false} />
+        </div>
+      </div>
 
     </div>
   );
