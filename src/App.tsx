@@ -156,7 +156,6 @@ export default function App() {
               {/* SECTION 01: HERO STATEMENT */}
               <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start" id="home-hero">
                 <div className="lg:col-span-8 space-y-6">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// THE MISSION STATEMENT</span>
                   <h1 className="font-serif text-4xl md:text-6xl font-extrabold tracking-tight text-ink leading-[1.1]">
                     <TypingText text={PORTFOLIO_OWNER.tagline} speed={40} />
                   </h1>
@@ -237,7 +236,6 @@ export default function App() {
               {/* SECTION 02: THE BACKSTORY */}
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 pt-6" id="home-backstory">
                 <div className="lg:col-span-4 space-y-4">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// THE BACKSTORY</span>
                   <h2 className="text-3xl md:text-4xl font-serif font-extrabold tracking-tight text-ink leading-tight">
                     I did not start in tech.<br />
                     <span className="text-accent">I started in money.</span>
@@ -298,7 +296,6 @@ export default function App() {
 
               {/* SECTION 03: PROOF IN NUMBERS */}
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="bg-surface-container py-12 px-6 md:px-12 border border-ink/5" id="home-numbers">
-                <span className="text-xs font-mono text-accent tracking-widest block uppercase mb-8">// PROOF IN NUMBERS</span>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 divide-y lg:divide-y-0 lg:divide-x divide-ink/10">
                   {PORTFOLIO_OWNER.stats.map((stat, idx) => (
                     <div key={idx} className="space-y-2 pt-6 lg:pt-0 lg:pl-6 first:pl-0 first:pt-0">
@@ -317,7 +314,6 @@ export default function App() {
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="space-y-8" id="home-selected-work">
                 <div className="flex justify-between items-end border-b border-ink/15 pb-4">
                   <div>
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// PORTFOLIO SHIPPED PRODUCTS</span>
                     <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink mt-1">
                       Selected Systems Work
                     </h2>
@@ -382,7 +378,6 @@ export default function App() {
               {/* SECTION 05: HOW I WORK / PHILOSOPHY */}
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12" id="home-philosophy">
                 <div className="lg:col-span-4 space-y-4">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// WORK PHILOSOPHY</span>
                   <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink">
                     Rigorous logic, intentional beauty.
                   </h2>
@@ -408,7 +403,6 @@ export default function App() {
               {/* SECTION 06: SKILLS & ARCHITECTURE */}
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="space-y-10" id="home-toolkit">
                 <div className="space-y-2">
-                  <span className="text-xs font-mono text-accent tracking-widest block uppercase">// SKILLS & TECHNICAL CAPABILITIES</span>
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-ink tracking-tight">
                     Professional Capabilities
                   </h2>
@@ -477,7 +471,6 @@ export default function App() {
               
               {/* Header intro */}
               <div className="space-y-2 border-b border-ink/10 pb-6">
-                <span className="text-xs font-mono text-accent tracking-widest block uppercase">// WORK ARCHIVE</span>
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
                   Projects — things built and shipped.
                 </h1>
@@ -2147,7 +2140,6 @@ export default function App() {
               
               {/* Header */}
               <div className="space-y-2 border-b border-ink/10 pb-6">
-                <span className="text-xs font-mono text-accent tracking-widest block uppercase">// THE RECORD</span>
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
                   Professional Experience
                 </h1>
@@ -2279,7 +2271,6 @@ export default function App() {
               
               {/* Header */}
               <div className="space-y-2 border-b border-ink/10 pb-6">
-                <span className="text-xs font-mono text-accent tracking-widest block uppercase">// COMMUNICATE</span>
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
                   Let's build better systems.
                 </h1>
