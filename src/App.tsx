@@ -212,7 +212,7 @@ export default function App() {
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute bottom-2 left-2 bg-ink/80 text-paper px-2 py-0.5 text-[9px] font-mono tracking-widest uppercase">
-                      FIG 01. ARPIT JAISWAL, PORTRAIT
+                      FIG 01. SYSTEMS & ANALYTICS WORKSPACE
                     </div>
                   </div>
                   

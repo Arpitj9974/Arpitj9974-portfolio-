@@ -5,7 +5,7 @@ export const PORTFOLIO_OWNER = {
   title: "Full-Stack Builder & Finance Specialist",
   tagline: "Full-stack builder. Finance background. Eight products shipped and running.",
   subLine: "Surat, Gujarat, India · BCA 2026 · MBA in Analytics & Data Science + Project Management, Manipal University Jaipur",
-  portraitUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAhp8rfW4bgywHoBSOoKfllFxkKts1homWAosdFGxnfLwK9BE__RVIAruocvkOb2kMGFbllbqG4lYVTGcUBgjDAVEWbesyT4hmC9E16Ai_QJbOTPbLdfam9aDY4gGRGLt3qUqgb1WenwRBxR2AH4hfX44XxupgUkqG3hnxIO3ydhSd3c09bf7Wyy_0t_ex3ypUZUAqICuzKXgfjvrGRDtQhV760jvkMSVgjWHMNrcydHR34hRfxe-YDe3XT5lNKG5OfDQGfnEalqVg", // High quality portrait placeholder
+  portraitUrl: "/tech_workspace.jpg", // Tech & Analytics workspace image
   location: "Surat, Gujarat, India",
   aboutHeading: "Bridging the gap between financial models and full-stack product architectures.",
   aboutText1: "I am a full-stack builder with a deep finance background. I specialize in turning complex, messy business and technical ideas into elegant, fully working web and mobile products.",
