@@ -210,7 +210,7 @@ export default function App() {
                   <div className="border-l-2 border-ink/10 pl-4 py-1 text-xs text-muted font-mono space-y-1.5">
                     <p>SURAT, INDIA // REMOTE</p>
                     <p>BCA (CLASS OF 2026)</p>
-                    <p>MBA ANALYTICS & DATA SCIENCE</p>
+                    <p>MBA ANALYTICS & DATA SCIENCE + PROJECT MANAGEMENT</p>
                   </div>
                 </div>
 
