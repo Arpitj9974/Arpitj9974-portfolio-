@@ -586,9 +586,14 @@ export default function App() {
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
                   Projects — things built and shipped.
                 </h1>
-                <p className="text-sm text-muted max-w-2xl font-sans">
-                  A comprehensive audit of eight key applications designed, structured, and implemented to solve complex analytical workflows.
-                </p>
+                <div className="text-sm text-muted max-w-2xl font-sans space-y-1.5 leading-relaxed">
+                  <p>
+                    Every product here started with a real problem—not a tutorial.
+                  </p>
+                  <p>
+                    From helping students stay consistent to helping businesses automate repetitive work, each project is an attempt to make someone's day a little easier.
+                  </p>
+                </div>
               </div>
 
               {/* Category tag filter row */}
