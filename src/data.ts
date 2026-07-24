@@ -190,8 +190,8 @@ export const PORTFOLIO_OWNER = {
       name: "C++ Programming — Beginner to Advance, Deep Dive in C++",
       issuer: "Udemy",
       date: "Dec 2024",
-      credentialId: "UC-bfe2b6ce-8811-4c45-a332-c11a2fc357b4",
-      url: "https://www.udemy.com/certificate/UC-bfe2b6ce-8811-4c45-a332-c11a2fc357b4/"
+      credentialId: "UC-bfe2b6ce-881f-4c45-a332-c11a2fc357b4",
+      url: "https://www.udemy.com/certificate/UC-bfe2b6ce-881f-4c45-a332-c11a2fc357b4/"
     }
   ]
 };
