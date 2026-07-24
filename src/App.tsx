@@ -298,6 +298,55 @@ export default function App() {
                     <p>BCA (CLASS OF 2026)</p>
                     <p>MBA ANALYTICS & DATA SCIENCE + PROJECT MANAGEMENT</p>
                   </div>
+
+                  {/* Career Evolution Timeline */}
+                  <div className="pt-6 space-y-4">
+                    <span className="text-[10px] font-mono text-muted uppercase tracking-widest block font-bold">// CAREER EVOLUTION</span>
+                    <div className="space-y-4 font-mono text-xs relative pl-4 border-l border-ink/10 ml-1.5">
+                      
+                      {/* 2021 */}
+                      <div className="relative space-y-1">
+                        <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-accent border border-paper" />
+                        <div className="text-[10px] font-bold text-muted">2021</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">FINANCE</div>
+                        <div className="text-muted font-sans text-xs">Operations & Systems</div>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="text-muted text-[10px] pl-0.5 select-none">↓</div>
+
+                      {/* 2024 */}
+                      <div className="relative space-y-1">
+                        <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-ink border border-paper" />
+                        <div className="text-[10px] font-bold text-muted">2024</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">SOFTWARE</div>
+                        <div className="text-muted font-sans text-xs">Full-Stack Development</div>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="text-muted text-[10px] pl-0.5 select-none">↓</div>
+
+                      {/* 2025 */}
+                      <div className="relative space-y-1">
+                        <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-ink border border-paper" />
+                        <div className="text-[10px] font-bold text-muted">2025</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">AI</div>
+                        <div className="text-muted font-sans text-xs">Automation & Products</div>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="text-muted text-[10px] pl-0.5 select-none">↓</div>
+
+                      {/* NOW */}
+                      <div className="relative space-y-1">
+                        <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-accent animate-pulse border border-paper" />
+                        <div className="text-[10px] font-bold text-muted">NOW</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">BUILDING</div>
+                        <div className="text-muted font-sans text-xs text-accent font-bold">Products That Solve Problems</div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
 
                 <div className="lg:col-span-8 space-y-8 text-sm md:text-base text-muted leading-relaxed font-sans font-light">
