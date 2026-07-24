@@ -274,9 +274,12 @@ export default function App() {
                       <span className="text-muted">PROJECTS:</span>
                       <span className="text-ink font-bold">8 Shipped</span>
                     </div>
-                    <div className="flex flex-col border-b border-ink/10 pb-1.5 gap-0.5">
-                      <span className="text-muted">CURRENT BUILD:</span>
-                      <span className="text-ink font-bold">Study Tracker for Aspirants - AspirantFlow</span>
+                    <div className="flex justify-between items-start border-b border-ink/10 pb-1.5">
+                      <span className="text-muted shrink-0">CURRENT BUILD:</span>
+                      <div className="text-right text-ink font-bold flex flex-col items-end pl-2">
+                        <span>Study Tracker for</span>
+                        <span>Aspirants - AspirantFlow</span>
+                      </div>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted">STATUS:</span>
