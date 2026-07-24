@@ -352,15 +352,17 @@ export default function App() {
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 divide-y lg:divide-y-0 lg:divide-x divide-ink/10">
                   {PORTFOLIO_OWNER.stats.map((stat, idx) => (
                     <div key={idx} className="space-y-2 pt-6 lg:pt-0 lg:pl-6 first:pl-0 first:pt-0 overflow-hidden">
-                      <span className={`font-mono font-extrabold text-ink block tracking-tight ${
-                        stat.value.length > 8 
-                          ? "text-xl md:text-3xl" 
-                          : stat.value.length > 4 
-                            ? "text-2xl md:text-4xl" 
-                            : "text-4xl md:text-6xl"
-                      }`}>
-                        {stat.value}
-                      </span>
+                      <div className="h-10 md:h-16 flex items-end">
+                        <span className={`font-mono font-extrabold text-ink block tracking-tight leading-none ${
+                          stat.value.length > 8 
+                            ? "text-xl md:text-3xl pb-1" 
+                            : stat.value.length > 4 
+                              ? "text-2xl md:text-4xl pb-0.5" 
+                              : "text-4xl md:text-6xl"
+                        }`}>
+                          {stat.value}
+                        </span>
+                      </div>
                       <span className="text-[11px] font-mono text-muted tracking-widest uppercase block">
                         {stat.label}
                       </span>
