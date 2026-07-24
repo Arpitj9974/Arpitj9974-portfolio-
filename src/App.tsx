@@ -248,7 +248,7 @@ export default function App() {
 
                 {/* Right portrait / details card */}
                 <div className="lg:col-span-4 bg-surface-container p-6 space-y-4 border border-ink/5 relative group max-w-sm lg:max-w-none mx-auto lg:mx-0 w-full">
-                  <div className="aspect-[4/5] bg-ink/10 overflow-hidden relative border border-ink/10">
+                  <div className="aspect-[4/3] bg-ink/10 overflow-hidden relative border border-ink/10">
                     <img 
                       src={PORTFOLIO_OWNER.portraitUrl}
                       alt="Arpit Jaiswal Portrait" 
@@ -257,18 +257,30 @@ export default function App() {
                     />
                   </div>
                   
-                  <div className="space-y-2 font-mono text-xs">
+                  <div className="space-y-2 font-mono text-[10px] md:text-xs">
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">LOCATION:</span>
-                      <span className="text-ink font-bold">Surat, India</span>
+                      <span className="text-ink font-bold">Surat, Gujarat</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
-                      <span className="text-muted">FOCUS:</span>
-                      <span className="text-ink font-bold">Full-Stack, Finance & PM</span>
+                      <span className="text-muted">EXPERIENCE:</span>
+                      <span className="text-ink font-bold">4 Years (Finance)</span>
+                    </div>
+                    <div className="flex justify-between border-b border-ink/10 pb-1.5">
+                      <span className="text-muted">SPECIALITY:</span>
+                      <span className="text-ink font-bold">AI Product Development</span>
+                    </div>
+                    <div className="flex justify-between border-b border-ink/10 pb-1.5">
+                      <span className="text-muted">PROJECTS:</span>
+                      <span className="text-ink font-bold">8 Shipped</span>
+                    </div>
+                    <div className="flex flex-col border-b border-ink/10 pb-1.5 gap-0.5">
+                      <span className="text-muted">CURRENT BUILD:</span>
+                      <span className="text-ink font-bold">Study Tracker for Aspirants - AspirantFlow</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted">STATUS:</span>
-                      <span className="text-accent font-bold">● ACTIVE</span>
+                      <span className="text-accent font-bold">● Open to Opportunities</span>
                     </div>
                   </div>
                 </div>

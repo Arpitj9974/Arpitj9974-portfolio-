@@ -36,11 +36,12 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, onToggle
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-300">
       {/* Top micro-banner */}
       <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
-        <span className="hidden sm:inline">[ SURAT, GUJARAT, INDIA // FULL-STACK BUILDER & FINANCE ]</span>
-        <span className="inline sm:hidden">[ SURAT, IN // BUILDER & FINANCE ]</span>
+        <span>[ DESIGNING. BUILDING. IMPROVING. ]</span>
         <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
-          <span className="hidden md:inline text-accent font-medium">• LIVE PORTFOLIO TERMINAL</span>
-          <span className="text-paper/60">IST {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' })}</span>
+          <span className="text-accent font-medium">● PORTFOLIO ACTIVE</span>
+          <span className="text-paper/60">
+            {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' })} IST
+          </span>
         </div>
       </div>
 
