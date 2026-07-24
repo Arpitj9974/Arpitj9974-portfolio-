@@ -351,8 +351,14 @@ export default function App() {
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="bg-surface-container py-12 px-6 md:px-12 border border-ink/5" id="home-numbers">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 divide-y lg:divide-y-0 lg:divide-x divide-ink/10">
                   {PORTFOLIO_OWNER.stats.map((stat, idx) => (
-                    <div key={idx} className="space-y-2 pt-6 lg:pt-0 lg:pl-6 first:pl-0 first:pt-0">
-                      <span className="text-4xl md:text-6xl font-mono font-extrabold text-ink block tracking-tight">
+                    <div key={idx} className="space-y-2 pt-6 lg:pt-0 lg:pl-6 first:pl-0 first:pt-0 overflow-hidden">
+                      <span className={`font-mono font-extrabold text-ink block tracking-tight ${
+                        stat.value.length > 8 
+                          ? "text-xl md:text-3xl" 
+                          : stat.value.length > 4 
+                            ? "text-2xl md:text-4xl" 
+                            : "text-4xl md:text-6xl"
+                      }`}>
                         {stat.value}
                       </span>
                       <span className="text-[11px] font-mono text-muted tracking-widest uppercase block">
