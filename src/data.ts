@@ -18,10 +18,10 @@ export const PORTFOLIO_OWNER = {
     github: "github.com/Arpitj9974"
   },
   stats: [
-    { label: "Products Shipped", value: "08" },
-    { label: "Tech Stack Modules", value: "12+" },
-    { label: "Active Integrations", value: "05" },
-    { label: "Data Science Skills", value: "Intermediate" }
+    { label: "Products", value: "BUILD" },
+    { label: "Business Problems", value: "SOLVE" },
+    { label: "Workflows", value: "AUTOMATE" },
+    { label: "Fast", value: "SHIP" }
   ],
   skills: {
     whatIDo: [

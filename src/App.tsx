@@ -403,8 +403,10 @@ export default function App() {
                     <div key={idx} className="space-y-2 pt-6 lg:pt-0 lg:pl-6 first:pl-0 first:pt-0 overflow-hidden">
                       <div className="h-10 md:h-16 flex items-end">
                         <span className={`font-mono font-extrabold text-ink block tracking-tight leading-none ${
-                          stat.value.length > 8 
-                            ? "text-xl md:text-3xl pb-1" 
+                          /[a-zA-Z]/.test(stat.value)
+                            ? stat.value.length > 8
+                              ? "text-xl md:text-3xl pb-1"
+                              : "text-2xl md:text-4xl pb-0.5"
                             : stat.value.length > 4 
                               ? "text-2xl md:text-4xl pb-0.5" 
                               : "text-4xl md:text-6xl"
