@@ -21,7 +21,7 @@ export const PORTFOLIO_OWNER = {
     { label: "Products Shipped", value: "08" },
     { label: "Tech Stack Modules", value: "12+" },
     { label: "Active Integrations", value: "05" },
-    { label: "Data Science Skills", value: "Expert" }
+    { label: "Data Science Skills", value: "Intermediate" }
   ],
   skills: {
     whatIDo: [
