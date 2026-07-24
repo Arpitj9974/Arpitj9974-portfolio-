@@ -588,10 +588,10 @@ export default function App() {
                 </h1>
                 <div className="text-sm text-muted max-w-2xl font-sans space-y-1.5 leading-relaxed">
                   <p>
-                    Every product here started with a real problem—not a tutorial.
+                    Every product started with a real problem—not a tutorial.
                   </p>
                   <p>
-                    From helping students stay consistent to helping businesses automate repetitive work, each project is an attempt to make someone's day a little easier.
+                    Built to simplify work, automate processes, and create value for the people who use them.
                   </p>
                 </div>
               </div>
