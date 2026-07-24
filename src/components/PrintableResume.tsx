@@ -271,7 +271,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             <li><strong>Google Prompting Essentials Specialization</strong> | Google | Aug 2025 | Credential ID NFF6BEFXNP9X</li>
             <li><strong>Mastering Data Structures and Algorithms in C and C++</strong> | Udemy | Oct 2025</li>
             <li><strong>Java Programming - Beginner to Master</strong> | Udemy | Jan 2025</li>
-            <li><strong>C++ Programming - Beginner to Advance, Deep Dive in C++</strong> | Udemy | Dec 2024</li>
+            <li><strong>C++ Programming - Beginner to Advance, Deep Dive in C++</strong> | Udemy | Dec 2024 | Credential ID UC-bfe2b6ce-8811-4c45-a332-c11a2fc357b4</li>
           </ul>
         </div>
       </div>
