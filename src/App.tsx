@@ -29,10 +29,29 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+const parseHash = (): { tab: string; project: Project | null } => {
+  if (typeof window === 'undefined') return { tab: "home", project: null };
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) return { tab: "home", project: null };
+
+  if (hash.startsWith('case-study/')) {
+    const projectId = hash.replace('case-study/', '');
+    const project = PROJECTS.find(p => p.id === projectId) || null;
+    return { tab: "projects", project };
+  }
+
+  const allowedTabs = ["home", "projects", "experience", "contact"];
+  if (allowedTabs.includes(hash)) {
+    return { tab: hash, project: null };
+  }
+
+  return { tab: "home", project: null };
+};
+
 export default function App() {
-  const [currentTab, setCurrentTab] = useState<string>("home");
+  const [currentTab, setCurrentTab] = useState<string>(() => parseHash().tab);
   const [projectFilter, setProjectFilter] = useState<string>("All");
-  const [selectedCaseStudy, setSelectedCaseStudy] = useState<Project | null>(null);
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<Project | null>(() => parseHash().project);
   
   // Contact state
   const [contactName, setContactName] = useState("");
@@ -82,6 +101,31 @@ export default function App() {
   useEffect(() => {
     scrollToTop();
   }, [currentTab, selectedCaseStudy]);
+
+  // Synchronize active view state with the URL hash
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    if (selectedCaseStudy) {
+      window.location.hash = `case-study/${selectedCaseStudy.id}`;
+    } else {
+      window.location.hash = currentTab === "home" ? "" : currentTab;
+    }
+  }, [currentTab, selectedCaseStudy]);
+
+  // Synchronize URL hash changes (like browser back/forward buttons) back to state
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleHashChange = () => {
+      const parsed = parseHash();
+      setCurrentTab(parsed.tab);
+      setSelectedCaseStudy(parsed.project);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
