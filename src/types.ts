@@ -18,6 +18,7 @@ export interface Project {
   image?: string;
   liveUrl?: string;
   githubUrl?: string;
+  tag?: string;
 }
 
 export interface CareerInput {

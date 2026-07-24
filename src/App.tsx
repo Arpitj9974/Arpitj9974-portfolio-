@@ -448,7 +448,14 @@ export default function App() {
                       <div className="space-y-3">
                         <div className="flex justify-between items-start">
                           <span className="text-[10px] font-mono text-muted uppercase tracking-wider">{project.year} // {project.category}</span>
-                          <span className="text-accent text-xs font-mono font-bold tracking-widest uppercase">FEATURED</span>
+                          <div className="flex gap-2 items-center">
+                            {project.tag && (
+                              <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
+                                &lt;{project.tag}&gt;
+                              </span>
+                            )}
+                            <span className="text-accent text-xs font-mono font-bold tracking-widest uppercase">FEATURED</span>
+                          </div>
                         </div>
                         <h3 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-ink group-hover:text-accent transition-colors">
                           {project.title}
@@ -631,7 +638,14 @@ export default function App() {
                           <div className="space-y-3">
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted">
                               <span>{p.year} // {p.category}</span>
-                              <span className="text-accent font-bold">★ FEATURED</span>
+                              <div className="flex gap-2 items-center">
+                                {p.tag && (
+                                  <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
+                                    &lt;{p.tag}&gt;
+                                  </span>
+                                )}
+                                <span className="text-accent font-bold">★ FEATURED</span>
+                              </div>
                             </div>
 
                             <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">
@@ -707,6 +721,11 @@ export default function App() {
                           <div className="space-y-3">
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted">
                               <span>{p.year} // {p.category}</span>
+                              {p.tag && (
+                                <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
+                                  &lt;{p.tag}&gt;
+                                </span>
+                              )}
                             </div>
 
                             <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">
@@ -775,7 +794,14 @@ export default function App() {
                       <div className="space-y-3">
                         <div className="flex justify-between items-center font-mono text-[10px] text-muted">
                           <span>{p.year} // {p.category}</span>
-                          {p.featured && <span className="text-accent font-bold">★ FEATURED</span>}
+                          <div className="flex gap-2 items-center">
+                            {p.tag && (
+                              <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
+                                &lt;{p.tag}&gt;
+                              </span>
+                            )}
+                            {p.featured && <span className="text-accent font-bold">★ FEATURED</span>}
+                          </div>
                         </div>
 
                         <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">

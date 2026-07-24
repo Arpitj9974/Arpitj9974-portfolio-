@@ -286,7 +286,8 @@ export const PROJECTS: Project[] = [
     ],
     featured: true,
     liveUrl: "https://career-library-worksarthi.vercel.app",
-    githubUrl: ""
+    githubUrl: "",
+    tag: "internship"
   },
   {
     id: "work-sarthi",
@@ -317,7 +318,8 @@ export const PROJECTS: Project[] = [
     ],
     featured: true,
     liveUrl: "https://work-sarthi.vercel.app",
-    githubUrl: ""
+    githubUrl: "",
+    tag: "internship"
   },
   {
     id: "arws-raw",
@@ -348,7 +350,8 @@ export const PROJECTS: Project[] = [
     ],
     featured: true,
     liveUrl: "",
-    githubUrl: "https://github.com/Arpitj9974/ARWS-dialer"
+    githubUrl: "https://github.com/Arpitj9974/ARWS-dialer",
+    tag: "internship"
   },
   {
     id: "farmer-connect",
@@ -413,7 +416,8 @@ export const PROJECTS: Project[] = [
     ],
     featured: false,
     liveUrl: "https://medicine-image-extraction.vercel.app",
-    githubUrl: "https://github.com/Arpitj9974/Medicine-Image-Extraction"
+    githubUrl: "https://github.com/Arpitj9974/Medicine-Image-Extraction",
+    tag: "internship"
   },
   {
     id: "ar-auagpt",
