@@ -2227,8 +2227,8 @@ export default function App() {
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
                   Professional Experience
                 </h1>
-                <p className="text-sm text-muted max-w-2xl font-sans">
-                  Three years of operational finance management intersecting with custom frontend engineering, design systems, and AI SDK deployments.
+                <p className="text-sm text-muted max-w-2xl font-sans leading-relaxed">
+                  A journey from finance operations to building software—using business experience to create products that solve real-world problems.
                 </p>
               </div>
 
