@@ -199,34 +199,33 @@ export const PORTFOLIO_OWNER = {
 export const PROJECTS: Project[] = [
   {
     id: "study-tracker-aj",
-    title: "Arpit's Exam Hub",
-    subtitle: "Elite Multi-Exam Tracker & Syllabus Manager",
-    description: "A client-side syllabus tracker and active-recall manager supporting CA, CMA, CFA, NEET, JEE, and UPSC exams. Built using Vanilla HTML5/CSS3, ES6 JavaScript, Firebase Auth, and Firestore.",
-    longDescription: "Arpit's Exam Hub is a full-stack, progressive learning portal designed to coordinate complex preparation pipelines for high-stakes professional & competitive exams. Instead of general checklists, it models the student’s journey through a structured 3-Stage Tracking Cycle: Done (✓), Revised (⭐), and Mock Tested (🏆) to measure deep syllabus mastery. It features dynamic pacing calculators, study streak gamification, inline markdown study drawers, real-time Firebase cloud synchronization, and robust zero-latency offline-first persistence.",
+    title: "AspirantFlow",
+    subtitle: "ArpitPrep Hub — Online Exam Study Planner & Tracker",
+    description: "A client-heavy, cloud-synchronized study tracker for Indian competitive exams (UPSC, SSC, IBPS, JEE, NEET, and more). Combines local storage cache with a bidirectional Firebase Firestore sync engine, connection timeout guards, and cross-frame event sync.",
+    longDescription: "AspirantFlow is a client-heavy, cloud-synchronized online study tracker for Indian competitive exams (UPSC CSE, SSC CGL/CHSL/MTS, TCS NQT, IBPS, JEE, NEET, and more). It combines a high-performance local storage cache with a bidirectional Firebase Firestore synchronization engine, complete with connection timeout guards and cross-frame event sync. It resolves study interruption issues on spotty networks by relying on localStorage as its primary source of truth, loading instantly, updating progress in under 16 milliseconds, and updating the database asynchronously in the background. Features include chapter-wise tracking, pacing estimation, daily study streak counters, and peer percentile tables.",
     year: "2026",
     category: "Web Apps",
     stack: [
-      "HTML5 & CSS3 Variables",
-      "Vanilla ES6 JavaScript",
-      "Firebase Authentication",
-      "Firestore Cloud Database",
-      "localStorage Persistence",
-      "iframe & postMessage API"
+      "HTML5 & ES6 Modules",
+      "Tailwind CSS CDN",
+      "Firebase Auth & Firestore",
+      "LocalStorage API",
+      "HTML5 postMessage API"
     ],
     role: "Lead Full-Stack Software Engineer & Architect",
     timeline: "5 Months (Completed May 2026)",
     client: "Personal Exam Preparation / EdTech Focus",
     outcome: "Built a fully persistent progress engine actively used across multiple devices to manage 1,100+ chapters with a zero-server pricing model and 100% automated layout/theme syncing.",
-    problem: "Competitive and professional exam aspirants face a massive, overwhelming volume of syllabus topics and struggle to gauge their actual readiness. Standard checklists fail because they treat learning as binary (Done vs. Undone), neglecting systematic revision, active recall tracking, and mock practice.",
-    solution: "Designed a multi-page dynamic configuration engine where each subject's tracking state is managed via a click-sequence state machine. Built a resilient offline-first data sync layer that performs mutations instantly in localStorage and asynchronously syncs with Firestore. Integrated study notes drawers, study streak gamification, and dynamic target-date pacing calculators.",
+    problem: "Competitive and professional exam aspirants face a massive, overwhelming volume of syllabus topics and struggle to gauge their actual readiness. Standard tools fail to provide resilient tracking when internet connectivity is spotty, introducing friction and interrupting study sessions.",
+    solution: "Designed a resilient cloud-synchronized data sync layer that performs mutations instantly in localStorage (updates in under 16ms) and asynchronously syncs with Firestore. Integrated a 5-second Promise.race wrapper to prevent database operations from stalling the UI, a decoupled cross-context sync using postMessage for iframe roadmaps, a centralized dynamic route protection gate, and a flexible polymorphic variant engine for multi-exam dashboards.",
     impactStats: [
       { label: "Tracked Chapters", value: "1,100+" },
-      { label: "Tracked Exam Types", value: "19" },
+      { label: "Supported Exam Variants", value: "20+" },
       { label: "Server Infrastructure Cost", value: "$0" },
-      { label: "Progress Hydration Rate", value: "100%" }
+      { label: "Sync Timeout Guard", value: "5 Seconds" }
     ],
     featured: true,
-    liveUrl: "https://study-tracker-aj.vercel.app",
+    liveUrl: "https://aspirantflow.vercel.app",
     githubUrl: "https://github.com/Arpitj9974/Study-Tracker-AJ"
   },
   {

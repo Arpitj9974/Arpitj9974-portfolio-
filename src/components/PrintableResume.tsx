@@ -113,17 +113,17 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-2">
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-[10pt]" style={{ color: '#1a1a1a' }}>Study Tracker AJ</span>
+                  <span className="font-bold text-[10pt]" style={{ color: '#1a1a1a' }}>AspirantFlow</span>
                   <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#555555', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>EdTech, Live</span>
                 </div>
                 <div className="text-[9pt]">
-                  <a href="https://study-tracker-aj.vercel.app/" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#1f3a5f' }}>study-tracker-aj.vercel.app</a>
+                  <a href="https://aspirantflow.vercel.app/" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#1f3a5f' }}>aspirantflow.vercel.app</a>
                 </div>
               </div>
               <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1a1a1a' }}>
-                Exam preparation tracking across 27 competitive exams, for aspirants who kept losing track of what to study next. Progress syncs to the cloud automatically across devices. A recommendation engine reads live completion data and surfaces what to study next based on exam priority and weakest areas.
+                Cloud-synchronized online study tracker and planner for competitive exams (UPSC, SSC, IBPS, JEE, NEET). Updates checkmarks locally with zero latency (&lt;16ms) and syncs asynchronously in the background. Features connection timeout guards to completely eliminate connection stalling, dynamic target pacing, and HTML5 cross-frame event sync.
               </p>
-              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#555555' }}>Built with: Vanilla JavaScript, Firebase Auth, Firestore</div>
+              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#555555' }}>Built with: HTML5, ES6 Modules, Tailwind CSS, Firebase Auth & Firestore, LocalStorage</div>
             </div>
 
             {/* FreshStamp */}

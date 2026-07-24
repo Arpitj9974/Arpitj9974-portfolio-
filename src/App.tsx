@@ -1110,164 +1110,135 @@ export default function App() {
                   <div className="space-y-2">
                     <span className="text-xs font-mono text-accent tracking-widest block uppercase">// SYSTEM METRICS & ARCHITECTURE</span>
                     <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Full-Stack Synergy & Smart Coach Engine
+                      Deep-Dive: Resilient Cloud-Synchronized Sync & Polymorphic Dashboards
                     </h2>
                     <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      Study Tracker AJ is a highly optimized, zero-framework progressive preparation environment built with native web primitives and Firebase serverless cloud databases.
+                      AspirantFlow is a highly resilient, cloud-synchronized online study planner and tracker featuring a network-resilient sync engine, polymorphic dashboard architectures, and HTML5 cross-frame event propagation.
                     </p>
                   </div>
 
                   {/* Feature Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
-                    {/* Subject Curriculum & Architecture */}
+                    {/* Polymorphic Variant Engine */}
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">CURRICULUM</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Multi-Subject Architecture</h4>
+                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">VARIANT ENGINE</span>
+                        <h4 className="font-serif font-bold text-lg text-ink">Polymorphic Exam Architecture</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed">
-                        The preparation scope tracks 178 modules partitioned between immediate high-ROI NQT tasks (Phase 1) and advanced SSC CGL concepts (Phase 2) across 6 subjects:
+                        Instead of duplicate HTML/JS templates, a single generic controller (<code className="text-accent">dashboard-generic.js</code>) dynamically reads exam specifications (<code className="text-accent">window.DASH_SPEC</code>) for 20+ variants, updating layout, targets, and counters on-the-fly:
                       </p>
                       <div className="overflow-x-auto">
                         <table className="w-full text-[11px] font-mono border-collapse text-ink">
                           <thead>
                             <tr className="border-b border-ink/10 text-muted uppercase">
-                              <th className="text-left py-1">Subject</th>
-                              <th className="text-center py-1">Chapters</th>
-                              <th className="text-center py-1">NQT</th>
-                              <th className="text-center py-1">SSC</th>
-                              <th className="text-right py-1">Accent</th>
+                              <th className="text-left py-1">Exam Type</th>
+                              <th className="text-left py-1">Core Subjects</th>
+                              <th className="text-right py-1">Chapters</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">⚡ Speed Math</td>
-                              <td className="text-center font-bold">28</td>
-                              <td className="text-center">28</td>
-                              <td className="text-center text-muted">0</td>
-                              <td className="text-right text-orange-500">Orange</td>
+                              <td className="py-1">🏛️ UPSC CSE</td>
+                              <td className="py-1 text-muted text-[10px]">Polity, History, Geography, CSAT...</td>
+                              <td className="text-right font-bold">1,100+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">🔢 Quant Aptitude</td>
-                              <td className="text-center font-bold">41</td>
-                              <td className="text-center">27</td>
-                              <td className="text-center">14</td>
-                              <td className="text-right text-purple-400">Purple</td>
+                              <td className="py-1">💼 SSC CGL/CHSL</td>
+                              <td className="py-1 text-muted text-[10px]">Quant, Reasoning, English, GA...</td>
+                              <td className="text-right font-bold">150+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">🧠 Logical Reasoning</td>
-                              <td className="text-center font-bold">44</td>
-                              <td className="text-center">23</td>
-                              <td className="text-center">21</td>
-                              <td className="text-right text-blue-400">Blue</td>
+                              <td className="py-1">⚡ TCS NQT</td>
+                              <td className="py-1 text-muted text-[10px]">Speed Math, Aptitude, Coding, English</td>
+                              <td className="text-right font-bold">100+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">📝 English Language</td>
-                              <td className="text-center font-bold">26</td>
-                              <td className="text-center">25</td>
-                              <td className="text-center">1</td>
-                              <td className="text-right text-emerald-400">Green</td>
+                              <td className="py-1">🏦 IBPS PO/Clerk</td>
+                              <td className="py-1 text-muted text-[10px]">Quant, Reasoning, Banking, English</td>
+                              <td className="text-right font-bold">120+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">💻 NQT Coding</td>
-                              <td className="text-center font-bold">16</td>
-                              <td className="text-center">16</td>
-                              <td className="text-center text-muted">0</td>
-                              <td className="text-right text-amber-500">Amber</td>
-                            </tr>
-                            <tr>
-                              <td className="py-1">🌍 General Knowledge</td>
-                              <td className="text-center font-bold">23</td>
-                              <td className="text-center">12</td>
-                              <td className="text-center">11</td>
-                              <td className="text-right text-pink-400">Pink</td>
+                              <td className="py-1">🎓 JEE / NEET</td>
+                              <td className="py-1 text-muted text-[10px]">Physics, Chemistry, Math / Biology</td>
+                              <td className="text-right font-bold">90+</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                     </div>
 
-                    {/* Adaptive Recommendations */}
+                    {/* Timeout-Safe Synchronization */}
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">AI ADVISOR</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Smart Recommendation Engine</h4>
+                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">DATABASE PROTECTION</span>
+                        <h4 className="font-serif font-bold text-lg text-ink">Timeout-Safe Cloud Sync</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed">
-                        Rather than displaying static, unhelpful lists, Study Tracker AJ reads current checklist levels on each load and dynamically generates high-ROI strategic alerts via <code>renderSmartSuggestion()</code>:
+                        To prevent Firestore queries from stalling the UI during connection drops, all database reads/writes are wrapped in a 5-second <code className="text-accent">Promise.race</code> timeout guard:
                       </p>
-                      <div className="space-y-2 font-mono text-xs text-ink">
-                        <div className="border border-red-500/20 bg-red-500/5 p-2 rounded">
-                          <span className="text-[10px] text-red-400 uppercase tracking-wider block font-bold">// CRITICAL BLOCKER</span>
-                          <p className="text-xs font-sans mt-1">"🔴 Finish Coding first — it's NQT-exclusive and has the highest stake in short-term placement ratios."</p>
-                        </div>
-                        <div className="border border-amber-500/20 bg-amber-500/5 p-2 rounded">
-                          <span className="text-[10px] text-amber-400 uppercase tracking-wider block font-bold">// STRATEGIC DEFENSE</span>
-                          <p className="text-xs font-sans mt-1">"⚠️ Complete Phase 1 of Quant + Reasoning — representing the absolute highest core ROI for TCS NQT scorecards."</p>
-                        </div>
-                      </div>
+                      <pre className="text-[10px] font-mono bg-paper p-3 border border-ink/5 overflow-x-auto text-ink">
+{`function runWithTimeout(promise, errorMsg) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => 
+      setTimeout(() => reject(new Error(errorMsg)), 5000)
+    )
+  ]);
+}`}
+                      </pre>
+                      <p className="text-[11px] text-muted">
+                        If the network fails or Firestore stalls, the app catches the error and cleanly falls back to local-only mode, keeping the candidate's session entirely active.
+                      </p>
                     </div>
 
-                    {/* iframe Theme Isolation & Dynamic Injection */}
+                    {/* Decoupled Cross-Context Sync */}
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">SANDBOX</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Theme Injection & Iframe Bridges</h4>
+                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">EVENT BUS</span>
+                        <h4 className="font-serif font-bold text-lg text-ink">Cross-Frame postMessage Sync</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed">
-                        To enable isolation and speed up independent builds, trackers operate as standalone child HTML files within parent wrappers. Standard iframes create visual fragmentation. The system bridges this gap seamlessly:
+                        To avoid duplicate styling layers and visual fragmentation, roadmaps run inside independent iframes. Status mutations are securely transmitted to the host shell using the HTML5 postMessage API:
                       </p>
-                      <div className="border-l-2 border-accent/30 pl-3 space-y-2 text-xs">
-                        <p className="font-mono text-[11px] text-ink">
-                          <strong>The CSS Injection Strategy:</strong>
-                        </p>
-                        <p className="text-xs text-muted leading-relaxed">
-                          A central <code>injectTheme(iframe)</code> routine directly targets the iframe's content document root, projecting all parent CSS variables, tokens, fonts, and dark backgrounds cleanly into the sandbox context.
-                        </p>
-                        <p className="font-mono text-[11px] text-ink mt-2">
-                          <strong>The Height Sync Protocol:</strong>
-                        </p>
-                        <p className="text-xs text-muted leading-relaxed">
-                          The child triggers parent updates through the HTML5 <code>postMessage</code> API with custom payloads (<code>'iframeHeight'</code>), adjusting dimensions on-the-fly to remove secondary scrollbars.
-                        </p>
-                      </div>
+                      <pre className="text-[10px] font-mono bg-paper p-3 border border-ink/5 overflow-x-auto text-ink">
+{`window.parent.postMessage({
+  type: 'storageChange',
+  key: 'qt3_5',
+  value: '1'
+}, '*');`}
+                      </pre>
+                      <p className="text-[11px] text-muted">
+                        The parent window intercepts these messages and coordinates progress updates on the dashboard dials without causing page reloads or full DOM refreshes.
+                      </p>
                     </div>
 
-                    {/* Real-time sync pipeline */}
+                    {/* Centralized Session Gating & Onboarding */}
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">CLOUD ARCHITECTURE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Real-Time Firebase Synchronization</h4>
+                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">ROUTE GATES</span>
+                        <h4 className="font-serif font-bold text-lg text-ink">Session Gates & Onboarding Flow</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed">
-                        A dual-storage persistence loop guarantees offline protection and high-durability cross-device sync.
+                        Protects user privacy and enforces demographic collection before displaying the dashboard core:
                       </p>
-                      <ul className="space-y-3 text-xs font-mono">
-                        <li className="flex items-start gap-2 text-ink">
+                      <ul className="space-y-3 text-xs font-mono text-ink">
+                        <li className="flex items-start gap-2">
                           <span className="text-accent font-bold">1.</span>
                           <div>
-                            <span className="font-bold block">Local Cache Checkpoint</span>
+                            <span className="font-bold block">Auth loading overlay injection</span>
                             <span className="text-muted block text-[11px] leading-normal">
-                              Checkbox states write immediately to localStorage via <code>localStorage.setItem()</code>, giving zero-latency feedback loops.
+                              Dynamically injects a full-screen, premium glassmorphic overlay at the body start to prevent layout flashes (FOUC).
                             </span>
                           </div>
                         </li>
-                        <li className="flex items-start gap-2 text-ink">
+                        <li className="flex items-start gap-2">
                           <span className="text-accent font-bold">2.</span>
                           <div>
-                            <span className="font-bold block">Cross-Iframe Event Bridge</span>
+                            <span className="font-bold block">Onboarding & registration gate</span>
                             <span className="text-muted block text-[11px] leading-normal">
-                              Parent windows intercept child mutations using standard window <code>'storage'</code> event listeners, keeping multiple windows fully coordinated.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">3.</span>
-                          <div>
-                            <span className="font-bold block">Firestore Map Document Sync</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Validated mutations trigger a debounced <code>updateDoc()</code> or <code>setDoc(merge: true)</code> to the user's specific Firestore document.
+                              Validates whether the user's demographic survey profile exists in Firestore or local cache. If incomplete, routes users strictly to `onboarding.html`.
                             </span>
                           </div>
                         </li>
