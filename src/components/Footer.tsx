@@ -16,9 +16,14 @@ export default function Footer({ scrollToTop }: FooterProps) {
             <span className="font-serif text-xl font-bold tracking-tight text-ink">
               ARPIT JAISWAL
             </span>
-            <p className="text-sm text-muted font-sans max-w-sm">
-              Designing robust digital products that align business workflows with full-stack technical precision. Connecting finance, analytics, and clean code.
-            </p>
+            <div className="text-xs md:text-sm text-muted font-sans max-w-md space-y-3 leading-relaxed">
+              <p>
+                Every project on this website started with a real problem—not a tutorial or a trend. I enjoy understanding how people work, finding where the friction exists, and building software that quietly removes it.
+              </p>
+              <p>
+                I'm still learning, still improving, and still building—but every product moves me one step closer to creating software that people genuinely rely on.
+              </p>
+            </div>
             <div className="flex items-center gap-2 text-xs font-mono text-muted">
               <MapPin size={12} className="text-accent" />
               <span>Based in Surat, Gujarat, India // Available Worldwide</span>
