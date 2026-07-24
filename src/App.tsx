@@ -586,14 +586,10 @@ export default function App() {
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
                   Projects — things built and shipped.
                 </h1>
-                <div className="text-sm text-muted max-w-2xl font-sans space-y-1.5 leading-relaxed">
-                  <p>
-                    Every product started with a real problem—not a tutorial.
-                  </p>
-                  <p>
-                    Built to simplify work, automate processes, and create value for the people who use them.
-                  </p>
-                </div>
+                <p className="text-sm text-muted max-w-2xl font-sans leading-relaxed">
+                  Every product started with a real problem—not a tutorial.<br />
+                  Built to simplify work, automate processes, and create value for the people who use them.
+                </p>
               </div>
 
               {/* Category tag filter row */}
