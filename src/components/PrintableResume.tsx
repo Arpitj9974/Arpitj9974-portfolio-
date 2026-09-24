@@ -47,7 +47,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="mt-3.5">
           <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-1.5" style={{ color: '#1f3a5f', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SUMMARY</h2>
           <p className="text-[9.5pt] leading-normal text-justify" style={{ color: '#1a1a1a' }}>
-            Four years in finance operations at JD Finance, running the complete lending operation and building the Excel data infrastructure the team still runs on. Since 2025, eight products designed and deployed across EdTech, AgriTech, FinTech, HealthTech and retail. I build using AI IDE agents: I own the problem definition, the architecture and the trade-offs; the agent handles the keystrokes.
+            Four years in finance operations at JD Finance, running the complete lending operation and building the Excel data infrastructure the team still runs on. Since 2025, nine products designed and deployed across FinTech, EdTech, AgriTech, HealthTech, and retail. I build using AI IDE agents: I own the problem definition, the architecture and the trade-offs; the agent handles the keystrokes.
           </p>
         </div>
 

@@ -3,7 +3,7 @@ import { Project } from "./types";
 export const PORTFOLIO_OWNER = {
   name: "ARPIT JAISWAL",
   title: "Full-Stack Builder, Finance & Project Management",
-  tagline: "Full-stack builder. Finance background. Eight products shipped and running.",
+  tagline: "Full-stack builder. Finance background. Nine products shipped and running.",
   subLine: "Surat, Gujarat, India · BCA 2026 · MBA in Analytics & Data Science + Project Management, Manipal University Jaipur",
   portraitUrl: "/tech_workspace.jpg", // Tech & Analytics workspace image
   location: "Surat, Gujarat, India",
@@ -197,6 +197,39 @@ export const PORTFOLIO_OWNER = {
 };
 
 export const PROJECTS: Project[] = [
+  {
+    id: "vyosha",
+    title: "Vyosha",
+    subtitle: "Cloud-Synced, Offline-First Digital Ledger & EMI Prepayment Platform",
+    description: "Reinventing the traditional Indian Bahi-Khata with real-time passbook accounting, dynamic UPI collection QR, sub-200ms offline-first architecture, and bank loan amortization.",
+    longDescription: "Vyosha (from Vyom + Kosha, 'Treasury of Space') is a high-performance progressive web app (PWA) and fintech ledger platform designed for Indian micro-merchants, kirana stores, and SMEs. Replaces physical paper notebooks with cloud-synchronized, passbook-style running balances, instant dynamic NPCI UPI QR payment generation, and one-tap WhatsApp payment reminders. Engineered with React 19, TypeScript 5.8, Tailwind CSS v4, and Firebase 12 Firestore with multi-tab IndexedDB disk caching, Vyosha achieves sub-200ms cold-start hydration via Frame-0 local cache. It also features multi-book isolation, client-side photo receipt compression (98% reduction), an in-app arithmetic evaluation keypad, and a comprehensive multi-prepayment bank loan amortization simulator.",
+    year: "2026",
+    category: "Web Apps",
+    stack: [
+      "React 19",
+      "TypeScript 5.8",
+      "Tailwind CSS v4",
+      "Firebase 12 Firestore",
+      "IndexedDB",
+      "Service Worker PWA",
+      "node-qrcode"
+    ],
+    role: "Lead Systems Architect & Full-Stack FinTech Engineer",
+    timeline: "4 Months (Completed Q3 2026)",
+    client: "Indian Micro-Merchants, Kirana Stores & MSMEs",
+    outcome: "Delivered an offline-first PWA with <200ms cold-start hydration, 100% offline durability with multi-tab IndexedDB synchronization, dynamic UPI payment QR links accelerating collection cycles by up to 5x, and zero-data-loss recovery.",
+    problem: "Millions of Indian micro-merchants and kirana owners track credit (Udhaar) and payments (Jama) in physical paper notebooks (Bahi-Khata). These suffer from physical damage, lost pages, calculation errors, lack of offsite backups, awkward debt-chasing, and zero ability to compute running balances or plan loan prepayments on spotty basement/mandi network connections.",
+    solution: "Engineered Vyosha as a resilient offline-first PWA backed by Firebase Firestore persistent IndexedDB cache and Frame-0 localStorage hydration (<200ms cold boot). Features pure reducer chronological running balance computation, dynamic NPCI UPI QR code generation and WhatsApp deep-link billing, multi-ledger isolation (business vs personal), an in-app arithmetic expression keypad, client-side 98% image compression for receipts, and an end-to-end Loan Amortization & Multi-Prepayment Simulation engine.",
+    impactStats: [
+      { label: "Cold-Start Hydration", value: "<200ms" },
+      { label: "Collection Speedup", value: "Up to 5x" },
+      { label: "Offline Storage Durability", value: "100% IndexedDB" },
+      { label: "Photo Receipt Compression", value: "98% (<100KB)" }
+    ],
+    featured: true,
+    liveUrl: "https://vyosha.vercel.app",
+    githubUrl: "https://github.com/Arpitj9974/Vyosha"
+  },
   {
     id: "study-tracker-aj",
     title: "AspirantFlow",
