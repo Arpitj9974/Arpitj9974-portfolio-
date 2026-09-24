@@ -198,6 +198,37 @@ export const PORTFOLIO_OWNER = {
 
 export const PROJECTS: Project[] = [
   {
+    id: "study-tracker-aj",
+    title: "AspirantFlow",
+    subtitle: "ArpitPrep Hub — Online Exam Study Planner & Tracker",
+    description: "A client-heavy, cloud-synchronized study tracker for Indian competitive exams (UPSC, SSC, IBPS, JEE, NEET, and more). Combines local storage cache with a bidirectional Firebase Firestore sync engine, connection timeout guards, and cross-frame event sync.",
+    longDescription: "AspirantFlow is a client-heavy, cloud-synchronized online study tracker for Indian competitive exams (UPSC CSE, SSC CGL/CHSL/MTS, TCS NQT, IBPS, JEE, NEET, and more). It combines a high-performance local storage cache with a bidirectional Firebase Firestore synchronization engine, complete with connection timeout guards and cross-frame event sync. It resolves study interruption issues on spotty networks by relying on localStorage as its primary source of truth, loading instantly, updating progress in under 16 milliseconds, and updating the database asynchronously in the background. Features include chapter-wise tracking, pacing estimation, daily study streak counters, and peer percentile tables.",
+    year: "2026",
+    category: "Web Apps",
+    stack: [
+      "HTML5 & ES6 Modules",
+      "Tailwind CSS CDN",
+      "Firebase Auth & Firestore",
+      "LocalStorage API",
+      "HTML5 postMessage API"
+    ],
+    role: "Lead Full-Stack Software Engineer & Architect",
+    timeline: "5 Months (Completed May 2026)",
+    client: "Personal Exam Preparation / EdTech Focus",
+    outcome: "Built a fully persistent progress engine actively used across multiple devices to manage 1,100+ chapters with a zero-server pricing model and 100% automated layout/theme syncing.",
+    problem: "Competitive and professional exam aspirants face a massive, overwhelming volume of syllabus topics and struggle to gauge their actual readiness. Standard tools fail to provide resilient tracking when internet connectivity is spotty, introducing friction and interrupting study sessions.",
+    solution: "Designed a resilient cloud-synchronized data sync layer that performs mutations instantly in localStorage (updates in under 16ms) and asynchronously syncs with Firestore. Integrated a 5-second Promise.race wrapper to prevent database operations from stalling the UI, a decoupled cross-context sync using postMessage for iframe roadmaps, a centralized dynamic route protection gate, and a flexible polymorphic variant engine for multi-exam dashboards.",
+    impactStats: [
+      { label: "Tracked Chapters", value: "1,100+" },
+      { label: "Supported Exam Variants", value: "20+" },
+      { label: "Server Infrastructure Cost", value: "$0" },
+      { label: "Sync Timeout Guard", value: "5 Seconds" }
+    ],
+    featured: true,
+    liveUrl: "https://aspirantflow.vercel.app",
+    githubUrl: "https://github.com/Arpitj9974/Study-Tracker-AJ"
+  },
+  {
     id: "vyosha",
     title: "Vyosha",
     subtitle: "Cloud-Synced, Offline-First Digital Ledger & EMI Prepayment Platform",
@@ -229,37 +260,6 @@ export const PROJECTS: Project[] = [
     featured: true,
     liveUrl: "https://vyosha.vercel.app",
     githubUrl: "https://github.com/Arpitj9974/Vyosha"
-  },
-  {
-    id: "study-tracker-aj",
-    title: "AspirantFlow",
-    subtitle: "ArpitPrep Hub — Online Exam Study Planner & Tracker",
-    description: "A client-heavy, cloud-synchronized study tracker for Indian competitive exams (UPSC, SSC, IBPS, JEE, NEET, and more). Combines local storage cache with a bidirectional Firebase Firestore sync engine, connection timeout guards, and cross-frame event sync.",
-    longDescription: "AspirantFlow is a client-heavy, cloud-synchronized online study tracker for Indian competitive exams (UPSC CSE, SSC CGL/CHSL/MTS, TCS NQT, IBPS, JEE, NEET, and more). It combines a high-performance local storage cache with a bidirectional Firebase Firestore synchronization engine, complete with connection timeout guards and cross-frame event sync. It resolves study interruption issues on spotty networks by relying on localStorage as its primary source of truth, loading instantly, updating progress in under 16 milliseconds, and updating the database asynchronously in the background. Features include chapter-wise tracking, pacing estimation, daily study streak counters, and peer percentile tables.",
-    year: "2026",
-    category: "Web Apps",
-    stack: [
-      "HTML5 & ES6 Modules",
-      "Tailwind CSS CDN",
-      "Firebase Auth & Firestore",
-      "LocalStorage API",
-      "HTML5 postMessage API"
-    ],
-    role: "Lead Full-Stack Software Engineer & Architect",
-    timeline: "5 Months (Completed May 2026)",
-    client: "Personal Exam Preparation / EdTech Focus",
-    outcome: "Built a fully persistent progress engine actively used across multiple devices to manage 1,100+ chapters with a zero-server pricing model and 100% automated layout/theme syncing.",
-    problem: "Competitive and professional exam aspirants face a massive, overwhelming volume of syllabus topics and struggle to gauge their actual readiness. Standard tools fail to provide resilient tracking when internet connectivity is spotty, introducing friction and interrupting study sessions.",
-    solution: "Designed a resilient cloud-synchronized data sync layer that performs mutations instantly in localStorage (updates in under 16ms) and asynchronously syncs with Firestore. Integrated a 5-second Promise.race wrapper to prevent database operations from stalling the UI, a decoupled cross-context sync using postMessage for iframe roadmaps, a centralized dynamic route protection gate, and a flexible polymorphic variant engine for multi-exam dashboards.",
-    impactStats: [
-      { label: "Tracked Chapters", value: "1,100+" },
-      { label: "Supported Exam Variants", value: "20+" },
-      { label: "Server Infrastructure Cost", value: "$0" },
-      { label: "Sync Timeout Guard", value: "5 Seconds" }
-    ],
-    featured: true,
-    liveUrl: "https://aspirantflow.vercel.app",
-    githubUrl: "https://github.com/Arpitj9974/Study-Tracker-AJ"
   },
   {
     id: "freshstamp",
@@ -317,7 +317,7 @@ export const PROJECTS: Project[] = [
       { label: "Colleges Referenced", value: "5,000+" },
       { label: "Design Themes Integrated", value: "14" }
     ],
-    featured: true,
+    featured: false,
     liveUrl: "https://career-library-worksarthi.vercel.app",
     githubUrl: "",
     tag: "internship"
@@ -349,7 +349,7 @@ export const PROJECTS: Project[] = [
       { label: "API Parallel Factor", value: "4x" },
       { label: "Report Page Yield", value: "8-10 Pages" }
     ],
-    featured: true,
+    featured: false,
     liveUrl: "https://work-sarthi.vercel.app",
     githubUrl: "",
     tag: "internship"
@@ -381,9 +381,41 @@ export const PROJECTS: Project[] = [
       { label: "Duplicate Entry Rate", value: "0%" },
       { label: "Server Infrastructure Cost", value: "$0" }
     ],
-    featured: true,
+    featured: false,
     liveUrl: "",
     githubUrl: "https://github.com/Arpitj9974/ARWS-dialer",
+    tag: "internship"
+  },
+  {
+    id: "medicine-extraction",
+    title: "Medicine Image Extraction",
+    subtitle: "AI-Powered Pharmaceutical Data Digitization",
+    description: "Gemini Vision pulls the medicine name, expiry, batch number, and price straight off the packaging — no manual transcription.",
+    longDescription: "Gemini Vision pulls the medicine name, expiry, batch number, and price straight off the packaging — no manual transcription. Built as three independent services so the AI keeps working even if the database goes down, and every extraction is classified as complete, partial, or failed so nothing silently disappears.",
+    year: "2026",
+    category: "Web Apps",
+    stack: [
+      "React",
+      "Node.js",
+      "Python (FastAPI)",
+      "MongoDB",
+      "Gemini"
+    ],
+    role: "Lead Systems & MLOps Architect",
+    timeline: "5 Months (Completed January 2026)",
+    client: "Pharmaceutical Supply Chain & Retail Pharmacies",
+    outcome: "Successfully automated medicine packaging data ingestion with an average extraction duration of sub-5 seconds, supporting graceful database degradation and keeping a 0% client-side API credential leak rate.",
+    problem: "Healthcare supply chain units rely on manual transcription to record batch numbers, prices, and expiration dates from packaging boxes. This process is highly slow, produces transcription errors, and compromises medication inventory auditing due to data mismatches.",
+    solution: "Engineered a decoupled polyglot pipeline separating heavy AI inference from database operations. Formed custom temperature=0.0 and forced response_mime_type schemas inside FastAPI using Pydantic. Built a robust three-tier validation engine (client, Multer, FastAPI) to ensure uploads remain under 5MB while gracefully handling server-database connection drops during extractions.",
+    impactStats: [
+      { label: "Fields Extracted", value: "4 (Critical)" },
+      { label: "Average Extraction Speed", value: "<5 Seconds" },
+      { label: "Service Tiers", value: "3 (Polyglot)" },
+      { label: "File Validation Steps", value: "3-Tier" }
+    ],
+    featured: false,
+    liveUrl: "https://medicine-image-extraction.vercel.app",
+    githubUrl: "https://github.com/Arpitj9974/Medicine-Image-Extraction",
     tag: "internship"
   },
   {
@@ -419,38 +451,6 @@ export const PROJECTS: Project[] = [
     featured: false,
     liveUrl: "https://farmer-connect-aj.vercel.app",
     githubUrl: "https://github.com/Arpitj9974/Farmer_Connect"
-  },
-  {
-    id: "medicine-extraction",
-    title: "Medicine Image Extraction",
-    subtitle: "AI-Powered Pharmaceutical Data Digitization",
-    description: "Gemini Vision pulls the medicine name, expiry, batch number, and price straight off the packaging — no manual transcription.",
-    longDescription: "Gemini Vision pulls the medicine name, expiry, batch number, and price straight off the packaging — no manual transcription. Built as three independent services so the AI keeps working even if the database goes down, and every extraction is classified as complete, partial, or failed so nothing silently disappears.",
-    year: "2026",
-    category: "Web Apps",
-    stack: [
-      "React",
-      "Node.js",
-      "Python (FastAPI)",
-      "MongoDB",
-      "Gemini"
-    ],
-    role: "Lead Systems & MLOps Architect",
-    timeline: "5 Months (Completed January 2026)",
-    client: "Pharmaceutical Supply Chain & Retail Pharmacies",
-    outcome: "Successfully automated medicine packaging data ingestion with an average extraction duration of sub-5 seconds, supporting graceful database degradation and keeping a 0% client-side API credential leak rate.",
-    problem: "Healthcare supply chain units rely on manual transcription to record batch numbers, prices, and expiration dates from packaging boxes. This process is highly slow, produces transcription errors, and compromises medication inventory auditing due to data mismatches.",
-    solution: "Engineered a decoupled polyglot pipeline separating heavy AI inference from database operations. Formed custom temperature=0.0 and forced response_mime_type schemas inside FastAPI using Pydantic. Built a robust three-tier validation engine (client, Multer, FastAPI) to ensure uploads remain under 5MB while gracefully handling server-database connection drops during extractions.",
-    impactStats: [
-      { label: "Fields Extracted", value: "4 (Critical)" },
-      { label: "Average Extraction Speed", value: "<5 Seconds" },
-      { label: "Service Tiers", value: "3 (Polyglot)" },
-      { label: "File Validation Steps", value: "3-Tier" }
-    ],
-    featured: false,
-    liveUrl: "https://medicine-image-extraction.vercel.app",
-    githubUrl: "https://github.com/Arpitj9974/Medicine-Image-Extraction",
-    tag: "internship"
   },
   {
     id: "ar-auagpt",

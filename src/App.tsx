@@ -439,8 +439,8 @@ export default function App() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {PROJECTS.filter(p => p.featured).slice(0, 2).map((project) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {PROJECTS.filter(p => p.featured).slice(0, 3).map((project) => (
                     <div 
                       key={project.id} 
                       className="bg-paper border border-ink/10 hover:border-accent transition-all p-6 space-y-4 group flex flex-col justify-between"
@@ -703,16 +703,94 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Non-featured Section */}
+                  {/* Internship Section */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 border-b border-ink/5 pb-2">
+                      <span className="h-2 w-2 bg-accent/70 rounded-full" />
+                      <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono">
+                        💼 Internship Projects &amp; Products
+                      </h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {filteredProjects.filter(p => p.tag === "internship").map((p) => (
+                        <div 
+                          key={p.id} 
+                          className="border border-ink/10 bg-paper/40 hover:bg-paper transition-all p-5 flex flex-col justify-between group"
+                          id={`project-card-${p.id}`}
+                        >
+                          <div className="space-y-3">
+                            <div className="flex justify-between items-center font-mono text-[10px] text-muted">
+                              <span>{p.year} // {p.category}</span>
+                              <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
+                                &lt;internship&gt;
+                              </span>
+                            </div>
+
+                            <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">
+                              {p.title}
+                            </h3>
+                            
+                            <p className="text-xs text-muted leading-relaxed font-sans">
+                              {p.description}
+                            </p>
+                          </div>
+
+                          <div className="pt-4 mt-4 border-t border-ink/5 flex justify-between items-center">
+                            <div className="flex gap-1 flex-wrap">
+                              {p.stack.slice(0, 2).map((s, idx) => (
+                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5">
+                                  {s}
+                                </span>
+                              ))}
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                              {p.liveUrl && (
+                                <a 
+                                  href={p.liveUrl} 
+                                  target="_blank" 
+                                  rel="noreferrer"
+                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  Live ↗
+                                </a>
+                              )}
+                              {p.githubUrl && (
+                                <a 
+                                  href={p.githubUrl} 
+                                  target="_blank" 
+                                  rel="noreferrer"
+                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  Git ↗
+                                </a>
+                              )}
+                              <button 
+                                onClick={() => setSelectedCaseStudy(p)}
+                                className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
+                              >
+                                <span>Case Study</span>
+                                <ChevronRight size={12} />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Other Systems & Modules Section */}
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 border-b border-ink/5 pb-2">
                       <span className="h-2 w-2 bg-muted/60 rounded-full" />
                       <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono text-muted">
-                        Other Systems & Modules
+                        ⚙️ Other Systems &amp; Modules
                       </h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {filteredProjects.filter(p => !p.featured).map((p) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {filteredProjects.filter(p => !p.featured && p.tag !== "internship").map((p) => (
                         <div 
                           key={p.id} 
                           className="border border-ink/10 bg-paper/30 hover:bg-paper transition-all p-5 flex flex-col justify-between group"
