@@ -30,7 +30,8 @@ import {
   BookOpen,
   Star,
   ArrowDown,
-  Check
+  Check,
+  Search
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -76,6 +77,7 @@ const parseHash = (): { tab: string; project: Project | null } => {
 export default function App() {
   const [currentTab, setCurrentTab] = useState<string>(() => parseHash().tab);
   const [projectFilter, setProjectFilter] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<Project | null>(() => parseHash().project);
   const [caseStudyMode, setCaseStudyMode] = useState<"narrative" | "prd">("narrative");
   
@@ -233,10 +235,66 @@ export default function App() {
     }
   };
 
-  // Filter project listing
-  const filteredProjects = projectFilter === "All"
-    ? PROJECTS
-    : PROJECTS.filter(p => p.category === projectFilter);
+  // Curated project domain categories & filter logic
+  const QUICK_TAGS = [
+    { id: "All", label: "All Systems (9)" },
+    { id: "FinTech", label: "FinTech & Lending" },
+    { id: "EdTech", label: "EdTech & Careers" },
+    { id: "Automation", label: "Operations & Automation" },
+    { id: "AgriRetail", label: "AgriTech & Retail" },
+    { id: "Python", label: "Python & Analytics" },
+    { id: "Mobile", label: "Mobile & Android" }
+  ];
+
+  const matchesTag = (p: Project, tag: string): boolean => {
+    if (tag === "All") return true;
+    if (tag === "FinTech") {
+      return ["vyosha", "ar-auagpt", "arws-raw"].includes(p.id) || 
+             p.title.toLowerCase().includes("vyosha") || 
+             p.description.toLowerCase().includes("lending") ||
+             p.description.toLowerCase().includes("fintech");
+    }
+    if (tag === "EdTech") {
+      return ["study-tracker-aj", "career-library"].includes(p.id) || 
+             p.title.toLowerCase().includes("aspirant") || 
+             p.title.toLowerCase().includes("career");
+    }
+    if (tag === "Automation") {
+      return ["work-sarthi", "medicine-extraction"].includes(p.id) || 
+             p.description.toLowerCase().includes("automat") ||
+             (p.solution || "").toLowerCase().includes("automat");
+    }
+    if (tag === "AgriRetail") {
+      return ["farmer-connect", "freshstamp"].includes(p.id);
+    }
+    if (tag === "Python") {
+      return p.stack.some(s => /python|pandas|data|streamlit|sql/i.test(s)) ||
+             ["arws-raw", "career-library", "medicine-extraction"].includes(p.id);
+    }
+    if (tag === "Mobile") {
+      return p.category === "Mobile" || 
+             p.stack.some(s => /android|kotlin|mobile|pwa/i.test(s)) ||
+             ["work-sarthi", "vyosha"].includes(p.id);
+    }
+    return p.category === tag;
+  };
+
+  const matchesSearch = (p: Project, query: string): boolean => {
+    if (!query.trim()) return true;
+    const q = query.toLowerCase().trim();
+    const inTitle = p.title.toLowerCase().includes(q);
+    const inSubtitle = (p.subtitle || "").toLowerCase().includes(q);
+    const inDesc = p.description.toLowerCase().includes(q);
+    const inLongDesc = (p.longDescription || "").toLowerCase().includes(q);
+    const inCategory = p.category.toLowerCase().includes(q);
+    const inStack = p.stack.some(s => s.toLowerCase().includes(q));
+    const inProblem = (p.problem || "").toLowerCase().includes(q);
+    const inSolution = (p.solution || "").toLowerCase().includes(q);
+    const inOutcome = (p.outcome || "").toLowerCase().includes(q);
+    return inTitle || inSubtitle || inDesc || inLongDesc || inCategory || inStack || inProblem || inSolution || inOutcome;
+  };
+
+  const filteredProjects = PROJECTS.filter(p => matchesTag(p, projectFilter) && matchesSearch(p, searchQuery));
 
   return (
     <div className="min-h-screen bg-paper text-ink selection:bg-accent selection:text-paper font-sans">
@@ -321,12 +379,19 @@ export default function App() {
                 {/* Right portrait / details card */}
                 <div className="lg:col-span-4 bg-surface-container p-6 space-y-4 border border-ink/5 relative group max-w-sm lg:max-w-none mx-auto lg:mx-0 w-full">
                   <div className="aspect-[4/3] bg-ink/10 overflow-hidden relative border border-ink/10">
-                    <img 
-                      src={PORTFOLIO_OWNER.portraitUrl}
-                      alt="Arpit Jaiswal Portrait" 
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                      referrerPolicy="no-referrer"
-                    />
+                    <picture>
+                      <source srcSet="/tech_workspace.webp" type="image/webp" />
+                      <img 
+                        src="/tech_workspace.jpg"
+                        alt="Arpit Jaiswal Workspace" 
+                        width={960}
+                        height={1440}
+                        fetchPriority="high"
+                        loading="eager"
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                        referrerPolicy="no-referrer"
+                      />
+                    </picture>
                   </div>
                   
                   <div className="space-y-2 font-mono text-[10px] md:text-xs">
@@ -753,26 +818,74 @@ export default function App() {
                 </p>
               </div>
 
-              {/* Category tag filter row */}
-              <div className="flex flex-wrap items-center gap-2 border-b border-ink/5 pb-4">
-                <span className="text-xs font-mono text-muted mr-2">Filter Category:</span>
-                {["All", "Data", "Web Apps", "Mobile", "Internal Tools"].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setProjectFilter(cat)}
-                    className={`px-3 py-1 text-xs font-mono transition-all border cursor-pointer ${
-                      projectFilter === cat 
-                        ? "bg-ink text-paper border-ink font-bold" 
-                        : "bg-surface-container text-muted border-ink/5 hover:border-ink/20 hover:text-ink"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+              {/* Search & Tag Filter Control Center */}
+              <div className="space-y-4 border-b border-ink/10 pb-6">
+                {/* Search Bar Input */}
+                <div className="relative flex items-center">
+                  <span className="absolute left-3.5 text-muted pointer-events-none">
+                    <Search size={15} />
+                  </span>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search by technology, domain, or problem... (e.g. FinTech, Amortization, Kotlin, Python, Gemini)"
+                    className="w-full pl-10 pr-10 py-3 bg-surface-container border border-ink/15 text-xs md:text-sm font-mono text-ink placeholder:text-muted/60 focus:outline-none focus:border-accent transition-colors"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-3.5 text-muted hover:text-ink cursor-pointer"
+                      title="Clear search"
+                    >
+                      <X size={15} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Quick Curated Domain Tags */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[11px] font-mono text-muted uppercase font-bold tracking-wider mr-1">
+                    DOMAINS:
+                  </span>
+                  {QUICK_TAGS.map((tag) => (
+                    <button
+                      key={tag.id}
+                      onClick={() => setProjectFilter(tag.id)}
+                      className={`px-3 py-1.5 text-xs font-mono transition-all border cursor-pointer ${
+                        projectFilter === tag.id 
+                          ? "bg-ink text-paper border-ink font-bold shadow-sm" 
+                          : "bg-surface-container/60 text-muted border-ink/10 hover:border-ink/30 hover:text-ink"
+                      }`}
+                    >
+                      {tag.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Results Counter / Filter status banner */}
+                {(projectFilter !== "All" || searchQuery.trim()) && (
+                  <div className="flex items-center justify-between text-xs font-mono bg-accent/5 border border-accent/15 px-3 py-2 text-ink">
+                    <span>
+                      Found <strong>{filteredProjects.length}</strong> system{filteredProjects.length === 1 ? "" : "s"}
+                      {projectFilter !== "All" && ` in ${QUICK_TAGS.find(t => t.id === projectFilter)?.label || projectFilter}`}
+                      {searchQuery.trim() && ` matching "${searchQuery}"`}
+                    </span>
+                    <button
+                      onClick={() => {
+                        setProjectFilter("All");
+                        setSearchQuery("");
+                      }}
+                      className="text-accent hover:underline font-bold cursor-pointer"
+                    >
+                      Clear all filters
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Dynamic GRID for featured / active filter cards */}
-              {projectFilter === "All" ? (
+              {projectFilter === "All" && !searchQuery.trim() ? (
                 <div className="space-y-12">
                   {/* Featured Section */}
                   <div className="space-y-4">
@@ -1115,11 +1228,20 @@ export default function App() {
                     </div>
                   ))}
                   {filteredProjects.length === 0 && (
-                    <div className="col-span-full py-16 px-6 border border-dashed border-ink/15 text-center space-y-3 bg-surface-container/50">
-                      <span className="text-xs font-mono text-muted uppercase tracking-wider block">// SYSTEM ARCHIVE EMPTY</span>
-                      <p className="text-xs text-muted font-sans">
-                        No matching projects found. Supply your project details, and the workspace will instantly index and map them across categories.
+                    <div className="col-span-full py-16 px-6 border border-dashed border-ink/15 text-center space-y-4 bg-surface-container/50">
+                      <span className="text-xs font-mono text-muted uppercase tracking-wider block">// ZERO MATCHING SYSTEMS FOUND</span>
+                      <p className="text-sm text-muted font-sans max-w-md mx-auto leading-relaxed">
+                        No projects matched your query <strong>"{searchQuery || projectFilter}"</strong>. Try searching for <em>FinTech</em>, <em>Python</em>, <em>Kotlin</em>, <em>Amortization</em>, or <em>Automation</em>.
                       </p>
+                      <button
+                        onClick={() => {
+                          setProjectFilter("All");
+                          setSearchQuery("");
+                        }}
+                        className="px-4 py-2 bg-ink text-paper text-xs font-mono font-bold tracking-wider uppercase hover:bg-accent transition-colors cursor-pointer"
+                      >
+                        RESET ALL FILTERS
+                      </button>
                     </div>
                   )}
                 </div>
@@ -1141,7 +1263,7 @@ export default function App() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-ink/10 font-mono text-xs text-muted">
-                      {PROJECTS.map((p) => (
+                      {filteredProjects.map((p) => (
                         <tr key={p.id} className="hover:bg-surface-container/30 transition-colors">
                           <td className="p-4 font-bold text-ink">{p.year}</td>
                           <td className="p-4 font-serif text-sm font-semibold text-ink">{p.title}</td>

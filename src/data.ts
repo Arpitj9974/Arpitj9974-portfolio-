@@ -5,7 +5,7 @@ export const PORTFOLIO_OWNER = {
   title: "Product & Business Operations, Finance & Systems Architecture",
   tagline: "Product & business operations. Finance background. 9 shipped products.",
   subLine: "Surat, Gujarat, India · MBA in Analytics & Data Science + Project Management (Manipal) · BCA 2026",
-  portraitUrl: "/tech_workspace.jpg", // Tech & Analytics workspace image
+  portraitUrl: "/tech_workspace.webp", // Optimized Tech & Analytics workspace image
   location: "Surat, Gujarat, India",
   aboutHeading: "Bridging business strategy, financial operations, and software delivery.",
   aboutText1: "I am a product and business operations specialist with 4.5 years of finance experience and a BCA technical foundation. I turn complex operational friction into clear product architectures and shipped, functional software.",
