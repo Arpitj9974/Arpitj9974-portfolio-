@@ -2,14 +2,14 @@ import { Project } from "./types";
 
 export const PORTFOLIO_OWNER = {
   name: "ARPIT JAISWAL",
-  title: "Full-Stack Builder, Finance & Project Management",
-  tagline: "Full-stack builder. Finance background. 9 products shipped and running.",
-  subLine: "Surat, Gujarat, India · BCA 2026 · MBA in Analytics & Data Science + Project Management, Manipal University Jaipur",
+  title: "Product & Business Operations, Finance & Systems Architecture",
+  tagline: "Product & business operations. Finance background. 9 shipped products.",
+  subLine: "Surat, Gujarat, India · MBA in Analytics & Data Science + Project Management (Manipal) · BCA 2026",
   portraitUrl: "/tech_workspace.jpg", // Tech & Analytics workspace image
   location: "Surat, Gujarat, India",
-  aboutHeading: "Bridging the gap between financial models and full-stack product architectures.",
-  aboutText1: "I am a full-stack builder with a deep finance background. I specialize in turning complex, messy business and technical ideas into elegant, fully working web and mobile products.",
-  aboutText2: "With solid academic foundations spanning a BCA (Graduating 2026) and an MBA in Analytics & Data Science + Project Management from Manipal University Jaipur, I design software systems that are robust, clean, and fast.",
+  aboutHeading: "Bridging business strategy, financial operations, and software delivery.",
+  aboutText1: "I am a product and business operations specialist with 4.5 years of finance experience and a BCA technical foundation. I turn complex operational friction into clear product architectures and shipped, functional software.",
+  aboutText2: "With an academic foundation spanning a BCA (Graduating 2026) and an MBA in Analytics & Data Science + Project Management from Manipal University Jaipur, I design systems that solve real business problems.",
   officeLocation: "Surat, India / Remote Hub",
   contactInfo: {
     email: "jaiswalarpit428@gmail.com",

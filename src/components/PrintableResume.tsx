@@ -21,7 +21,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="text-center sm:text-left border-b pb-3" style={{ borderColor: 'rgba(30, 41, 59, 0.15)' }}>
           <h1 className="text-[22pt] font-extrabold tracking-tight leading-none" style={{ color: '#1a1a1a' }}>ARPIT JAISWAL</h1>
           <div className="text-[9pt] font-bold uppercase tracking-wider mt-1" style={{ color: '#1f3a5f' }}>
-            Full-Stack Builder | Finance Operations | AI &amp; Automation
+            Product &amp; Business Operations | MBA (Analytics &amp; PM) | BCA | 4.5 Yrs FinOps
           </div>
           
           <div className="text-[9pt] mt-2 flex flex-wrap justify-center sm:justify-start gap-x-3 gap-y-0.5" style={{ color: '#555555' }}>
@@ -47,7 +47,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="mt-3.5">
           <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-1.5" style={{ color: '#1f3a5f', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SUMMARY</h2>
           <p className="text-[9.5pt] leading-normal text-justify" style={{ color: '#1a1a1a' }}>
-            Four years in finance operations at JD Finance, running the complete lending operation and building the Excel data infrastructure the team still runs on. Since 2025, nine products designed and deployed across FinTech, EdTech, AgriTech, HealthTech, and retail. I build using AI IDE agents: I own the problem definition, the architecture and the trade-offs; the agent handles the keystrokes.
+            Over four and a half years in finance operations at JD Finance, running the complete lending operation and building the Excel data infrastructure the team still runs on. Since 2025, nine products designed and deployed across FinTech, EdTech, AgriTech, HealthTech, and retail. I build using modern developer tooling: I own the problem definition, the architecture, and the trade-offs; turning complex workflows into working software.
           </p>
         </div>
 

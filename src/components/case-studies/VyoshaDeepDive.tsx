@@ -89,7 +89,7 @@ export default function VyoshaDeepDive({ amortizationData = [] }: { amortization
                         </div>
                         <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
                           <strong className="block text-ink">3. 3-DAY PROXIMITY ALERT ENGINE</strong>
-                          <span className="text-muted text-[11px]">Normalized midnight boundaries (<code>setHours(0,0,0,0)</code>) calculate exact calendar delta to flag ðŸ”´ Overdue and ðŸŸ¡ Due Soon accounts without false alarms on settled balances.</span>
+                          <span className="text-muted text-[11px]">Normalized midnight boundaries (<code>setHours(0,0,0,0)</code>) calculate exact calendar delta to flag Overdue and Due Soon accounts without false alarms on settled balances.</span>
                         </div>
                       </div>
                     </div>

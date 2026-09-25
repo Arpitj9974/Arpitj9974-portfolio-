@@ -9,6 +9,7 @@ import { Project } from "./types";
 import { 
   ArrowLeft,
   ArrowRight, 
+  Briefcase,
   Layers, 
   MapPin, 
   Terminal, 
@@ -325,27 +326,31 @@ export default function App() {
                   <div className="space-y-2 font-mono text-[10px] md:text-xs">
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">LOCATION:</span>
-                      <span className="text-ink font-bold">Surat, Gujarat</span>
+                      <span className="text-ink font-bold">Surat, Gujarat, India</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
-                      <span className="text-muted">EXPERIENCE:</span>
-                      <span className="text-ink font-bold">4 Years (Finance)</span>
+                      <span className="text-muted">BACKGROUND:</span>
+                      <span className="text-ink font-bold">4.5 Years FinOps (JD Finance)</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
-                      <span className="text-muted">SPECIALITY:</span>
-                      <span className="text-ink font-bold">AI Product Development</span>
+                      <span className="text-muted">EDUCATION:</span>
+                      <span className="text-ink font-bold">MBA (Analytics &amp; PM) + BCA</span>
+                    </div>
+                    <div className="flex justify-between border-b border-ink/10 pb-1.5">
+                      <span className="text-muted">FOCUS:</span>
+                      <span className="text-ink font-bold">Product Strategy &amp; Operations</span>
+                    </div>
+                    <div className="flex justify-between border-b border-ink/10 pb-1.5">
+                      <span className="text-muted">CAPABILITY:</span>
+                      <span className="text-ink font-bold">Systems Architecture &amp; Delivery</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">PROJECTS:</span>
-                      <span className="text-ink font-bold">{PROJECTS.length} Shipped</span>
-                    </div>
-                    <div className="flex justify-between border-b border-ink/10 pb-1.5">
-                      <span className="text-muted">CURRENT BUILD:</span>
-                      <span className="text-ink font-bold">Vyosha &amp; AspirantFlow</span>
+                      <span className="text-ink font-bold">{PROJECTS.length} Shipped Solutions</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted">STATUS:</span>
-                      <span className="text-accent font-bold flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block" /> Open to Opportunities</span>
+                      <span className="text-accent font-bold flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block" /> Open to Product &amp; Operations Roles</span>
                     </div>
                   </div>
                 </div>
@@ -373,8 +378,8 @@ export default function App() {
                       <div className="relative space-y-1">
                         <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-accent border border-paper" />
                         <div className="text-[10px] font-bold text-muted">2021</div>
-                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">FINANCE</div>
-                        <div className="text-muted font-sans text-xs">Operations & Systems</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">FINANCE OPERATIONS</div>
+                        <div className="text-muted font-sans text-xs">Lending Operations &amp; Risk Modeling (JD Finance)</div>
                       </div>
 
                       {/* Arrow */}
@@ -384,8 +389,8 @@ export default function App() {
                       <div className="relative space-y-1">
                         <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-ink border border-paper" />
                         <div className="text-[10px] font-bold text-muted">2024</div>
-                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">SOFTWARE</div>
-                        <div className="text-muted font-sans text-xs">Full-Stack Development</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">TECHNICAL FOUNDATION</div>
+                        <div className="text-muted font-sans text-xs">BCA — Systems Architecture, Databases &amp; Logic</div>
                       </div>
 
                       {/* Arrow */}
@@ -395,8 +400,8 @@ export default function App() {
                       <div className="relative space-y-1">
                         <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-ink border border-paper" />
                         <div className="text-[10px] font-bold text-muted">2025</div>
-                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">AI</div>
-                        <div className="text-muted font-sans text-xs">Automation & Products</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">MBA + STRATEGY</div>
+                        <div className="text-muted font-sans text-xs">Analytics &amp; Data Science, Project Management</div>
                       </div>
 
                       {/* Arrow */}
@@ -406,8 +411,8 @@ export default function App() {
                       <div className="relative space-y-1">
                         <span className="absolute -left-[21.5px] top-1.5 h-2 w-2 rounded-full bg-accent animate-pulse border border-paper" />
                         <div className="text-[10px] font-bold text-muted">NOW</div>
-                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">BUILDING</div>
-                        <div className="text-muted font-sans text-xs text-accent font-bold">Products That Solve Problems</div>
+                        <div className="text-ink font-bold uppercase text-[11px] leading-tight">PRODUCT &amp; BUSINESS OPS</div>
+                        <div className="text-muted font-sans text-xs text-accent font-bold">Turning Operational Friction Into Shipped Software</div>
                       </div>
 
                     </div>
@@ -421,7 +426,7 @@ export default function App() {
                       <span>THE FINANCIAL ORIGIN (JD FINANCE)</span>
                     </div>
                     <p>
-                      For nearly three years I ran the complete lending operation at <strong>JD Finance</strong> — loan disbursement, daily repayment, borrower portfolios — and built the Excel systems the team ran on, because nobody else was going to build them. I came back in 2025 to lead that same function again, this time bringing automation and data tooling into it.
+                      For 4.5 years I ran the complete lending operation at <strong>JD Finance</strong> — loan disbursement, daily repayment, borrower portfolios — and built the Excel systems the team ran on, because nobody else was going to build them. I came back in 2025 to lead that same function again, this time bringing automation and data tooling into it.
                     </p>
                     <p className="italic text-ink font-serif text-sm border-t border-ink/5 pt-3">
                       "That work taught me something no course does: software fails less often because the code is bad, and more often because nobody understood the process it was supposed to replace."
@@ -432,29 +437,29 @@ export default function App() {
                     <div className="border border-ink/10 p-5 space-y-3 bg-paper">
                       <div className="flex items-center gap-2 text-xs font-mono font-bold text-ink uppercase tracking-wider">
                         <span className="h-1.5 w-1.5 bg-accent" />
-                        <span>{PROJECTS.length} SHIPPED SYSTEMS</span>
+                        <span>BUSINESS &amp; OPERATIONS FIRST</span>
                       </div>
                       <p className="text-xs leading-relaxed">
-                        So I started building. {PROJECTS.length} products, deployed and live — a cloud-synced digital ledger &amp; EMI engine for micro-merchants, an exam tracker used by aspirants across 27 competitive exams, an AI vision scanner that reads expiry dates off packaging for shopkeepers, a background Android app that deleted an hour of daily data entry for an HR team, a farmer-to-buyer marketplace with a live bidding engine. Not tutorials. Real things, with real users and real bugs I had to go fix on a Sunday.
+                        Every system I build starts with operational reality, not code syntax. 4.5 years running lending operations at JD Finance taught me how portfolios work, how capital moves, and where manual bottlenecks drain margins. I design systems around real unit economics and user needs.
                       </p>
                     </div>
 
                     <div className="border border-ink/10 p-5 space-y-3 bg-paper">
                       <div className="flex items-center gap-2 text-xs font-mono font-bold text-ink uppercase tracking-wider">
                         <span className="h-1.5 w-1.5 bg-accent" />
-                        <span>AI WORKING METHOD</span>
+                        <span>TECHNICAL DELIVERY &amp; ARCHITECTURE</span>
                       </div>
                       <p className="text-xs leading-relaxed">
-                        I build with AI IDE agents as my working method — I own the architecture, the trade-offs, and the decisions about what gets built and why; the agent handles the keystrokes. That's how one person ships a Kotlin app with a four-layer deduplication system and a full-stack PostgreSQL marketplace in the same year. It's also why I care more about whether a system solves the actual problem than about which framework it's written in.
+                        My BCA technical foundation means I don't just write theoretical slides or PRDs. I understand system architecture, data models, APIs, and modern developer tooling well enough to architect, prototype, and ship working software directly.
                       </p>
                     </div>
                   </div>
 
                   <div className="p-5 border border-ink/10 bg-accent/5 text-xs font-mono text-ink/90 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                     <div className="space-y-1">
-                      <span className="font-bold block text-accent uppercase tracking-widest">// THE ACADEMIC CROSSOVER</span>
+                      <span className="font-bold block text-accent uppercase tracking-widest">// THE TECHNO-COMMERCIAL INTERSECTION</span>
                       <p className="font-sans font-light text-muted leading-relaxed text-xs">
-                        I'm finishing my BCA in Surat and starting an MBA at Manipal University Jaipur in Analytics & Data Science and Project Management — because the problems worth solving live where business logic meets the technical one.
+                        Finishing my BCA in Surat and pursuing an MBA at Manipal University Jaipur in Analytics &amp; Data Science and Project Management — because the problems worth solving live right where operational logic meets technical execution.
                       </p>
                     </div>
                   </div>
@@ -850,8 +855,9 @@ export default function App() {
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 border-b border-ink/5 pb-2">
                       <span className="h-2 w-2 bg-accent/70 rounded-full" />
-                      <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono">
-                        ðŸ’¼ Internship Projects &amp; Products
+                      <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono flex items-center gap-1.5">
+                        <Briefcase size={13} className="text-accent" />
+                        <span>Internship Projects &amp; Products</span>
                       </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

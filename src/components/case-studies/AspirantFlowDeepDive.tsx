@@ -36,27 +36,27 @@ export default function AspirantFlowDeepDive() {
                           </thead>
                           <tbody>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">ðŸ›ï¸ UPSC CSE</td>
+                              <td className="py-1">UPSC CSE</td>
                               <td className="py-1 text-muted text-[10px]">Polity, History, Geography, CSAT...</td>
                               <td className="text-right font-bold">1,100+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">ðŸ’¼ SSC CGL/CHSL</td>
+                              <td className="py-1">SSC CGL/CHSL</td>
                               <td className="py-1 text-muted text-[10px]">Quant, Reasoning, English, GA...</td>
                               <td className="text-right font-bold">150+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">⚡ TCS NQT</td>
+                              <td className="py-1">TCS NQT</td>
                               <td className="py-1 text-muted text-[10px]">Speed Math, Aptitude, Coding, English</td>
                               <td className="text-right font-bold">100+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">ðŸ¦ IBPS PO/Clerk</td>
+                              <td className="py-1">IBPS PO/Clerk</td>
                               <td className="py-1 text-muted text-[10px]">Quant, Reasoning, Banking, English</td>
                               <td className="text-right font-bold">120+</td>
                             </tr>
                             <tr className="border-b border-ink/5">
-                              <td className="py-1">ðŸŽ“ JEE / NEET</td>
+                              <td className="py-1">JEE / NEET</td>
                               <td className="py-1 text-muted text-[10px]">Physics, Chemistry, Math / Biology</td>
                               <td className="text-right font-bold">90+</td>
                             </tr>
