@@ -3,7 +3,7 @@ import { Project } from "./types";
 export const PORTFOLIO_OWNER = {
   name: "ARPIT JAISWAL",
   title: "Full-Stack Builder, Finance & Project Management",
-  tagline: "Full-stack builder. Finance background. Nine products shipped and running.",
+  tagline: "Full-stack builder. Finance background. 9 products shipped and running.",
   subLine: "Surat, Gujarat, India · BCA 2026 · MBA in Analytics & Data Science + Project Management, Manipal University Jaipur",
   portraitUrl: "/tech_workspace.jpg", // Tech & Analytics workspace image
   location: "Surat, Gujarat, India",

@@ -7,6 +7,7 @@ import TypingText from "./components/TypingText";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
 import { 
+  ArrowLeft,
   ArrowRight, 
   Layers, 
   MapPin, 
@@ -28,6 +29,25 @@ import {
   BookOpen
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer
+} from "recharts";
+import VyoshaDeepDive from "./components/case-studies/VyoshaDeepDive";
+import RawDeepDive from "./components/case-studies/RawDeepDive";
+import AspirantFlowDeepDive from "./components/case-studies/AspirantFlowDeepDive";
+import CareerLibraryDeepDive from "./components/case-studies/CareerLibraryDeepDive";
+import WorkSarthiDeepDive from "./components/case-studies/WorkSarthiDeepDive";
+import ArAuAgPtDeepDive from "./components/case-studies/ArAuAgPtDeepDive";
+import MedicineExtractionDeepDive from "./components/case-studies/MedicineExtractionDeepDive";
+import FarmerConnectDeepDive from "./components/case-studies/FarmerConnectDeepDive";
+import FreshStampDeepDive from "./components/case-studies/FreshStampDeepDive";
 
 const parseHash = (): { tab: string; project: Project | null } => {
   if (typeof window === 'undefined') return { tab: "home", project: null };
@@ -58,6 +78,51 @@ export default function App() {
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
   const [contactSuccess, setContactSuccess] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  // Copy email handler
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(PORTFOLIO_OWNER.contactInfo.email);
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 2500);
+  };
+
+  // Amortization chart data (₹10L @ 8.5% for 240 months with prepayment scenario)
+  const amortizationData = (() => {
+    const P = 1000000; // ₹10 Lakh
+    const annualRate = 8.5;
+    const r = annualRate / 100 / 12;
+    const n = 240; // 20 years
+    const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    const data: { month: number; principal: number; interest: number; balanceNormal: number; balancePrepay: number }[] = [];
+    let bal = P;
+    let balPre = P;
+    const prepayAmount = 20000; // monthly extra prepayment
+    for (let m = 1; m <= n; m++) {
+      const intNormal = bal * r;
+      const principalNormal = emi - intNormal;
+      bal = Math.max(0, bal - principalNormal);
+
+      const intPre = balPre * r;
+      const principalPre = emi - intPre;
+      balPre = Math.max(0, balPre - principalPre - prepayAmount);
+
+      if (m % 12 === 0 || m === 1) {
+        data.push({
+          month: m,
+          principal: Math.round(principalNormal),
+          interest: Math.round(intNormal),
+          balanceNormal: Math.round(bal / 1000),
+          balancePrepay: Math.round(Math.max(0, balPre) / 1000)
+        });
+      }
+      if (balPre <= 0 && m % 12 === 0) break;
+    }
+    return data;
+  })();
+
+  const [roiHours, setRoiHours] = useState(3); // ROI slider: hours/day spent in Excel
+
   const [messagesLog, setMessagesLog] = useState<{ name: string; email: string; message: string; date: string }[]>([]);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -272,15 +337,15 @@ export default function App() {
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">PROJECTS:</span>
-                      <span className="text-ink font-bold">8 Shipped</span>
+                      <span className="text-ink font-bold">{PROJECTS.length} Shipped</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">CURRENT BUILD:</span>
-                      <span className="text-ink font-bold">Study tracker - AspirantFlow</span>
+                      <span className="text-ink font-bold">Vyosha &amp; AspirantFlow</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted">STATUS:</span>
-                      <span className="text-accent font-bold">● Open to Opportunities</span>
+                      <span className="text-accent font-bold flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block" /> Open to Opportunities</span>
                     </div>
                   </div>
                 </div>
@@ -367,10 +432,10 @@ export default function App() {
                     <div className="border border-ink/10 p-5 space-y-3 bg-paper">
                       <div className="flex items-center gap-2 text-xs font-mono font-bold text-ink uppercase tracking-wider">
                         <span className="h-1.5 w-1.5 bg-accent" />
-                        <span>9 SHIPPED SYSTEMS</span>
+                        <span>{PROJECTS.length} SHIPPED SYSTEMS</span>
                       </div>
                       <p className="text-xs leading-relaxed">
-                        So I started building. Nine products, deployed and live — a cloud-synced digital ledger &amp; EMI engine for micro-merchants, an exam tracker used by aspirants across 27 competitive exams, an AI vision scanner that reads expiry dates off packaging for shopkeepers, a background Android app that deleted an hour of daily data entry for an HR team, a farmer-to-buyer marketplace with a live bidding engine. Not tutorials. Real things, with real users and real bugs I had to go fix on a Sunday.
+                        So I started building. {PROJECTS.length} products, deployed and live — a cloud-synced digital ledger &amp; EMI engine for micro-merchants, an exam tracker used by aspirants across 27 competitive exams, an AI vision scanner that reads expiry dates off packaging for shopkeepers, a background Android app that deleted an hour of daily data entry for an HR team, a farmer-to-buyer marketplace with a live bidding engine. Not tutorials. Real things, with real users and real bugs I had to go fix on a Sunday.
                       </p>
                     </div>
 
@@ -417,6 +482,84 @@ export default function App() {
                       <span className="text-[11px] font-mono text-muted tracking-widest uppercase block">
                         {stat.label}
                       </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.section>
+
+              {/* SECTION 03b: INTERACTIVE ROI CALCULATOR */}
+              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="border border-ink/10 bg-paper p-6 md:p-10 space-y-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div>
+                    <span className="text-xs font-mono text-accent uppercase tracking-widest block font-bold">// INTERACTIVE ROI CALCULATOR</span>
+                    <h2 className="font-serif text-2xl font-bold text-ink mt-1">Manual Ops vs. Automation — What's Your Team Losing?</h2>
+                    <p className="text-xs text-muted font-sans mt-1">Move the slider to see how much time and money I can save your team by automating repetitive workflows.</p>
+                  </div>
+                  <div className="flex flex-col items-center gap-2 min-w-[180px]">
+                    <span className="text-4xl font-mono font-bold text-ink">{roiHours}h</span>
+                    <span className="text-[10px] font-mono text-muted uppercase tracking-widest">DAILY HOURS IN EXCEL/SHEETS</span>
+                    <input
+                      id="roi-slider"
+                      type="range"
+                      min={0.5}
+                      max={10}
+                      step={0.5}
+                      value={roiHours}
+                      onChange={(e) => setRoiHours(Number(e.target.value))}
+                      className="w-full accent-accent cursor-pointer"
+                    />
+                    <div className="flex justify-between w-full text-[9px] font-mono text-muted">
+                      <span>0.5h</span><span>10h</span>
+                    </div>
+                  </div>
+                </div>
+                <div style={{ width: '100%', height: 200 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                      data={[1,2,3,4,5].map(member => ({
+                        team: `${member} person${member > 1 ? 's' : ''}`,
+                        hoursLost: Math.round(member * roiHours * 250),
+                        hoursSaved: Math.round(member * roiHours * 250 * 0.85),
+                        moneySaved: Math.round(member * roiHours * 250 * 0.85 * 600)
+                      }))}
+                      margin={{ top: 8, right: 16, left: 0, bottom: 0 }}
+                    >
+                      <defs>
+                        <linearGradient id="gradLost" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#ef4444" stopOpacity={0.2} />
+                          <stop offset="95%" stopColor="#ef4444" stopOpacity={0.02} />
+                        </linearGradient>
+                        <linearGradient id="gradSaved" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#10b981" stopOpacity={0.25} />
+                          <stop offset="95%" stopColor="#10b981" stopOpacity={0.02} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+                      <XAxis dataKey="team" tick={{ fontSize: 10, fontFamily: 'monospace' }} stroke="rgba(0,0,0,0.2)" />
+                      <YAxis tickFormatter={(v) => `${v}h`} tick={{ fontSize: 10, fontFamily: 'monospace' }} stroke="rgba(0,0,0,0.2)" width={44} />
+                      <Tooltip
+                        formatter={(value: number, name: string) => [
+                          name === 'moneySaved' ? `₹${value.toLocaleString('en-IN')}` : `${value} hours`,
+                          name === 'hoursLost' ? 'Annual Hours Lost (Manual)' : name === 'hoursSaved' ? 'Annual Hours Saved (Automated)' : 'Annual Value Recovered (₹600/hr)'
+                        ]}
+                        contentStyle={{ fontFamily: 'monospace', fontSize: 11, border: '1px solid rgba(0,0,0,0.1)', borderRadius: 0 }}
+                      />
+                      <Legend formatter={(val) => val === 'hoursLost' ? 'Manual Hours Lost' : 'Automated Hours Saved'} wrapperStyle={{ fontSize: 11, fontFamily: 'monospace' }} />
+                      <Area type="monotone" dataKey="hoursLost" stroke="#ef4444" strokeWidth={2} fill="url(#gradLost)" dot={false} />
+                      <Area type="monotone" dataKey="hoursSaved" stroke="#10b981" strokeWidth={2} fill="url(#gradSaved)" dot={false} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center border-t border-ink/10 pt-4">
+                  {[
+                    { label: 'Hours Saved / Year (1 person)', value: `${Math.round(roiHours * 250 * 0.85)}h` },
+                    { label: 'Value Recovered (₹600/hr)', value: `₹${Math.round(roiHours * 250 * 0.85 * 600).toLocaleString('en-IN')}` },
+                    { label: 'Error Rate Reduction', value: '~98%' },
+                    { label: 'Typical Automation Time', value: '2–4 Weeks' }
+                  ].map(stat => (
+                    <div key={stat.label} className="bg-surface-container border border-ink/10 p-3">
+                      <div className="text-[10px] font-mono text-muted uppercase tracking-wider">{stat.label}</div>
+                      <div className="font-serif font-bold text-ink text-lg mt-0.5">{stat.value}</div>
                     </div>
                   ))}
                 </div>
@@ -675,7 +818,7 @@ export default function App() {
                                   className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  Live ↗
+                                  <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
                                 </a>
                               )}
                               {p.githubUrl && (
@@ -686,7 +829,7 @@ export default function App() {
                                   className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  Git ↗
+                                  <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
                                 </a>
                               )}
                               <button 
@@ -708,7 +851,7 @@ export default function App() {
                     <div className="flex items-center gap-2 border-b border-ink/5 pb-2">
                       <span className="h-2 w-2 bg-accent/70 rounded-full" />
                       <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono">
-                        💼 Internship Projects &amp; Products
+                        ðŸ’¼ Internship Projects &amp; Products
                       </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -753,7 +896,7 @@ export default function App() {
                                   className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  Live ↗
+                                  <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
                                 </a>
                               )}
                               {p.githubUrl && (
@@ -764,7 +907,7 @@ export default function App() {
                                   className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  Git ↗
+                                  <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
                                 </a>
                               )}
                               <button 
@@ -786,7 +929,7 @@ export default function App() {
                     <div className="flex items-center gap-2 border-b border-ink/5 pb-2">
                       <span className="h-2 w-2 bg-muted/60 rounded-full" />
                       <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono text-muted">
-                        ⚙️ Other Systems &amp; Modules
+                        Other Systems &amp; Modules
                       </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -833,7 +976,7 @@ export default function App() {
                                   className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  Live ↗
+                                  <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
                                 </a>
                               )}
                               {p.githubUrl && (
@@ -844,7 +987,7 @@ export default function App() {
                                   className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  Git ↗
+                                  <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
                                 </a>
                               )}
                               <button 
@@ -909,7 +1052,7 @@ export default function App() {
                               className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              Live ↗
+                              <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
                             </a>
                           )}
                           {p.githubUrl && (
@@ -920,7 +1063,7 @@ export default function App() {
                               className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              Git ↗
+                              <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
                             </a>
                           )}
                           <button 
@@ -974,7 +1117,7 @@ export default function App() {
                               onClick={() => setSelectedCaseStudy(p)}
                               className="text-accent hover:underline text-[11px] cursor-pointer"
                             >
-                              Case Study →
+                              <span className="flex items-center gap-1">Case Study <ChevronRight size={12} /></span>
                             </button>
                           </td>
                         </tr>
@@ -1010,7 +1153,8 @@ export default function App() {
                 onClick={() => setSelectedCaseStudy(null)}
                 className="flex items-center gap-1.5 px-3 py-1.5 border border-ink/10 text-xs font-mono text-muted hover:text-ink hover:border-ink transition-colors cursor-pointer"
               >
-                <span>← BACK TO PROJECTS</span>
+                <ArrowLeft size={13} className="shrink-0" />
+                <span>BACK TO PROJECTS</span>
               </button>
 
               {/* Case study hero heading */}
@@ -1055,7 +1199,7 @@ export default function App() {
                         rel="noreferrer"
                         className="bg-accent text-paper hover:bg-accent/80 text-[11px] font-mono font-bold px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer"
                       >
-                        Live App ↗
+                        <span className="flex items-center gap-1">Live App <ExternalLink size={11} /></span>
                       </a>
                     ) : (
                       <span className="text-[11px] font-mono text-muted italic">Internal System</span>
@@ -1067,7 +1211,7 @@ export default function App() {
                         rel="noreferrer"
                         className="border border-ink/20 text-ink hover:bg-ink/5 text-[11px] font-mono font-bold px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer"
                       >
-                        GitHub ↗
+                        <span className="flex items-center gap-1">GitHub <ExternalLink size={11} /></span>
                       </a>
                     ) : (
                       selectedCaseStudy.liveUrl && <span className="text-[11px] font-mono text-muted italic">Private Repo</span>
@@ -1079,11 +1223,36 @@ export default function App() {
               {/* Deep dive sections details */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 
-                {/* Left side text columns (Span 8) */}
-                <div className="lg:col-span-8 space-y-8">
+                {/* Sticky Mini TOC (lg only) */}
+                <div className="hidden lg:block lg:col-span-1">
+                  <div className="sticky top-8 space-y-1 border-l border-ink/10 pl-3">
+                    <span className="text-[9px] font-mono text-muted uppercase tracking-widest block mb-2">CONTENTS</span>
+                    {[
+                      { id: "cs-problem", label: "01 Problem" },
+                      { id: "cs-solution", label: "02 Solution" },
+                      { id: "cs-metrics", label: "03 Metrics" },
+                      { id: "cs-deepdive", label: "04 Deep-Dive" }
+                    ].map(item => (
+                      <a
+                        key={item.id}
+                        href={`#${item.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }}
+                        className="block text-[10px] font-mono text-muted hover:text-accent transition-colors py-0.5 cursor-pointer"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Left side text columns (Span 7) */}
+                <div className="lg:col-span-7 space-y-8">
                   
                   {/* Problem */}
-                  <div className="space-y-3">
+                  <div id="cs-problem" className="space-y-3">
                     <h3 className="font-serif text-xl font-bold text-ink">01 / The Business Problem</h3>
                     <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
                       {selectedCaseStudy.problem || "Legacy infrastructure in enterprise finance operations suffered from massive latency barriers, high risk of user error during manual ledger input, and zero active visual intelligence telemetry."}
@@ -1091,7 +1260,7 @@ export default function App() {
                   </div>
 
                   {/* Built Details / Solution */}
-                  <div className="space-y-3">
+                  <div id="cs-solution" className="space-y-3">
                     <h3 className="font-serif text-xl font-bold text-ink">02 / System Architecture Solution</h3>
                     <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
                       {selectedCaseStudy.solution || "We designed a unified client-side dashboard leveraging highly structured UI tokens, responsive layouts, and automatic reconciliations. The system binds key transactional data directly into React state vectors to provide live auditing capabilities."}
@@ -1114,7 +1283,7 @@ export default function App() {
                 <div className="lg:col-span-4 space-y-6">
                   
                   {/* Case Study Impact Metrics */}
-                  <div className="bg-surface-container p-6 border border-ink/5 space-y-4">
+                  <div id="cs-metrics" className="bg-surface-container p-6 border border-ink/5 space-y-4">
                     <span className="text-[10px] font-mono text-accent tracking-widest block font-bold uppercase">// 03 / SYSTEM PERFORMANCE METRICS</span>
                     
                     <div className="space-y-4">
@@ -1147,1378 +1316,36 @@ export default function App() {
 
               </div>
 
+              {/* Deep-Dive Anchor (TOC target) */}
+              <div id="cs-deepdive" className="space-y-0">
               {/* Specialized VYOSHA Deep-Dive */}
-              {selectedCaseStudy.id === "vyosha" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12 animate-fade-in">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// FINTECH ARCHITECTURE &amp; OFFLINE-FIRST PWA SYSTEMS</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Dual-Engine Ledger, Dynamic UPI QR &amp; Loan Amortization
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed font-sans">
-                      Vyosha (from Sanskrit <em>Vyom</em> + <em>Kosha</em> — &quot;Treasury of Space&quot;) reinvents traditional Indian paper <em>bahi-khata</em> for millions of micro-merchants and SMEs. Engineered with sub-200ms cold-start hydration, client-side running balance reducers, dynamic NPCI UPI QR generation, and compound financial amortization engines.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Block 1: Passbook Running Balance & Pure Reducer Accumulator */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">LEDGER INTEGRITY</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Passbook Running Balance Reducer</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Storing precomputed balances in a database invites catastrophic drift when transactions are edited, backdated, or restored from the recycle bin out of order. Vyosha computes ledger balances dynamically on the client:
-                      </p>
-                      <ul className="space-y-3 text-xs font-mono">
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">01.</span>
-                          <div>
-                            <span className="font-bold block">Single-Pass Chronological Reducer</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Reverses sorted transactions to oldest-first, iterating once with an accumulator: <code>currentBalance += t.type === 'gave' ? t.amount : -t.amount</code>, producing a memoized <code>Record&lt;string, number&gt;</code> map keyed by transaction ID.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">02.</span>
-                          <div>
-                            <span className="font-bold block">Paise-Precision Currency Formatting</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Dynamic fraction digits (<code>minimumFractionDigits: Number.isInteger(amt) ? 0 : 2</code>) prevent fractional rounding artifacts like <code>₹1,250.5.00</code> while preserving clean whole rupee displays.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">03.</span>
-                          <div>
-                            <span className="font-bold block">Audit-Trail Soft Deletion</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Entries flagged with <code>deletedAt</code> are excluded from the accumulator before rendering, protecting audit trails without corrupting running totals.
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Block 2: Dynamic UPI QR & WhatsApp Reminder Engine */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">FINTECH ECOSYSTEM</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Dynamic NPCI UPI QR &amp; WhatsApp Engine</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Replaces paid SMS gateways and cumbersome bank transfers with zero-marginal-cost NPCI cryptographic payment deep links:
-                      </p>
-                      <div className="border border-accent/10 bg-accent/5 p-3.5 space-y-2 rounded text-xs font-mono text-ink">
-                        <div className="flex justify-between font-bold text-accent">
-                          <span>MECHANISM</span>
-                          <span>SPECIFICATION &amp; ROUTING</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">1. NPCI UPI URI SPECIFICATION</strong>
-                          <span className="text-muted text-[10px]">Encodes <code>upi://pay?pa=VPA&amp;pn=NAME&amp;am=DUE&amp;cu=INR&amp;tn=Hisaab</code> into an on-the-fly 200x200px Data URL QR code via node-qrcode.</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">2. WHATSAPP CLICK-TO-CHAT DEEP LINKS</strong>
-                          <span className="text-muted text-[10px]">Normalizes Indian 10-digit phone numbers with country code <code>91</code>, creating pre-filled WhatsApp billing statements with embedded pay links.</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">3. 3-DAY PROXIMITY ALERT ENGINE</strong>
-                          <span className="text-muted text-[11px]">Normalized midnight boundaries (<code>setHours(0,0,0,0)</code>) calculate exact calendar delta to flag 🔴 Overdue and 🟡 Due Soon accounts without false alarms on settled balances.</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Block 3: Frame-0 Hydration & Firestore Multi-Tab IndexedDB */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">PERFORMANCE RUNTIME</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Frame-0 Fast Hydration (&lt;200ms)</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Eliminates the 4–8 second white splash screen common in cellular-bound Firestore mobile applications:
-                      </p>
-                      <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent text-xs font-bold block">FRAME-0 HYDRATION</span>
-                          <span className="text-[10px] text-muted block mt-1">Reads synchronous local cache snapshots on mount; sets <code>isLoading=false</code> immediately to paint the UI in &lt;50ms.</span>
-                        </div>
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent text-xs font-bold block">INDEXEDDB PERSISTENCE</span>
-                          <span className="text-[10px] text-muted block mt-1">Firebase 12 <code>persistentLocalCache</code> + <code>persistentMultipleTabManager</code> syncs across tabs and survives offline app restarts.</span>
-                        </div>
-                      </div>
-                      <p className="text-[11px] text-muted font-mono leading-relaxed">
-                        A strict 600ms safety timeout guarantees the UI is never trapped behind network promises, while a subtle header pill communicates background sync status.
-                      </p>
-                    </div>
-
-                    {/* Block 4: Bank Loan Amortization & Multi-Prepayment Simulator */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">FINANCIAL ENGINEERING</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Loan Amortization &amp; Prepayment Engine</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Bridges merchant bookkeeping with comprehensive institutional loan planning:
-                      </p>
-                      <div className="space-y-3 text-xs font-mono text-ink">
-                        <div className="border-b border-ink/5 pb-2">
-                          <span className="font-bold block">Monthly Compounding Formula &amp; 0% Fallback</span>
-                          <span className="text-muted text-[11px] leading-normal block mt-1">
-                            Calculates standard monthly amortization: <code>EMI = [P × r × (1 + r)^n] / [(1 + r)^n - 1]</code> with automatic fallback to <code>P / n</code> for zero-interest peer loans.
-                          </span>
-                        </div>
-                        <div className="border-b border-ink/5 pb-2">
-                          <span className="font-bold block">Reduce Tenure vs. Reduce EMI Simulation</span>
-                          <span className="text-muted text-[11px] leading-normal block mt-1">
-                            Simulates single or recurring prepayments across cashflow intervals. Calculates exact interest saved, months shaved, and residual truncation guards (<code>opening - principal &lt; 1.0</code>) to eliminate phantom maturity months.
-                          </span>
-                        </div>
-                        <div>
-                          <span className="font-bold block">Natural Language Tenure Parser</span>
-                          <span className="text-muted text-[11px] leading-normal block mt-1">
-                            Interprets inputs like <code>&quot;18 years 9 months&quot;</code>, <code>&quot;240 months&quot;</code>, or <code>&quot;5y 6m&quot;</code> into discrete month integers.
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Block 5: Mechanical Keypad & Client-Side Image Compressor */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">MOBILE ERGONOMICS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">In-App Arithmetic Keypad &amp; 98% Image Compression</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Engineered specifically for one-handed thumb entry in busy retail environments:
-                      </p>
-                      <ul className="space-y-2 text-xs font-mono text-ink">
-                        <li className="flex items-start gap-1.5">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Expression Evaluator:</strong> Custom tokenizer evaluates math expressions like <code>150 + 250 * 2 = 650</code> with operator precedence, allowing merchants to tally sales tickets without switching to an external calculator.</span>
-                        </li>
-                        <li className="flex items-start gap-1.5">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>HTML5 Canvas Receipt Compressor:</strong> Downscales raw 8MB–12MB smartphone camera photos to a 1024x1024 bounding box at 72% JPEG quality, shrinking uploads to 60KB–120KB in &lt;150ms on-device.</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Block 6: Multi-Book Isolation & Disaster Recovery */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">RESILIENCE ARCHITECTURE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Multi-Book Isolation &amp; Emergency Recovery</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Protects data sovereignty and accounts compartmentalization without additional server overhead:
-                      </p>
-                      <ul className="space-y-2 text-xs font-mono text-ink">
-                        <li className="flex items-start gap-1.5">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Multi-Ledger Compartmentalization:</strong> Merchants maintain separate books (e.g. <em>Wholesale Shop</em> vs. <em>Personal Household</em>) under one account with scoped context filtering and zero multi-DB costs.</span>
-                        </li>
-                        <li className="flex items-start gap-1.5">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Reverse-Cascading Recycle Bin:</strong> 30-day soft deletes with automatic reverse-cascade: restoring a transaction automatically reactivates a deleted customer account.</span>
-                        </li>
-                        <li className="flex items-start gap-1.5">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Root Error Boundary &amp; JSON Dump:</strong> Traps unhandled React exceptions and offers an instant one-click raw LocalStorage JSON backup download, ensuring merchants never lose their financial records.</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Architecture Diagram / Terminal Blueprint */}
-                  <div className="border border-ink/10 bg-surface-container/40 p-6 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-accent font-bold uppercase">// SYSTEM TOPOLOGY: OFFLINE-FIRST PWA TO NPCI ECOSYSTEM</span>
-                      <span className="text-[10px] font-mono text-muted">23 TS/TSX FILES · ~5,400 SLOC · ZERO BACKEND SPEND</span>
-                    </div>
-                    <div className="bg-paper border border-ink/10 p-4 font-mono text-[11px] leading-relaxed overflow-x-auto text-ink">
-                      <pre className="whitespace-pre">
-{`+----------------------------------------------------------------------------------------------------+
-|                                    CLIENT BROWSER / MOBILE PWA                                     |
-|  +-----------------------------------------------------------------------------------------------+  |
-|  |  React 19 Presentation: LedgerHomeView | PartyDetailView | LoanCalculator | CustomersView     |  |
-|  |  Ergonomic Controls:   WhatsAppModal  | AddTransaction  | RecycleBinView | In-App Keypad     |  |
-|  +-----------------------------------------------------------------------------------------------+  |
-|                                                  |                                                 |
-|  +-----------------------------------------------------------------------------------------------+  |
-|  |  LedgerContext: Frame-0 Hydration (<200ms) | Multi-Book Isolation | Offline-First Dispatcher  |  |
-|  +-----------------------------------------------------------------------------------------------+  |
-|             |                                    |                                    |            |
-|             v                                    v                                    v            |
-|  +---------------------+              +---------------------+              +---------------------+ |
-|  |  Pure Math Engines  |              |   Storage Adapter   |              |  Service Worker     | |
-|  |  - balance.ts       |              |   - IndexedDB Disk  |              |  - Cache API (v1)   | |
-|  |  - loanCalculator.ts|              |   - LocalStorage    |              |  - Stale-While-Reval| |
-|  +---------------------+              +---------------------+              +---------------------+ |
-+--------------------------------------------------|-------------------------------------------------+
-                                                   |
-                             HTTPS / TLS / WSS     |     Cloud Sync (onSnapshot)
-                                                   v
-+----------------------------------------------------------------------------------------------------+
-|                              GOOGLE FIREBASE INFRASTRUCTURE                                        |
-|  Firebase Auth (Google OAuth)  <--->  Cloud Firestore NoSQL (parties / transactions collections)   |
-+----------------------------------------------------------------------------------------------------+
-                                                   |
-                                                   | NPCI UPI & WhatsApp Deep-Links
-                                                   v
-+----------------------------------------------------------------------------------------------------+
-|                                      EXTERNAL ECOSYSTEM APIS                                       |
-|  WhatsApp Click-to-Chat (wa.me/91...)   <--->  NPCI UPI Gateways (GPay / PhonePe / Paytm / BHIM)    |
-+----------------------------------------------------------------------------------------------------+`}
-                      </pre>
-                    </div>
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "vyosha" && <VyoshaDeepDive amortizationData={amortizationData} />}
 
               {/* Specialized ARWS RAW Deep-Dive */}
-              {selectedCaseStudy.id === "arws-raw" && (
-                <div className="border-t border-ink/10 pt-10 space-y-10">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// TECHNICAL BLUEPRINT</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: System Mechanics & Defense Pipelines
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      RAW stands for <strong>Record, Analyse, Work</strong>. To meet ARWS's production-grade standard, the system was engineered to survive device sleeps, unstable cellular coverage, and hardware dual-SIM contexts.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Block 1: 4-Layer Deduplication */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">CORE PIPELINE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">4-Layer Duplication Prevention</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        The most common failure mode in call-logging systems is duplicate writes due to poor network retry states. RAW addresses this with an end-to-end 4-layer defense pipeline:
-                      </p>
-                      <ul className="space-y-3 text-xs font-mono">
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">L1:</span>
-                          <div>
-                            <span className="font-bold block">5-Factor Collision-Proof Key</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Constructs a unique ID hash: <code>normalizedNum_dateMillis_duration_callType_simId</code> with millisecond precision.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">L2:</span>
-                          <div>
-                            <span className="font-bold block">Room DB Unique Constraints</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Database-level unique indexing on <code>uniqueCallId</code> with an idempotent <code>OnConflictStrategy.IGNORE</code> layer.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">L3:</span>
-                          <div>
-                            <span className="font-bold block">Kotlin Coroutines Mutex Lock</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              SyncManager uses <code>syncMutex.tryLock()</code> to prevent overlapping background upload cycles from executing concurrently.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">L4:</span>
-                          <div>
-                            <span className="font-bold block">Server-Side R_A_CheckDuplicate</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              The Apps Script scans Column H via a single batch range search before applying any row append operation, yielding a truly idempotent loop.
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Block 2: Multi-SIM Separation */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">PRIVACY ENGINE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Dual-SIM Hardware Separation</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        ARWS agents carry their personal contacts on the same devices used for professional calls. Standard Call Log trackers capture everything, violating privacy laws. RAW enforces strict boundary isolation:
-                      </p>
-                      <ul className="space-y-3 text-xs font-mono">
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">01.</span>
-                          <div>
-                            <span className="font-bold block">Active Subscription ID Picker</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              During Setup, <code>SubscriptionManager</code> lists active SIM ids and carriers. The user binds their official Company SIM.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">02.</span>
-                          <div>
-                            <span className="font-bold block">Double-Gate Discard Code Path</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              SIM validation checks are integrated both in real-time within <code>CallTrackingService.kt</code> and during the batch log scanner.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">03.</span>
-                          <div>
-                            <span className="font-bold block">Immediate Memory Flush</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Personal calls trigger an instant discard log and are never cached, written to the DB, or outputted to log files.
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Block 3: WorkManager Boundary Alignment */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">BG STRATEGY</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Clock-Boundary Aligned Sync</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Rather than utilizing battery-intensive and volatile intervals (which Android Doze mode forcefully kills), RAW uses a mathematical clock-grid system:
-                      </p>
-                      <div className="border-l-2 border-accent/30 pl-3 space-y-2 text-xs">
-                        <p className="font-mono text-[11px] text-ink">
-                          <strong>Boundary Floor Algorithm:</strong><br />
-                          The system snaps time intervals to floor-aligned 30-minute marks (e.g. <code>:00</code> or <code>:30</code>). When the worker runs, it calculates precisely:
-                        </p>
-                        <pre className="bg-paper p-2 font-mono text-[10px] text-muted overflow-x-auto whitespace-pre">
-{`fun getCurrentBoundary(now: Long): Long {
-  val cal = Calendar.getInstance().apply { timeInMillis = now }
-  val min = cal.get(Calendar.MINUTE)
-  cal.set(Calendar.MINUTE, if (min >= 30) 30 else 0)
-  cal.set(Calendar.SECOND, 0)
-  cal.set(Calendar.MILLISECOND, 0)
-  return cal.timeInMillis
-}`}
-                        </pre>
-                        <p className="text-[11px] text-muted leading-normal">
-                          This boundary alignment guarantees no overlapping scan queries and guarantees 100% data replication with zero data duplication.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Block 4: Low-Latency OS Hook */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">OS HEURISTIC</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Native Android Telephony Hacks</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Android's media layer is notoriously asynchronous. Building real-time background syncs requires overriding typical lifecycle behaviors:
-                      </p>
-                      <ul className="space-y-3 text-xs font-mono">
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">A.</span>
-                          <div>
-                            <span className="font-bold block">1500ms Database Write Wait-State</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              The OS does not write <code>CallLog.Calls</code> immediately upon going idle. A custom main-thread <code>Looper Handler</code> delays call reads to guarantee the fresh call record is flushed.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">B.</span>
-                          <div>
-                            <span className="font-bold block">START_STICKY + BootReceiver Durability</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Declared with <code>foregroundServiceType="dataSync"</code>. Survives both Operating System low-memory (OOM) sweeps and hardware reboots automatically.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 text-ink">
-                          <span className="text-accent font-bold">C.</span>
-                          <div>
-                            <span className="font-bold block">Serverless Apps Script Webhook</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              A lightweight Web App script is deployed on Google Apps Script, handling POST parameters, validating phone numbers and fields, and mapping records at $0 infrastructure cost.
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "arws-raw" && <RawDeepDive />}
 
               {/* Specialized STUDY TRACKER AJ Deep-Dive */}
-              {selectedCaseStudy.id === "study-tracker-aj" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// SYSTEM METRICS & ARCHITECTURE</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Resilient Cloud-Synchronized Sync & Polymorphic Dashboards
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      AspirantFlow is a highly resilient, cloud-synchronized online study planner and tracker featuring a network-resilient sync engine, polymorphic dashboard architectures, and HTML5 cross-frame event propagation.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* Polymorphic Variant Engine */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">VARIANT ENGINE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Polymorphic Exam Architecture</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Instead of duplicate HTML/JS templates, a single generic controller (<code className="text-accent">dashboard-generic.js</code>) dynamically reads exam specifications (<code className="text-accent">window.DASH_SPEC</code>) for 20+ variants, updating layout, targets, and counters on-the-fly:
-                      </p>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-[11px] font-mono border-collapse text-ink">
-                          <thead>
-                            <tr className="border-b border-ink/10 text-muted uppercase">
-                              <th className="text-left py-1">Exam Type</th>
-                              <th className="text-left py-1">Core Subjects</th>
-                              <th className="text-right py-1">Chapters</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className="border-b border-ink/5">
-                              <td className="py-1">🏛️ UPSC CSE</td>
-                              <td className="py-1 text-muted text-[10px]">Polity, History, Geography, CSAT...</td>
-                              <td className="text-right font-bold">1,100+</td>
-                            </tr>
-                            <tr className="border-b border-ink/5">
-                              <td className="py-1">💼 SSC CGL/CHSL</td>
-                              <td className="py-1 text-muted text-[10px]">Quant, Reasoning, English, GA...</td>
-                              <td className="text-right font-bold">150+</td>
-                            </tr>
-                            <tr className="border-b border-ink/5">
-                              <td className="py-1">⚡ TCS NQT</td>
-                              <td className="py-1 text-muted text-[10px]">Speed Math, Aptitude, Coding, English</td>
-                              <td className="text-right font-bold">100+</td>
-                            </tr>
-                            <tr className="border-b border-ink/5">
-                              <td className="py-1">🏦 IBPS PO/Clerk</td>
-                              <td className="py-1 text-muted text-[10px]">Quant, Reasoning, Banking, English</td>
-                              <td className="text-right font-bold">120+</td>
-                            </tr>
-                            <tr className="border-b border-ink/5">
-                              <td className="py-1">🎓 JEE / NEET</td>
-                              <td className="py-1 text-muted text-[10px]">Physics, Chemistry, Math / Biology</td>
-                              <td className="text-right font-bold">90+</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-
-                    {/* Timeout-Safe Synchronization */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">DATABASE PROTECTION</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Timeout-Safe Cloud Sync</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        To prevent Firestore queries from stalling the UI during connection drops, all database reads/writes are wrapped in a 5-second <code className="text-accent">Promise.race</code> timeout guard:
-                      </p>
-                      <pre className="text-[10px] font-mono bg-paper p-3 border border-ink/5 overflow-x-auto text-ink">
-{`function runWithTimeout(promise, errorMsg) {
-  return Promise.race([
-    promise,
-    new Promise((_, reject) => 
-      setTimeout(() => reject(new Error(errorMsg)), 5000)
-    )
-  ]);
-}`}
-                      </pre>
-                      <p className="text-[11px] text-muted">
-                        If the network fails or Firestore stalls, the app catches the error and cleanly falls back to local-only mode, keeping the candidate's session entirely active.
-                      </p>
-                    </div>
-
-                    {/* Decoupled Cross-Context Sync */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">EVENT BUS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Cross-Frame postMessage Sync</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        To avoid duplicate styling layers and visual fragmentation, roadmaps run inside independent iframes. Status mutations are securely transmitted to the host shell using the HTML5 postMessage API:
-                      </p>
-                      <pre className="text-[10px] font-mono bg-paper p-3 border border-ink/5 overflow-x-auto text-ink">
-{`window.parent.postMessage({
-  type: 'storageChange',
-  key: 'qt3_5',
-  value: '1'
-}, '*');`}
-                      </pre>
-                      <p className="text-[11px] text-muted">
-                        The parent window intercepts these messages and coordinates progress updates on the dashboard dials without causing page reloads or full DOM refreshes.
-                      </p>
-                    </div>
-
-                    {/* Centralized Session Gating & Onboarding */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">ROUTE GATES</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Session Gates & Onboarding Flow</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Protects user privacy and enforces demographic collection before displaying the dashboard core:
-                      </p>
-                      <ul className="space-y-3 text-xs font-mono text-ink">
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">1.</span>
-                          <div>
-                            <span className="font-bold block">Auth loading overlay injection</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Dynamically injects a full-screen, premium glassmorphic overlay at the body start to prevent layout flashes (FOUC).
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">2.</span>
-                          <div>
-                            <span className="font-bold block">Onboarding & registration gate</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Validates whether the user's demographic survey profile exists in Firestore or local cache. If incomplete, routes users strictly to `onboarding.html`.
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "study-tracker-aj" && <AspirantFlowDeepDive />}
 
               {/* Specialized CAREER LIBRARY Deep-Dive */}
-              {selectedCaseStudy.id === "career-library" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// DISCOVERY ENGINE & AI MATRIX</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Information Density & Multi-Path Discovery
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      Career Library is a zero-framework, high-performance static SPA serving over 10,000 structured academic and occupational data points directly on the client edge.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* Discovery Pathways */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">DISCOVERY</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Multi-Pathway Architecture</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        To match varying stages of a student's cognitive planning, three independent navigation flows map into a unified taxonomy:
-                      </p>
-                      <ul className="space-y-3 text-xs font-mono text-ink">
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">01.</span>
-                          <div>
-                            <span className="font-bold block">Stream-Based Partitioning</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Filters by secondary disciplines (PCM, PCB, Commerce, Humanities), immediately showing comprehensive non-traditional alternatives to break narrow academic tunnel-vision.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">02.</span>
-                          <div>
-                            <span className="font-bold block">3-Tier Taxonomy Drill-Down</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              Hierarchical catalog scaling from broad <strong>Industries</strong> down to <strong>Career Families</strong> and ultimately <strong>Individual Careers</strong> with automated deep breadcrumbs.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">03.</span>
-                          <div>
-                            <span className="font-bold block">Client-Side O(1) Instant Search</span>
-                            <span className="text-muted block text-[11px] leading-normal">
-                              A lightweight, pre-indexed JSON registry enables sub-millisecond keyword matches over 225 careers with zero background API overhead.
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* AI Assessment Engine */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">AI ANALYSIS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Personalized Marksheet Fit Evaluation</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        The platform's flagship feature provides structured career suitability analysis by evaluating academic transcripts or marksheets against a career's exact profile parameters:
-                      </p>
-                      <div className="border border-accent/10 bg-accent/5 p-3.5 space-y-3 rounded text-xs font-mono">
-                        <span className="text-[10px] text-accent uppercase tracking-wider block font-bold">// CLAUDE PROMPT COMPOSITION</span>
-                        <div className="text-[11px] text-ink leading-relaxed space-y-1">
-                          <p><strong>1. Parsing:</strong> Web API <code>FileReader</code> processes local files (PDF/TXT/DOCX) on-the-fly.</p>
-                          <p><strong>2. Context Assembly:</strong> Dynamically merges parsed raw academic grades with career-specific traits, entrance criteria, and educational pathways.</p>
-                          <p><strong>3. Synthesis:</strong> Claude Sonnet evaluates the candidate on 5 distinct dimensions: <em>academic fit, trait alignment, market viability, timeline readiness, and potential blockers</em>.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Highly Structured Templates */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">DATA DEPTH</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">9-Section Complete Career Blueprint</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Rather than surface-level definitions, every single career features deep analytical data. The dynamic templating covers:
-                      </p>
-                      <div className="grid grid-cols-2 gap-3 text-[11px] font-mono text-ink">
-                        <div className="bg-paper p-2 border border-ink/5">
-                          <span className="font-bold block text-accent">A. Careers Map</span>
-                          <span className="text-muted text-[10px]">Paths mapping PCM/PCB/Comm streams to degrees.</span>
-                        </div>
-                        <div className="bg-paper p-2 border border-ink/5">
-                          <span className="font-bold block text-accent">B. Exams & Colleges</span>
-                          <span className="text-muted text-[10px]">700+ entrance exams paired with 5,000+ top Indian colleges.</span>
-                        </div>
-                        <div className="bg-paper p-2 border border-ink/5">
-                          <span className="font-bold block text-accent">C. Specialty Tracks</span>
-                          <span className="text-muted text-[10px]">Detailed sub-specializations & role splits.</span>
-                        </div>
-                        <div className="bg-paper p-2 border border-ink/5">
-                          <span className="font-bold block text-accent">D. Ideal Traits</span>
-                          <span className="text-muted text-[10px]">Core psychological profiles & required aptitudes.</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Zero-Framework Styling Architecture */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">CRAFTSMANSHIP</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">No-Framework Performance & Theming</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Career Library demonstrates how high design fidelity can be achieved entirely with native, zero-runtime standard utilities:
-                      </p>
-                      <div className="space-y-3 text-xs font-mono text-ink">
-                        <div className="flex justify-between items-start border-b border-ink/5 pb-2">
-                          <div>
-                            <span className="font-bold block">14-Theme Attribute Engine</span>
-                            <span className="text-muted text-[11px] leading-normal">
-                              CSS custom properties applied via HTML body <code>data-industry="..."</code> attributes allow one stylesheet to elegantly re-theme 225 pages on loading.
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="font-bold block">IntersectionObserver Header</span>
-                            <span className="text-muted text-[11px] leading-normal">
-                              Tracks scrolling inside deep career templates to automatically update and highlight the primary sub-nav menu sections.
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "career-library" && <CareerLibraryDeepDive />}
 
               {/* Specialized WORK SARTHI Deep-Dive */}
-              {selectedCaseStudy.id === "work-sarthi" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// COGNITIVE AI PIPELINE & MULTILINGUAL PERSISTENCE</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Multi-Stage Parallel AI & 13-Language i18n
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      Work Sarthi coordinates multiple psychological frameworks and launches parallel client-side API requests to deliver personalized career roadmaps with absolute data sovereignty.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* Multi-Framework Psychometrics */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">PSYCHOMETRICS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Tri-Framework Normalization</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        The core assessment unifies three academically validated behavioral frameworks, tracking over 60 dynamic vectors through a standardized mathematical pipeline:
-                      </p>
-                      <div className="grid grid-cols-3 gap-3 text-center">
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent font-mono text-xs font-bold block">RIASEC</span>
-                          <span className="text-[10px] text-muted font-mono uppercase block mt-1">Holland Codes</span>
-                          <span className="text-[11px] text-ink block mt-1 leading-tight">Realistic, Social, Enterprising, etc.</span>
-                        </div>
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent font-mono text-xs font-bold block">OCEAN</span>
-                          <span className="text-[10px] text-muted font-mono uppercase block mt-1">Big Five</span>
-                          <span className="text-[11px] text-ink block mt-1 leading-tight">Openness to Neuroticism.</span>
-                        </div>
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent font-mono text-xs font-bold block">HOFSTEDE</span>
-                          <span className="text-[10px] text-muted font-mono uppercase block mt-1">Cultural Dimensions</span>
-                          <span className="text-[11px] text-ink block mt-1 leading-tight">6 dimensions of social values.</span>
-                        </div>
-                      </div>
-                      <p className="text-[11px] text-muted font-mono">
-                        Standardized scoring maps individual Likert inputs via <code>round((sum / (count * 5)) * 10)</code> to guarantee equivalent weighting.
-                      </p>
-                    </div>
-
-                    {/* AI Pipeline Orchestration */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">ORCHESTRATION</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Parallel AI Engine & fallbacks</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Fires sequential and concurrent REST API endpoints directly to Google Gemini 1.5 Flash in a structured multi-stage topology to shrink generation times by ~60%:
-                      </p>
-                      <div className="border border-accent/10 bg-accent/5 p-3.5 space-y-3 rounded text-xs font-mono text-ink">
-                        <div className="space-y-1.5">
-                          <p className="text-[11px] flex justify-between">
-                            <strong>Stage 1: Main Diagnostic</strong>
-                            <span className="text-accent font-bold">1x Call (45s timeout)</span>
-                          </p>
-                          <p className="text-[10px] text-muted">Generates overall clusters, themes, and high-level SWOT metrics in forced JSON.</p>
-                        </div>
-                        <div className="space-y-1.5 pt-2 border-t border-ink/5">
-                          <p className="text-[11px] flex justify-between">
-                            <strong>Stage 2: Parallel Deep SWOTs</strong>
-                            <span className="text-accent font-bold">4x Calls (Promise.all)</span>
-                          </p>
-                          <p className="text-[10px] text-muted">Launches concurrent API requests for localized career match analyses and comparative ranking justifications.</p>
-                        </div>
-                        <div className="space-y-1.5 pt-2 border-t border-ink/5">
-                          <p className="text-[11px] flex justify-between">
-                            <strong>Fallback: Offline Pearson Engine</strong>
-                            <span className="text-muted font-bold">Client-Side Array Math</span>
-                          </p>
-                          <p className="text-[10px] text-muted">Calculates trigonometric vector overlaps if API throttles, yielding instantly formatted matching arrays.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* i18n & Prompt Localization */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">LOCALIZATION</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">13-Language Multi-National i18n</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Rather than standard English-only interfaces, Work Sarthi integrates a high-fidelity localization architecture targeting India's diverse student demographics:
-                      </p>
-                      <div className="grid grid-cols-2 gap-4 text-xs">
-                        <div className="space-y-1">
-                          <span className="font-mono font-bold block text-ink">A. Framework Mapping</span>
-                          <span className="text-muted leading-relaxed block text-[11px]">
-                            Leverages <code>i18next</code> and <code>react-i18next</code> to handle over 1,000 UI dictionary keys spanning English, Hindi, Tamil, Telugu, Gujarati, and 8 other regional tongues.
-                          </span>
-                        </div>
-                        <div className="space-y-1">
-                          <span className="font-mono font-bold block text-ink">B. Prompt Language Injection</span>
-                          <span className="text-muted leading-relaxed block text-[11px]">
-                            The current locale parameter threads directly into the AI orchestrator's system context. This instructs Gemini to emit all advisory outputs natively in the requested language.
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* PDF Export & Admin Panel */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">UTILITIES</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Enterprise-Grade PDF & Control Panel</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Supports high-fidelity exporting and real-time prompt modification with local administration controls:
-                      </p>
-                      <div className="space-y-3 text-xs font-mono text-ink">
-                        <div className="flex justify-between items-start border-b border-ink/5 pb-2">
-                          <div>
-                            <span className="font-bold block">150 DPI PDF Vector Export</span>
-                            <span className="text-muted text-[11px] leading-normal">
-                              Uses <code>html2canvas</code> and <code>jsPDF</code> to slice complex Recharts radar displays and HTML hierarchies cleanly into print-ready A4 reports.
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="font-bold block">Live Prompt-Tuning Dashboard</span>
-                            <span className="text-muted text-[11px] leading-normal">
-                              Provides a password-protected route allowing administrators to edit the active core prompts, persist changes to localStorage, or export responses to clean CSV arrays.
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "work-sarthi" && <WorkSarthiDeepDive />}
 
               {/* Specialized AR-AUAGPT Deep-Dive */}
-              {selectedCaseStudy.id === "ar-auagpt" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// COMMODITY PIPELINES & MULTI-PLATFORM SYNC</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Five-Tier Redundancy & Duty-Inclusive Pricing
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      AR-AuAgPt acts as a highly resilient pricing proxy that bridges global precious metal spot rates with localized Indian retail market realities.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* Five-Tier Redundancy Chain */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">REDUCING DOWNTIME</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Five-Tier Data Acquisition</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        To guarantee that retail price cards are never blank, the stateless Express gateway manages a robust fall-back cascade:
-                      </p>
-                      <ul className="space-y-2 text-xs font-mono text-ink">
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">1.</span>
-                          <div>
-                            <span className="font-bold">Swissquote Spot API:</span>
-                            <span className="text-muted text-[11px] block mt-0.5 leading-normal">
-                              Pulls institutional-grade, real-time bid/ask streams for Gold, Silver, and Platinum.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">2.</span>
-                          <div>
-                            <span className="font-bold">Yahoo Finance Futures:</span>
-                            <span className="text-muted text-[11px] block mt-0.5 leading-normal">
-                              Fallback index that queries futures contracts (GC=F, SI=F, PL=F) via the <code>yahoo-finance2</code> library.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">3.</span>
-                          <div>
-                            <span className="font-bold">Frankfurter FX (ECB):</span>
-                            <span className="text-muted text-[11px] block mt-0.5 leading-normal">
-                              Third-line provider for real-time EUR/USD and USD/INR exchange parameters if primary feeds time out.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">4.</span>
-                          <div>
-                            <span className="font-bold">In-Memory Cache & Local Storage:</span>
-                            <span className="text-muted text-[11px] block mt-0.5 leading-normal">
-                              Falls back to server-side cache or client-side localStorage values (<code>ar_market_cache_v2</code>) with client-side TTL checks.
-                            </span>
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-accent font-bold">5.</span>
-                          <div>
-                            <span className="font-bold">Emergency Fallbacks:</span>
-                            <span className="text-muted text-[11px] block mt-0.5 leading-normal">
-                              Loads pre-calibrated baseline parameters corresponding to verified April 2026 commodity index levels.
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* India Duty Multiplier Model */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">TAX LAYERING</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">IBJA-Calibrated Multipliers</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Rather than displaying raw global spot values that fail to account for Indian import duty regulations, the pricing engine applies strict mathematical formulas:
-                      </p>
-                      <div className="border border-accent/10 bg-accent/5 p-4 rounded space-y-3 font-mono text-[11px] text-ink">
-                        <div className="space-y-1">
-                          <p className="font-bold text-accent">GOLD MULTIPLIER:</p>
-                          <code className="text-muted block text-[10px]">INR Price = (USD/oz × USD_INR_Rate / 31.1035g) × 1.0628</code>
-                          <p className="text-muted text-[10px] leading-relaxed">Accounts for 6% basic import duty, 1% AIDC surcharge, and 3% GST compound layering.</p>
-                        </div>
-                        <div className="space-y-1 pt-2 border-t border-ink/5">
-                          <p className="font-bold text-accent">SILVER MULTIPLIER:</p>
-                          <code className="text-muted block text-[10px]">INR Price = (USD/oz × USD_INR_Rate / 31.1035g) × 1.0759</code>
-                          <p className="text-muted text-[10px] leading-relaxed">Independently verified against live India market pricing (IBJA ₹2,42,400/kg benchmark equivalents).</p>
-                        </div>
-                        <div className="space-y-1 pt-2 border-t border-ink/5">
-                          <p className="font-bold text-accent">PLATINUM MULTIPLIER:</p>
-                          <code className="text-muted block text-[10px]">INR Price = (USD/oz × USD_INR_Rate / 31.1035g) × 0.9748</code>
-                          <p className="text-muted text-[10px] leading-relaxed">Adjusted factor matching the contemporary zero-duty premium regulatory regime.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Interactive Charts & Comparison Mode */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">ANALYTICS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">30-Year Charting & Normalize View</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Features highly responsive multi-range charts coupled with relative-percentage tracking to normalise commodity comparisons:
-                      </p>
-                      <div className="space-y-3 text-xs font-mono text-ink">
-                        <div className="flex justify-between items-start border-b border-ink/5 pb-2">
-                          <div>
-                            <span className="font-bold block">Compounding FX Devaluation</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              Applies historical currency depreciation data to historical spot prices. Allows users to witness how Gold hedge yields compound over 30 years compared to dollar indexes.
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="font-bold block">Relative Normalization Toggle</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              Plots Gold, Silver, and Platinum as relative percentage changes from the selected chart window starting point, standardising the massive dollar-per-ounce gap.
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Progressive Web App & Native Builds */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">CROSS-PLATFORM</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">One Codebase, Four Surfaces</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Maintains identical feature sets, layout tokens, and synchronization behaviors across multiple target environments:
-                      </p>
-                      <div className="grid grid-cols-2 gap-4 text-xs font-mono">
-                        <div className="space-y-1">
-                          <span className="font-bold block text-ink">A. Vite PWA Engine</span>
-                          <span className="text-muted leading-relaxed block text-[11px]">
-                            Integrates offline fallback capabilities via <code>vite-plugin-pwa</code>. Caches static shells and displays cached rates gracefully during connection drops.
-                          </span>
-                        </div>
-                        <div className="space-y-1">
-                          <span className="font-bold block text-ink">B. Capacitor Native Bridge</span>
-                          <span className="text-muted leading-relaxed block text-[11px]">
-                            Wraps the compiled React bundle using Capacitor into native iOS and Android packages, offering native binary performance with zero-lag over-the-air client parity.
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "ar-auagpt" && <ArAuAgPtDeepDive />}
 
               {/* Specialized MEDICINE EXTRACTION Deep-Dive */}
-              {selectedCaseStudy.id === "medicine-extraction" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// POLYGLOT MICROSERVICES & ENFORCED AI DETERMINISM</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Polyglot Extraction & Decoupled Inference
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      The Medicine Image Extraction platform coordinates three independent microservices tiers to ingest, validate, and persist pharmaceutical labels with absolute type safety and operational uptime.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* Polyglot Pipeline & Decoupled Inference */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">ARCHITECTURE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Decoupled Three-Tier Polyglot Stack</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Splitting heavyweight AI workloads from orchestrator processes ensures isolated scaling capabilities and prevents memory bloat:
-                      </p>
-                      <ul className="space-y-2.5 text-xs font-mono text-ink">
-                        <li className="flex gap-2">
-                          <span className="text-accent font-bold">1. React 19 Frontend:</span>
-                          <span className="text-muted text-[11px] leading-relaxed">
-                            Handles drag-and-drop file inputs, instant canvas previews, and client-side 5MB limits.
-                          </span>
-                        </li>
-                        <li className="flex gap-2 border-t border-ink/5 pt-2">
-                          <span className="text-accent font-bold">2. Node.js Express Gateway:</span>
-                          <span className="text-muted text-[11px] leading-relaxed">
-                            Manages file storage via Multer, issues 60s asynchronous timeouts, and handles Mongoose persistence.
-                          </span>
-                        </li>
-                        <li className="flex gap-2 border-t border-ink/5 pt-2">
-                          <span className="text-accent font-bold">3. FastAPI Python Engine:</span>
-                          <span className="text-muted text-[11px] leading-relaxed">
-                            Interacts natively with the <code>google-generativeai</code> SDK, enforcing Pydantic validations on raw bytes.
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Forced AI Determinism & Schema Cleanser */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">AI STABILITY</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Strict Determinism & Fallback Cleaning</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        To bypass the typical unstructured text pitfalls of probabilistic models, the pipeline layers two coordinated formatting patterns:
-                      </p>
-                      <div className="border border-accent/10 bg-accent/5 p-3.5 space-y-3 rounded text-xs font-mono text-ink">
-                        <div className="space-y-1">
-                          <p className="text-[11px] font-bold text-accent">A. API-Level Output Enforcement</p>
-                          <p className="text-[10px] text-muted">Configures Gemini 2.5 Flash with <code>temperature=0.0</code> and explicitly requests <code>response_mime_type="application/json"</code>.</p>
-                        </div>
-                        <div className="space-y-1 pt-2 border-t border-ink/5">
-                          <p className="text-[11px] font-bold text-accent">B. Multi-Strategy Parser Cascade</p>
-                          <p className="text-[10px] text-muted">Runs manual regex sweeps to clear backtick block fencings (<code>```json</code>), isolates brace-boundaries, and extracts nested substrings if parsing hits errors.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Three-Tier Classification & Persistence */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">DATA INTEGRITY</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Status Categorization & MongoDB Audits</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Saves every transaction into MongoDB Atlas paired with metadata to preserve historical lineage:
-                      </p>
-                      <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                        <div className="bg-paper p-2.5 border border-emerald-500/10 rounded">
-                          <span className="text-emerald-500 font-mono text-xs font-bold block">SUCCESS</span>
-                          <span className="text-[9px] text-muted leading-normal mt-1 block">All four vital variables (name, batch, expiry, price) resolved.</span>
-                        </div>
-                        <div className="bg-paper p-2.5 border border-amber-500/10 rounded">
-                          <span className="text-amber-500 font-mono text-xs font-bold block">PARTIAL</span>
-                          <span className="text-[9px] text-muted leading-normal mt-1 block">1 to 3 fields captured. Unresolved variables saved as null.</span>
-                        </div>
-                        <div className="bg-paper p-2.5 border border-red-500/10 rounded">
-                          <span className="text-red-500 font-mono text-xs font-bold block">FAILED</span>
-                          <span className="text-[9px] text-muted leading-normal mt-1 block">0 fields found or model rejected image. Error logs saved.</span>
-                        </div>
-                      </div>
-                      <p className="text-[11px] text-muted font-mono leading-normal">
-                        Raw Gemini payload buffers are stored side-by-side with sanitized indexes, enabling retrospective query tuning without re-processing image storage.
-                      </p>
-                    </div>
-
-                    {/* Graceful Degradation Design */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">RESILIENCE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Uptime Persistence & Fail-Safe Defaults</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Architected specifically to protect runtime operations against external network and service drops:
-                      </p>
-                      <div className="space-y-3 text-xs font-mono text-ink">
-                        <div className="flex justify-between items-start border-b border-ink/5 pb-2">
-                          <div>
-                            <span className="font-bold block">Disconnected Database Extractor</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              If the MongoDB replica set drops offline, the Express listener logs the outage but avoids blocking extraction. It returns real-time JSON responses directly to the client interface.
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="font-bold block">Non-Cascading Exception Control</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              If FastAPI errors or times out, Node.js captures the failure and logs a custom administrative ticket with standard default parameters, preventing silent frontend crashes.
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "medicine-extraction" && <MedicineExtractionDeepDive />}
 
               {/* Specialized FARMER CONNECT Deep-Dive */}
-              {selectedCaseStudy.id === "farmer-connect" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// TRANSACTION CONCURRENCY & MULTI-PROVIDER AI SYSTEMS</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Race-Free Bidding & Provider Failovers
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      FarmerConnect orchestrates a highly concurrent marketplace with automated data.gov.in mandi indexes, secure Razorpay verification, and a zero-downtime triple AI-agent matrix.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* Race-Free Bidding & Transaction Integrity */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">DATABASE TRANSACTIONS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Concurrency-Safe Bidding Engine</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        To resolve bidding race conditions where multiple buyers compete on the same crop millisecond-boundary, the marketplace handles placements in isolated relational blocks:
-                      </p>
-                      <div className="border border-accent/10 bg-accent/5 p-3.5 space-y-2 rounded text-xs font-mono text-ink">
-                        <div className="flex justify-between font-bold text-accent">
-                          <span>STAGE / COMMAND</span>
-                          <span>ACTION DESCRIPTION</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">1. SELECT ... FOR UPDATE</strong>
-                          <span className="text-muted text-[10px]">Acquires exclusive product row locks in PostgreSQL before read checks. Prevents simultaneous outbid states.</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">2. ATOMIC BIDS FLUSH</strong>
-                          <span className="text-muted text-[10px]">In the exact transaction window, sets former competitor bids to 'outbid' and queues push triggers in background callbacks.</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">3. TRANSACTION COMMIT / ROLLBACK</strong>
-                          <span className="text-muted text-[10px]">Persists the highest bid. Releases locks or rollbacks the session automatically if calculations trigger a validation conflict.</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Krishi Sahayak 4-Mode Provider Cascade */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">AI ORCHESTRATION</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Cascading Provider Failover Routing</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        The crop assistance chatbot uses a 2x2 intent matrix (Farmer/General × Live/Knowledge) with a self-healing fallback chain to shield operations from API outages:
-                      </p>
-                      <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent text-xs font-bold block">LIVE MODE</span>
-                          <span className="text-[10px] text-muted block mt-1">Queries OpenRouter with web search and falls back to Google Gemini 2.0 Flash with Search grounding.</span>
-                        </div>
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent text-xs font-bold block">KNOWLEDGE MODE</span>
-                          <span className="text-[10px] text-muted block mt-1">Routes directly to Groq (Llama 3.3 70B) for sub-second, zero-scraping agricultural wisdom.</span>
-                        </div>
-                      </div>
-                      <p className="text-[11px] text-muted font-mono leading-relaxed">
-                        If a specific provider endpoint yields high latency or ratelimits, the server-side router transparently shifts context payloads to the adjacent tier.
-                      </p>
-                    </div>
-
-                    {/* Hybrid APMC Caching & Government APIs */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">INTEGRATIONS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Hybrid Caching & Proxy Security</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        FarmerConnect integrates India's official <code>data.gov.in</code> commodity API, securing access and enhancing fetch times:
-                      </p>
-                      <div className="space-y-3 text-xs font-mono text-ink">
-                        <div className="flex justify-between items-start border-b border-ink/5 pb-2">
-                          <div>
-                            <span className="font-bold block">24-Hour PostgreSQL Cache</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              Retrieves fresh mandi rates across all states, writes structured snapshots to database cache tables, and serves local data instantly for common queries.
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="font-bold block">Stale-While-Revalidate Warnings</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              If the upstream federal servers drop offline, the gateway serves cached indexes combined with an honest visual notice banner on the UI.
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Multi-Tier Security & Compliance */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">SECURITY</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Helmet.js & Tiered Throttling Engine</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Because the app provides live bidding, payments, and open AI resources, security layers are embedded at every middleware endpoint:
-                      </p>
-                      <ul className="space-y-1.5 text-xs font-mono text-ink">
-                        <li className="flex items-start gap-1">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>7 Throttling Tiers:</strong> Configures rate limits ranging from 5 auth registers/hour to 30 bid creations/minute.</span>
-                        </li>
-                        <li className="flex items-start gap-1">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Cryptographic Signatures:</strong> Razorpay webhook callbacks verify authentic transactions using SHA256 HMAC salts.</span>
-                        </li>
-                        <li className="flex items-start gap-1">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Multimodal Guardrails:</strong> Gemini Vision validates uploaded listing images to block irrelevant uploads before DB insertion.</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              {selectedCaseStudy.id === "farmer-connect" && <FarmerConnectDeepDive />}
 
               {/* Specialized FRESHSTAMP Deep-Dive */}
-              {selectedCaseStudy.id === "freshstamp" && (
-                <div className="border-t border-ink/10 pt-10 space-y-12 animate-fade-in">
-                  <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// MULTIMODAL COMPUTER VISION & CLOUD ARCHITECTURES</span>
-                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
-                      Deep-Dive: Gemini Vision OCR & Dual-Storage Sync
-                    </h2>
-                    <p className="text-sm text-muted max-w-3xl leading-relaxed font-sans">
-                      FreshStamp leverages advanced Gemini 3.5 Flash JSON extraction parameters alongside real-time multi-device cloud persistence patterns and smart FIFO consumption warnings.
-                    </p>
-                  </div>
+              {selectedCaseStudy.id === "freshstamp" && <FreshStampDeepDive />}
 
-                  {/* Feature Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* Gemini Vision OCR extraction */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">COMPUTER VISION</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Gemini 3.5 Flash JSON Mode</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        To bypass the high friction of typing product info manually, the app converts images to structured, typed objects securely:
-                      </p>
-                      <div className="border border-accent/10 bg-accent/5 p-3.5 space-y-2 rounded text-xs font-mono text-ink">
-                        <div className="flex justify-between font-bold text-accent">
-                          <span>STEP / PARAMETER</span>
-                          <span>ACTION DESCRIPTION</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">1. MULTIPART DATA TRANSFERS</strong>
-                          <span className="text-muted text-[10px]">Converts camera images to data URIs inside the browser, passing them base64-encoded to serverless microservices.</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">2. FORCED JSON SCHEMA</strong>
-                          <span className="text-muted text-[10px]">Utilizes <code>responseMimeType: 'application/json'</code> to mandate strict schema compatibility across 7 parsed values (name, dates, price).</span>
-                        </div>
-                        <div className="pt-1 border-t border-ink/5 text-[11px] leading-relaxed">
-                          <strong className="block text-ink">3. TEMPORAL FALLBACKS</strong>
-                          <span className="text-muted text-[10px]">Automatically resolves imprecise packaging dates (e.g. "Best Before Oct 2026") to absolute end-of-month calendar dates.</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Dual Sync Pipeline */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">PERSISTENCE</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Dual-Channel Sync & Fallbacks</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Optimistic UI writes are paired with local/cloud replication models for bulletproof performance and seamless offline usage:
-                      </p>
-                      <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent text-xs font-bold block">GUEST CHANNELS</span>
-                          <span className="text-[10px] text-muted block mt-1">Saves snapshots locally with relative seeds. Transitioning to Google login migrates all offline records.</span>
-                        </div>
-                        <div className="bg-paper p-3 border border-ink/5 rounded">
-                          <span className="text-accent text-xs font-bold block">CLOUD PERSISTENCE</span>
-                          <span className="text-[10px] text-muted block mt-1">Fires non-blocking Firestore document payloads to isolate, validate, and secure entries across devices.</span>
-                        </div>
-                      </div>
-                      <p className="text-[11px] text-muted font-mono leading-relaxed">
-                        All local caching operations are namespace-isolated using authenticated Firebase IDs, completely eliminating browser state corruption.
-                      </p>
-                    </div>
-
-                    {/* FIFO Batch rotation */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">ALGORITHMS</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">FIFO Batch Rotation Engine</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        FreshStamp tracks multiple inventory instances without adding redundant tables or bloating your database footprint:
-                      </p>
-                      <div className="space-y-3 text-xs font-mono text-ink">
-                        <div className="flex justify-between items-start border-b border-ink/5 pb-2">
-                          <div>
-                            <span className="font-bold block">Derived State Multi-Batching</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              Detects items sharing the same name and brand at runtime, calculating batch counts (Batch X of Y) with zero database overhead.
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="font-bold block">Temporal Proximity Engine</span>
-                            <span className="text-muted text-[11px] leading-normal block mt-1">
-                              Computes calendar differences precisely down to day/month/year deltas, applying pulsing 'Consume First! 💡' warning badges to earlier-expiring items.
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Shelf Life consumed and export-backup system */}
-                    <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">UTILITIES</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Shelf Life Ratios & JSON Backups</h4>
-                      </div>
-                      <p className="text-xs text-muted leading-relaxed font-sans">
-                        Designed with advanced user utility helpers to secure data ownership and track item status transitions:
-                      </p>
-                      <ul className="space-y-1.5 text-xs font-mono text-ink">
-                        <li className="flex items-start gap-1">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Shelf Life Progress:</strong> Displays active consumable ratios: <code>(Today - MFD) / (EXP - MFD)</code> with dynamic color shifting.</span>
-                        </li>
-                        <li className="flex items-start gap-1">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Data Backups:</strong> Implements zero-dependency browser download anchors to back up and restore datasets with ease.</span>
-                        </li>
-                        <li className="flex items-start gap-1">
-                          <span className="text-accent font-bold">•</span>
-                          <span><strong>Verified Zero Waste:</strong> Features positive reinforcement stats panels when no items are wasted during active billing intervals.</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              </div>{/* end cs-deepdive */}
 
               {/* Bottom Navigation */}
               <div className="pt-8 border-t border-ink/10 flex justify-between items-center">
@@ -2530,7 +1357,7 @@ export default function App() {
                   }}
                   className="text-xs font-mono text-muted hover:text-ink cursor-pointer"
                 >
-                  ← PREVIOUS CASE
+                  <span className="flex items-center gap-1.5"><ArrowLeft size={13} /> PREVIOUS CASE</span>
                 </button>
                 <button
                   onClick={() => {
@@ -2540,7 +1367,7 @@ export default function App() {
                   }}
                   className="text-xs font-mono text-muted hover:text-ink cursor-pointer"
                 >
-                  NEXT CASE →
+                  <span className="flex items-center gap-1.5">NEXT CASE <ArrowRight size={13} /></span>
                 </button>
               </div>
 
@@ -2655,7 +1482,7 @@ export default function App() {
                               rel="noreferrer"
                               className="text-[10px] font-mono text-accent hover:text-accent-high font-bold flex items-center gap-0.5 transition-colors cursor-pointer self-start"
                             >
-                              Show credential ↗
+                              <span className="flex items-center gap-1">Show credential <ExternalLink size={10} /></span>
                             </a>
                           </div>
                         </div>
@@ -2716,7 +1543,7 @@ export default function App() {
                         exit={{ opacity: 0, y: -10 }}
                         className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono"
                       >
-                        ✔ Your message has been dispatched! I'll respond within 24 hours.
+                        ✓ Your message has been dispatched! I'll respond within 24 hours.
                       </motion.div>
                     )}
                     {contactError && (
@@ -2726,7 +1553,7 @@ export default function App() {
                         exit={{ opacity: 0, y: -10 }}
                         className="p-4 bg-red-50 border border-red-200 text-red-700 text-xs font-mono"
                       >
-                        ✘ {contactError}
+                        ✕ {contactError}
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -2791,7 +1618,41 @@ export default function App() {
 
                 {/* Direct info column (Span 5) */}
                 <div className="lg:col-span-5 space-y-6">
-                  
+
+                  {/* Quick-Action Buttons */}
+                  <div className="bg-paper border border-ink/15 p-6 space-y-3">
+                    <span className="text-[10px] font-mono text-accent tracking-widest block font-bold uppercase">// ONE-CLICK DIRECT CONTACT</span>
+                    <p className="text-xs text-muted font-sans">Busy? Skip the form — reach me instantly:</p>
+                    <div className="flex flex-col gap-2.5">
+                      <button
+                        id="copy-email-btn"
+                        onClick={handleCopyEmail}
+                        className="flex items-center gap-3 px-4 py-3 bg-ink hover:bg-accent text-paper text-xs font-mono font-bold tracking-wider uppercase transition-all w-full cursor-pointer"
+                      >
+                        <Mail size={13} />
+                        {emailCopied ? '✓ COPIED TO CLIPBOARD!' : 'COPY EMAIL ADDRESS'}
+                      </button>
+                      <a
+                        id="whatsapp-contact-btn"
+                        href="https://wa.me/919624997427?text=Hi%20Arpit%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect."
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-3 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-mono font-bold tracking-wider uppercase transition-all w-full"
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        CHAT ON WHATSAPP
+                      </a>
+                      <a
+                        id="call-direct-btn"
+                        href="tel:+919624997427"
+                        className="flex items-center gap-3 px-4 py-3 border border-ink/20 hover:bg-ink hover:text-paper text-ink text-xs font-mono font-bold tracking-wider uppercase transition-all w-full"
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z"/></svg>
+                        CALL DIRECT (+91 96249 97427)
+                      </a>
+                    </div>
+                  </div>
+
                   {/* HQ Info details */}
                   <div className="bg-paper border border-ink/15 p-6 space-y-4">
                     <span className="text-[10px] font-mono text-accent tracking-widest block font-bold uppercase">// CONTACT METRICS & DIRECT CHANNELS</span>

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Terminal, LineChart, Download, Sun, Moon, Eye, ChevronDown } from "lucide-react";
+import { PROJECTS } from "../data";
 
 interface HeaderProps {
   currentTab: string;
@@ -55,7 +56,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, onToggle
             ARPIT JAISWAL
           </span>
           <span className="font-mono text-[9px] md:text-[10px] tracking-wider text-muted mt-0.5 uppercase">
-            Full-Stack Builder // Finance & Project Management // Shipped 8 Products
+            Full-Stack Builder // Finance & Project Management // Shipped {PROJECTS.length} Products
           </span>
         </div>
 
