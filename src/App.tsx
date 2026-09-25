@@ -52,6 +52,7 @@ import ArAuAgPtDeepDive from "./components/case-studies/ArAuAgPtDeepDive";
 import MedicineExtractionDeepDive from "./components/case-studies/MedicineExtractionDeepDive";
 import FarmerConnectDeepDive from "./components/case-studies/FarmerConnectDeepDive";
 import FreshStampDeepDive from "./components/case-studies/FreshStampDeepDive";
+import PRDViewer from "./components/PRDViewer";
 
 const parseHash = (): { tab: string; project: Project | null } => {
   if (typeof window === 'undefined') return { tab: "home", project: null };
@@ -76,6 +77,7 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState<string>(() => parseHash().tab);
   const [projectFilter, setProjectFilter] = useState<string>("All");
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<Project | null>(() => parseHash().project);
+  const [caseStudyMode, setCaseStudyMode] = useState<"narrative" | "prd">("narrative");
   
   // Contact state
   const [contactName, setContactName] = useState("");
@@ -169,6 +171,7 @@ export default function App() {
 
   useEffect(() => {
     scrollToTop();
+    setCaseStudyMode("narrative");
   }, [currentTab, selectedCaseStudy]);
 
   // Synchronize active view state with the URL hash
@@ -845,7 +848,15 @@ export default function App() {
                                 </a>
                               )}
                               <button 
-                                onClick={() => setSelectedCaseStudy(p)}
+                                onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("prd"); }}
+                                className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                                title="View 1-Page PRD"
+                              >
+                                <FileText size={11} />
+                                <span>PRD</span>
+                              </button>
+                              <button 
+                                onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("narrative"); }}
                                 className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
                               >
                                 <span>Case Study</span>
@@ -1085,7 +1096,15 @@ export default function App() {
                             </a>
                           )}
                           <button 
-                            onClick={() => setSelectedCaseStudy(p)}
+                            onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("prd"); }}
+                            className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                            title="View 1-Page PRD"
+                          >
+                            <FileText size={11} />
+                            <span>PRD</span>
+                          </button>
+                          <button 
+                            onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("narrative"); }}
                             className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
                           >
                             <span>Case Study</span>
@@ -1238,8 +1257,51 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Deep dive sections details */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              {/* Perspective View Switcher: Narrative vs 1-Page PRD */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-ink/15 pb-4">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[10px] font-mono text-muted uppercase font-bold tracking-wider">VIEW PERSPECTIVE:</span>
+                  <div className="inline-flex p-1 bg-surface-container border border-ink/15 gap-1">
+                    <button
+                      onClick={() => setCaseStudyMode("narrative")}
+                      className={`px-3 py-1.5 text-xs font-mono font-bold tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                        caseStudyMode === "narrative"
+                          ? "bg-ink text-paper shadow-sm"
+                          : "text-muted hover:text-ink"
+                      }`}
+                    >
+                      <BookOpen size={12} />
+                      <span>CASE STUDY &amp; ARCHITECTURE</span>
+                    </button>
+
+                    <button
+                      onClick={() => setCaseStudyMode("prd")}
+                      className={`px-3 py-1.5 text-xs font-mono font-bold tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                        caseStudyMode === "prd"
+                          ? "bg-accent text-paper shadow-sm"
+                          : "text-muted hover:text-ink"
+                      }`}
+                    >
+                      <FileText size={12} />
+                      <span>1-PAGE PRD / PRODUCT SPEC</span>
+                    </button>
+                  </div>
+                </div>
+
+                <span className="text-[10px] md:text-[11px] font-mono text-muted">
+                  {caseStudyMode === "prd" ? "// Full Product Requirement Document with Acceptance Criteria" : "// Architecture Diagrams & Interactive Telemetry"}
+                </span>
+              </div>
+
+              {caseStudyMode === "prd" ? (
+                <PRDViewer 
+                  project={selectedCaseStudy} 
+                  onBackToCaseStudy={() => setCaseStudyMode("narrative")} 
+                />
+              ) : (
+                <>
+                  {/* Deep dive sections details */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 
                 {/* Sticky Mini TOC (lg only) */}
                 <div className="hidden lg:block lg:col-span-1">
@@ -1364,6 +1426,8 @@ export default function App() {
               {selectedCaseStudy.id === "freshstamp" && <FreshStampDeepDive />}
 
               </div>{/* end cs-deepdive */}
+              </>
+              )}
 
               {/* Bottom Navigation */}
               <div className="pt-8 border-t border-ink/10 flex justify-between items-center">
