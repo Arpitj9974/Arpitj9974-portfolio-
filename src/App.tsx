@@ -27,7 +27,10 @@ import {
   Linkedin,
   Github,
   Award,
-  BookOpen
+  BookOpen,
+  Star,
+  ArrowDown,
+  Check
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -383,7 +386,7 @@ export default function App() {
                       </div>
 
                       {/* Arrow */}
-                      <div className="text-muted text-[10px] pl-0.5 select-none">↓</div>
+                      <div className="text-muted text-[10px] pl-0.5 select-none"><ArrowDown size={11} /></div>
 
                       {/* 2024 */}
                       <div className="relative space-y-1">
@@ -394,7 +397,7 @@ export default function App() {
                       </div>
 
                       {/* Arrow */}
-                      <div className="text-muted text-[10px] pl-0.5 select-none">↓</div>
+                      <div className="text-muted text-[10px] pl-0.5 select-none"><ArrowDown size={11} /></div>
 
                       {/* 2025 */}
                       <div className="relative space-y-1">
@@ -405,7 +408,7 @@ export default function App() {
                       </div>
 
                       {/* Arrow */}
-                      <div className="text-muted text-[10px] pl-0.5 select-none">↓</div>
+                      <div className="text-muted text-[10px] pl-0.5 select-none"><ArrowDown size={11} /></div>
 
                       {/* NOW */}
                       <div className="relative space-y-1">
@@ -772,8 +775,9 @@ export default function App() {
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 border-b border-ink/5 pb-2">
                       <span className="h-2 w-2 bg-accent rounded-full animate-pulse" />
-                      <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono">
-                        ★ Featured Systems Work
+                      <h2 className="font-serif text-lg font-bold text-ink tracking-tight uppercase text-xs font-mono flex items-center gap-1.5">
+                        <Star size={12} className="text-accent fill-accent" />
+                        <span>Featured Systems Work</span>
                       </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -792,7 +796,10 @@ export default function App() {
                                     &lt;{p.tag}&gt;
                                   </span>
                                 )}
-                                <span className="text-accent font-bold">★ FEATURED</span>
+                                <span className="text-accent font-bold flex items-center gap-1 text-[9px] uppercase tracking-wider">
+                                  <Star size={10} className="fill-accent text-accent" />
+                                  <span>FEATURED</span>
+                                </span>
                               </div>
                             </div>
 
@@ -1027,7 +1034,12 @@ export default function App() {
                                 &lt;{p.tag}&gt;
                               </span>
                             )}
-                            {p.featured && <span className="text-accent font-bold">★ FEATURED</span>}
+                            {p.featured && (
+                              <span className="text-accent font-bold flex items-center gap-1 text-[9px] uppercase tracking-wider">
+                                <Star size={10} className="fill-accent text-accent" />
+                                <span>FEATURED</span>
+                              </span>
+                            )}
                           </div>
                         </div>
 
@@ -1547,9 +1559,10 @@ export default function App() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono"
+                        className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono flex items-center gap-2"
                       >
-                        ✓ Your message has been dispatched! I'll respond within 24 hours.
+                        <Check size={14} className="text-emerald-700 shrink-0" />
+                        <span>Your message has been dispatched! I'll respond within 24 hours.</span>
                       </motion.div>
                     )}
                     {contactError && (
@@ -1557,9 +1570,10 @@ export default function App() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="p-4 bg-red-50 border border-red-200 text-red-700 text-xs font-mono"
+                        className="p-4 bg-red-50 border border-red-200 text-red-700 text-xs font-mono flex items-center gap-2"
                       >
-                        ✕ {contactError}
+                        <X size={14} className="text-red-700 shrink-0" />
+                        <span>{contactError}</span>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -1635,8 +1649,8 @@ export default function App() {
                         onClick={handleCopyEmail}
                         className="flex items-center gap-3 px-4 py-3 bg-ink hover:bg-accent text-paper text-xs font-mono font-bold tracking-wider uppercase transition-all w-full cursor-pointer"
                       >
-                        <Mail size={13} />
-                        {emailCopied ? '✓ COPIED TO CLIPBOARD!' : 'COPY EMAIL ADDRESS'}
+                        {emailCopied ? <Check size={13} className="text-emerald-400" /> : <Mail size={13} />}
+                        {emailCopied ? 'COPIED TO CLIPBOARD!' : 'COPY EMAIL ADDRESS'}
                       </button>
                       <a
                         id="whatsapp-contact-btn"

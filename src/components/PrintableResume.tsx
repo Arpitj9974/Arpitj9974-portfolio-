@@ -167,7 +167,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
       {isModal && (
         <div className="my-8 border-t-2 border-dashed border-accent/20 relative flex justify-center items-center select-none" style={{ pageBreakBefore: "avoid", pageBreakAfter: "avoid" }}>
           <span className="absolute bg-paper border border-accent/15 px-4 py-1 rounded-full text-[10px] font-mono text-accent uppercase tracking-widest font-bold">
-            ✂️ PAGE 1 ENDS HERE (PDF PAGE BREAK)
+            [ PAGE 1 ENDS HERE · PDF PAGE BREAK ]
           </span>
         </div>
       )}

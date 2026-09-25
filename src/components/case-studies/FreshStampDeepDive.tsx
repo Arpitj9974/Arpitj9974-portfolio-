@@ -38,7 +38,7 @@ const SAMPLE_PACKAGES: SamplePackage[] = [
       status: "CRITICAL",
       daysLeft: 1,
       shelfLifeRatio: 85,
-      fifoAlert: "⚠️ Rotate to front rack. Must consume within 24h."
+      fifoAlert: "[CRITICAL] Rotate to front rack. Must consume within 24h."
     }
   },
   {
@@ -57,7 +57,7 @@ const SAMPLE_PACKAGES: SamplePackage[] = [
       status: "FRESH",
       daysLeft: 462,
       shelfLifeRatio: 22,
-      fifoAlert: "✅ Optimum condition. Safe for general inventory."
+      fifoAlert: "[OPTIMUM] Optimum condition. Safe for general inventory."
     }
   },
   {
@@ -76,7 +76,7 @@ const SAMPLE_PACKAGES: SamplePackage[] = [
       status: "EXPIRED",
       daysLeft: -3,
       shelfLifeRatio: 100,
-      fifoAlert: "⛔ PAST EXPIRY DATE. Quarantine immediately from shelf."
+      fifoAlert: "[ALERT] PAST EXPIRY DATE. Quarantine immediately from shelf."
     }
   }
 ];
@@ -210,7 +210,7 @@ export default function FreshStampDeepDive() {
                     ? "bg-amber-100 text-amber-800 border border-amber-200"
                     : "bg-emerald-100 text-emerald-800 border border-emerald-200"
                 }`}>
-                  {activeSample.parsed.status === "EXPIRED" ? "⛔ EXPIRED" : activeSample.parsed.status === "CRITICAL" ? "⚠️ EXPIRES SOON" : "✅ FRESH"}
+                  {activeSample.parsed.status === "EXPIRED" ? "EXPIRED" : activeSample.parsed.status === "CRITICAL" ? "EXPIRES SOON" : "FRESH"}
                 </span>
               </div>
 
@@ -332,7 +332,7 @@ export default function FreshStampDeepDive() {
               <div>
                 <span className="font-bold block">Temporal Proximity Engine</span>
                 <span className="text-muted text-[11px] leading-normal block mt-1">
-                  Computes calendar differences precisely down to day/month/year deltas, applying pulsing 'Consume First! 💡' warning badges to earlier-expiring items.
+                  Computes calendar differences precisely down to day/month/year deltas, applying pulsing 'Consume First!' warning badges to earlier-expiring items.
                 </span>
               </div>
             </div>
