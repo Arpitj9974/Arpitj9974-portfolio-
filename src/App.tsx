@@ -55,23 +55,31 @@ import FarmerConnectDeepDive from "./components/case-studies/FarmerConnectDeepDi
 import FreshStampDeepDive from "./components/case-studies/FreshStampDeepDive";
 import PRDViewer from "./components/PRDViewer";
 
-const parseHash = (): { tab: string; project: Project | null } => {
-  if (typeof window === 'undefined') return { tab: "home", project: null };
+const parseHash = (): { tab: string; project: Project | null; mode: "narrative" | "prd" } => {
+  if (typeof window === 'undefined') return { tab: "home", project: null, mode: "narrative" };
   const hash = window.location.hash.replace('#', '');
-  if (!hash) return { tab: "home", project: null };
+  if (!hash) return { tab: "home", project: null, mode: "narrative" };
 
   if (hash.startsWith('case-study/')) {
-    const projectId = hash.replace('case-study/', '');
+    const raw = hash.replace('case-study/', '');
+    const isPrd = raw.endsWith('/prd');
+    const projectId = isPrd ? raw.replace(/\/prd$/, '') : raw;
     const project = PROJECTS.find(p => p.id === projectId) || null;
-    return { tab: "projects", project };
+    return { tab: "projects", project, mode: isPrd ? "prd" : "narrative" };
+  }
+
+  if (hash.startsWith('prd/')) {
+    const projectId = hash.replace('prd/', '');
+    const project = PROJECTS.find(p => p.id === projectId) || null;
+    return { tab: "projects", project, mode: "prd" };
   }
 
   const allowedTabs = ["home", "projects", "experience", "contact"];
   if (allowedTabs.includes(hash)) {
-    return { tab: hash, project: null };
+    return { tab: hash, project: null, mode: "narrative" };
   }
 
-  return { tab: "home", project: null };
+  return { tab: "home", project: null, mode: "narrative" };
 };
 
 export default function App() {
@@ -79,7 +87,13 @@ export default function App() {
   const [projectFilter, setProjectFilter] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<Project | null>(() => parseHash().project);
-  const [caseStudyMode, setCaseStudyMode] = useState<"narrative" | "prd">("narrative");
+  const [caseStudyMode, setCaseStudyMode] = useState<"narrative" | "prd">(() => parseHash().mode);
+
+  const openCaseStudy = (project: Project, mode: "narrative" | "prd" = "narrative") => {
+    setCaseStudyMode(mode);
+    setSelectedCaseStudy(project);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   
   // Contact state
   const [contactName, setContactName] = useState("");
@@ -173,7 +187,6 @@ export default function App() {
 
   useEffect(() => {
     scrollToTop();
-    setCaseStudyMode("narrative");
   }, [currentTab, selectedCaseStudy]);
 
   // Synchronize active view state with the URL hash
@@ -181,11 +194,19 @@ export default function App() {
     if (typeof window === 'undefined') return;
     
     if (selectedCaseStudy) {
-      window.location.hash = `case-study/${selectedCaseStudy.id}`;
+      const targetHash = caseStudyMode === "prd" 
+        ? `case-study/${selectedCaseStudy.id}/prd` 
+        : `case-study/${selectedCaseStudy.id}`;
+      if (window.location.hash !== `#${targetHash}`) {
+        window.location.hash = targetHash;
+      }
     } else {
-      window.location.hash = currentTab === "home" ? "" : currentTab;
+      const targetHash = currentTab === "home" ? "" : currentTab;
+      if (window.location.hash !== (targetHash ? `#${targetHash}` : '')) {
+        window.location.hash = targetHash;
+      }
     }
-  }, [currentTab, selectedCaseStudy]);
+  }, [currentTab, selectedCaseStudy, caseStudyMode]);
 
   // Synchronize URL hash changes (like browser back/forward buttons) back to state
   useEffect(() => {
@@ -195,6 +216,7 @@ export default function App() {
       const parsed = parseHash();
       setCurrentTab(parsed.tab);
       setSelectedCaseStudy(parsed.project);
+      setCaseStudyMode(parsed.mode);
     };
 
     window.addEventListener("hashchange", handleHashChange);
@@ -692,13 +714,23 @@ export default function App() {
                             </span>
                           ))}
                         </div>
-                        <button 
-                          onClick={() => setSelectedCaseStudy(project)}
-                          className="text-xs font-mono text-ink font-bold tracking-wider hover:text-accent flex items-center gap-1 transition-colors cursor-pointer"
-                        >
-                          <span>CASE STUDY</span>
-                          <ArrowRight size={12} />
-                        </button>
+                        <div className="flex items-center gap-3">
+                          <button 
+                            onClick={() => openCaseStudy(project, "prd")}
+                            className="text-xs font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                            title="View 1-Page PRD"
+                          >
+                            <FileText size={11} />
+                            <span>PRD</span>
+                          </button>
+                          <button 
+                            onClick={() => openCaseStudy(project, "narrative")}
+                            className="text-xs font-mono text-ink font-bold tracking-wider hover:text-accent flex items-center gap-1 transition-colors cursor-pointer"
+                          >
+                            <span>CASE STUDY</span>
+                            <ArrowRight size={12} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -961,7 +993,7 @@ export default function App() {
                                 </a>
                               )}
                               <button 
-                                onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("prd"); }}
+                                onClick={() => openCaseStudy(p, "prd")}
                                 className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
                                 title="View 1-Page PRD"
                               >
@@ -969,7 +1001,7 @@ export default function App() {
                                 <span>PRD</span>
                               </button>
                               <button 
-                                onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("narrative"); }}
+                                onClick={() => openCaseStudy(p, "narrative")}
                                 className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
                               >
                                 <span>Case Study</span>
@@ -1048,7 +1080,15 @@ export default function App() {
                                 </a>
                               )}
                               <button 
-                                onClick={() => setSelectedCaseStudy(p)}
+                                onClick={() => openCaseStudy(p, "prd")}
+                                className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                                title="View 1-Page PRD"
+                              >
+                                <FileText size={11} />
+                                <span>PRD</span>
+                              </button>
+                              <button 
+                                onClick={() => openCaseStudy(p, "narrative")}
                                 className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
                               >
                                 <span>Case Study</span>
@@ -1128,7 +1168,15 @@ export default function App() {
                                 </a>
                               )}
                               <button 
-                                onClick={() => setSelectedCaseStudy(p)}
+                                onClick={() => openCaseStudy(p, "prd")}
+                                className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                                title="View 1-Page PRD"
+                              >
+                                <FileText size={11} />
+                                <span>PRD</span>
+                              </button>
+                              <button 
+                                onClick={() => openCaseStudy(p, "narrative")}
                                 className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
                               >
                                 <span>Case Study</span>
@@ -1209,7 +1257,7 @@ export default function App() {
                             </a>
                           )}
                           <button 
-                            onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("prd"); }}
+                            onClick={() => openCaseStudy(p, "prd")}
                             className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
                             title="View 1-Page PRD"
                           >
@@ -1217,7 +1265,7 @@ export default function App() {
                             <span>PRD</span>
                           </button>
                           <button 
-                            onClick={() => { setSelectedCaseStudy(p); setCaseStudyMode("narrative"); }}
+                            onClick={() => openCaseStudy(p, "narrative")}
                             className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
                           >
                             <span>Case Study</span>
@@ -1272,12 +1320,22 @@ export default function App() {
                             <span className="truncate block max-w-[120px]">{p.stack.join(", ")}</span>
                           </td>
                           <td className="p-4 text-right">
-                            <button 
-                              onClick={() => setSelectedCaseStudy(p)}
-                              className="text-accent hover:underline text-[11px] cursor-pointer"
-                            >
-                              <span className="flex items-center gap-1">Case Study <ChevronRight size={12} /></span>
-                            </button>
+                            <div className="flex items-center justify-end gap-3">
+                              <button 
+                                onClick={() => openCaseStudy(p, "prd")}
+                                className="text-accent hover:underline text-[11px] cursor-pointer font-bold flex items-center gap-1"
+                                title="View 1-Page PRD"
+                              >
+                                <FileText size={11} />
+                                <span>PRD</span>
+                              </button>
+                              <button 
+                                onClick={() => openCaseStudy(p, "narrative")}
+                                className="text-accent hover:underline text-[11px] cursor-pointer"
+                              >
+                                <span className="flex items-center gap-1">Case Study <ChevronRight size={12} /></span>
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -1557,7 +1615,7 @@ export default function App() {
                   onClick={() => {
                     const idx = PROJECTS.findIndex(p => p.id === selectedCaseStudy.id);
                     const prevIdx = idx > 0 ? idx - 1 : PROJECTS.length - 1;
-                    setSelectedCaseStudy(PROJECTS[prevIdx]);
+                    openCaseStudy(PROJECTS[prevIdx], caseStudyMode);
                   }}
                   className="text-xs font-mono text-muted hover:text-ink cursor-pointer"
                 >
@@ -1567,7 +1625,7 @@ export default function App() {
                   onClick={() => {
                     const idx = PROJECTS.findIndex(p => p.id === selectedCaseStudy.id);
                     const nextIdx = idx < PROJECTS.length - 1 ? idx + 1 : 0;
-                    setSelectedCaseStudy(PROJECTS[nextIdx]);
+                    openCaseStudy(PROJECTS[nextIdx], caseStudyMode);
                   }}
                   className="text-xs font-mono text-muted hover:text-ink cursor-pointer"
                 >

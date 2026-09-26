@@ -25,7 +25,10 @@ export default function PRDViewer({ project, onBackToCaseStudy }: PRDViewerProps
   const [activeTab, setActiveTab] = useState<"all" | "P0" | "P1" | "P2">("all");
 
   // Get custom PRD or build fallback PRD from project data
-  const prd: PRDSpec = PRD_DATA[project.id] || {
+  const prd: PRDSpec = 
+    PRD_DATA[project.id] || 
+    PRD_DATA[project.id.toLowerCase()] || 
+    (project.id === "study-tracker-aj" ? PRD_DATA["aspirantflow"] : undefined) || {
     projectId: project.id,
     docId: `PRD-${project.category.substring(0, 3).toUpperCase()}-00${project.id.length}`,
     version: "v1.0",

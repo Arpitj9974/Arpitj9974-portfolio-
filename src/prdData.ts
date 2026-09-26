@@ -257,3 +257,6 @@ export const PRD_DATA: Record<string, PRDSpec> = {
     ]
   }
 };
+
+// Ensure direct lookup by project.id ("study-tracker-aj") succeeds
+PRD_DATA["study-tracker-aj"] = PRD_DATA["aspirantflow"];
