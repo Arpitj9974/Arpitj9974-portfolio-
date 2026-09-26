@@ -1,0 +1,42 @@
+{
+  "name": "Arpit Jaiswal — Product & Business Operations",
+  "short_name": "Arpit Jaiswal",
+  "description": "Product & Business Operations specialist with 4.5 years running lending operations at JD Finance, a BCA technical foundation, and MBA in Analytics & PM. 9 shipped and live systems.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbfbf9",
+  "theme_color": "#1a1a1a",
+  "categories": ["business", "portfolio", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
