@@ -29,7 +29,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             <span className="hidden sm:inline">•</span>
             <a href="tel:+919624997427" className="hover:underline font-semibold" style={{ color: '#0f3d64' }}>+91 96249 97427</a>
             <span className="hidden sm:inline">•</span>
-            <a href="mailto:jaiswalarpit428@gmail.com" className="hover:underline font-semibold" style={{ color: '#0f3d64' }}>jaiswalarpit428@gmail.com</a>
+            <a href="mailto:arpitj9974@gmail.com" className="hover:underline font-semibold" style={{ color: '#0f3d64' }}>arpitj9974@gmail.com</a>
           </div>
           
           <div className="text-[9pt] mt-1 flex flex-wrap justify-center sm:justify-start gap-x-3 gap-y-0.5" style={{ color: '#4b5563' }}>

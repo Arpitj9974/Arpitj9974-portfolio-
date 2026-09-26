@@ -12,7 +12,7 @@ export const PORTFOLIO_OWNER = {
   aboutText2: "With an academic foundation spanning a BCA (Graduating 2026) and an MBA in Analytics & Data Science + Project Management from Manipal University Jaipur, I design systems that solve real business problems.",
   officeLocation: "Surat, India / Remote Hub",
   contactInfo: {
-    email: "jaiswalarpit428@gmail.com",
+    email: "arpitj9974@gmail.com",
     phone: "+91 9624997427",
     linkedin: "linkedin.com/in/Arpit-Jaiswal9974",
     github: "github.com/Arpitj9974"
