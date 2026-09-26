@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arpit Jaiswal — Resume</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      background-color: #ffffff;
+      color: #1a1a1a;
+      font-family: Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 9.2pt;
+      line-height: 1.28;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      padding: 10mm 14mm 8mm 14mm;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    a {
+      color: #0f3d64;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .header {
+      border-bottom: 1.5px solid #1e293b;
+      padding-bottom: 5px;
+      margin-bottom: 7px;
+    }
+    .name {
+      font-size: 21pt;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0a0a0a;
+      line-height: 1;
+    }
+    .headline {
+      font-size: 8.8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #0f3d64;
+      margin-top: 3px;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-size: 8.6pt;
+      color: #4b5563;
+      margin-top: 4px;
+    }
+    .contact-row span.sep {
+      color: #9ca3af;
+    }
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      font-size: 8.6pt;
+      margin-top: 2px;
+    }
+    .links-row a {
+      font-weight: 600;
+      color: #0f3d64;
+    }
+    .section {
+      margin-top: 6.5px;
+    }
+    .section-title {
+      font-size: 10pt;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #0f3d64;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 1px;
+      margin-bottom: 4.5px;
+    }
+    .summary-text {
+      font-size: 9pt;
+      line-height: 1.32;
+      text-align: justify;
+      color: #1f2937;
+    }
+    .exp-item {
+      margin-bottom: 5px;
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .exp-role {
+      font-weight: 700;
+      font-size: 9.4pt;
+      color: #111827;
+    }
+    .exp-company {
+      font-weight: 600;
+      font-size: 8.8pt;
+      color: #374151;
+    }
+    .exp-dates {
+      font-size: 8.2pt;
+      font-style: italic;
+      color: #6b7280;
+      margin-top: 0.5px;
+    }
+    ul.bullet-list {
+      margin-left: 14px;
+      margin-top: 1.5px;
+    }
+    ul.bullet-list li {
+      font-size: 8.8pt;
+      line-height: 1.27;
+      color: #1f2937;
+      margin-bottom: 1px;
+    }
+    .skills-tag {
+      font-size: 8.2pt;
+      color: #4b5563;
+      margin-top: 1px;
+    }
+    .project-card {
+      margin-bottom: 5.5px;
+    }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .project-title {
+      font-weight: 700;
+      font-size: 9.4pt;
+      color: #111827;
+    }
+    .project-tag {
+      font-size: 7.6pt;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      padding: 0.5px 4px;
+      border-radius: 2px;
+      font-weight: 600;
+      color: #475569;
+      margin-left: 4px;
+    }
+    .project-links {
+      font-size: 8.5pt;
+    }
+    .project-desc {
+      font-size: 8.7pt;
+      line-height: 1.28;
+      text-align: justify;
+      color: #1f2937;
+      margin-top: 1px;
+    }
+    .project-stack {
+      font-size: 8pt;
+      font-style: italic;
+      color: #64748b;
+      margin-top: 1px;
+    }
+    .skills-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 8.7pt;
+      line-height: 1.28;
+    }
+    .skills-category {
+      color: #1f2937;
+    }
+    .skills-category strong {
+      color: #0f3d64;
+      font-size: 8.9pt;
+    }
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3.5px;
+    }
+    .edu-degree {
+      font-weight: 700;
+      font-size: 9.1pt;
+      color: #111827;
+    }
+    .edu-inst {
+      font-size: 8.7pt;
+      color: #4b5563;
+    }
+    .edu-dates {
+      font-size: 8.7pt;
+      font-weight: 700;
+      color: #4b5563;
+      white-space: nowrap;
+    }
+    .cert-list {
+      margin-left: 14px;
+      margin-top: 1.5px;
+    }
+    .cert-list li {
+      font-size: 8.7pt;
+      line-height: 1.28;
+      color: #1f2937;
+      margin-bottom: 1.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="page">
+    
+    <!-- HEADER -->
+    <div class="header">
+      <div class="name">ARPIT JAISWAL</div>
+      <div class="headline">Product &amp; Business Operations | 4.5 Yrs FinOps · MBA (Analytics &amp; PM) · BCA</div>
+      <div class="contact-row">
+        <span>Surat, Gujarat, India</span>
+        <span class="sep">•</span>
+        <a href="tel:+919624997427">+91 96249 97427</a>
+        <span class="sep">•</span>
+        <a href="mailto:jaiswalarpit428@gmail.com">jaiswalarpit428@gmail.com</a>
+      </div>
+      <div class="links-row">
+        <a href="https://linkedin.com/in/Arpit-Jaiswal9974" target="_blank">linkedin.com/in/Arpit-Jaiswal9974</a>
+        <span class="sep">|</span>
+        <a href="https://github.com/Arpitj9974" target="_blank">github.com/Arpitj9974</a>
+        <span class="sep">|</span>
+        <a href="https://arpitj9974.vercel.app" target="_blank">arpitj9974.vercel.app (Live Portfolio)</a>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="section">
+      <div class="section-title">SUMMARY</div>
+      <p class="summary-text">
+        Product and business operations specialist with 4.5 years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 9 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
+      </p>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="section">
+      <div class="section-title">EXPERIENCE</div>
+      
+      <!-- JD Finance -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Finance Operations Lead &amp; Systems Builder</span>
+          <span class="exp-company">JD Finance | Surat, Gujarat</span>
+        </div>
+        <div class="exp-dates">Aug 2021 – Jun 2024 (Full-time, On-site) | Apr 2025 – Present (Part-time, Hybrid)</div>
+        <ul class="bullet-list">
+          <li>Ran end-to-end lending operations: borrower portfolio onboarding, credit validation, loan disbursement, and daily repayment tracking across 120+ active merchant accounts.</li>
+          <li>Designed and built the firm&apos;s foundational Excel data and ledger infrastructure from scratch; remains the core operational system running daily operations today with 100% mathematical accuracy.</li>
+          <li>Returned in 2025 to spearhead automation tooling, reducing daily account reconciliation time from 45 minutes to under 4 minutes using Google Apps Script and automated data workflows.</li>
+          <li>Formulated operational risk checks, delinquency alerts, and EMI schedules to ensure zero accounting discrepancies between field collections and ledger balances.</li>
+        </ul>
+        <div class="skills-tag"><strong>Skills:</strong> Process Automation, Business Operations, Amortization Modeling, Advanced Excel, Google Apps Script, Decision Analysis</div>
+      </div>
+
+      <!-- Work Sarthi -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Product Development Lead (Internship)</span>
+          <span class="exp-company">Work Sarthi | Surat, Gujarat</span>
+        </div>
+        <div class="exp-dates">Jan 2026 – Mar 2026</div>
+        <ul class="bullet-list">
+          <li>Worked directly under the Founder &amp; CEO to conceptualize, coordinate, and deliver three digital products from scope definition to production release.</li>
+          <li>Led the AI Career Assessment platform: engineered a psychometric scoring engine synthesizing RIASEC, Big Five, and Hofstede frameworks to generate comprehensive career reports in 13 Indian languages.</li>
+          <li>Shipped Career Library, a 225-career interactive discovery portal for Class 11–12 students featuring AI-driven academic fit analysis from uploaded marksheets.</li>
+        </ul>
+        <div class="skills-tag"><strong>Skills:</strong> Product Coordination, PRD &amp; Spec Writing, Google Apps Script, Multi-Language Localization, Prompt Engineering</div>
+      </div>
+
+      <!-- CripcoCode -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Product Developer – AI &amp; Automation (Internship)</span>
+          <span class="exp-company">CripcoCode Technologies Pvt Ltd | Surat, Gujarat · Remote</span>
+        </div>
+        <div class="exp-dates">Nov 2025 – Jan 2026</div>
+        <ul class="bullet-list">
+          <li>Built and deployed Medicine Image Extraction: an AI computer vision pipeline converting pharmaceutical packaging photos into structured, verified database records.</li>
+          <li>Replaced error-prone manual transcription for pharmacists and distributors, slashing cataloging turnaround time by over 80%.</li>
+          <li>Architected the system into three decoupled micro-services, ensuring ingestion and local caching continue seamlessly even during database maintenance outages.</li>
+        </ul>
+        <div class="skills-tag"><strong>Skills:</strong> Gemini AI, AI Vision Automation, System Architecture, API Integration, Operational Continuity</div>
+      </div>
+
+    </div>
+
+    <!-- SELECTED PROJECTS (PART 1: FINTECH & EDTECH FLAGSHIPS) -->
+    <div class="section">
+      <div class="section-title">SELECTED PROJECTS</div>
+
+      <!-- Vyosha -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-title">Vyosha</span>
+            <span class="project-tag">FinTech / Lending, Live</span>
+          </div>
+          <div class="project-links">
+            <a href="https://vyosha.vercel.app/" target="_blank">vyosha.vercel.app</a> | <a href="https://github.com/Arpitj9974/Vyosha" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Offline-first digital ledger &amp; EMI prepayment platform for micro-merchants and kirana stores. Engineered passbook accounting with Frame-0 local caching, achieving sub-200ms cold-start hydration and offline transaction recording with zero cellular lag. Features exact banking amortization calculation parity, prepayment interest-savings simulation, dynamic NPCI UPI QR collection, and 98% client-side receipt photo compression.
+        </p>
+        <div class="project-stack">Built with: React 19, TypeScript 5.8, Tailwind CSS v4, Firebase Firestore, IndexedDB Disk Cache, PWA</div>
+      </div>
+
+      <!-- AspirantFlow -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-title">AspirantFlow</span>
+            <span class="project-tag">EdTech / Study Analytics, Live</span>
+          </div>
+          <div class="project-links">
+            <a href="https://aspirantflow.vercel.app/" target="_blank">aspirantflow.vercel.app</a> | <a href="https://github.com/Arpitj9974/Study-Tracker-AJ" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Cloud-synchronized exam study planner and velocity analytics engine for 27 national Indian competitive exams (UPSC, SSC, IBPS, JEE, NEET). Uses localStorage cache as the source of truth for instantaneous (&lt;16ms) checkmark interactions; syncs asynchronously to Firestore with a 5-second timeout guard to prevent UI freeze on spotty networks. Features hierarchical taxonomies indexing 1,100+ topics, spaced-repetition revision queues, and multi-exam routing.
+        </p>
+        <div class="project-stack">Built with: HTML5, ES6 Modules, Tailwind CSS, Firebase Auth &amp; Firestore, LocalStorage API, HTML5 postMessage</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page">
+    
+    <!-- SELECTED PROJECTS CONTINUED -->
+    <div class="section" style="margin-top: 0;">
+      <div class="section-title">SELECTED PROJECTS (CONTINUED)</div>
+
+      <!-- RAW -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-title">RAW</span>
+            <span class="project-tag">Android / HR Operations, Deployed at ARWS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Arpitj9974/RAW" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Enterprise background call-logging and workforce tracking automation app for high-volume recruitment teams. Captured and logged 100% of recruitment calls in real time, saving HR coordinators 30–60 minutes per day previously lost to manual spreadsheet data entry. Implemented dual-SIM hardware filtering (ensuring personal calls never leave the device), offline-first Room database queuing, and a 4-layer duplicate-prevention system with zero-cost Google Apps Script backend.
+        </p>
+        <div class="project-stack">Built with: Kotlin, Room Database, Android WorkManager, Google Apps Script, Google Sheets API</div>
+      </div>
+
+      <!-- FreshStamp -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-title">FreshStamp</span>
+            <span class="project-tag">Retail / AI Vision, Live</span>
+          </div>
+          <div class="project-links">
+            <a href="https://fresh-stamp.vercel.app/" target="_blank">fresh-stamp.vercel.app</a> | <a href="https://github.com/Arpitj9974/FreshStamp" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Computer-vision expiry tracking and inventory shrinkage prevention tool for retail shopkeepers. Uses Gemini Vision to parse manufacture dates, expiry dates, brand names, and price directly off product packaging in a single photo scan, eliminating manual catalog entry. Provides FIFO batch movement detection to prioritize stock clearance, financial waste analytics on expired inventory, and complete offline guest mode with cloud synchronization.
+        </p>
+        <div class="project-stack">Built with: React, TypeScript, Firebase, Gemini Vision API, Tailwind CSS, Vercel Serverless</div>
+      </div>
+
+      <!-- FarmerConnect -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-title">FarmerConnect</span>
+            <span class="project-tag">AgriTech Marketplace, Live</span>
+          </div>
+          <div class="project-links">
+            <a href="https://farmer-connect-aj.vercel.app/" target="_blank">farmer-connect-aj.vercel.app</a> | <a href="https://github.com/Arpitj9974/FarmerConnect" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Direct farmer-to-buyer agricultural marketplace with live auction bidding and market telemetry. Solves middleman price erosion (30–40% loss) via transparent fixed-price listings and real-time auctions backed by database row locking to prevent race-condition bid collisions. Integrated live wholesale mandi prices via the government data.gov.in API, multi-provider AI advisory routing (English/Hindi/Gujarati), and Razorpay payments.
+        </p>
+        <div class="project-stack">Built with: React, Node.js, PostgreSQL, Gemini, Groq, OpenRouter, Razorpay, Supabase</div>
+      </div>
+
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section">
+      <div class="section-title">SKILLS &amp; COMPETENCIES</div>
+      <div class="skills-block">
+        <div class="skills-category">
+          <strong>Product &amp; Project Management:</strong> Product Roadmapping, PRD &amp; Spec Writing, Requirements Gathering, Scope Definition, User Story Mapping, Stakeholder Communication, Delivery Ownership, Agile/Scrum
+        </div>
+        <div class="skills-category">
+          <strong>Business Operations &amp; Finance:</strong> Lending Operations, Loan Amortization Modeling, Credit &amp; Risk Validation, SOP Creation, Business Process Analysis, Accounting Parity, Collections Workflow
+        </div>
+        <div class="skills-category">
+          <strong>Data &amp; Analytics:</strong> SQL, Python, Advanced Excel (Financial Models, Pivot, Dynamic Arrays), Power BI, Tableau, Performance Telemetry, Cohort Analysis, Reporting
+        </div>
+        <div class="skills-category">
+          <strong>Automation &amp; Integrations:</strong> Google Apps Script, REST APIs, n8n, Make, Webhooks, Firestore Event Sync, SheetDB
+        </div>
+        <div class="skills-category">
+          <strong>AI Orchestration &amp; Tooling:</strong> Prompt Engineering, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM
+        </div>
+        <div class="skills-category">
+          <strong>Core Technologies:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="section">
+      <div class="section-title">EDUCATION</div>
+      
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">MBA – Analytics &amp; Data Science + Project Management (Dual Specialization)</div>
+          <div class="edu-inst">Manipal University Jaipur</div>
+        </div>
+        <span class="edu-dates">2026 – 2028</span>
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">BCA – Bachelor of Computer Applications</div>
+          <div class="edu-inst">Bhagwan Mahavir University, Surat</div>
+        </div>
+        <span class="edu-dates">2023 – 2026</span>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="section">
+      <div class="section-title">CERTIFICATIONS</div>
+      <ul class="cert-list">
+        <li><strong>Google Prompting Essentials Specialization</strong> | Google | Aug 2025 | Credential ID: NFF6BEFXNP9X</li>
+        <li><strong>Mastering Data Structures and Algorithms in C and C++</strong> | Udemy | Oct 2025 | Credential ID: UC-0e9d4f63-26db-4803-8381-ffd8971f1863</li>
+        <li><strong>Java Programming – Beginner to Master</strong> | Udemy | Jan 2025 | Credential ID: UC-53933d4d-b063-4c0d-a818-ecd3ecb92ba4</li>
+        <li><strong>C++ Programming – Beginner to Advance, Deep Dive in C++</strong> | Udemy | Dec 2024 | Credential ID: UC-bfe2b6ce-881f-4c45-a332-c11a2fc357b4</li>
+      </ul>
+    </div>
+
+  </div>
+
+</body>
+</html>
