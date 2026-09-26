@@ -18,10 +18,10 @@ export const PORTFOLIO_OWNER = {
     github: "github.com/Arpitj9974"
   },
   stats: [
-    { label: "Products", value: "BUILD" },
-    { label: "Business Problems", value: "SOLVE" },
-    { label: "Workflows", value: "AUTOMATE" },
-    { label: "Fast", value: "SHIP" }
+    { label: "Shipped & Live Systems", value: "9" },
+    { label: "Years FinOps (JD Finance)", value: "4.5" },
+    { label: "Exams Indexed & Mapped", value: "27" },
+    { label: "HR Call Logs Automated", value: "100%" }
   ],
   skills: {
     whatIDo: [
