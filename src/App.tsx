@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import ResumeModal from "./components/ResumeModal";
 import PrintableResume from "./components/PrintableResume";
 import TypingText from "./components/TypingText";
+import ProjectCardLinks from "./components/ProjectCardLinks";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
 import { 
@@ -695,35 +696,12 @@ export default function App() {
                         {/* Top Meta Bar */}
                         <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                           <span className="uppercase tracking-wider truncate mr-1">{project.year} // {project.category}</span>
-                          <div className="flex items-center gap-2 shrink-0">
-                            {project.liveUrl && (
-                              <a 
-                                href={project.liveUrl} 
-                                target="_blank" 
-                                rel="noreferrer"
-                                title="Live Application"
-                                className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <ExternalLink size={11} />
-                              </a>
-                            )}
-                            {project.githubUrl && (
-                              <a 
-                                href={project.githubUrl} 
-                                target="_blank" 
-                                rel="noreferrer"
-                                title="Source Code"
-                                className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <Github size={11} />
-                              </a>
-                            )}
-                            <span className="text-accent font-bold flex items-center gap-0.5 text-[9px] uppercase tracking-wider" title="Featured System">
-                              <Star size={9} className="fill-accent text-accent" />
-                            </span>
-                          </div>
+                          <ProjectCardLinks
+                            liveUrl={project.liveUrl}
+                            githubUrl={project.githubUrl}
+                            title={project.title}
+                            showStar={true}
+                          />
                         </div>
 
                         {/* Title and Subtitle */}
@@ -992,35 +970,12 @@ export default function App() {
                             {/* Top Meta Bar */}
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                               <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
-                              <div className="flex items-center gap-2 shrink-0">
-                                {p.liveUrl && (
-                                  <a 
-                                    href={p.liveUrl} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    title="Live Application"
-                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                    onClick={(e) => e.stopPropagation()}
-                                  >
-                                    <ExternalLink size={11} />
-                                  </a>
-                                )}
-                                {p.githubUrl && (
-                                  <a 
-                                    href={p.githubUrl} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    title="Source Code"
-                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                    onClick={(e) => e.stopPropagation()}
-                                  >
-                                    <Github size={11} />
-                                  </a>
-                                )}
-                                <span className="text-accent font-bold flex items-center gap-0.5 text-[9px] uppercase tracking-wider" title="Featured System">
-                                  <Star size={9} className="fill-accent text-accent" />
-                                </span>
-                              </div>
+                              <ProjectCardLinks
+                                liveUrl={p.liveUrl}
+                                githubUrl={p.githubUrl}
+                                title={p.title}
+                                showStar={true}
+                              />
                             </div>
 
                             {/* Title and Subtitle */}
@@ -1107,35 +1062,12 @@ export default function App() {
                             {/* Top Meta Bar */}
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                               <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
-                              <div className="flex items-center gap-2 shrink-0">
-                                {p.liveUrl && (
-                                  <a 
-                                    href={p.liveUrl} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    title="Live Application"
-                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                    onClick={(e) => e.stopPropagation()}
-                                  >
-                                    <ExternalLink size={11} />
-                                  </a>
-                                )}
-                                {p.githubUrl && (
-                                  <a 
-                                    href={p.githubUrl} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    title="Source Code"
-                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                    onClick={(e) => e.stopPropagation()}
-                                  >
-                                    <Github size={11} />
-                                  </a>
-                                )}
-                                <span className="text-accent border border-accent/20 px-1 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none">
-                                  &lt;intern&gt;
-                                </span>
-                              </div>
+                              <ProjectCardLinks
+                                liveUrl={p.liveUrl}
+                                githubUrl={p.githubUrl}
+                                title={p.title}
+                                tag="intern"
+                              />
                             </div>
 
                             {/* Title and Subtitle */}
@@ -1221,37 +1153,12 @@ export default function App() {
                             {/* Top Meta Bar */}
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                               <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
-                              <div className="flex items-center gap-2 shrink-0">
-                                {p.liveUrl && (
-                                  <a 
-                                    href={p.liveUrl} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    title="Live Application"
-                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                    onClick={(e) => e.stopPropagation()}
-                                  >
-                                    <ExternalLink size={11} />
-                                  </a>
-                                )}
-                                {p.githubUrl && (
-                                  <a 
-                                    href={p.githubUrl} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    title="Source Code"
-                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                    onClick={(e) => e.stopPropagation()}
-                                  >
-                                    <Github size={11} />
-                                  </a>
-                                )}
-                                {p.tag && (
-                                  <span className="text-accent border border-accent/20 px-1 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none">
-                                    &lt;{p.tag}&gt;
-                                  </span>
-                                )}
-                              </div>
+                              <ProjectCardLinks
+                                liveUrl={p.liveUrl}
+                                githubUrl={p.githubUrl}
+                                title={p.title}
+                                tag={p.tag}
+                              />
                             </div>
 
                             {/* Title and Subtitle */}
@@ -1330,42 +1237,13 @@ export default function App() {
                         {/* Top Meta Bar */}
                         <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                           <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
-                          <div className="flex items-center gap-2 shrink-0">
-                            {p.liveUrl && (
-                              <a 
-                                href={p.liveUrl} 
-                                target="_blank" 
-                                rel="noreferrer"
-                                title="Live Application"
-                                className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <ExternalLink size={11} />
-                              </a>
-                            )}
-                            {p.githubUrl && (
-                              <a 
-                                href={p.githubUrl} 
-                                target="_blank" 
-                                rel="noreferrer"
-                                title="Source Code"
-                                className="text-muted hover:text-accent transition-colors cursor-pointer"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <Github size={11} />
-                              </a>
-                            )}
-                            {p.tag && (
-                              <span className="text-accent border border-accent/20 px-1 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none">
-                                &lt;{p.tag}&gt;
-                              </span>
-                            )}
-                            {p.featured && (
-                              <span className="text-accent font-bold flex items-center gap-0.5 text-[9px] uppercase tracking-wider" title="Featured System">
-                                <Star size={9} className="fill-accent text-accent" />
-                              </span>
-                            )}
-                          </div>
+                          <ProjectCardLinks
+                            liveUrl={p.liveUrl}
+                            githubUrl={p.githubUrl}
+                            title={p.title}
+                            tag={p.tag}
+                            showStar={p.featured}
+                          />
                         </div>
 
                         {/* Title and Subtitle */}
@@ -1568,9 +1446,9 @@ export default function App() {
                         href={selectedCaseStudy.liveUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="bg-accent text-paper hover:bg-accent/80 text-[11px] font-mono font-bold px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer"
+                        className="bg-accent text-paper hover:bg-accent/80 text-[11px] font-mono font-bold px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer shadow-2xs"
                       >
-                        <span className="flex items-center gap-1">Live App <ExternalLink size={11} /></span>
+                        <span className="flex items-center gap-1">Live App <ExternalLink size={12} /></span>
                       </a>
                     ) : (
                       <span className="text-[11px] font-mono text-muted italic">Internal System</span>
@@ -1580,9 +1458,9 @@ export default function App() {
                         href={selectedCaseStudy.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="border border-ink/20 text-ink hover:bg-ink/5 text-[11px] font-mono font-bold px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer"
+                        className="border border-ink/20 text-ink hover:bg-ink hover:text-paper text-[11px] font-mono font-bold px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer shadow-2xs"
                       >
-                        <span className="flex items-center gap-1">GitHub <ExternalLink size={11} /></span>
+                        <span className="flex items-center gap-1">GitHub <Github size={12} /></span>
                       </a>
                     ) : (
                       selectedCaseStudy.liveUrl && <span className="text-[11px] font-mono text-muted italic">Private Repo</span>
