@@ -7,6 +7,8 @@ import TypingText from "./components/TypingText";
 import ProjectCardLinks from "./components/ProjectCardLinks";
 import CommandPalette from "./components/CommandPalette";
 import CaseStudyReadingBar from "./components/CaseStudyReadingBar";
+import ArchitectureSimulator from "./components/ArchitectureSimulator";
+import ExecutiveTourModal from "./components/ExecutiveTourModal";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
 import { isSoundEnabled, setSoundEnabled, playClick, playToggle, playSuccess } from "./utils/soundEngine";
@@ -119,6 +121,7 @@ export default function App() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
   const [isSoundActive, setIsSoundActive] = useState<boolean>(() => isSoundEnabled());
+  const [isTourOpen, setIsTourOpen] = useState(false);
 
   const handleToggleSound = () => {
     const next = !isSoundActive;
@@ -432,6 +435,10 @@ export default function App() {
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         isSoundActive={isSoundActive}
         onToggleSound={handleToggleSound}
+        onStartTour={() => {
+          playClick();
+          setIsTourOpen(true);
+        }}
       />
 
       {/* Main Container Content */}
@@ -466,6 +473,18 @@ export default function App() {
                     >
                       <span>View Work</span>
                       <ArrowRight size={14} />
+                    </button>
+                    
+                    <button 
+                      onClick={() => {
+                        playClick();
+                        setIsTourOpen(true);
+                      }}
+                      className="px-4 py-3 border border-ink/20 hover:border-accent hover:text-accent bg-paper text-ink text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                      title="5-Slide Executive Story Tour"
+                    >
+                      <span>[ 2-MIN EXECUTIVE TOUR ]</span>
+                      <ArrowRight size={13} />
                     </button>
                     
                     <div className="flex items-center gap-3 sm:ml-2 border-t sm:border-t-0 sm:border-l border-ink/10 pt-4 sm:pt-0 sm:pl-5">
@@ -762,6 +781,11 @@ export default function App() {
                   ))}
                 </div>
               </motion.section>
+
+              {/* SECTION 03c: LIVE ARCHITECTURE SIMULATOR */}
+              <div id="architecture-simulator">
+                <ArchitectureSimulator />
+              </div>
 
               {/* SECTION 04: SELECTED WORK PREVIEW */}
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="space-y-8" id="home-selected-work">
@@ -2318,6 +2342,14 @@ export default function App() {
         }}
         isSoundActive={isSoundActive}
         onToggleSound={handleToggleSound}
+        onStartTour={() => setIsTourOpen(true)}
+        onScrollToSimulator={() => {
+          setCurrentTab("home");
+          setSelectedCaseStudy(null);
+          setTimeout(() => {
+            document.getElementById("architecture-simulator")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 200);
+        }}
       />
 
       {/* Interactive PDF Resume Modal */}
@@ -2325,6 +2357,24 @@ export default function App() {
         isOpen={isResumeModalOpen} 
         onClose={() => setIsResumeModalOpen(false)} 
         onDownload={handleDownloadResume}
+      />
+
+      {/* 2-Minute Executive Story Tour Modal */}
+      <ExecutiveTourModal
+        isOpen={isTourOpen}
+        onClose={() => setIsTourOpen(false)}
+        onExploreProjects={() => {
+          setCurrentTab("projects");
+          setSelectedCaseStudy(null);
+        }}
+        onScrollToSimulator={() => {
+          setCurrentTab("home");
+          setSelectedCaseStudy(null);
+          setTimeout(() => {
+            document.getElementById("architecture-simulator")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 200);
+        }}
+        onDownloadResume={handleDownloadResume}
       />
 
     </div>

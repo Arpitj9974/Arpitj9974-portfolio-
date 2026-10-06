@@ -35,6 +35,8 @@ export interface CommandPaletteProps {
   onSelectSkill?: (skill: string) => void;
   isSoundActive?: boolean;
   onToggleSound?: () => void;
+  onStartTour?: () => void;
+  onScrollToSimulator?: () => void;
 }
 
 interface PaletteAction {
@@ -59,7 +61,9 @@ export default function CommandPalette({
   onToggleTheme,
   onSelectSkill,
   isSoundActive = false,
-  onToggleSound
+  onToggleSound,
+  onStartTour,
+  onScrollToSimulator
 }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -179,6 +183,26 @@ export default function CommandPalette({
         }
       },
       {
+        id: "nav-simulator",
+        category: "NAVIGATION",
+        title: "Live Architecture & FinOps Telemetry Simulator",
+        subtitle: "Interactive 4-node pipeline with 1,000 TX batch stream & network fault injection",
+        badge: "SIMULATOR",
+        icon: <Sliders size={14} className="text-accent" />,
+        keywords: ["simulator", "architecture", "telemetry", "pipeline", "amortization", "ledger", "fault", "stream", "batch"],
+        run: () => {
+          onSelectTab("home");
+          onClose();
+          if (onScrollToSimulator) {
+            onScrollToSimulator();
+          } else {
+            setTimeout(() => {
+              document.getElementById("architecture-simulator")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 250);
+          }
+        }
+      },
+      {
         id: "nav-contact",
         category: "NAVIGATION",
         title: "Contact & Direct Channels",
@@ -195,6 +219,19 @@ export default function CommandPalette({
 
     // 3. Quick Actions
     list.push(
+      {
+        id: "act-tour",
+        category: "ACTIONS",
+        title: "Start 2-Minute Executive Story Tour",
+        subtitle: "5-slide interactive recruiter walkthrough: FinOps origin, BCA+MBA synthesis, 10 shipped systems",
+        badge: "TOUR",
+        icon: <Sparkles size={14} className="text-accent" />,
+        keywords: ["tour", "executive", "story", "slides", "presentation", "briefing", "recruiter", "pitch", "summary"],
+        run: () => {
+          onClose();
+          onStartTour?.();
+        }
+      },
       {
         id: "act-resume-pdf",
         category: "ACTIONS",

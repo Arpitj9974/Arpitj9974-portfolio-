@@ -12,6 +12,7 @@ interface HeaderProps {
   onOpenCommandPalette?: () => void;
   isSoundActive?: boolean;
   onToggleSound?: () => void;
+  onStartTour?: () => void;
 }
 
 export default function Header({ 
@@ -23,7 +24,8 @@ export default function Header({
   onDownloadResume,
   onOpenCommandPalette,
   isSoundActive = false,
-  onToggleSound
+  onToggleSound,
+  onStartTour
 }: HeaderProps) {
   const navItems = [
     { id: "home", label: "About Me" },
@@ -52,7 +54,19 @@ export default function Header({
       <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
         <span>[ DESIGNING. BUILDING. IMPROVING. ]</span>
         <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
-          <span className="text-accent font-medium">● PORTFOLIO ACTIVE</span>
+          {onStartTour && (
+            <button
+              onClick={onStartTour}
+              className="text-paper/80 hover:text-accent transition-colors cursor-pointer hidden sm:flex items-center gap-1 font-bold"
+              title="Launch 2-Minute Executive Story Tour"
+            >
+              <span>[ 2-MIN EXECUTIVE TOUR ]</span>
+            </button>
+          )}
+          <span className="text-accent font-medium flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block animate-pulse" />
+            <span>PORTFOLIO ACTIVE</span>
+          </span>
           <span className="text-paper/60">
             {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' })} IST
           </span>

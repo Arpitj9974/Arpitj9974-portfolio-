@@ -23,6 +23,8 @@ export default defineConfig(() => {
         output: {
           manualChunks: {
             recharts: ['recharts'],
+            motion: ['motion/react'],
+            lucide: ['lucide-react'],
           },
         },
       },
