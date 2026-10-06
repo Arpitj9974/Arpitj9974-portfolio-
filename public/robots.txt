@@ -1,0 +1,27 @@
+# Robots.txt for Arpit Jaiswal Portfolio
+# Domain: https://arpitj9974.vercel.app
+
+User-agent: *
+Allow: /
+
+# Explicit allow for search & social crawler bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Canonical XML Sitemap
+Sitemap: https://arpitj9974.vercel.app/sitemap.xml

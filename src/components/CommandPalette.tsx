@@ -15,10 +15,13 @@ import {
   Layers, 
   Tag, 
   Check,
-  Sparkles
+  Sparkles,
+  Volume2,
+  VolumeX
 } from "lucide-react";
 import { PROJECTS, PORTFOLIO_OWNER } from "../data";
 import { Project } from "../types";
+import { playClick, playPalette, playToggle, playSuccess } from "../utils/soundEngine";
 
 export interface CommandPaletteProps {
   isOpen: boolean;
@@ -30,6 +33,8 @@ export interface CommandPaletteProps {
   isDarkMode: boolean;
   onToggleTheme: () => void;
   onSelectSkill?: (skill: string) => void;
+  isSoundActive?: boolean;
+  onToggleSound?: () => void;
 }
 
 interface PaletteAction {
@@ -52,7 +57,9 @@ export default function CommandPalette({
   onDownloadResume,
   isDarkMode,
   onToggleTheme,
-  onSelectSkill
+  onSelectSkill,
+  isSoundActive = false,
+  onToggleSound
 }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -72,6 +79,7 @@ export default function CommandPalette({
       setQuery("");
       setSelectedIndex(0);
       setCopiedEmail(false);
+      playPalette();
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [isOpen]);
@@ -222,6 +230,7 @@ export default function CommandPalette({
         icon: isDarkMode ? <Sun size={14} className="text-amber-400" /> : <Moon size={14} className="text-indigo-400" />,
         keywords: ["theme", "dark", "light", "mode", "toggle", "color"],
         run: () => {
+          playToggle(!isDarkMode);
           onToggleTheme();
           onClose();
         }
@@ -236,6 +245,7 @@ export default function CommandPalette({
         keywords: ["copy", "email", "address", "arpitj9974@gmail.com"],
         run: () => {
           navigator.clipboard.writeText(PORTFOLIO_OWNER.contactInfo.email);
+          playSuccess();
           setCopiedEmail(true);
           setTimeout(() => {
             setCopiedEmail(false);
@@ -279,6 +289,19 @@ export default function CommandPalette({
         keywords: ["linkedin", "profile", "network", "connect"],
         run: () => {
           window.open(`https://${PORTFOLIO_OWNER.contactInfo.linkedin}`, "_blank");
+          onClose();
+        }
+      },
+      {
+        id: "act-audio",
+        category: "ACTIONS",
+        title: `Turn Audio Feedback ${isSoundActive ? "OFF" : "ON"}`,
+        subtitle: `Micro-haptic acoustic synthesis is currently ${isSoundActive ? "ACTIVE (Audible)" : "MUTED (Silent)"}`,
+        badge: isSoundActive ? "ACTIVE" : "MUTED",
+        icon: isSoundActive ? <Volume2 size={14} className="text-accent" /> : <VolumeX size={14} className="text-muted" />,
+        keywords: ["sound", "audio", "sfx", "haptic", "mute", "volume", "tone"],
+        run: () => {
+          onToggleSound?.();
           onClose();
         }
       }
@@ -348,12 +371,15 @@ export default function CommandPalette({
         onClose();
       } else if (e.key === "ArrowDown") {
         e.preventDefault();
+        playClick();
         setSelectedIndex((prev) => (prev < filteredActions.length - 1 ? prev + 1 : 0));
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
+        playClick();
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : filteredActions.length - 1));
       } else if (e.key === "Enter") {
         e.preventDefault();
+        playClick();
         if (filteredActions[selectedIndex]) {
           filteredActions[selectedIndex].run();
         }

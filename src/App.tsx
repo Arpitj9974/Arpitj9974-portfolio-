@@ -9,6 +9,7 @@ import CommandPalette from "./components/CommandPalette";
 import CaseStudyReadingBar from "./components/CaseStudyReadingBar";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
+import { isSoundEnabled, setSoundEnabled, playClick, playToggle, playSuccess } from "./utils/soundEngine";
 import { 
   ArrowLeft,
   ArrowRight, 
@@ -117,6 +118,16 @@ export default function App() {
   const [copiedDrawerLink, setCopiedDrawerLink] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const [isSoundActive, setIsSoundActive] = useState<boolean>(() => isSoundEnabled());
+
+  const handleToggleSound = () => {
+    const next = !isSoundActive;
+    setIsSoundActive(next);
+    setSoundEnabled(next);
+    if (next) {
+      playSuccess();
+    }
+  };
 
   // Global CMD+K / Ctrl+K listener for Command Palette
   useEffect(() => {
@@ -229,7 +240,10 @@ export default function App() {
     }
   }, [isDarkMode]);
 
-  const toggleTheme = () => setIsDarkMode(prev => !prev);
+  const toggleTheme = () => {
+    playToggle(!isDarkMode);
+    setIsDarkMode(prev => !prev);
+  };
 
 
   const handleDownloadResume = () => {
@@ -404,14 +418,20 @@ export default function App() {
       <Header 
         currentTab={currentTab} 
         setCurrentTab={(tab) => {
+          playClick();
           setCurrentTab(tab);
           setSelectedCaseStudy(null);
         }}
         isDarkMode={isDarkMode}
         onToggleTheme={toggleTheme}
-        onOpenResumeModal={() => setIsResumeModalOpen(true)}
+        onOpenResumeModal={() => {
+          playClick();
+          setIsResumeModalOpen(true);
+        }}
         onDownloadResume={handleDownloadResume}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        isSoundActive={isSoundActive}
+        onToggleSound={handleToggleSound}
       />
 
       {/* Main Container Content */}
@@ -2296,6 +2316,8 @@ export default function App() {
         onSelectSkill={(skill) => {
           handleSelectSkill(skill);
         }}
+        isSoundActive={isSoundActive}
+        onToggleSound={handleToggleSound}
       />
 
       {/* Interactive PDF Resume Modal */}

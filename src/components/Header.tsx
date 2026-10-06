@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Terminal, LineChart, Download, Sun, Moon, Eye, ChevronDown, Search } from "lucide-react";
+import { Terminal, LineChart, Download, Sun, Moon, Eye, ChevronDown, Search, Volume2, VolumeX } from "lucide-react";
 import { PROJECTS } from "../data";
 
 interface HeaderProps {
@@ -10,6 +10,8 @@ interface HeaderProps {
   onOpenResumeModal: () => void;
   onDownloadResume: () => void;
   onOpenCommandPalette?: () => void;
+  isSoundActive?: boolean;
+  onToggleSound?: () => void;
 }
 
 export default function Header({ 
@@ -19,7 +21,9 @@ export default function Header({
   onToggleTheme, 
   onOpenResumeModal, 
   onDownloadResume,
-  onOpenCommandPalette
+  onOpenCommandPalette,
+  isSoundActive = false,
+  onToggleSound
 }: HeaderProps) {
   const navItems = [
     { id: "home", label: "About Me" },
@@ -144,6 +148,19 @@ export default function Header({
             >
               {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
             </button>
+
+            {/* Audio Micro-Haptics Toggle */}
+            {onToggleSound && (
+              <button
+                onClick={onToggleSound}
+                title={isSoundActive ? "Audio Feedback: ON (Click to mute)" : "Audio Feedback: OFF (Click to enable)"}
+                className={`p-2 transition-colors duration-200 cursor-pointer ${
+                  isSoundActive ? "text-accent" : "text-muted/50 hover:text-ink"
+                }`}
+              >
+                {isSoundActive ? <Volume2 size={16} /> : <VolumeX size={16} />}
+              </button>
+            )}
           </nav>
         </div>
       </div>
