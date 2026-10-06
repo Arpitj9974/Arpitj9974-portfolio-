@@ -8,7 +8,7 @@ export const PORTFOLIO_OWNER = {
   portraitUrl: "/tech_workspace.webp", // Optimized Tech & Analytics workspace image
   location: "Surat, Gujarat, India",
   aboutHeading: "Bridging business strategy, financial operations, and software delivery.",
-  aboutText1: "I am a product and business operations specialist with 4.5 years of finance experience and a BCA technical foundation. I turn complex operational friction into clear product architectures and shipped, functional software.",
+  aboutText1: "I am a product and business operations specialist with 4+ years of finance experience and a BCA technical foundation. I turn complex operational friction into clear product architectures and shipped, functional software.",
   aboutText2: "With an academic foundation spanning a BCA (Graduating 2026) and an MBA in Analytics & Data Science + Project Management from Manipal University Jaipur, I design systems that solve real business problems.",
   officeLocation: "Surat, India / Remote Hub",
   contactInfo: {
@@ -19,7 +19,7 @@ export const PORTFOLIO_OWNER = {
   },
   stats: [
     { label: "Shipped & Live Systems", value: "10" },
-    { label: "Years FinOps (JD Finance)", value: "4.5" },
+    { label: "Years FinOps (JD Finance)", value: "4+" },
     { label: "Exams Indexed & Mapped", value: "27" },
     { label: "HR Call Logs Automated", value: "100%" }
   ],
@@ -117,10 +117,10 @@ export const PORTFOLIO_OWNER = {
     {
       role: "Finance Operations Lead & Systems Builder",
       company: "JD Finance",
-      duration: "Aug 2021 – Jun 2024 (FT, On-site) · Apr 2025 – Present (PT, Hybrid)",
+      duration: "Aug 2021 – Jun 2024 (FT, On-site) · Apr 2025 – Present (PT, Hybrid) · 4 years 4 months",
       location: "Surat, Gujarat, India",
       points: [
-        "Ran the complete lending operation — loan disbursement, daily repayment tracking, and borrower account portfolios across the full lifecycle.",
+        "Ran the complete lending operation across 4 years 4 months — loan disbursement, daily repayment tracking, and borrower account portfolios across the full lifecycle.",
         "Designed and built the team's Excel data infrastructure from scratch; it's still the system operations runs on.",
         "Returned in 2025 to lead financial operations again, now bringing automation tooling and data workflows into a process that had been entirely manual."
       ],

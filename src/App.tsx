@@ -427,7 +427,7 @@ export default function App() {
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">BACKGROUND:</span>
-                      <span className="text-ink font-bold">4.5 Years FinOps (JD Finance)</span>
+                      <span className="text-ink font-bold">4+ Years FinOps (JD Finance)</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">EDUCATION:</span>
@@ -523,7 +523,7 @@ export default function App() {
                       <span>THE FINANCIAL ORIGIN (JD FINANCE)</span>
                     </div>
                     <p>
-                      For 4.5 years I ran the complete lending operation at <strong>JD Finance</strong> — loan disbursement, daily repayment, borrower portfolios — and built the Excel systems the team ran on, because nobody else was going to build them. I came back in 2025 to lead that same function again, this time bringing automation and data tooling into it.
+                      For 4+ years I ran the complete lending operation at <strong>JD Finance</strong> — loan disbursement, daily repayment, borrower portfolios — and built the Excel systems the team ran on, because nobody else was going to build them. I came back in 2025 to lead that same function again, this time bringing automation and data tooling into it.
                     </p>
                     <p className="italic text-ink font-serif text-sm border-t border-ink/5 pt-3">
                       "That work taught me something no course does: software fails less often because the code is bad, and more often because nobody understood the process it was supposed to replace."
@@ -537,7 +537,7 @@ export default function App() {
                         <span>BUSINESS &amp; OPERATIONS FIRST</span>
                       </div>
                       <p className="text-xs leading-relaxed">
-                        Every system I build starts with operational reality, not code syntax. 4.5 years running lending operations at JD Finance taught me how portfolios work, how capital moves, and where manual bottlenecks drain margins. I design systems around real unit economics and user needs.
+                        Every system I build starts with operational reality, not code syntax. 4+ years running lending operations at JD Finance taught me how portfolios work, how capital moves, and where manual bottlenecks drain margins. I design systems around real unit economics and user needs.
                       </p>
                     </div>
 

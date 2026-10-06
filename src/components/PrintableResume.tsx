@@ -21,7 +21,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="text-center sm:text-left border-b pb-3" style={{ borderColor: 'rgba(30, 41, 59, 0.2)' }}>
           <h1 className="text-[22pt] font-extrabold tracking-tight leading-none" style={{ color: '#0a0a0a' }}>ARPIT JAISWAL</h1>
           <div className="text-[9pt] font-bold uppercase tracking-wider mt-1" style={{ color: '#0f3d64' }}>
-            Product &amp; Business Operations | 4.5 Yrs FinOps · MBA (Analytics &amp; PM) · BCA
+            Product &amp; Business Operations | 4+ Yrs FinOps · MBA (Analytics &amp; PM) · BCA
           </div>
           
           <div className="text-[9pt] mt-2 flex flex-wrap justify-center sm:justify-start gap-x-3 gap-y-0.5" style={{ color: '#4b5563' }}>
@@ -51,7 +51,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="mt-3.5">
           <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-1.5" style={{ color: '#0f3d64', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SUMMARY</h2>
           <p className="text-[9.5pt] leading-normal text-justify" style={{ color: '#1f2937' }}>
-            Product and business operations specialist with 4.5 years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
+            Product and business operations specialist with 4+ years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
           </p>
         </div>
 
@@ -67,10 +67,10 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
                 <span className="text-[9pt] font-semibold" style={{ color: '#374151' }}>JD Finance | Surat, Gujarat</span>
               </div>
               <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#6b7280' }}>
-                Aug 2021 – Jun 2024 (Full-time, On-site) | Apr 2025 – Present (Part-time, Hybrid)
+                Aug 2021 – Jun 2024 (Full-time, On-site) | Apr 2025 – Present (Part-time, Hybrid) · 4 years 4 months
               </div>
               <ul className="list-disc ml-4 mt-1 text-[9.5pt] space-y-0.5 leading-[1.3]" style={{ color: '#1f2937' }}>
-                <li>Ran end-to-end lending operations: borrower portfolio onboarding, credit validation, loan disbursement, and daily repayment tracking across 120+ active merchant accounts.</li>
+                <li>Ran end-to-end lending operations across 4 years 4 months: borrower portfolio onboarding, credit validation, loan disbursement, and daily repayment tracking across 120+ active merchant accounts.</li>
                 <li>Designed and built the firm&apos;s foundational Excel data and ledger infrastructure from scratch; remains the core operational system running daily operations today with 100% mathematical accuracy.</li>
                 <li>Returned in 2025 to spearhead automation tooling, reducing daily account reconciliation time from 45 minutes to under 4 minutes using Google Apps Script and automated data workflows.</li>
                 <li>Formulated operational risk checks, delinquency alerts, and EMI schedules to ensure zero accounting discrepancies between field collections and ledger balances.</li>
