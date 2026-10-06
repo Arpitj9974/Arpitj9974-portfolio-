@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ResumeModal from "./components/ResumeModal";
@@ -32,7 +32,8 @@ import {
   Star,
   ArrowDown,
   Check,
-  Search
+  Search,
+  Link2
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -45,17 +46,38 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-import VyoshaDeepDive from "./components/case-studies/VyoshaDeepDive";
-import RawDeepDive from "./components/case-studies/RawDeepDive";
-import AspirantFlowDeepDive from "./components/case-studies/AspirantFlowDeepDive";
-import CareerLibraryDeepDive from "./components/case-studies/CareerLibraryDeepDive";
-import WorkSarthiDeepDive from "./components/case-studies/WorkSarthiDeepDive";
-import ArAuAgPtDeepDive from "./components/case-studies/ArAuAgPtDeepDive";
-import MedicineExtractionDeepDive from "./components/case-studies/MedicineExtractionDeepDive";
-import FarmerConnectDeepDive from "./components/case-studies/FarmerConnectDeepDive";
-import FreshStampDeepDive from "./components/case-studies/FreshStampDeepDive";
-import FinDharDeepDive from "./components/case-studies/FinDharDeepDive";
-import PRDViewer from "./components/PRDViewer";
+
+// Dynamic Code-Splitting for Case Studies & PRD (reduces initial bundle by ~60%)
+const VyoshaDeepDive = lazy(() => import("./components/case-studies/VyoshaDeepDive"));
+const RawDeepDive = lazy(() => import("./components/case-studies/RawDeepDive"));
+const AspirantFlowDeepDive = lazy(() => import("./components/case-studies/AspirantFlowDeepDive"));
+const CareerLibraryDeepDive = lazy(() => import("./components/case-studies/CareerLibraryDeepDive"));
+const WorkSarthiDeepDive = lazy(() => import("./components/case-studies/WorkSarthiDeepDive"));
+const ArAuAgPtDeepDive = lazy(() => import("./components/case-studies/ArAuAgPtDeepDive"));
+const MedicineExtractionDeepDive = lazy(() => import("./components/case-studies/MedicineExtractionDeepDive"));
+const FarmerConnectDeepDive = lazy(() => import("./components/case-studies/FarmerConnectDeepDive"));
+const FreshStampDeepDive = lazy(() => import("./components/case-studies/FreshStampDeepDive"));
+const FinDharDeepDive = lazy(() => import("./components/case-studies/FinDharDeepDive"));
+const PRDViewer = lazy(() => import("./components/PRDViewer"));
+
+function CaseStudySkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse py-8 font-mono border-t border-ink/10">
+      <div className="flex items-center gap-2 text-xs text-muted">
+        <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
+        <span>STREAMING SYSTEM ARCHITECTURE &amp; TELEMETRY...</span>
+      </div>
+      <div className="h-7 bg-surface-container border border-ink/10 w-1/3 rounded-xs" />
+      <div className="h-4 bg-surface-container border border-ink/5 w-2/3 rounded-xs" />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div className="h-20 bg-surface-container border border-ink/10 rounded-xs" />
+        <div className="h-20 bg-surface-container border border-ink/10 rounded-xs" />
+        <div className="h-20 bg-surface-container border border-ink/10 rounded-xs" />
+      </div>
+      <div className="h-72 bg-surface-container border border-ink/10 rounded-xs" />
+    </div>
+  );
+}
 
 const parseHash = (): { tab: string; project: Project | null; mode: "narrative" | "prd" } => {
   if (typeof window === 'undefined') return { tab: "home", project: null, mode: "narrative" };
@@ -90,6 +112,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<Project | null>(() => parseHash().project);
   const [caseStudyMode, setCaseStudyMode] = useState<"narrative" | "prd">(() => parseHash().mode);
+  const [copiedDrawerLink, setCopiedDrawerLink] = useState(false);
 
   const openCaseStudy = (project: Project, mode: "narrative" | "prd" = "narrative") => {
     setCaseStudyMode(mode);
@@ -224,6 +247,18 @@ export default function App() {
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
+
+  // Global Escape key listener to close active case study
+  useEffect(() => {
+    if (!selectedCaseStudy) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedCaseStudy(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedCaseStudy]);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -697,8 +732,10 @@ export default function App() {
                         <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                           <span className="uppercase tracking-wider truncate mr-1">{project.year} // {project.category}</span>
                           <ProjectCardLinks
+                            projectId={project.id}
                             liveUrl={project.liveUrl}
                             githubUrl={project.githubUrl}
+                            repoStatus={project.repoStatus}
                             title={project.title}
                             showStar={true}
                           />
@@ -971,8 +1008,10 @@ export default function App() {
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                               <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
                               <ProjectCardLinks
+                                projectId={p.id}
                                 liveUrl={p.liveUrl}
                                 githubUrl={p.githubUrl}
+                                repoStatus={p.repoStatus}
                                 title={p.title}
                                 showStar={true}
                               />
@@ -1063,8 +1102,10 @@ export default function App() {
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                               <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
                               <ProjectCardLinks
+                                projectId={p.id}
                                 liveUrl={p.liveUrl}
                                 githubUrl={p.githubUrl}
+                                repoStatus={p.repoStatus}
                                 title={p.title}
                                 tag="intern"
                               />
@@ -1154,8 +1195,10 @@ export default function App() {
                             <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                               <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
                               <ProjectCardLinks
+                                projectId={p.id}
                                 liveUrl={p.liveUrl}
                                 githubUrl={p.githubUrl}
+                                repoStatus={p.repoStatus}
                                 title={p.title}
                                 tag={p.tag}
                               />
@@ -1238,8 +1281,10 @@ export default function App() {
                         <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
                           <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
                           <ProjectCardLinks
+                            projectId={p.id}
                             liveUrl={p.liveUrl}
                             githubUrl={p.githubUrl}
+                            repoStatus={p.repoStatus}
                             title={p.title}
                             tag={p.tag}
                             showStar={p.featured}
@@ -1462,9 +1507,31 @@ export default function App() {
                       >
                         <span className="flex items-center gap-1">GitHub <Github size={12} /></span>
                       </a>
+                    ) : selectedCaseStudy.repoStatus === "client-proprietary" ? (
+                      <span className="text-[11px] font-mono text-muted border border-ink/15 px-2 py-0.5 bg-surface-container/60 font-semibold" title="Proprietary commercial codebase under NDA">
+                        Client IP (NDA)
+                      </span>
                     ) : (
                       selectedCaseStudy.liveUrl && <span className="text-[11px] font-mono text-muted italic">Private Repo</span>
                     )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const url = `${window.location.origin}/#${caseStudyMode === 'prd' ? `case-study/${selectedCaseStudy.id}/prd` : `case-study/${selectedCaseStudy.id}`}`;
+                        navigator.clipboard.writeText(url);
+                        setCopiedDrawerLink(true);
+                        setTimeout(() => setCopiedDrawerLink(false), 2000);
+                      }}
+                      className={`text-[11px] font-mono font-bold px-2.5 py-1 border transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs ${
+                        copiedDrawerLink
+                          ? "bg-accent text-paper border-accent"
+                          : "border-ink/20 text-ink hover:bg-surface-container"
+                      }`}
+                      title="Copy Direct Link to this Case Study"
+                    >
+                      {copiedDrawerLink ? <Check size={12} className="stroke-[2.5]" /> : <Link2 size={12} />}
+                      <span>{copiedDrawerLink ? "Link Copied!" : "Share Link"}</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1505,7 +1572,8 @@ export default function App() {
                 </span>
               </div>
 
-              {caseStudyMode === "prd" ? (
+              <Suspense fallback={<CaseStudySkeleton />}>
+                {caseStudyMode === "prd" ? (
                 <PRDViewer 
                   project={selectedCaseStudy} 
                   onBackToCaseStudy={() => setCaseStudyMode("narrative")} 
@@ -1643,6 +1711,7 @@ export default function App() {
               </div>{/* end cs-deepdive */}
               </>
               )}
+              </Suspense>
 
               {/* Bottom Navigation */}
               <div className="pt-8 border-t border-ink/10 flex justify-between items-center">

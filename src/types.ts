@@ -18,6 +18,7 @@ export interface Project {
   image?: string;
   liveUrl?: string;
   githubUrl?: string;
+  repoStatus?: "public" | "client-proprietary" | "internal-infra";
   tag?: string;
 }
 

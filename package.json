@@ -8,7 +8,9 @@
     "check:encoding": "node scripts/check-encoding.js",
     "build": "node scripts/check-encoding.js && vite build",
     "preview": "vite preview --port=3000 --host=0.0.0.0",
-    "lint": "node scripts/check-encoding.js && tsc --noEmit"
+    "lint": "node scripts/check-encoding.js && tsc --noEmit",
+    "pdf": "node scripts/generate-resume-pdf.js",
+    "generate:resume": "node scripts/generate-resume-pdf.js"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

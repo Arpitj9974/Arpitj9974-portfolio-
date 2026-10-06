@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { X, Download } from "lucide-react";
 
 interface ResumeModalProps {
@@ -8,12 +8,26 @@ interface ResumeModalProps {
 }
 
 export default function ResumeModal({ isOpen, onClose, onDownload }: ResumeModalProps) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div 
       className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 md:p-8"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Resume PDF Preview"
     >
       <div 
         className="bg-paper border border-ink/15 shadow-2xl max-w-5xl w-full h-[85vh] flex flex-col rounded-md overflow-hidden"

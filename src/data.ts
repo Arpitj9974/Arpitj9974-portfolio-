@@ -354,6 +354,7 @@ export const PROJECTS: Project[] = [
     featured: false,
     liveUrl: "https://career-library-worksarthi.vercel.app",
     githubUrl: "",
+    repoStatus: "client-proprietary",
     tag: "internship"
   },
   {
@@ -386,6 +387,7 @@ export const PROJECTS: Project[] = [
     featured: false,
     liveUrl: "https://work-sarthi.vercel.app",
     githubUrl: "",
+    repoStatus: "client-proprietary",
     tag: "internship"
   },
   {
