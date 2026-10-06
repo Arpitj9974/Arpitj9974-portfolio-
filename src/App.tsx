@@ -5,6 +5,8 @@ import ResumeModal from "./components/ResumeModal";
 import PrintableResume from "./components/PrintableResume";
 import TypingText from "./components/TypingText";
 import ProjectCardLinks from "./components/ProjectCardLinks";
+import CommandPalette from "./components/CommandPalette";
+import CaseStudyReadingBar from "./components/CaseStudyReadingBar";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
 import { 
@@ -113,6 +115,39 @@ export default function App() {
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<Project | null>(() => parseHash().project);
   const [caseStudyMode, setCaseStudyMode] = useState<"narrative" | "prd">(() => parseHash().mode);
   const [copiedDrawerLink, setCopiedDrawerLink] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+
+  // Global CMD+K / Ctrl+K listener for Command Palette
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCommandPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const projectMatchesSkill = (p: Project, skill: string | null): boolean => {
+    if (!skill) return false;
+    const s = skill.toLowerCase().trim();
+    return (
+      p.stack.some(st => st.toLowerCase().includes(s) || s.includes(st.toLowerCase())) ||
+      p.title.toLowerCase().includes(s) ||
+      p.category.toLowerCase().includes(s) ||
+      p.description.toLowerCase().includes(s) ||
+      (p.solution || "").toLowerCase().includes(s) ||
+      (p.subtitle || "").toLowerCase().includes(s)
+    );
+  };
+
+  const handleSelectSkill = (skill: string) => {
+    setActiveSkill((prev) => (prev === skill ? null : skill));
+    setCurrentTab("projects");
+    setSelectedCaseStudy(null);
+  };
 
   const openCaseStudy = (project: Project, mode: "narrative" | "prd" = "narrative") => {
     setCaseStudyMode(mode);
@@ -356,7 +391,11 @@ export default function App() {
     return inTitle || inSubtitle || inDesc || inLongDesc || inCategory || inStack || inProblem || inSolution || inOutcome;
   };
 
-  const filteredProjects = PROJECTS.filter(p => matchesTag(p, projectFilter) && matchesSearch(p, searchQuery));
+  const filteredProjects = PROJECTS.filter(p => 
+    matchesTag(p, projectFilter) && 
+    matchesSearch(p, searchQuery) && 
+    (!activeSkill || projectMatchesSkill(p, activeSkill))
+  );
 
   return (
     <div className="min-h-screen bg-paper text-ink selection:bg-accent selection:text-paper font-sans">
@@ -372,6 +411,7 @@ export default function App() {
         onToggleTheme={toggleTheme}
         onOpenResumeModal={() => setIsResumeModalOpen(true)}
         onDownloadResume={handleDownloadResume}
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
       />
 
       {/* Main Container Content */}
@@ -724,7 +764,11 @@ export default function App() {
                   {PROJECTS.filter(p => p.featured).slice(0, 4).map((project) => (
                     <div 
                       key={project.id} 
-                      className="bg-paper border border-ink/10 hover:border-accent transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
+                      className={`bg-paper border transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full ${
+                        activeSkill && projectMatchesSkill(project, activeSkill)
+                          ? "border-accent ring-1 ring-accent"
+                          : "border-ink/10 hover:border-accent"
+                      }`}
                       id={`home-selected-card-${project.id}`}
                     >
                       <div className="space-y-2.5">
@@ -772,9 +816,21 @@ export default function App() {
                         {/* Tech Stack Pills */}
                         <div className="flex gap-1 flex-wrap">
                           {project.stack.slice(0, 3).map((s, i) => (
-                            <span key={i} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
+                            <button
+                              key={i}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleSelectSkill(s);
+                              }}
+                              className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
+                                activeSkill === s
+                                  ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                                  : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
+                              }`}
+                              title={`Filter systems using ${s}`}
+                            >
                               {s}
-                            </span>
+                            </button>
                           ))}
                           {project.stack.length > 3 && (
                             <span className="text-[9px] font-mono text-muted/70">+{project.stack.length - 3}</span>
@@ -882,12 +938,18 @@ export default function App() {
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {PORTFOLIO_OWNER.skills.techBuildWith.map((tech, idx) => (
-                      <span 
+                      <button 
                         key={idx} 
-                        className="bg-surface-container border border-ink/5 text-xs font-mono text-ink px-3 py-1.5 rounded-sm hover:border-accent/30 hover:bg-surface-container-high transition-colors"
+                        onClick={() => handleSelectSkill(tech)}
+                        className={`text-xs font-mono px-3 py-1.5 rounded-sm transition-all border cursor-pointer ${
+                          activeSkill === tech
+                            ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                            : "bg-surface-container border-ink/5 text-ink hover:border-accent/30 hover:bg-surface-container-high"
+                        }`}
+                        title={`Filter systems built with ${tech}`}
                       >
                         {tech}
-                      </span>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -964,10 +1026,13 @@ export default function App() {
                 </div>
 
                 {/* Results Counter / Filter status banner */}
-                {(projectFilter !== "All" || searchQuery.trim()) && (
+                {(projectFilter !== "All" || searchQuery.trim() || activeSkill) && (
                   <div className="flex items-center justify-between text-xs font-mono bg-accent/5 border border-accent/15 px-3 py-2 text-ink">
                     <span>
                       Found <strong>{filteredProjects.length}</strong> system{filteredProjects.length === 1 ? "" : "s"}
+                      {activeSkill && (
+                        <span> matching skill <strong className="text-accent underline">"{activeSkill}"</strong></span>
+                      )}
                       {projectFilter !== "All" && ` in ${QUICK_TAGS.find(t => t.id === projectFilter)?.label || projectFilter}`}
                       {searchQuery.trim() && ` matching "${searchQuery}"`}
                     </span>
@@ -975,6 +1040,7 @@ export default function App() {
                       onClick={() => {
                         setProjectFilter("All");
                         setSearchQuery("");
+                        setActiveSkill(null);
                       }}
                       className="text-accent hover:underline font-bold cursor-pointer"
                     >
@@ -985,7 +1051,7 @@ export default function App() {
               </div>
 
               {/* Dynamic GRID for featured / active filter cards */}
-              {projectFilter === "All" && !searchQuery.trim() ? (
+              {projectFilter === "All" && !searchQuery.trim() && !activeSkill ? (
                 <div className="space-y-12">
                   {/* Featured Section */}
                   <div className="space-y-4">
@@ -1000,7 +1066,11 @@ export default function App() {
                       {filteredProjects.filter(p => p.featured).map((p) => (
                         <div 
                           key={p.id} 
-                          className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
+                          className={`border bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full ${
+                            activeSkill && projectMatchesSkill(p, activeSkill)
+                              ? "border-accent ring-1 ring-accent"
+                              : "border-ink/10"
+                          }`}
                           id={`project-card-${p.id}`}
                         >
                           <div className="space-y-2.5">
@@ -1048,9 +1118,21 @@ export default function App() {
                             {/* Tech Stack Pills */}
                             <div className="flex gap-1 flex-wrap">
                               {p.stack.slice(0, 3).map((s, idx) => (
-                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
+                                <button
+                                  key={idx}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSelectSkill(s);
+                                  }}
+                                  className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
+                                    activeSkill === s
+                                      ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                                      : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
+                                  }`}
+                                  title={`Filter systems using ${s}`}
+                                >
                                   {s}
-                                </span>
+                                </button>
                               ))}
                               {p.stack.length > 3 && (
                                 <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
@@ -1094,7 +1176,11 @@ export default function App() {
                       {filteredProjects.filter(p => p.tag === "internship").map((p) => (
                         <div 
                           key={p.id} 
-                          className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
+                          className={`border bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full ${
+                            activeSkill && projectMatchesSkill(p, activeSkill)
+                              ? "border-accent ring-1 ring-accent"
+                              : "border-ink/10"
+                          }`}
                           id={`project-card-${p.id}`}
                         >
                           <div className="space-y-2.5">
@@ -1142,9 +1228,21 @@ export default function App() {
                             {/* Tech Stack Pills */}
                             <div className="flex gap-1 flex-wrap">
                               {p.stack.slice(0, 3).map((s, idx) => (
-                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
+                                <button
+                                  key={idx}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSelectSkill(s);
+                                  }}
+                                  className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
+                                    activeSkill === s
+                                      ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                                      : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
+                                  }`}
+                                  title={`Filter systems using ${s}`}
+                                >
                                   {s}
-                                </span>
+                                </button>
                               ))}
                               {p.stack.length > 3 && (
                                 <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
@@ -1187,7 +1285,11 @@ export default function App() {
                       {filteredProjects.filter(p => !p.featured && p.tag !== "internship").map((p) => (
                         <div 
                           key={p.id} 
-                          className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
+                          className={`border bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full ${
+                            activeSkill && projectMatchesSkill(p, activeSkill)
+                              ? "border-accent ring-1 ring-accent"
+                              : "border-ink/10"
+                          }`}
                           id={`project-card-${p.id}`}
                         >
                           <div className="space-y-2.5">
@@ -1235,9 +1337,21 @@ export default function App() {
                             {/* Tech Stack Pills */}
                             <div className="flex gap-1 flex-wrap">
                               {p.stack.slice(0, 3).map((s, idx) => (
-                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
+                                <button
+                                  key={idx}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSelectSkill(s);
+                                  }}
+                                  className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
+                                    activeSkill === s
+                                      ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                                      : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
+                                  }`}
+                                  title={`Filter systems using ${s}`}
+                                >
                                   {s}
-                                </span>
+                                </button>
                               ))}
                               {p.stack.length > 3 && (
                                 <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
@@ -1273,7 +1387,11 @@ export default function App() {
                   {filteredProjects.map((p) => (
                     <div 
                       key={p.id} 
-                      className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
+                      className={`border bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full ${
+                        activeSkill && projectMatchesSkill(p, activeSkill)
+                          ? "border-accent ring-1 ring-accent"
+                          : "border-ink/10"
+                      }`}
                       id={`project-card-${p.id}`}
                     >
                       <div className="space-y-2.5">
@@ -1322,9 +1440,21 @@ export default function App() {
                         {/* Tech Stack Pills */}
                         <div className="flex gap-1 flex-wrap">
                           {p.stack.slice(0, 3).map((s, idx) => (
-                            <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
+                            <button
+                              key={idx}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleSelectSkill(s);
+                              }}
+                              className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
+                                activeSkill === s
+                                  ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                                  : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
+                              }`}
+                              title={`Filter systems using ${s}`}
+                            >
                               {s}
-                            </span>
+                            </button>
                           ))}
                           {p.stack.length > 3 && (
                             <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
@@ -1429,6 +1559,18 @@ export default function App() {
               </div>
 
             </motion.div>
+          )}
+
+          {/* Interactive Case Study Reading Progress Bar & Wayfinding */}
+          {selectedCaseStudy && (
+            <CaseStudyReadingBar
+              title={selectedCaseStudy.title}
+              year={selectedCaseStudy.year}
+              category={selectedCaseStudy.category}
+              mode={caseStudyMode}
+              onSwitchMode={(mode) => setCaseStudyMode(mode)}
+              onClose={() => setSelectedCaseStudy(null)}
+            />
           )}
 
           {/* PORTFOLIO CASE STUDY PAGE VIEW */}
@@ -1765,35 +1907,59 @@ export default function App() {
                 
                 {/* Left side Timeline listings (Span 8) */}
                 <div className="lg:col-span-8 space-y-10">
-                  {PORTFOLIO_OWNER.experience.map((job, idx) => (
-                    <div key={idx} className="relative pl-6 border-l border-ink/10 space-y-3">
-                      <div className="absolute top-1.5 left-[-4px] h-2 w-2 rounded-full bg-accent" />
-                      
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 font-mono text-xs">
-                        <span className="text-accent tracking-wider font-bold block uppercase">// {job.duration}</span>
-                        <span className="text-muted">{job.location}</span>
-                      </div>
+                  {PORTFOLIO_OWNER.experience.map((job, idx) => {
+                    const isJobHighlighted = !!(activeSkill && (
+                      job.skills?.some(s => s.toLowerCase().includes(activeSkill.toLowerCase()) || activeSkill.toLowerCase().includes(s.toLowerCase())) ||
+                      job.role.toLowerCase().includes(activeSkill.toLowerCase()) ||
+                      job.points.some(p => p.toLowerCase().includes(activeSkill.toLowerCase()))
+                    ));
 
-                      <div>
-                        <h3 className="font-serif text-xl font-bold text-ink leading-tight">{job.role}</h3>
-                        <span className="font-mono text-xs font-semibold text-muted">{job.company}</span>
-                      </div>
-
-                      <ul className="space-y-2 text-xs md:text-sm text-muted font-sans list-disc pl-4 leading-relaxed">
-                        {job.points.map((p, i) => <li key={i}>{p}</li>)}
-                      </ul>
-
-                      {job.skills && job.skills.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-2">
-                          {job.skills.map((s, i) => (
-                            <span key={i} className="bg-surface-container text-[10px] font-mono text-muted px-2 py-0.5 border border-ink/5 rounded-sm">
-                              {s}
-                            </span>
-                          ))}
+                    return (
+                      <div 
+                        key={idx} 
+                        className={`relative pl-6 border-l space-y-3 transition-all ${
+                          isJobHighlighted 
+                            ? "border-accent bg-accent/5 py-3 pr-3 rounded-xs shadow-xs" 
+                            : "border-ink/10"
+                        }`}
+                      >
+                        <div className={`absolute top-1.5 left-[-4px] h-2 w-2 rounded-full ${isJobHighlighted ? "bg-accent scale-125" : "bg-accent"}`} />
+                        
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 font-mono text-xs">
+                          <span className="text-accent tracking-wider font-bold block uppercase">// {job.duration}</span>
+                          <span className="text-muted">{job.location}</span>
                         </div>
-                      )}
-                    </div>
-                  ))}
+
+                        <div>
+                          <h3 className="font-serif text-xl font-bold text-ink leading-tight">{job.role}</h3>
+                          <span className="font-mono text-xs font-semibold text-muted">{job.company}</span>
+                        </div>
+
+                        <ul className="space-y-2 text-xs md:text-sm text-muted font-sans list-disc pl-4 leading-relaxed">
+                          {job.points.map((p, i) => <li key={i}>{p}</li>)}
+                        </ul>
+
+                        {job.skills && job.skills.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 pt-2">
+                            {job.skills.map((s, i) => (
+                              <button
+                                key={i}
+                                onClick={() => handleSelectSkill(s)}
+                                className={`text-[10px] font-mono px-2 py-0.5 border rounded-sm transition-all cursor-pointer ${
+                                  activeSkill === s
+                                    ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                                    : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
+                                }`}
+                                title={`Cross-filter systems using ${s}`}
+                              >
+                                {s}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
 
                  {/* Right side Education & Certifications (Span 4) */}
@@ -2089,6 +2255,48 @@ export default function App() {
 
       {/* Footer Element */}
       <Footer scrollToTop={scrollToTop} />
+
+      {/* Floating Active Skill Matrix Banner */}
+      {activeSkill && !selectedCaseStudy && (
+        <aside 
+          aria-label="Skill matrix indicator"
+          className="fixed bottom-6 right-6 z-40 bg-ink text-paper border border-accent/40 shadow-2xl p-3 md:p-4 flex items-center gap-3 font-mono text-xs animate-in slide-in-from-bottom-3 duration-200"
+        >
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-muted uppercase text-[10px]">SKILL MATRIX:</span>
+            <span className="text-accent font-bold">"{activeSkill}"</span>
+          </div>
+          <span className="text-muted/60 hidden sm:inline">|</span>
+          <span className="text-[11px] text-paper/80 hidden sm:inline">
+            Matched in {PROJECTS.filter(p => projectMatchesSkill(p, activeSkill)).length} Projects
+          </span>
+          <button
+            onClick={() => setActiveSkill(null)}
+            className="ml-2 px-2 py-1 bg-paper/10 hover:bg-paper/20 text-paper text-[10px] uppercase font-bold border border-paper/20 cursor-pointer"
+          >
+            CLEAR [X]
+          </button>
+        </aside>
+      )}
+
+      {/* Global CMD+K Command Palette */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onSelectTab={(tab) => {
+          setCurrentTab(tab);
+          setSelectedCaseStudy(null);
+        }}
+        onOpenCaseStudy={openCaseStudy}
+        onOpenResumeModal={() => setIsResumeModalOpen(true)}
+        onDownloadResume={handleDownloadResume}
+        isDarkMode={isDarkMode}
+        onToggleTheme={toggleTheme}
+        onSelectSkill={(skill) => {
+          handleSelectSkill(skill);
+        }}
+      />
 
       {/* Interactive PDF Resume Modal */}
       <ResumeModal 

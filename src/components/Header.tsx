@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Terminal, LineChart, Download, Sun, Moon, Eye, ChevronDown } from "lucide-react";
+import { Terminal, LineChart, Download, Sun, Moon, Eye, ChevronDown, Search } from "lucide-react";
 import { PROJECTS } from "../data";
 
 interface HeaderProps {
@@ -9,9 +9,18 @@ interface HeaderProps {
   onToggleTheme: () => void;
   onOpenResumeModal: () => void;
   onDownloadResume: () => void;
+  onOpenCommandPalette?: () => void;
 }
 
-export default function Header({ currentTab, setCurrentTab, isDarkMode, onToggleTheme, onOpenResumeModal, onDownloadResume }: HeaderProps) {
+export default function Header({ 
+  currentTab, 
+  setCurrentTab, 
+  isDarkMode, 
+  onToggleTheme, 
+  onOpenResumeModal, 
+  onDownloadResume,
+  onOpenCommandPalette
+}: HeaderProps) {
   const navItems = [
     { id: "home", label: "About Me" },
     { id: "projects", label: "Projects" },
@@ -112,6 +121,20 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, onToggle
                 </div>
               )}
             </div>
+
+            {/* Command Palette Trigger */}
+            {onOpenCommandPalette && (
+              <button
+                onClick={onOpenCommandPalette}
+                title="Open Command Palette (CMD+K / Ctrl+K)"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-surface-container/60 hover:bg-surface-container border border-ink/15 hover:border-accent text-muted hover:text-ink text-xs font-mono tracking-wider transition-all duration-150 cursor-pointer"
+              >
+                <Search size={12} className="text-accent" />
+                <span className="hidden sm:inline text-[10px] font-bold">
+                  {typeof window !== 'undefined' && /Mac/.test(navigator.platform || '') ? 'CMD+K' : 'CTRL+K'}
+                </span>
+              </button>
+            )}
 
             {/* Theme Toggle */}
             <button
