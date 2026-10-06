@@ -53,6 +53,7 @@ import ArAuAgPtDeepDive from "./components/case-studies/ArAuAgPtDeepDive";
 import MedicineExtractionDeepDive from "./components/case-studies/MedicineExtractionDeepDive";
 import FarmerConnectDeepDive from "./components/case-studies/FarmerConnectDeepDive";
 import FreshStampDeepDive from "./components/case-studies/FreshStampDeepDive";
+import FinDharDeepDive from "./components/case-studies/FinDharDeepDive";
 import PRDViewer from "./components/PRDViewer";
 
 const parseHash = (): { tab: string; project: Project | null; mode: "narrative" | "prd" } => {
@@ -259,7 +260,7 @@ export default function App() {
 
   // Curated project domain categories & filter logic
   const QUICK_TAGS = [
-    { id: "All", label: "All Systems (9)" },
+    { id: "All", label: "All Systems (10)" },
     { id: "FinTech", label: "FinTech & Lending" },
     { id: "EdTech", label: "EdTech & Careers" },
     { id: "Automation", label: "Operations & Automation" },
@@ -271,9 +272,12 @@ export default function App() {
   const matchesTag = (p: Project, tag: string): boolean => {
     if (tag === "All") return true;
     if (tag === "FinTech") {
-      return ["vyosha", "ar-auagpt", "arws-raw"].includes(p.id) || 
+      return ["findhar", "vyosha", "ar-auagpt", "arws-raw"].includes(p.id) || 
+             p.title.toLowerCase().includes("findhar") || 
              p.title.toLowerCase().includes("vyosha") || 
              p.description.toLowerCase().includes("lending") ||
+             p.description.toLowerCase().includes("cashflow") ||
+             p.description.toLowerCase().includes("finance") ||
              p.description.toLowerCase().includes("fintech");
     }
     if (tag === "EdTech") {
@@ -296,7 +300,7 @@ export default function App() {
     if (tag === "Mobile") {
       return p.category === "Mobile" || 
              p.stack.some(s => /android|kotlin|mobile|pwa/i.test(s)) ||
-             ["work-sarthi", "vyosha"].includes(p.id);
+             ["work-sarthi", "vyosha", "findhar"].includes(p.id);
     }
     return p.category === tag;
   };
@@ -680,8 +684,8 @@ export default function App() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {PROJECTS.filter(p => p.featured).slice(0, 3).map((project) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {PROJECTS.filter(p => p.featured).slice(0, 4).map((project) => (
                     <div 
                       key={project.id} 
                       className="bg-paper border border-ink/10 hover:border-accent transition-all p-6 space-y-4 group flex flex-col justify-between"
@@ -928,7 +932,7 @@ export default function App() {
                         <span>Featured Systems Work</span>
                       </h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                       {filteredProjects.filter(p => p.featured).map((p) => (
                         <div 
                           key={p.id} 
@@ -1578,6 +1582,9 @@ export default function App() {
 
               {/* Deep-Dive Anchor (TOC target) */}
               <div id="cs-deepdive" className="space-y-0">
+              {/* Specialized FINDHAR Deep-Dive */}
+              {selectedCaseStudy.id === "findhar" && <FinDharDeepDive />}
+
               {/* Specialized VYOSHA Deep-Dive */}
               {selectedCaseStudy.id === "vyosha" && <VyoshaDeepDive amortizationData={amortizationData} />}
 

@@ -36,3 +36,4 @@ export default function TypingText({ text, speed = 45, className = "" }: TypingT
     </span>
   );
 }
+

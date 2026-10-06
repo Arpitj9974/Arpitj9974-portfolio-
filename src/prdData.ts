@@ -255,6 +255,142 @@ export const PRD_DATA: Record<string, PRDSpec> = {
         businessImpact: "Dramatically improves long-term factual retention over traditional unassisted studying."
       }
     ]
+  },
+
+  findhar: {
+    projectId: "findhar",
+    docId: "PRD-FIN-003",
+    version: "v1.0",
+    status: "SHIPPED & LIVE",
+    title: "FinDhar — Committed Cashflow & Obligation Intelligence System",
+    author: "Arpit Jaiswal (Lead FinTech & Systems Architect)",
+    targetUsers: "Salaried professionals, freelancers with volatile monthly income, multi-credit-line households managing overlapping EMIs",
+    lastUpdated: "Q4 2026",
+    executiveSummary: "Personal finance tools predominantly act as digital bank statement categorizers, showing where money went last month after financial damage has already occurred. In emerging, credit-heavy markets with UPI mandates and post-dated EMIs, households fail because contractual obligations quietly compound until committed cashflows exceed available liquidity. FinDhar inverts the paradigm by serving as a forward-looking committed cashflow and obligation engine, projecting contractual burn across 12-to-60 month timeline horizons with deterministic precision.",
+    rootCauseAnalysis: [
+      "Retrospective expense tracking only alerts users after a cashflow deficit or overdraft occurs, providing zero predictive early warning.",
+      "Contractual liabilities (reducing-balance loans, no-cost EMIs, utility mandates, insurance premiums) are fragmented across disparate bank apps without unified multi-year amortization visualization.",
+      "Native calendar rollover traps (e.g., February 31 rolling into March 3) create false delinquency notifications and corrupted forward projections."
+    ],
+    primaryPersona: {
+      name: "Aditya Varma",
+      role: "Senior Tech Lead & Home Loan Borrower",
+      context: "Manages a ₹45L home loan, overlapping consumer electronics EMIs, SIPs, and school fee mandates across multiple credit cards and bank accounts.",
+      jtbd: "When I plan major discretionary purchases or consider new credit commitments, I want to see my exact committed contractual outflow for the next 12 to 36 months, so that I never breach my debt-to-income safety limits or deplete emergency savings."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Forward-Looking Cashflow Waterfall & Run-Rate Engine",
+        spec: "Pure mathematical calculation engine projecting 12-to-60 month non-discretionary commitments across variable cadences (MONTHLY, QUARTERLY, BI_WEEKLY, ANNUALLY) with dynamic bounding ranges.",
+        acceptanceCriteria: "Calculates total committed outflow and annualized run-rate in <2ms with zero UI blocking or network roundtrips."
+      },
+      {
+        priority: "P0",
+        title: "Exact-Day Compound Amortization Engine",
+        spec: "Client-side mathematical amortization implementing reducing-balance compound formula EMI = P * r * (1+r)^n / ((1+r)^n - 1) and flat rate schedules with No-Cost EMI discount handling.",
+        acceptanceCriteria: "100% calculation parity with institutional bank loan schedules down to the rupee, automatically deducting decreasing interest from future projections."
+      },
+      {
+        priority: "P0",
+        title: "Non-Destructive 10-Second Transactional Undo Buffer",
+        spec: "Optimistic UI mutations coupled with a staged 10,000ms memory buffer for settlements and deletions before committing permanent Firestore batch transactions.",
+        acceptanceCriteria: "Zero modal confirmation fatigue; users can revert accidental mutations in 1-click; browser unload hook flushes pending buffer."
+      },
+      {
+        priority: "P1",
+        title: "Credit Card Blocked Limit & Liquidity Radar",
+        spec: "Tracks total credit card limit, aggregate blocked EMI principal liabilities, and real available revolving credit month-by-month with strict PCI-DSS validation rejecting 13-19 digit PAN inputs.",
+        acceptanceCriteria: "Accurately decrements blocked limit as monthly installments settle; strictly enforces 4-digit card masks only."
+      },
+      {
+        priority: "P1",
+        title: "Deterministic Calendar Month-End Clamping (Cycle Drift Guard)",
+        spec: "Dynamic date normalizer evaluating target month boundaries via new Date(year, monthIndex + 1, 0).getDate() and clamping scheduled due dates via Math.min(dueDayOfMonth, daysInMonth).",
+        acceptanceCriteria: "Obligations due on the 29th, 30th, or 31st reliably execute on February 28/29 without rolling over into March."
+      },
+      {
+        priority: "P1",
+        title: "Air-Gapped Serverless Gemini 2.0 Flash Multimodal Receipt OCR",
+        spec: "Serverless 2nd Gen Cloud Functions invoking Gemini 2.0 Flash with Secret Manager API key isolation and strict Zod/JSON schema enforcement.",
+        acceptanceCriteria: "Extracts structured obligation fields (name, amount, cadence, dueDay) from raw text or receipt images in ~650ms with 0 client key leaks."
+      },
+      {
+        priority: "P2",
+        title: "Sovereign Offline-First Workbox PWA & Zero-Cost PDF Print Engine",
+        spec: "Workbox service worker caching app shell and static assets with CacheFirst, dynamic routes with NetworkFirst, and native browser print window generator.",
+        acceptanceCriteria: "Full offline functionality with clear sync status indicators; zero heavy third-party PDF dependencies saving >300 kB bundle size."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "Commitment",
+          description: "Contractual recurring or amortized financial liability",
+          fields: ["id", "name", "amount", "cadence", "dueDayOfMonth", "type (LOAN|EMI|MANDATE|SUBSCRIPTION)", "principalAmount", "interestRate", "installmentCount", "status"]
+        },
+        {
+          name: "PaymentRecord",
+          description: "Immutable transaction settlement ledger entry",
+          fields: ["id", "commitmentId", "paymentDate", "actualPaidAmount", "referenceNumber", "status (PLANNED|PAID|PREPAID|SKIPPED)"]
+        },
+        {
+          name: "PaymentSource",
+          description: "Masked payment instrument or credit card line",
+          fields: ["id", "name", "type (CREDIT_CARD|BANK_ACCOUNT|UPI)", "last4", "creditLimit", "blockedAmount", "expiry"]
+        },
+        {
+          name: "CashflowWaterfallInterval",
+          description: "Computed monthly projection horizon",
+          fields: ["monthYear", "confirmedAmount", "estimatedAmount", "totalCommitted", "activeCommitmentsCount", "terminatingDebtAmount"]
+        }
+      ],
+      syncStrategy: "Optimistic React state update -> Staged 10-second memory undo window -> Cloud Firestore batch mutation (/users/{uid}/*) with offline Workbox IndexedDB sync."
+    },
+    edgeCases: [
+      {
+        scenario: "Obligation scheduled on the 31st falls in February or 30-day month",
+        operationalRisk: "Native JS Date rolls into March 3rd, corrupting monthly cashflow totals and triggering false overdue alerts.",
+        systemResolution: "Engine clamps due date to month-end: Math.min(commitment.dueDayOfMonth, new Date(year, monthIndex + 1, 0).getDate())."
+      },
+      {
+        scenario: "Firestore compound queries fail with missing composite index error",
+        operationalRisk: "Runtime application crashes when sorting payments by date within a specific commitment.",
+        systemResolution: "Replaced compound Firestore queries with single-field equality filters and offloaded sorting to deterministic client in-memory sort."
+      },
+      {
+        scenario: "Firestore null values fail Zod runtime schema optional validation",
+        operationalRisk: "Zod rejects null on optional fields with Expected number, received null, crashing commitment editing and settlement.",
+        systemResolution: "Engineered custom Zod preprocessor opt() converting null to undefined before schema validation."
+      },
+      {
+        scenario: "User enters complete 16-digit card number on payment source form",
+        operationalRisk: "PCI-DSS compliance violation and storage of unencrypted sensitive cardholder data.",
+        systemResolution: "Zod regex /^\\d{13,19}$/ explicitly rejects full PAN inputs; accepts only 4-digit last4 masks."
+      },
+      {
+        scenario: "Browser tab closed or refreshed during active 10-second undo countdown",
+        operationalRisk: "Uncommitted deletion in memory buffer lost, causing state mismatch with Firestore database.",
+        systemResolution: "Window 'beforeunload' event listener immediately flushes and commits all pending buffer transactions to Firestore."
+      }
+    ],
+    kpiMetrics: [
+      {
+        label: "Cashflow Deficit Blindspots",
+        metric: "100% Elimination via 12-60M Horizon",
+        businessImpact: "Warns users months in advance before high-commitment intervals breach liquidity thresholds."
+      },
+      {
+        label: "Amortization Parity",
+        metric: "100% Rupee Parity (0 Delta)",
+        businessImpact: "Zero variance with institutional banking schedules across reducing balance and flat rate loans."
+      },
+      {
+        label: "Client Security Posture",
+        metric: "0 Leaked Secrets / A+ Security Grade",
+        businessImpact: "Air-gapped Cloud Functions isolate Gemini API keys with Google Cloud Secret Manager."
+      }
+    ]
   }
 };
 

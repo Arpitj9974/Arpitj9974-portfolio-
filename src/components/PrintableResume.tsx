@@ -51,7 +51,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="mt-3.5">
           <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-1.5" style={{ color: '#0f3d64', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SUMMARY</h2>
           <p className="text-[9.5pt] leading-normal text-justify" style={{ color: '#1f2937' }}>
-            Product and business operations specialist with 4.5 years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 9 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
+            Product and business operations specialist with 4.5 years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
           </p>
         </div>
 
@@ -110,17 +110,36 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
           </div>
         </div>
 
-        {/* Selected Projects (Part 1: Vyosha & AspirantFlow) */}
+        {/* Selected Projects (Part 1: FinDhar & Vyosha) */}
         <div className="mt-3.5">
           <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-2" style={{ color: '#0f3d64', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SELECTED PROJECTS</h2>
           
           <div className="space-y-3">
+            {/* FinDhar */}
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-[10pt]" style={{ color: '#111827' }}>FinDhar</span>
+                  <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>FinTech / Obligation Intelligence, Live</span>
+                </div>
+                <div className="text-[9pt] flex gap-2">
+                  <a href="https://findhar.vercel.app/" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>findhar.vercel.app</a>
+                  <span>|</span>
+                  <a href="https://github.com/Arpitj9974/FinDhar" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>GitHub</a>
+                </div>
+              </div>
+              <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
+                Forward-looking committed cashflow &amp; obligation intelligence engine projecting contractual burn across 12-to-60 month horizons. Inverts retrospective budgeting by modeling fixed, variable, and amortized liabilities (reducing bank loans, credit card EMIs, recurring mandates). Engineered with React 19, TypeScript, Firestore, and Workbox PWA. Features deterministic month-end clamping (preventing cycle drift in 28/29/30/31-day months), optimistic state with 10-second transactional undo buffer, 136 passing Vitest unit tests, and air-gapped Gemini 2.0 Flash multimodal receipt OCR.
+              </p>
+              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: React 19, TypeScript, Cloud Firestore, Workbox PWA, Gemini 2.0 Flash, Zustand, Zod, Vitest</div>
+            </div>
+
             {/* Vyosha */}
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-2">
                 <div className="flex items-center gap-1.5">
                   <span className="font-bold text-[10pt]" style={{ color: '#111827' }}>Vyosha</span>
-                  <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>FinTech / Lending, Live</span>
+                  <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>FinTech / Lending Ledger, Live</span>
                 </div>
                 <div className="text-[9pt] flex gap-2">
                   <a href="https://vyosha.vercel.app/" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>vyosha.vercel.app</a>
@@ -132,25 +151,6 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
                 Offline-first digital ledger &amp; EMI prepayment platform for micro-merchants and kirana stores. Engineered passbook accounting with Frame-0 local caching, achieving sub-200ms cold-start hydration and offline transaction recording with zero cellular lag. Features exact banking amortization calculation parity, prepayment interest-savings simulation, dynamic NPCI UPI QR collection, and 98% client-side receipt photo compression.
               </p>
               <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: React 19, TypeScript 5.8, Tailwind CSS v4, Firebase Firestore, IndexedDB Disk Cache, PWA</div>
-            </div>
-
-            {/* AspirantFlow */}
-            <div>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-[10pt]" style={{ color: '#111827' }}>AspirantFlow</span>
-                  <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>EdTech / Study Analytics, Live</span>
-                </div>
-                <div className="text-[9pt] flex gap-2">
-                  <a href="https://aspirantflow.vercel.app/" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>aspirantflow.vercel.app</a>
-                  <span>|</span>
-                  <a href="https://github.com/Arpitj9974/Study-Tracker-AJ" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>GitHub</a>
-                </div>
-              </div>
-              <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
-                Cloud-synchronized exam study planner and velocity analytics engine for 27 national Indian competitive exams (UPSC, SSC, IBPS, JEE, NEET). Uses localStorage cache as the source of truth for instantaneous (&lt;16ms) checkmark interactions; syncs asynchronously to Firestore with a 5-second timeout guard to prevent UI freeze on spotty networks. Features hierarchical taxonomies indexing 1,100+ topics, spaced-repetition revision queues, and multi-exam routing.
-              </p>
-              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: HTML5, ES6 Modules, Tailwind CSS, Firebase Auth &amp; Firestore, LocalStorage API, HTML5 postMessage</div>
             </div>
           </div>
         </div>
@@ -170,9 +170,28 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
 
       {/* PAGE 2 CONTENT */}
       <div className={isModal ? "mt-4" : "pt-1"}>
-        {/* Selected Projects Continued (RAW, FreshStamp, FarmerConnect) */}
+        {/* Selected Projects Continued (AspirantFlow, RAW, FreshStamp, FarmerConnect) */}
         <div>
           <div className="space-y-3">
+            {/* AspirantFlow */}
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-[10pt]" style={{ color: '#111827' }}>AspirantFlow</span>
+                  <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>EdTech / Study Analytics, Live</span>
+                </div>
+                <div className="text-[9pt] flex gap-2">
+                  <a href="https://aspirantflow.vercel.app/" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>aspirantflow.vercel.app</a>
+                  <span>|</span>
+                  <a href="https://github.com/Arpitj9974/Study-Tracker-AJ" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>GitHub</a>
+                </div>
+              </div>
+              <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
+                Cloud-synchronized exam study planner and velocity analytics engine for 27 national Indian competitive exams (UPSC, SSC, IBPS, JEE, NEET). Uses localStorage cache as the source of truth for instantaneous (&lt;16ms) checkmark interactions; syncs asynchronously to Firestore with a 5-second timeout guard to prevent UI freeze on spotty networks. Features hierarchical taxonomies indexing 1,100+ topics, spaced-repetition revision queues, and multi-exam routing.
+              </p>
+              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: HTML5, ES6 Modules, Tailwind CSS, Firebase Auth &amp; Firestore, LocalStorage API, HTML5 postMessage</div>
+            </div>
+
             {/* RAW */}
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-2">

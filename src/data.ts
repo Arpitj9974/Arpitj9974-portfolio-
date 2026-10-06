@@ -3,7 +3,7 @@ import { Project } from "./types";
 export const PORTFOLIO_OWNER = {
   name: "ARPIT JAISWAL",
   title: "Product & Business Operations, Finance & Systems Architecture",
-  tagline: "Product & business operations. Finance background. 9 shipped products.",
+  tagline: "Product & business operations. Finance background. 10 shipped products.",
   subLine: "Surat, Gujarat, India · MBA in Analytics & Data Science + Project Management (Manipal) · BCA 2026",
   portraitUrl: "/tech_workspace.webp", // Optimized Tech & Analytics workspace image
   location: "Surat, Gujarat, India",
@@ -18,7 +18,7 @@ export const PORTFOLIO_OWNER = {
     github: "github.com/Arpitj9974"
   },
   stats: [
-    { label: "Shipped & Live Systems", value: "9" },
+    { label: "Shipped & Live Systems", value: "10" },
     { label: "Years FinOps (JD Finance)", value: "4.5" },
     { label: "Exams Indexed & Mapped", value: "27" },
     { label: "HR Call Logs Automated", value: "100%" }
@@ -197,6 +197,40 @@ export const PORTFOLIO_OWNER = {
 };
 
 export const PROJECTS: Project[] = [
+  {
+    id: "findhar",
+    title: "FinDhar",
+    subtitle: "Committed Cashflow & Obligation Intelligence System",
+    description: "A forward-looking, zero-assumption personal finance engine that projects contractual obligations, amortized debt schedules, and recurring commitments with React 19, TypeScript, Firestore, Workbox PWA, and serverless Gemini 2.0 Flash AI.",
+    longDescription: "Personal finance applications predominantly suffer from a retrospective architectural flaw: they act as digital bank statement categorizers. Budgeting tools tell users where their money went last month after the financial damage is already done. FinDhar inverts this paradigm: it is not an expense tracker, but a forward-looking obligation and committed cashflow engine. It models fixed, variable, and estimated future financial liabilities—including reducing-balance bank loans, no-cost credit card EMIs, insurance premiums, utility mandates, and recurring subscriptions—mapping them across 12-to-60 month timeline horizons. Features an exact-day compound amortization engine, deterministic calendar month-end clamping (preventing cycle drift in 28/29/30/31-day months), bidirectional payment reconciliation with non-destructive 10-second undo transactions, memory-isolated 'What-If' sandbox simulations, offline-first Workbox service worker caching, and air-gapped serverless Gemini 2.0 Flash multimodal receipt parsing.",
+    year: "2026",
+    category: "Web Apps",
+    stack: [
+      "React 19",
+      "TypeScript",
+      "Cloud Firestore",
+      "Workbox PWA",
+      "Gemini 2.0 Flash",
+      "Zustand",
+      "Zod",
+      "Vitest"
+    ],
+    role: "Lead Systems & FinTech Architect",
+    timeline: "4 Months (Completed Q4 2026)",
+    client: "Personal Finance & Committed Obligation Intelligence",
+    outcome: "Architected an offline-first PWA with sub-millisecond waterfall generation, 136 passing tests, 10-second transactional undo buffer, deterministic month-end clamping, and air-gapped Gemini 2.0 Flash OCR.",
+    problem: "Personal finance applications act as digital bank statement categorizers telling users where money went last month after damage is already done. Contractual obligations (reducing loans, credit card EMIs, recurring mandates) quietly compound until committed cashflow exceeds available liquidity, with zero early-warning visibility.",
+    solution: "Shifted financial awareness from retrospective post-mortems to predictive 12-to-60 month obligation waterfalls. Implemented pure math amortization schedules, deterministic month-end date clamping (eliminating February/31st cycle drifts), non-destructive 10-second undo buffers for payment settlements, credit card blocked limit tracking, memory-isolated What-If sandboxes, and air-gapped Gemini 2.0 Flash OCR via Google Cloud Functions.",
+    impactStats: [
+      { label: "Vitest Test Suite", value: "136 Passed" },
+      { label: "AI Parsing Latency", value: "~650ms" },
+      { label: "Precached PWA Assets", value: "1.54 MB" },
+      { label: "Client Secret Exposure", value: "0 Keys" }
+    ],
+    featured: true,
+    liveUrl: "https://findhar.vercel.app",
+    githubUrl: "https://github.com/Arpitj9974/FinDhar"
+  },
   {
     id: "study-tracker-aj",
     title: "AspirantFlow",
