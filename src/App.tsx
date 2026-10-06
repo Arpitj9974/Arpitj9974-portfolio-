@@ -684,55 +684,104 @@ export default function App() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {PROJECTS.filter(p => p.featured).slice(0, 4).map((project) => (
                     <div 
                       key={project.id} 
-                      className="bg-paper border border-ink/10 hover:border-accent transition-all p-6 space-y-4 group flex flex-col justify-between"
+                      className="bg-paper border border-ink/10 hover:border-accent transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
+                      id={`home-selected-card-${project.id}`}
                     >
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-start">
-                          <span className="text-[10px] font-mono text-muted uppercase tracking-wider">{project.year} // {project.category}</span>
-                          <div className="flex gap-2 items-center">
-                            {project.tag && (
-                              <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
-                                &lt;{project.tag}&gt;
-                              </span>
+                      <div className="space-y-2.5">
+                        {/* Top Meta Bar */}
+                        <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
+                          <span className="uppercase tracking-wider truncate mr-1">{project.year} // {project.category}</span>
+                          <div className="flex items-center gap-2 shrink-0">
+                            {project.liveUrl && (
+                              <a 
+                                href={project.liveUrl} 
+                                target="_blank" 
+                                rel="noreferrer"
+                                title="Live Application"
+                                className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <ExternalLink size={11} />
+                              </a>
                             )}
-                            <span className="text-accent text-xs font-mono font-bold tracking-widest uppercase">FEATURED</span>
+                            {project.githubUrl && (
+                              <a 
+                                href={project.githubUrl} 
+                                target="_blank" 
+                                rel="noreferrer"
+                                title="Source Code"
+                                className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Github size={11} />
+                              </a>
+                            )}
+                            <span className="text-accent font-bold flex items-center gap-0.5 text-[9px] uppercase tracking-wider" title="Featured System">
+                              <Star size={9} className="fill-accent text-accent" />
+                            </span>
                           </div>
                         </div>
-                        <h3 className="font-serif text-xl md:text-2xl font-bold tracking-tight text-ink group-hover:text-accent transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-xs md:text-sm text-muted font-sans leading-relaxed">
+
+                        {/* Title and Subtitle */}
+                        <div className="space-y-0.5">
+                          <h3 className="font-serif text-lg font-bold tracking-tight text-ink group-hover:text-accent transition-colors leading-snug">
+                            {project.title}
+                          </h3>
+                          {project.subtitle && (
+                            <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={project.subtitle}>
+                              {project.subtitle}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Description (uniform 3-line height across all cards) */}
+                        <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
                           {project.description}
                         </p>
+
+                        {/* Primary Impact Metric Chip (compact) */}
+                        {project.impactStats && project.impactStats.length > 0 && (
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container border border-ink/5 flex items-center justify-between">
+                            <span className="text-muted truncate">{project.impactStats[0].label}:</span>
+                            <span className="font-bold text-accent shrink-0 ml-1.5">{project.impactStats[0].value}</span>
+                          </div>
+                        )}
                       </div>
 
-                      <div className="pt-4 border-t border-ink/5 flex justify-between items-center">
-                        <div className="flex gap-1.5 flex-wrap">
+                      {/* Compact Footer */}
+                      <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
+                        {/* Tech Stack Pills */}
+                        <div className="flex gap-1 flex-wrap">
                           {project.stack.slice(0, 3).map((s, i) => (
-                            <span key={i} className="bg-surface-container text-[10px] font-mono text-muted px-2 py-0.5">
+                            <span key={i} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
                               {s}
                             </span>
                           ))}
+                          {project.stack.length > 3 && (
+                            <span className="text-[9px] font-mono text-muted/70">+{project.stack.length - 3}</span>
+                          )}
                         </div>
-                        <div className="flex items-center gap-3">
+
+                        {/* 2-Button Action Row (50/50 split, zero word wrapping) */}
+                        <div className="grid grid-cols-2 gap-1.5">
                           <button 
                             onClick={() => openCaseStudy(project, "prd")}
-                            className="text-xs font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
                             title="View 1-Page PRD"
                           >
-                            <FileText size={11} />
+                            <FileText size={10} />
                             <span>PRD</span>
                           </button>
                           <button 
                             onClick={() => openCaseStudy(project, "narrative")}
-                            className="text-xs font-mono text-ink font-bold tracking-wider hover:text-accent flex items-center gap-1 transition-colors cursor-pointer"
+                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-paper bg-ink hover:bg-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-xs"
                           >
                             <span>CASE STUDY</span>
-                            <ArrowRight size={12} />
+                            <ArrowRight size={10} />
                           </button>
                         </div>
                       </div>
@@ -932,84 +981,104 @@ export default function App() {
                         <span>Featured Systems Work</span>
                       </h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {filteredProjects.filter(p => p.featured).map((p) => (
                         <div 
                           key={p.id} 
-                          className="border border-ink/10 bg-paper/50 hover:bg-paper transition-all p-5 flex flex-col justify-between group"
+                          className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
                           id={`project-card-${p.id}`}
                         >
-                          <div className="space-y-3">
-                            <div className="flex justify-between items-center font-mono text-[10px] text-muted">
-                              <span>{p.year} // {p.category}</span>
-                              <div className="flex gap-2 items-center">
-                                {p.tag && (
-                                  <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
-                                    &lt;{p.tag}&gt;
-                                  </span>
+                          <div className="space-y-2.5">
+                            {/* Top Meta Bar */}
+                            <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
+                              <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
+                              <div className="flex items-center gap-2 shrink-0">
+                                {p.liveUrl && (
+                                  <a 
+                                    href={p.liveUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    title="Live Application"
+                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <ExternalLink size={11} />
+                                  </a>
                                 )}
-                                <span className="text-accent font-bold flex items-center gap-1 text-[9px] uppercase tracking-wider">
-                                  <Star size={10} className="fill-accent text-accent" />
-                                  <span>FEATURED</span>
+                                {p.githubUrl && (
+                                  <a 
+                                    href={p.githubUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    title="Source Code"
+                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <Github size={11} />
+                                  </a>
+                                )}
+                                <span className="text-accent font-bold flex items-center gap-0.5 text-[9px] uppercase tracking-wider" title="Featured System">
+                                  <Star size={9} className="fill-accent text-accent" />
                                 </span>
                               </div>
                             </div>
 
-                            <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">
-                              {p.title}
-                            </h3>
-                            
-                            <p className="text-xs text-muted leading-relaxed font-sans">
+                            {/* Title and Subtitle */}
+                            <div className="space-y-0.5">
+                              <h3 className="font-serif text-lg font-bold tracking-tight text-ink group-hover:text-accent transition-colors leading-snug">
+                                {p.title}
+                              </h3>
+                              {p.subtitle && (
+                                <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                                  {p.subtitle}
+                                </p>
+                              )}
+                            </div>
+
+                            {/* Description (uniform 3-line height across all cards) */}
+                            <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
                               {p.description}
                             </p>
+
+                            {/* Primary Impact Metric Chip (compact) */}
+                            {p.impactStats && p.impactStats.length > 0 && (
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container border border-ink/5 flex items-center justify-between">
+                                <span className="text-muted truncate">{p.impactStats[0].label}:</span>
+                                <span className="font-bold text-accent shrink-0 ml-1.5">{p.impactStats[0].value}</span>
+                              </div>
+                            )}
                           </div>
 
-                          <div className="pt-4 mt-4 border-t border-ink/5 flex justify-between items-center">
+                          {/* Compact Footer */}
+                          <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
+                            {/* Tech Stack Pills */}
                             <div className="flex gap-1 flex-wrap">
-                              {p.stack.slice(0, 2).map((s, idx) => (
-                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5">
+                              {p.stack.slice(0, 3).map((s, idx) => (
+                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
                                   {s}
                                 </span>
                               ))}
+                              {p.stack.length > 3 && (
+                                <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
+                              )}
                             </div>
 
-                            <div className="flex items-center gap-3">
-                              {p.liveUrl && (
-                                <a 
-                                  href={p.liveUrl} 
-                                  target="_blank" 
-                                  rel="noreferrer"
-                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
-                                </a>
-                              )}
-                              {p.githubUrl && (
-                                <a 
-                                  href={p.githubUrl} 
-                                  target="_blank" 
-                                  rel="noreferrer"
-                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
-                                </a>
-                              )}
+                            {/* 2-Button Action Row (50/50 split, zero word wrapping) */}
+                            <div className="grid grid-cols-2 gap-1.5">
                               <button 
                                 onClick={() => openCaseStudy(p, "prd")}
-                                className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
                                 title="View 1-Page PRD"
                               >
-                                <FileText size={11} />
+                                <FileText size={10} />
                                 <span>PRD</span>
                               </button>
                               <button 
                                 onClick={() => openCaseStudy(p, "narrative")}
-                                className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-paper bg-ink hover:bg-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-xs"
                               >
-                                <span>Case Study</span>
-                                <ChevronRight size={12} />
+                                <span>CASE STUDY</span>
+                                <ArrowRight size={10} />
                               </button>
                             </div>
                           </div>
@@ -1027,76 +1096,104 @@ export default function App() {
                         <span>Internship Projects &amp; Products</span>
                       </h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {filteredProjects.filter(p => p.tag === "internship").map((p) => (
                         <div 
                           key={p.id} 
-                          className="border border-ink/10 bg-paper/40 hover:bg-paper transition-all p-5 flex flex-col justify-between group"
+                          className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
                           id={`project-card-${p.id}`}
                         >
-                          <div className="space-y-3">
-                            <div className="flex justify-between items-center font-mono text-[10px] text-muted">
-                              <span>{p.year} // {p.category}</span>
-                              <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
-                                &lt;internship&gt;
-                              </span>
+                          <div className="space-y-2.5">
+                            {/* Top Meta Bar */}
+                            <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
+                              <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
+                              <div className="flex items-center gap-2 shrink-0">
+                                {p.liveUrl && (
+                                  <a 
+                                    href={p.liveUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    title="Live Application"
+                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <ExternalLink size={11} />
+                                  </a>
+                                )}
+                                {p.githubUrl && (
+                                  <a 
+                                    href={p.githubUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    title="Source Code"
+                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <Github size={11} />
+                                  </a>
+                                )}
+                                <span className="text-accent border border-accent/20 px-1 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none">
+                                  &lt;intern&gt;
+                                </span>
+                              </div>
                             </div>
 
-                            <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">
-                              {p.title}
-                            </h3>
-                            
-                            <p className="text-xs text-muted leading-relaxed font-sans">
+                            {/* Title and Subtitle */}
+                            <div className="space-y-0.5">
+                              <h3 className="font-serif text-lg font-bold tracking-tight text-ink group-hover:text-accent transition-colors leading-snug">
+                                {p.title}
+                              </h3>
+                              {p.subtitle && (
+                                <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                                  {p.subtitle}
+                                </p>
+                              )}
+                            </div>
+
+                            {/* Description (uniform 3-line height across all cards) */}
+                            <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
                               {p.description}
                             </p>
+
+                            {/* Primary Impact Metric Chip (compact) */}
+                            {p.impactStats && p.impactStats.length > 0 && (
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container border border-ink/5 flex items-center justify-between">
+                                <span className="text-muted truncate">{p.impactStats[0].label}:</span>
+                                <span className="font-bold text-accent shrink-0 ml-1.5">{p.impactStats[0].value}</span>
+                              </div>
+                            )}
                           </div>
 
-                          <div className="pt-4 mt-4 border-t border-ink/5 flex justify-between items-center">
+                          {/* Compact Footer */}
+                          <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
+                            {/* Tech Stack Pills */}
                             <div className="flex gap-1 flex-wrap">
-                              {p.stack.slice(0, 2).map((s, idx) => (
-                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5">
+                              {p.stack.slice(0, 3).map((s, idx) => (
+                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
                                   {s}
                                 </span>
                               ))}
+                              {p.stack.length > 3 && (
+                                <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
+                              )}
                             </div>
 
-                            <div className="flex items-center gap-3">
-                              {p.liveUrl && (
-                                <a 
-                                  href={p.liveUrl} 
-                                  target="_blank" 
-                                  rel="noreferrer"
-                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
-                                </a>
-                              )}
-                              {p.githubUrl && (
-                                <a 
-                                  href={p.githubUrl} 
-                                  target="_blank" 
-                                  rel="noreferrer"
-                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
-                                </a>
-                              )}
+                            {/* 2-Button Action Row (50/50 split, zero word wrapping) */}
+                            <div className="grid grid-cols-2 gap-1.5">
                               <button 
                                 onClick={() => openCaseStudy(p, "prd")}
-                                className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
                                 title="View 1-Page PRD"
                               >
-                                <FileText size={11} />
+                                <FileText size={10} />
                                 <span>PRD</span>
                               </button>
                               <button 
                                 onClick={() => openCaseStudy(p, "narrative")}
-                                className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-paper bg-ink hover:bg-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-xs"
                               >
-                                <span>Case Study</span>
-                                <ChevronRight size={12} />
+                                <span>CASE STUDY</span>
+                                <ArrowRight size={10} />
                               </button>
                             </div>
                           </div>
@@ -1113,78 +1210,106 @@ export default function App() {
                         Other Systems &amp; Modules
                       </h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {filteredProjects.filter(p => !p.featured && p.tag !== "internship").map((p) => (
                         <div 
                           key={p.id} 
-                          className="border border-ink/10 bg-paper/30 hover:bg-paper transition-all p-5 flex flex-col justify-between group"
+                          className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
                           id={`project-card-${p.id}`}
                         >
-                          <div className="space-y-3">
-                            <div className="flex justify-between items-center font-mono text-[10px] text-muted">
-                              <span>{p.year} // {p.category}</span>
-                              {p.tag && (
-                                <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
-                                  &lt;{p.tag}&gt;
-                                </span>
+                          <div className="space-y-2.5">
+                            {/* Top Meta Bar */}
+                            <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
+                              <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
+                              <div className="flex items-center gap-2 shrink-0">
+                                {p.liveUrl && (
+                                  <a 
+                                    href={p.liveUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    title="Live Application"
+                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <ExternalLink size={11} />
+                                  </a>
+                                )}
+                                {p.githubUrl && (
+                                  <a 
+                                    href={p.githubUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    title="Source Code"
+                                    className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <Github size={11} />
+                                  </a>
+                                )}
+                                {p.tag && (
+                                  <span className="text-accent border border-accent/20 px-1 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none">
+                                    &lt;{p.tag}&gt;
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Title and Subtitle */}
+                            <div className="space-y-0.5">
+                              <h3 className="font-serif text-lg font-bold tracking-tight text-ink group-hover:text-accent transition-colors leading-snug">
+                                {p.title}
+                              </h3>
+                              {p.subtitle && (
+                                <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                                  {p.subtitle}
+                                </p>
                               )}
                             </div>
 
-                            <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">
-                              {p.title}
-                            </h3>
-                            
-                            <p className="text-xs text-muted leading-relaxed font-sans">
+                            {/* Description */}
+                            <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
                               {p.description}
                             </p>
+
+                            {/* Primary Impact Metric Chip */}
+                            {p.impactStats && p.impactStats.length > 0 && (
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container border border-ink/5 flex items-center justify-between">
+                                <span className="text-muted truncate">{p.impactStats[0].label}:</span>
+                                <span className="font-bold text-accent shrink-0 ml-1.5">{p.impactStats[0].value}</span>
+                              </div>
+                            )}
                           </div>
 
-                          <div className="pt-4 mt-4 border-t border-ink/5 flex justify-between items-center">
+                          {/* Compact Footer */}
+                          <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
+                            {/* Tech Stack Pills */}
                             <div className="flex gap-1 flex-wrap">
-                              {p.stack.slice(0, 2).map((s, idx) => (
-                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5">
+                              {p.stack.slice(0, 3).map((s, idx) => (
+                                <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
                                   {s}
                                 </span>
                               ))}
+                              {p.stack.length > 3 && (
+                                <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
+                              )}
                             </div>
 
-                            <div className="flex items-center gap-3">
-                              {p.liveUrl && (
-                                <a 
-                                  href={p.liveUrl} 
-                                  target="_blank" 
-                                  rel="noreferrer"
-                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
-                                </a>
-                              )}
-                              {p.githubUrl && (
-                                <a 
-                                  href={p.githubUrl} 
-                                  target="_blank" 
-                                  rel="noreferrer"
-                                  className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
-                                </a>
-                              )}
+                            {/* 2-Button Action Row */}
+                            <div className="grid grid-cols-2 gap-1.5">
                               <button 
                                 onClick={() => openCaseStudy(p, "prd")}
-                                className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
                                 title="View 1-Page PRD"
                               >
-                                <FileText size={11} />
+                                <FileText size={10} />
                                 <span>PRD</span>
                               </button>
                               <button 
                                 onClick={() => openCaseStudy(p, "narrative")}
-                                className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-paper bg-ink hover:bg-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-xs"
                               >
-                                <span>Case Study</span>
-                                <ChevronRight size={12} />
+                                <span>CASE STUDY</span>
+                                <ArrowRight size={10} />
                               </button>
                             </div>
                           </div>
@@ -1194,86 +1319,111 @@ export default function App() {
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {filteredProjects.map((p) => (
                     <div 
                       key={p.id} 
-                      className="border border-ink/10 bg-paper/50 hover:bg-paper transition-all p-5 flex flex-col justify-between group"
+                      className="border border-ink/10 bg-paper hover:bg-paper transition-all p-4 flex flex-col justify-between group rounded-xs shadow-xs h-full"
                       id={`project-card-${p.id}`}
                     >
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-center font-mono text-[10px] text-muted">
-                          <span>{p.year} // {p.category}</span>
-                          <div className="flex gap-2 items-center">
+                      <div className="space-y-2.5">
+                        {/* Top Meta Bar */}
+                        <div className="flex justify-between items-center font-mono text-[10px] text-muted border-b border-ink/5 pb-2">
+                          <span className="uppercase tracking-wider truncate mr-1">{p.year} // {p.category}</span>
+                          <div className="flex items-center gap-2 shrink-0">
+                            {p.liveUrl && (
+                              <a 
+                                href={p.liveUrl} 
+                                target="_blank" 
+                                rel="noreferrer"
+                                title="Live Application"
+                                className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <ExternalLink size={11} />
+                              </a>
+                            )}
+                            {p.githubUrl && (
+                              <a 
+                                href={p.githubUrl} 
+                                target="_blank" 
+                                rel="noreferrer"
+                                title="Source Code"
+                                className="text-muted hover:text-accent transition-colors cursor-pointer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Github size={11} />
+                              </a>
+                            )}
                             {p.tag && (
-                              <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider leading-none">
+                              <span className="text-accent border border-accent/20 px-1 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none">
                                 &lt;{p.tag}&gt;
                               </span>
                             )}
                             {p.featured && (
-                              <span className="text-accent font-bold flex items-center gap-1 text-[9px] uppercase tracking-wider">
-                                <Star size={10} className="fill-accent text-accent" />
-                                <span>FEATURED</span>
+                              <span className="text-accent font-bold flex items-center gap-0.5 text-[9px] uppercase tracking-wider" title="Featured System">
+                                <Star size={9} className="fill-accent text-accent" />
                               </span>
                             )}
                           </div>
                         </div>
 
-                        <h3 className="font-serif text-lg font-bold text-ink group-hover:text-accent transition-colors">
-                          {p.title}
-                        </h3>
-                        
-                        <p className="text-xs text-muted leading-relaxed font-sans">
+                        {/* Title and Subtitle */}
+                        <div className="space-y-0.5">
+                          <h3 className="font-serif text-lg font-bold tracking-tight text-ink group-hover:text-accent transition-colors leading-snug">
+                            {p.title}
+                          </h3>
+                          {p.subtitle && (
+                            <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                              {p.subtitle}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
                           {p.description}
                         </p>
+
+                        {/* Primary Impact Metric Chip */}
+                        {p.impactStats && p.impactStats.length > 0 && (
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container border border-ink/5 flex items-center justify-between">
+                            <span className="text-muted truncate">{p.impactStats[0].label}:</span>
+                            <span className="font-bold text-accent shrink-0 ml-1.5">{p.impactStats[0].value}</span>
+                          </div>
+                        )}
                       </div>
 
-                      <div className="pt-4 mt-4 border-t border-ink/5 flex justify-between items-center">
+                      {/* Compact Footer */}
+                      <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
+                        {/* Tech Stack Pills */}
                         <div className="flex gap-1 flex-wrap">
-                          {p.stack.slice(0, 2).map((s, idx) => (
-                            <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5">
+                          {p.stack.slice(0, 3).map((s, idx) => (
+                            <span key={idx} className="bg-surface-container text-[9px] font-mono text-muted px-1.5 py-0.5 border border-ink/5">
                               {s}
                             </span>
                           ))}
+                          {p.stack.length > 3 && (
+                            <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
+                          )}
                         </div>
 
-                        <div className="flex items-center gap-3">
-                          {p.liveUrl && (
-                            <a 
-                              href={p.liveUrl} 
-                              target="_blank" 
-                              rel="noreferrer"
-                              className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <span className="flex items-center gap-1">Live <ExternalLink size={10} /></span>
-                            </a>
-                          )}
-                          {p.githubUrl && (
-                            <a 
-                              href={p.githubUrl} 
-                              target="_blank" 
-                              rel="noreferrer"
-                              className="text-[11px] font-mono text-muted hover:text-accent transition-colors cursor-pointer"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <span className="flex items-center gap-1">Git <ExternalLink size={10} /></span>
-                            </a>
-                          )}
+                        {/* 2-Button Action Row */}
+                        <div className="grid grid-cols-2 gap-1.5">
                           <button 
                             onClick={() => openCaseStudy(p, "prd")}
-                            className="text-[11px] font-mono font-bold text-accent hover:text-ink flex items-center gap-1 cursor-pointer"
+                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
                             title="View 1-Page PRD"
                           >
-                            <FileText size={11} />
+                            <FileText size={10} />
                             <span>PRD</span>
                           </button>
                           <button 
                             onClick={() => openCaseStudy(p, "narrative")}
-                            className="text-xs font-mono font-bold text-ink hover:text-accent flex items-center gap-0.5 cursor-pointer"
+                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-paper bg-ink hover:bg-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-xs"
                           >
-                            <span>Case Study</span>
-                            <ChevronRight size={12} />
+                            <span>CASE STUDY</span>
+                            <ArrowRight size={10} />
                           </button>
                         </div>
                       </div>
