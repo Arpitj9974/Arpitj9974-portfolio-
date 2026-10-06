@@ -269,7 +269,7 @@ const htmlContent = `<!DOCTYPE html>
     <div class="section">
       <div class="section-title">SUMMARY</div>
       <p class="summary-text">
-        Product and business operations specialist with 4.5 years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 9 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
+        Product and business operations specialist with 4.5 years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
       </p>
     </div>
 
@@ -408,21 +408,21 @@ const htmlContent = `<!DOCTYPE html>
         <div class="project-stack">Built with: React, TypeScript, Firebase, Gemini Vision API, Tailwind CSS, Vercel Serverless</div>
       </div>
 
-      <!-- FarmerConnect -->
+      <!-- FinDhar -->
       <div class="project-card">
         <div class="project-header">
           <div>
-            <span class="project-title">FarmerConnect</span>
-            <span class="project-tag">AgriTech Marketplace, Live</span>
+            <span class="project-title">FinDhar</span>
+            <span class="project-tag">FinTech / Obligation Intelligence, Live</span>
           </div>
           <div class="project-links">
-            <a href="https://farmer-connect-aj.vercel.app/" target="_blank">farmer-connect-aj.vercel.app</a> | <a href="https://github.com/Arpitj9974/FarmerConnect" target="_blank">GitHub</a>
+            <a href="https://findhar.vercel.app/" target="_blank">findhar.vercel.app</a> | <a href="https://github.com/Arpitj9974/FinDhar" target="_blank">GitHub</a>
           </div>
         </div>
         <p class="project-desc">
-          Direct farmer-to-buyer agricultural marketplace with live auction bidding and market telemetry. Solves middleman price erosion (30–40% loss) via transparent fixed-price listings and real-time auctions backed by database row locking to prevent race-condition bid collisions. Integrated live wholesale mandi prices via the government data.gov.in API, multi-provider AI advisory routing (English/Hindi/Gujarati), and Razorpay payments.
+          Forward-looking committed cashflow &amp; obligation intelligence engine projecting contractual burn across 12-to-60 month horizons. Inverts retrospective budgeting by modeling fixed, variable, and amortized liabilities (reducing bank loans, credit card EMIs, recurring mandates). Engineered with React 19, TypeScript, Firestore, and Workbox PWA. Features deterministic month-end clamping (preventing cycle drift in 28/29/30/31-day months), optimistic state with 10-second transactional undo buffer, 136 passing Vitest unit tests, and air-gapped Gemini 2.0 Flash multimodal receipt OCR.
         </p>
-        <div class="project-stack">Built with: React, Node.js, PostgreSQL, Gemini, Groq, OpenRouter, Razorpay, Supabase</div>
+        <div class="project-stack">Built with: React 19, TypeScript, Cloud Firestore, Workbox PWA, Gemini 2.0 Flash, Zustand, Zod, Vitest</div>
       </div>
 
     </div>
@@ -500,13 +500,18 @@ const outputRootPdf = path.join(projectRoot, 'Arpit_Jaiswal_Resume_.pdf');
 
 console.log('Compiling PDF with Chrome headless...');
 
-// Generate directly into public
+const tempDir = path.join(projectRoot, 'node_modules', '.chrome_temp');
+if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+const tempPdf = path.join(tempDir, 'resume.pdf');
+
 execSync(
-  `powershell -Command "Start-Process -FilePath '${chromePath}' -ArgumentList '--headless=new', '--disable-gpu', '--no-pdf-header-footer', '--print-to-pdf=\\"${outputPublicPdf}\\"', 'file:///${htmlFilePath.replace(/\\\\/g, '/')}' -Wait"`
+  `powershell -Command "Start-Process -FilePath '${chromePath}' -ArgumentList '--headless', '--disable-gpu', '--no-pdf-header-footer', '--user-data-dir=\\"${tempDir}\\"', '--print-to-pdf=\\"${tempPdf}\\"', 'file:///${htmlFilePath.replace(/\\\\/g, '/')}' -Wait"`
 );
 
-// Copy to root
-fs.copyFileSync(outputPublicPdf, outputRootPdf);
+if (fs.existsSync(tempPdf)) {
+  fs.copyFileSync(tempPdf, outputPublicPdf);
+  fs.copyFileSync(tempPdf, outputRootPdf);
+}
 
 console.log('Successfully generated and updated:');
 console.log(' - ' + outputPublicPdf);
