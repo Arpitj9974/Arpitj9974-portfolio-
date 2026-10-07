@@ -148,9 +148,9 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
                 </div>
               </div>
               <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
-                Cloud-synchronized exam study planner and velocity analytics engine for 27 national Indian competitive exams (UPSC, SSC, IBPS, JEE, NEET). Uses localStorage cache as the source of truth for instantaneous (&lt;16ms) checkmark interactions; syncs asynchronously to Firestore with a 5-second timeout guard to prevent UI freeze on spotty networks. Features hierarchical taxonomies indexing 1,100+ topics, spaced-repetition revision queues, and multi-exam routing.
+                Multi-exam syllabus tracker &amp; study orchestrator across 101+ competitive exams and 15 domains (Banking, UPSC, SSC, RRB, Engineering, Medical, MBA, Placements). Engineered an offline-first PWA architecture (Service Worker v58, 220+ precached assets) with sub-16ms local persistence and 5000ms timeout-safe Firestore synchronization. Features cross-exam syllabus deduplication (&quot;study once, benefit everywhere&quot;), a generic dashboard controller powering 117 variant hubs, multi-horizon planning (ISO 8601), and zero-flicker pre-render layout guards (CLS 0.0).
               </p>
-              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: HTML5, ES6 Modules, Tailwind CSS, Firebase Auth &amp; Firestore, LocalStorage API, HTML5 postMessage</div>
+              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: Vanilla JS (ES6+), Vanilla CSS3 &amp; Tailwind CSS, Firebase Auth &amp; Firestore, Service Worker PWA (v58), LocalStorage API, Node.js Audit Suite</div>
             </div>
           </div>
         </div>

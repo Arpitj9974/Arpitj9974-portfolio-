@@ -881,9 +881,9 @@ export default function App() {
                           sector: "EdTech & Productivity",
                           name: "AspirantFlow",
                           id: "study-tracker-aj",
-                          bottleneck: "Competitive aspirants juggle uncoordinated study schedules, losing consistency and revision cadence.",
-                          solution: "Systemic syllabus breakdown with algorithmic revision cadence intervals and time-tracked audit logs.",
-                          impact: "27 exams mapped, 40%+ revision consistency boost, zero data drift."
+                          bottleneck: "Competitive aspirants juggle uncoordinated multi-exam syllabi across spreadsheets, losing momentum and duplicating study effort.",
+                          solution: "Cross-exam syllabus deduplication engine with offline-first PWA telemetry, multi-horizon study planning, and specification-driven generic dashboards.",
+                          impact: "101+ exams mapped (117 dashboards, 15 domains), zero syllabus duplication, PWA offline v58, $0 cloud cost."
                         },
                         {
                           sector: "HR & Recruitment",
