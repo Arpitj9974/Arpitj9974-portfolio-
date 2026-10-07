@@ -14,7 +14,8 @@ import {
   CheckCircle2, 
   Sparkles,
   ArrowRight,
-  Clock
+  Clock,
+  Linkedin
 } from "lucide-react";
 import { playClick, playSuccess } from "../utils/soundEngine";
 import { PORTFOLIO_OWNER } from "../data";
@@ -23,7 +24,6 @@ interface ExecutiveTourModalProps {
   isOpen: boolean;
   onClose: () => void;
   onExploreProjects: () => void;
-  onScrollToSimulator: () => void;
   onDownloadResume: () => void;
 }
 
@@ -43,7 +43,6 @@ export default function ExecutiveTourModal({
   isOpen,
   onClose,
   onExploreProjects,
-  onScrollToSimulator,
   onDownloadResume
 }: ExecutiveTourModalProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -245,46 +244,48 @@ export default function ExecutiveTourModal({
     // SLIDE 3: The Synthesis
     {
       id: "synthesis",
-      category: "TECHNO-COMMERCIAL HYBRID // FOUNDATION",
+      category: "70% MBA STRATEGY + 30% BCA AI DELIVERY",
       stepNumber: "03",
-      title: "BCA Technical Rigor + MBA Strategic Depth",
-      subtitle: "Bridging the traditional divide between business leadership and engineering reality.",
+      title: "70% Business Strategy & FinOps + 30% AI-Native Systems Delivery",
+      subtitle: "I observe operational friction, formulate the business solution, and ship working software through AI and agent coding.",
       content: (
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="border border-ink/10 bg-paper p-4 space-y-3">
               <div className="flex items-center gap-2">
-                <Cpu size={16} className="text-accent" />
-                <span className="font-mono text-xs font-bold text-ink">BCA // TECHNICAL RIGOR</span>
+                <Layers size={16} className="text-accent" />
+                <span className="font-mono text-xs font-bold text-ink">70% MBA // STRATEGY, FINOPS &amp; PM</span>
               </div>
               <p className="text-xs text-muted leading-relaxed font-sans">
-                Computer Applications background means I architect, write, and debug code directly. Deep fluency in relational databases, REST APIs, TypeScript, distributed event-streams, and algorithmic state vectors.
+                Manipal University Jaipur (Analytics, Data Science &amp; PM) backed by 4+ years leading lending operations at JD Finance. I focus on ground-level problem observation, borrower lifecycle unit economics, risk mitigation, and executive roadmaps.
               </p>
               <div className="flex flex-wrap gap-1 font-mono text-[10px] text-ink">
-                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">SQL Schema</span>
-                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">TypeScript</span>
-                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">State Machines</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Unit Economics</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">FinOps Strategy</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Process Design</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">PRDs &amp; Roadmaps</span>
               </div>
             </div>
 
             <div className="border border-ink/10 bg-paper p-4 space-y-3">
               <div className="flex items-center gap-2">
-                <Layers size={16} className="text-accent" />
-                <span className="font-mono text-xs font-bold text-ink">MBA // STRATEGY &amp; PM</span>
+                <Cpu size={16} className="text-accent" />
+                <span className="font-mono text-xs font-bold text-ink">30% BCA // SYSTEMS LITERACY &amp; AI DELIVERY</span>
               </div>
               <p className="text-xs text-muted leading-relaxed font-sans">
-                Manipal University Jaipur (Analytics, Data Science &amp; PM) provides data modeling, customer discovery, unit economics, P&amp;L oversight, and stakeholder alignment to keep projects tethered to revenue.
+                BCA foundation provides deep schema literacy and systems comprehension. I do not do manual line-by-line coding; instead, I orchestrate AI agents and coding tools to translate specifications directly into working, production-ready software.
               </p>
               <div className="flex flex-wrap gap-1 font-mono text-[10px] text-ink">
-                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Predictive Models</span>
-                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Unit Economics</span>
-                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Roadmap PRDs</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Systems Architecture</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Data Schemas</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">AI Agent Coding</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">API Workflows</span>
               </div>
             </div>
           </div>
 
           <div className="p-3 border-l-2 border-accent bg-surface-container/60 font-mono text-xs text-ink">
-            <strong>Key Advantage:</strong> I can review a dual-ledger balance sheet and evaluate a TypeScript microservice architecture in the same strategic session without needing a translator.
+            <strong>Core Principle:</strong> I do not write manual boilerplate code. I observe friction on the ground, think strategically, formulate the business solution, and solve &amp; ship it through AI and agent coding.
           </div>
         </div>
       )
@@ -412,20 +413,19 @@ export default function ExecutiveTourModal({
               <ArrowRight size={13} className="text-muted" />
             </button>
 
-            <button
-              onClick={() => {
-                playClick();
-                onClose();
-                onScrollToSimulator();
-              }}
+            <a
+              href={`https://${PORTFOLIO_OWNER.contactInfo.linkedin}`}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => playClick()}
               className="p-3.5 border border-ink/20 bg-paper hover:border-ink text-ink transition-all flex items-center justify-between cursor-pointer text-xs"
             >
               <div className="flex items-center gap-2">
-                <Cpu size={14} className="text-accent" />
-                <span>TEST ARCHITECTURE SIMULATOR</span>
+                <Linkedin size={14} className="text-accent" />
+                <span>CONNECT ON LINKEDIN</span>
               </div>
-              <ArrowRight size={13} className="text-muted" />
-            </button>
+              <ExternalLink size={12} className="text-muted" />
+            </a>
           </div>
         </div>
       )

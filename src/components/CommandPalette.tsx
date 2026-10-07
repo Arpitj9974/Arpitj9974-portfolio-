@@ -9,7 +9,6 @@ import {
   Mail, 
   Github, 
   Linkedin, 
-  Sliders, 
   Briefcase, 
   Compass, 
   Layers, 
@@ -32,7 +31,6 @@ export interface CommandPaletteProps {
   onToggleTheme: () => void;
   onSelectSkill?: (skill: string) => void;
   onStartTour?: () => void;
-  onScrollToSimulator?: () => void;
 }
 
 interface PaletteAction {
@@ -56,8 +54,7 @@ export default function CommandPalette({
   isDarkMode,
   onToggleTheme,
   onSelectSkill,
-  onStartTour,
-  onScrollToSimulator
+  onStartTour
 }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -158,27 +155,6 @@ export default function CommandPalette({
         run: () => {
           onSelectTab("experience");
           onClose();
-        }
-      },
-
-      {
-        id: "nav-simulator",
-        category: "NAVIGATION",
-        title: "Live Architecture & FinOps Telemetry Simulator",
-        subtitle: "Interactive 4-node pipeline with 1,000 TX batch stream & network fault injection",
-        badge: "SIMULATOR",
-        icon: <Sliders size={14} className="text-accent" />,
-        keywords: ["simulator", "architecture", "telemetry", "pipeline", "amortization", "ledger", "fault", "stream", "batch"],
-        run: () => {
-          onSelectTab("home");
-          onClose();
-          if (onScrollToSimulator) {
-            onScrollToSimulator();
-          } else {
-            setTimeout(() => {
-              document.getElementById("architecture-simulator")?.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 250);
-          }
         }
       },
       {

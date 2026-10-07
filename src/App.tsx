@@ -7,7 +7,6 @@ import TypingText from "./components/TypingText";
 import ProjectCardLinks from "./components/ProjectCardLinks";
 import CommandPalette from "./components/CommandPalette";
 import CaseStudyReadingBar from "./components/CaseStudyReadingBar";
-import ArchitectureSimulator from "./components/ArchitectureSimulator";
 import ExecutiveTourModal from "./components/ExecutiveTourModal";
 import { PROJECTS, PORTFOLIO_OWNER } from "./data";
 import { Project } from "./types";
@@ -637,7 +636,7 @@ export default function App() {
                         <span>TECHNICAL DELIVERY &amp; ARCHITECTURE</span>
                       </div>
                       <p className="text-xs leading-relaxed">
-                        My BCA technical foundation means I don't just write theoretical slides or PRDs. I understand system architecture, data models, APIs, and modern developer tooling well enough to architect, prototype, and ship working software directly.
+                        My BCA technical foundation provides strong systems architecture and schema literacy. I don't do manual line-by-line coding: I observe operational friction, formulate the business solution, and ship functional software through AI and agent coding.
                       </p>
                     </div>
                   </div>
@@ -678,11 +677,6 @@ export default function App() {
                   ))}
                 </div>
               </motion.section>
-
-              {/* SECTION 03b: LIVE ARCHITECTURE SIMULATOR */}
-              <div id="architecture-simulator">
-                <ArchitectureSimulator />
-              </div>
 
               {/* SECTION 04: SELECTED WORK PREVIEW */}
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="space-y-8" id="home-selected-work">
@@ -2238,13 +2232,6 @@ export default function App() {
           handleSelectSkill(skill);
         }}
         onStartTour={() => setIsTourOpen(true)}
-        onScrollToSimulator={() => {
-          setCurrentTab("home");
-          setSelectedCaseStudy(null);
-          setTimeout(() => {
-            document.getElementById("architecture-simulator")?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 200);
-        }}
       />
 
       {/* Interactive PDF Resume Modal */}
@@ -2261,13 +2248,6 @@ export default function App() {
         onExploreProjects={() => {
           setCurrentTab("projects");
           setSelectedCaseStudy(null);
-        }}
-        onScrollToSimulator={() => {
-          setCurrentTab("home");
-          setSelectedCaseStudy(null);
-          setTimeout(() => {
-            document.getElementById("architecture-simulator")?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 200);
         }}
         onDownloadResume={handleDownloadResume}
       />
