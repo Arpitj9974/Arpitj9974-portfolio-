@@ -110,17 +110,7 @@ export default function App() {
   const [copiedDrawerLink, setCopiedDrawerLink] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
-  const [isSoundActive, setIsSoundActive] = useState<boolean>(() => isSoundEnabled());
   const [isTourOpen, setIsTourOpen] = useState(false);
-
-  const handleToggleSound = () => {
-    const next = !isSoundActive;
-    setIsSoundActive(next);
-    setSoundEnabled(next);
-    if (next) {
-      playSuccess(true);
-    }
-  };
 
   // Global CMD+K / Ctrl+K listener for Command Palette
   useEffect(() => {
@@ -421,10 +411,7 @@ export default function App() {
         }}
         onDownloadResume={handleDownloadResume}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-        isSoundActive={isSoundActive}
-        onToggleSound={handleToggleSound}
         onStartTour={() => {
-          playClick();
           setIsTourOpen(true);
         }}
       />
@@ -2250,8 +2237,6 @@ export default function App() {
         onSelectSkill={(skill) => {
           handleSelectSkill(skill);
         }}
-        isSoundActive={isSoundActive}
-        onToggleSound={handleToggleSound}
         onStartTour={() => setIsTourOpen(true)}
         onScrollToSimulator={() => {
           setCurrentTab("home");

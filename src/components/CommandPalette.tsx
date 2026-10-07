@@ -15,9 +15,7 @@ import {
   Layers, 
   Tag, 
   Check,
-  Sparkles,
-  Volume2,
-  VolumeX
+  Sparkles
 } from "lucide-react";
 import { PROJECTS, PORTFOLIO_OWNER } from "../data";
 import { Project } from "../types";
@@ -33,8 +31,6 @@ export interface CommandPaletteProps {
   isDarkMode: boolean;
   onToggleTheme: () => void;
   onSelectSkill?: (skill: string) => void;
-  isSoundActive?: boolean;
-  onToggleSound?: () => void;
   onStartTour?: () => void;
   onScrollToSimulator?: () => void;
 }
@@ -60,8 +56,6 @@ export default function CommandPalette({
   isDarkMode,
   onToggleTheme,
   onSelectSkill,
-  isSoundActive = false,
-  onToggleSound,
   onStartTour,
   onScrollToSimulator
 }: CommandPaletteProps) {
@@ -311,19 +305,6 @@ export default function CommandPalette({
         keywords: ["linkedin", "profile", "network", "connect"],
         run: () => {
           window.open(`https://${PORTFOLIO_OWNER.contactInfo.linkedin}`, "_blank");
-          onClose();
-        }
-      },
-      {
-        id: "act-audio",
-        category: "ACTIONS",
-        title: `Turn Audio Feedback ${isSoundActive ? "OFF" : "ON"}`,
-        subtitle: `Micro-haptic acoustic synthesis is currently ${isSoundActive ? "ACTIVE (Audible)" : "MUTED (Silent)"}`,
-        badge: isSoundActive ? "ACTIVE" : "MUTED",
-        icon: isSoundActive ? <Volume2 size={14} className="text-accent" /> : <VolumeX size={14} className="text-muted" />,
-        keywords: ["sound", "audio", "sfx", "haptic", "mute", "volume", "tone"],
-        run: () => {
-          onToggleSound?.();
           onClose();
         }
       }
