@@ -51,7 +51,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="mt-3.5">
           <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-1.5" style={{ color: '#0f3d64', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SUMMARY</h2>
           <p className="text-[9.5pt] leading-normal text-justify" style={{ color: '#1f2937' }}>
-            Product and business operations specialist with 4+ years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
+            Product and business operations specialist with 4+ years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the foundational lending data and ledger infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in diagnosing ground-level operational friction, modeling business workflows and financial ledgers, and orchestrating autonomous AI coding agents to ship production-ready software without manual coding.
           </p>
         </div>
 
@@ -81,30 +81,30 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             {/* Work Sarthi */}
             <div>
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline">
-                <h3 className="text-[10pt] font-bold" style={{ color: '#111827' }}>Product Development Lead (Internship)</h3>
+                <h3 className="text-[10pt] font-bold" style={{ color: '#111827' }}>Product &amp; Operations Lead (Internship)</h3>
                 <span className="text-[9pt] font-semibold" style={{ color: '#374151' }}>Work Sarthi | Surat, Gujarat</span>
               </div>
               <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#6b7280' }}>Jan 2026 – Mar 2026</div>
               <ul className="list-disc ml-4 mt-1 text-[9.5pt] space-y-0.5 leading-[1.3]" style={{ color: '#1f2937' }}>
                 <li>Worked directly under the Founder &amp; CEO to conceptualize, coordinate, and deliver three digital products from scope definition to production release.</li>
-                <li>Led the AI Career Assessment platform: engineered a psychometric scoring engine synthesizing RIASEC, Big Five, and Hofstede frameworks to generate comprehensive career reports in 13 Indian languages.</li>
+                <li>Led the AI Career Assessment platform: conceptualized a psychometric scoring engine synthesizing RIASEC, Big Five, and Hofstede frameworks to generate comprehensive career reports in 13 Indian languages.</li>
                 <li>Shipped Career Library, a 225-career interactive discovery portal for Class 11–12 students featuring AI-driven academic fit analysis from uploaded marksheets.</li>
-                <li><strong>Skills:</strong> Product Coordination, PRD &amp; Spec Writing, Google Apps Script, Multi-Language Localization, Prompt Engineering</li>
+                <li><strong>Skills:</strong> Product Management, PRD &amp; Spec Writing, Google Apps Script, Multi-Language Localization, Prompt Engineering</li>
               </ul>
             </div>
 
             {/* CripcoCode */}
             <div>
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline">
-                <h3 className="text-[10pt] font-bold" style={{ color: '#111827' }}>Product Developer – AI &amp; Automation (Internship)</h3>
+                <h3 className="text-[10pt] font-bold" style={{ color: '#111827' }}>Product Operations &amp; AI Systems Specialist (Internship)</h3>
                 <span className="text-[9pt] font-semibold" style={{ color: '#374151' }}>CripcoCode Technologies Pvt Ltd | Surat, Gujarat · Remote</span>
               </div>
               <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#6b7280' }}>Nov 2025 – Jan 2026</div>
               <ul className="list-disc ml-4 mt-1 text-[9.5pt] space-y-0.5 leading-[1.3]" style={{ color: '#1f2937' }}>
-                <li>Built and deployed Medicine Image Extraction: an AI computer vision pipeline converting pharmaceutical packaging photos into structured, verified database records.</li>
+                <li>Conceived, architected, and orchestrated Medicine Image Extraction: an AI computer vision pipeline converting pharmaceutical packaging photos into structured, verified database records.</li>
                 <li>Replaced error-prone manual transcription for pharmacists and distributors, slashing cataloging turnaround time by over 80%.</li>
-                <li>Architected the system into three decoupled micro-services, ensuring ingestion and local caching continue seamlessly even during database maintenance outages.</li>
-                <li><strong>Skills:</strong> Gemini AI, AI Vision Automation, System Architecture, API Integration, Operational Continuity</li>
+                <li>Structured the system into three decoupled micro-services, ensuring ingestion and local caching continue seamlessly even during database maintenance outages.</li>
+                <li><strong>Skills:</strong> Gemini Vision AI, Process Automation, System Architecture, API Integration, Operational Continuity</li>
               </ul>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
                 </div>
               </div>
               <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
-                Forward-looking committed cashflow &amp; obligation intelligence engine projecting contractual burn across 12-to-60 month horizons. Inverts retrospective budgeting by modeling fixed, variable, and amortized liabilities (reducing bank loans, credit card EMIs, recurring mandates). Engineered with React 19, TypeScript, Firestore, and Workbox PWA. Features deterministic month-end clamping (preventing cycle drift in 28/29/30/31-day months), optimistic state with 10-second transactional undo buffer, 136 passing Vitest unit tests, and air-gapped Gemini 2.0 Flash multimodal receipt OCR.
+                Forward-looking committed cashflow &amp; obligation intelligence engine projecting contractual burn across 12-to-60 month horizons. Inverts retrospective budgeting by modeling fixed, variable, and amortized liabilities (reducing bank loans, credit card EMIs, recurring mandates). Architected with deterministic month-end calendar clamping (eliminating cycle drift across 28- to 31-day months), optimistic state with a 10-second transactional undo buffer, exhaustive test validation, and air-gapped Gemini 2.0 Flash multimodal receipt OCR to safeguard financial data integrity.
               </p>
               <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: React 19, TypeScript, Cloud Firestore, Workbox PWA, Gemini 2.0 Flash, Zustand, Zod, Vitest</div>
             </div>
@@ -240,7 +240,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             <div><strong style={{ color: '#0f3d64' }}>Data &amp; Analytics:</strong> SQL, Python, Advanced Excel (Financial Models, Pivot, Dynamic Arrays), Power BI, Tableau, Performance Telemetry, Cohort Analysis, Reporting</div>
             <div><strong style={{ color: '#0f3d64' }}>Automation &amp; Integrations:</strong> Google Apps Script, REST APIs, n8n, Make, Webhooks, Firestore Event Sync, SheetDB</div>
             <div><strong style={{ color: '#0f3d64' }}>AI Orchestration &amp; Tooling:</strong> Prompt Engineering, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM</div>
-            <div><strong style={{ color: '#0f3d64' }}>Core Technologies:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel</div>
+            <div><strong style={{ color: '#0f3d64' }}>Systems Architecture &amp; Stacks Orchestrated:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel</div>
           </div>
         </div>
 

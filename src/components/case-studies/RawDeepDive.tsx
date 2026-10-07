@@ -9,7 +9,7 @@ export default function RawDeepDive() {
                       Deep-Dive: System Mechanics & Defense Pipelines
                     </h2>
                     <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      RAW stands for <strong>Record, Analyse, Work</strong>. To meet ARWS's production-grade standard, the system was engineered to survive device sleeps, unstable cellular coverage, and hardware dual-SIM contexts.
+                      RAW stands for <strong>Record, Analyse, Work</strong>. To meet ARWS's production-grade standard, the system was architected to survive device sleeps, unstable cellular coverage, and hardware dual-SIM contexts.
                     </p>
                   </div>
 

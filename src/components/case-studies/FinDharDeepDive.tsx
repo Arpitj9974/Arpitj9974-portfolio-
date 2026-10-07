@@ -204,7 +204,7 @@ export default function FinDharDeepDive() {
         {/* Block 3: Loan & EMI Amortization + Credit Card Limit Radar */}
         <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
           <div className="flex items-center gap-2">
-            <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">FINANCIAL ENGINEERING</span>
+            <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">FINANCIAL LOGIC &amp; AMORTIZATION</span>
             <h4 className="font-serif font-bold text-lg text-ink">Amortization Math &amp; Credit Card Radar</h4>
           </div>
           <p className="text-xs text-muted leading-relaxed font-sans">

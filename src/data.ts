@@ -127,7 +127,7 @@ export const PORTFOLIO_OWNER = {
       skills: ["Process Automation", "Business Operations", "Decision-Making & Analysis", "Advanced Excel", "Google Apps Script"]
     },
     {
-      role: "Product Development Lead (Internship)",
+      role: "Product & Operations Lead (Internship)",
       company: "Work Sarthi",
       duration: "Jan 2026 – Mar 2026",
       location: "Surat, Gujarat, India",
@@ -136,18 +136,18 @@ export const PORTFOLIO_OWNER = {
         "Led the AI Career Assessment platform — a psychometric engine combining RIASEC, Big Five, and Hofstede frameworks into one scoring system, generating a personalized career report across 20 career clusters in 13 Indian languages.",
         "Also delivered Career Library, a 225-career exploration platform for Class 11–12 students."
       ],
-      skills: ["Product Coordination", "Google Apps Script", "AI Integration", "Prompt Engineering"]
+      skills: ["Product Management", "PRDs & Specs", "AI Integration", "Prompt Engineering"]
     },
     {
-      role: "Product Developer, AI & Automation (Internship)",
+      role: "Product Operations & AI Systems Specialist (Internship)",
       company: "CripcoCode Technologies Pvt Ltd",
       duration: "Nov 2025 – Jan 2026",
       location: "Surat, Gujarat, India · Remote",
       points: [
-        "Built and deployed Medicine Image Extraction — an AI application that turns a photo of pharmaceutical packaging into a structured database record, replacing manual transcription for pharmacists and stockists.",
-        "Designed it as three independent services so the extraction pipeline keeps running even when the database is down."
+        "Conceived, architected, and orchestrated Medicine Image Extraction — an AI computer-vision pipeline that turns photos of pharmaceutical packaging into structured database records, eliminating manual transcription for pharmacists and stockists.",
+        "Structured the system into three decoupled microservices so optical extraction and local operations continue uninterrupted during database maintenance windows."
       ],
-      skills: ["Gemini AI", "AI Automation", "System Design", "API Integration"]
+      skills: ["Gemini Vision AI", "System Architecture", "PRD Specification", "Process Automation"]
     }
   ],
   education: [

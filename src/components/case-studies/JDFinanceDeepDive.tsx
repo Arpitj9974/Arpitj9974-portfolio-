@@ -202,7 +202,7 @@ export default function JDFinanceDeepDive() {
         <div className="bg-emerald-500/5 border border-emerald-500/20 p-6 space-y-4">
           <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            <span>AFTER: ENGINEERED DATA INFRASTRUCTURE (ARPIT'S SYSTEM)</span>
+            <span>AFTER: STRUCTURED DATA &amp; AUTOMATION INFRASTRUCTURE (ARPIT'S SYSTEM)</span>
           </div>
           <ul className="space-y-2.5 text-xs text-muted font-sans leading-relaxed">
             <li className="flex items-start gap-2">

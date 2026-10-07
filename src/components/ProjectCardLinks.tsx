@@ -82,13 +82,13 @@ export default function ProjectCardLinks({
           title="Proprietary Client Software (Commercial IP under NDA)"
           className="text-muted border border-ink/15 bg-surface-container/70 px-1.5 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none"
         >
-          &lt;client-ip&gt;
+          [CLIENT IP]
         </span>
       )}
 
       {tag && (
         <span className="text-accent border border-accent/20 px-1.5 py-0.5 text-[8px] font-mono font-bold uppercase tracking-wider leading-none">
-          &lt;{tag}&gt;
+          [{tag.toUpperCase()}]
         </span>
       )}
 

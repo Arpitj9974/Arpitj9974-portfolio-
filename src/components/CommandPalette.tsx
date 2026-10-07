@@ -138,7 +138,7 @@ export default function CommandPalette({
         subtitle: "Filtered search, project domain tags, and comparison registry",
         badge: "TAB",
         icon: <Layers size={14} className="text-ink" />,
-        keywords: ["projects", "work", "systems", "filter", "registry", "code"],
+        keywords: ["projects", "work", "systems", "filter", "registry", "ai", "architecture"],
         run: () => {
           onSelectTab("projects");
           onClose();

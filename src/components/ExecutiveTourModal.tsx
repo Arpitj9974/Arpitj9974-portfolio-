@@ -169,7 +169,7 @@ export default function ExecutiveTourModal({
         <div className="space-y-6">
           <div className="p-4 md:p-5 border border-ink/10 bg-surface-container/50 space-y-3 font-sans">
             <p className="text-xs md:text-sm text-ink leading-relaxed">
-              Before writing code or architecting microservices, I managed everyday lending operations: loan disbursement, debt-to-income qualification, reducing-balance amortizations, daily collections, and borrower risk across hundreds of SME accounts.
+              Before architecting systems or automating workflows, I managed everyday lending operations: loan disbursement, debt-to-income qualification, reducing-balance amortizations, daily collections, and borrower risk across hundreds of SME accounts.
             </p>
             <p className="italic text-xs font-serif text-ink/80 border-t border-ink/10 pt-2.5">
               &quot;Software fails less often because developers cannot write code, and far more often because nobody understood the operational mechanics it was supposed to replace.&quot;
@@ -207,7 +207,7 @@ export default function ExecutiveTourModal({
       content: (
         <div className="space-y-6">
           <p className="text-xs md:text-sm text-muted leading-relaxed font-sans">
-            At scale, spreadsheet workarounds rot: formula corruption, duplicate borrower entries, unverified bureau scores, and 3+ hours lost daily in repetitive manual reconciliation. When existing off-the-shelf software failed to meet our operational constraints, I engineered the automation myself.
+            At scale, spreadsheet workarounds rot: formula corruption, duplicate borrower entries, unverified bureau scores, and 3+ hours lost daily in repetitive manual reconciliation. When existing off-the-shelf software failed to meet our operational constraints, I formulated the system logic and orchestrated custom automation to solve it.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -297,7 +297,7 @@ export default function ExecutiveTourModal({
       category: "10 SHIPPED SYSTEMS // PRODUCTION PROOF",
       stepNumber: "04",
       title: "Real Deployed Systems, Not Theoretical Slides",
-      subtitle: "10 complete solutions engineered with interactive PRDs, live repos &amp; architectural documentation.",
+      subtitle: "10 complete solutions orchestrated with interactive PRDs, live repos &amp; architectural documentation.",
       content: (
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

@@ -865,7 +865,7 @@ export default function App() {
                           name: "JD Finance",
                           id: "jd-finance",
                           bottleneck: "Manual paper registers caused 90m evening close times, mathematical errors, and default blindspots.",
-                          solution: "Engineered custom relational loan ledger with automatic daily cash reconciliation and Day 3 aging matrix.",
+                          solution: "Architected custom relational loan ledger with automatic daily cash reconciliation and Day 3 aging matrix.",
                           impact: "100% daily cash balanced, -80% closing time, 4+ yrs continuity."
                         },
                         {

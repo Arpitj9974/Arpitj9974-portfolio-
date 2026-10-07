@@ -19,7 +19,7 @@ export default function VyoshaDeepDive({ amortizationData = [] }: { amortization
                       Deep-Dive: Dual-Engine Ledger, Dynamic UPI QR &amp; Loan Amortization
                     </h2>
                     <p className="text-sm text-muted max-w-3xl leading-relaxed font-sans">
-                      Vyosha (from Sanskrit <em>Vyom</em> + <em>Kosha</em> — &quot;Treasury of Space&quot;) reinvents traditional Indian paper <em>bahi-khata</em> for millions of micro-merchants and SMEs. Engineered with sub-200ms cold-start hydration, client-side running balance reducers, dynamic NPCI UPI QR generation, and compound financial amortization engines.
+                      Vyosha (from Sanskrit <em>Vyom</em> + <em>Kosha</em> — &quot;Treasury of Space&quot;) reinvents traditional Indian paper <em>bahi-khata</em> for millions of micro-merchants and SMEs. Architected with sub-200ms cold-start hydration, client-side running balance reducers, dynamic NPCI UPI QR generation, and compound financial amortization engines.
                     </p>
                   </div>
 
@@ -121,7 +121,7 @@ export default function VyoshaDeepDive({ amortizationData = [] }: { amortization
                     {/* Block 4: Bank Loan Amortization & Multi-Prepayment Simulator */}
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
-                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">FINANCIAL ENGINEERING</span>
+                        <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">FINANCIAL LOGIC &amp; MODELING</span>
                         <h4 className="font-serif font-bold text-lg text-ink">Loan Amortization &amp; Prepayment Engine</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed font-sans">
@@ -156,7 +156,7 @@ export default function VyoshaDeepDive({ amortizationData = [] }: { amortization
                         <h4 className="font-serif font-bold text-lg text-ink">In-App Arithmetic Keypad &amp; 98% Image Compression</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed font-sans">
-                        Engineered specifically for one-handed thumb entry in busy retail environments:
+                        Designed specifically for one-handed thumb entry in busy retail environments:
                       </p>
                       <ul className="space-y-2 text-xs font-mono text-ink">
                         <li className="flex items-start gap-1.5">
