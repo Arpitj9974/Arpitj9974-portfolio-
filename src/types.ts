@@ -3,6 +3,13 @@ export interface Project {
   title: string;
   subtitle?: string;
   description: string;
+  cardSummary?: string;
+  buildingLogic?: string;
+  purpose?: string;
+  problemSolved?: string;
+  targetUser?: string;
+  aiOrchestration?: string;
+  valueBadges?: string[];
   longDescription?: string;
   year: string;
   category: "Data" | "Web Apps" | "Mobile" | "Internal Tools";

@@ -732,10 +732,17 @@ export default function App() {
                           )}
                         </div>
 
-                        {/* Description (uniform 3-line height across all cards) */}
+                        {/* Description (what this project is - non-technical) */}
                         <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
-                          {project.description}
+                          {project.cardSummary || project.description}
                         </p>
+
+                        {/* Target User / Beneficiary Chip */}
+                        {project.targetUser && (
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${project.targetUser}`}>
+                            <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{project.targetUser}</span>
+                          </div>
+                        )}
 
                         {/* Primary Impact Metric Chip (compact) */}
                         {project.impactStats && project.impactStats.length > 0 && (
@@ -748,28 +755,16 @@ export default function App() {
 
                       {/* Compact Footer */}
                       <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
-                        {/* Tech Stack Pills */}
+                        {/* Domain & Value Badges */}
                         <div className="flex gap-1 flex-wrap">
-                          {project.stack.slice(0, 3).map((s, i) => (
-                            <button
-                              key={i}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleSelectSkill(s);
-                              }}
-                              className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
-                                activeSkill === s
-                                  ? "bg-accent text-paper border-accent font-bold shadow-xs"
-                                  : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
-                              }`}
-                              title={`Filter systems using ${s}`}
+                          {(project.valueBadges || project.stack.slice(0, 3)).slice(0, 3).map((badge, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[9px] font-mono px-1.5 py-0.5 border border-ink/5 bg-surface-container text-muted font-medium"
                             >
-                              {s}
-                            </button>
+                              {badge}
+                            </span>
                           ))}
-                          {project.stack.length > 3 && (
-                            <span className="text-[9px] font-mono text-muted/70">+{project.stack.length - 3}</span>
-                          )}
                         </div>
 
                         {/* 2-Button Action Row (50/50 split, zero word wrapping) */}
@@ -1036,8 +1031,15 @@ export default function App() {
 
                             {/* Description (uniform 3-line height across all cards) */}
                             <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
-                              {p.description}
+                              {p.cardSummary || p.description}
                             </p>
+
+                            {/* Target User / Beneficiary Chip */}
+                            {p.targetUser && (
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                                <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
+                              </div>
+                            )}
 
                             {/* Primary Impact Metric Chip (compact) */}
                             {p.impactStats && p.impactStats.length > 0 && (
@@ -1050,28 +1052,16 @@ export default function App() {
 
                           {/* Compact Footer */}
                           <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
-                            {/* Tech Stack Pills */}
+                            {/* Domain & Value Badges */}
                             <div className="flex gap-1 flex-wrap">
-                              {p.stack.slice(0, 3).map((s, idx) => (
-                                <button
+                              {(p.valueBadges || p.stack.slice(0, 3)).slice(0, 3).map((badge, idx) => (
+                                <span
                                   key={idx}
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleSelectSkill(s);
-                                  }}
-                                  className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
-                                    activeSkill === s
-                                      ? "bg-accent text-paper border-accent font-bold shadow-xs"
-                                      : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
-                                  }`}
-                                  title={`Filter systems using ${s}`}
+                                  className="text-[9px] font-mono px-1.5 py-0.5 border border-ink/5 bg-surface-container text-muted font-medium"
                                 >
-                                  {s}
-                                </button>
+                                  {badge}
+                                </span>
                               ))}
-                              {p.stack.length > 3 && (
-                                <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
-                              )}
                             </div>
 
                             {/* 2-Button Action Row (50/50 split, zero word wrapping) */}
@@ -1146,8 +1136,15 @@ export default function App() {
 
                             {/* Description (uniform 3-line height across all cards) */}
                             <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
-                              {p.description}
+                              {p.cardSummary || p.description}
                             </p>
+
+                            {/* Target User / Beneficiary Chip */}
+                            {p.targetUser && (
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                                <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
+                              </div>
+                            )}
 
                             {/* Primary Impact Metric Chip (compact) */}
                             {p.impactStats && p.impactStats.length > 0 && (
@@ -1160,28 +1157,16 @@ export default function App() {
 
                           {/* Compact Footer */}
                           <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
-                            {/* Tech Stack Pills */}
+                            {/* Domain & Value Badges */}
                             <div className="flex gap-1 flex-wrap">
-                              {p.stack.slice(0, 3).map((s, idx) => (
-                                <button
+                              {(p.valueBadges || p.stack.slice(0, 3)).slice(0, 3).map((badge, idx) => (
+                                <span
                                   key={idx}
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleSelectSkill(s);
-                                  }}
-                                  className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
-                                    activeSkill === s
-                                      ? "bg-accent text-paper border-accent font-bold shadow-xs"
-                                      : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
-                                  }`}
-                                  title={`Filter systems using ${s}`}
+                                  className="text-[9px] font-mono px-1.5 py-0.5 border border-ink/5 bg-surface-container text-muted font-medium"
                                 >
-                                  {s}
-                                </button>
+                                  {badge}
+                                </span>
                               ))}
-                              {p.stack.length > 3 && (
-                                <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
-                              )}
                             </div>
 
                             {/* 2-Button Action Row (50/50 split, zero word wrapping) */}
@@ -1255,8 +1240,15 @@ export default function App() {
 
                             {/* Description */}
                             <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
-                              {p.description}
+                              {p.cardSummary || p.description}
                             </p>
+
+                            {/* Target User / Beneficiary Chip */}
+                            {p.targetUser && (
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                                <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
+                              </div>
+                            )}
 
                             {/* Primary Impact Metric Chip */}
                             {p.impactStats && p.impactStats.length > 0 && (
@@ -1269,28 +1261,16 @@ export default function App() {
 
                           {/* Compact Footer */}
                           <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
-                            {/* Tech Stack Pills */}
+                            {/* Domain & Value Badges */}
                             <div className="flex gap-1 flex-wrap">
-                              {p.stack.slice(0, 3).map((s, idx) => (
-                                <button
+                              {(p.valueBadges || p.stack.slice(0, 3)).slice(0, 3).map((badge, idx) => (
+                                <span
                                   key={idx}
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleSelectSkill(s);
-                                  }}
-                                  className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
-                                    activeSkill === s
-                                      ? "bg-accent text-paper border-accent font-bold shadow-xs"
-                                      : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
-                                  }`}
-                                  title={`Filter systems using ${s}`}
+                                  className="text-[9px] font-mono px-1.5 py-0.5 border border-ink/5 bg-surface-container text-muted font-medium"
                                 >
-                                  {s}
-                                </button>
+                                  {badge}
+                                </span>
                               ))}
-                              {p.stack.length > 3 && (
-                                <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
-                              )}
                             </div>
 
                             {/* 2-Button Action Row */}
@@ -1358,8 +1338,15 @@ export default function App() {
 
                         {/* Description */}
                         <p className="text-xs text-muted font-sans leading-relaxed line-clamp-3 h-[3.4rem]">
-                          {p.description}
+                          {p.cardSummary || p.description}
                         </p>
+
+                        {/* Target User / Beneficiary Chip */}
+                        {p.targetUser && (
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                            <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
+                          </div>
+                        )}
 
                         {/* Primary Impact Metric Chip */}
                         {p.impactStats && p.impactStats.length > 0 && (
@@ -1372,28 +1359,16 @@ export default function App() {
 
                       {/* Compact Footer */}
                       <div className="pt-3 mt-3 border-t border-ink/10 space-y-2.5">
-                        {/* Tech Stack Pills */}
+                        {/* Domain & Value Badges */}
                         <div className="flex gap-1 flex-wrap">
-                          {p.stack.slice(0, 3).map((s, idx) => (
-                            <button
+                          {(p.valueBadges || p.stack.slice(0, 3)).slice(0, 3).map((badge, idx) => (
+                            <span
                               key={idx}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleSelectSkill(s);
-                              }}
-                              className={`text-[9px] font-mono px-1.5 py-0.5 border transition-all cursor-pointer ${
-                                activeSkill === s
-                                  ? "bg-accent text-paper border-accent font-bold shadow-xs"
-                                  : "bg-surface-container text-muted border-ink/5 hover:border-accent/40 hover:text-ink"
-                              }`}
-                              title={`Filter systems using ${s}`}
+                              className="text-[9px] font-mono px-1.5 py-0.5 border border-ink/5 bg-surface-container text-muted font-medium"
                             >
-                              {s}
-                            </button>
+                              {badge}
+                            </span>
                           ))}
-                          {p.stack.length > 3 && (
-                            <span className="text-[9px] font-mono text-muted/70">+{p.stack.length - 3}</span>
-                          )}
                         </div>
 
                         {/* 2-Button Action Row */}
@@ -1447,8 +1422,8 @@ export default function App() {
                       <tr className="bg-surface-container border-b border-ink/10 font-mono text-[10px] text-muted tracking-widest uppercase">
                         <th className="p-4">YEAR</th>
                         <th className="p-4">PROJECT</th>
-                        <th className="p-4">DESCRIPTION</th>
-                        <th className="p-4">CORE STACK</th>
+                        <th className="p-4">WHAT THIS PRODUCT IS</th>
+                        <th className="p-4">TARGET BENEFICIARY &amp; VALUE</th>
                         <th className="p-4 text-right">ACTION</th>
                       </tr>
                     </thead>
@@ -1457,9 +1432,13 @@ export default function App() {
                         <tr key={p.id} className="hover:bg-surface-container/30 transition-colors">
                           <td className="p-4 font-bold text-ink">{p.year}</td>
                           <td className="p-4 font-serif text-sm font-semibold text-ink">{p.title}</td>
-                          <td className="p-4 font-sans text-xs max-w-xs md:max-w-md truncate">{p.description}</td>
+                          <td className="p-4 font-sans text-xs max-w-xs md:max-w-md truncate" title={p.cardSummary || p.description}>
+                            {p.cardSummary || p.description}
+                          </td>
                           <td className="p-4">
-                            <span className="truncate block max-w-[120px]">{p.stack.join(", ")}</span>
+                            <span className="truncate block max-w-[180px] font-mono text-[11px] text-accent font-semibold" title={p.targetUser || (p.valueBadges?.join(" · ") || p.stack.slice(0, 2).join(", "))}>
+                              {p.targetUser || (p.valueBadges?.join(" · ") || p.stack.slice(0, 2).join(", "))}
+                            </span>
                           </td>
                           <td className="p-4 text-right">
                             <div className="flex items-center justify-end gap-3">
@@ -1665,10 +1644,12 @@ export default function App() {
                   <div className="sticky top-8 space-y-1 border-l border-ink/10 pl-3">
                     <span className="text-[9px] font-mono text-muted uppercase tracking-widest block mb-2">CONTENTS</span>
                     {[
-                      { id: "cs-problem", label: "01 Problem" },
-                      { id: "cs-solution", label: "02 Solution" },
-                      { id: "cs-metrics", label: "03 Metrics" },
-                      { id: "cs-deepdive", label: "04 Deep-Dive" }
+                      { id: "cs-origin", label: "01 Origin" },
+                      { id: "cs-purpose", label: "02 Purpose" },
+                      { id: "cs-problem", label: "03 Problem" },
+                      { id: "cs-delivery", label: "04 AI Delivery" },
+                      { id: "cs-metrics", label: "05 Impact" },
+                      { id: "cs-deepdive", label: "06 Deep-Dive" }
                     ].map(item => (
                       <a
                         key={item.id}
@@ -1688,29 +1669,65 @@ export default function App() {
                 {/* Left side text columns (Span 7) */}
                 <div className="lg:col-span-7 space-y-8">
                   
-                  {/* Problem */}
+                  {/* 01 / Building Logic & Origin */}
+                  <div id="cs-origin" className="space-y-3">
+                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>01 // THE BUILDING LOGIC (WHY THIS WAS BUILT)</span>
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-ink">The Ground Reality &amp; Observation</h3>
+                    <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
+                      {selectedCaseStudy.buildingLogic || "Every system I build starts with observing real operational friction on the ground, not theoretical syntax."}
+                    </p>
+                  </div>
+
+                  {/* 02 / Purpose & Target Beneficiaries */}
+                  <div id="cs-purpose" className="space-y-3">
+                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>02 // CORE PURPOSE &amp; TARGET BENEFICIARIES</span>
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-ink">What This Product Achieves &amp; For Whom</h3>
+                    <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
+                      {selectedCaseStudy.purpose || selectedCaseStudy.subtitle || selectedCaseStudy.description}
+                    </p>
+                    {selectedCaseStudy.targetUser && (
+                      <div className="p-3.5 border border-ink/10 bg-surface-container/60 font-mono text-xs text-ink flex items-center gap-2">
+                        <span className="text-accent font-bold tracking-wider">FOR WHOM:</span>
+                        <span className="font-sans text-muted">{selectedCaseStudy.targetUser}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 03 / The Problem Solved */}
                   <div id="cs-problem" className="space-y-3">
-                    <h3 className="font-serif text-xl font-bold text-ink">01 / The Business Problem</h3>
+                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>03 // THE OPERATIONAL PROBLEM SOLVED</span>
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-ink">Friction &amp; Bottlenecks Eliminated</h3>
                     <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
-                      {selectedCaseStudy.problem || "Legacy infrastructure in enterprise finance operations suffered from massive latency barriers, high risk of user error during manual ledger input, and zero active visual intelligence telemetry."}
+                      {selectedCaseStudy.problemSolved || selectedCaseStudy.problem || "Eliminated operational bottlenecks and manual calculation friction."}
                     </p>
                   </div>
 
-                  {/* Built Details / Solution */}
-                  <div id="cs-solution" className="space-y-3">
-                    <h3 className="font-serif text-xl font-bold text-ink">02 / System Architecture Solution</h3>
+                  {/* 04 / AI & Agent-Driven Delivery */}
+                  <div id="cs-delivery" className="space-y-3">
+                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>04 // AI &amp; AGENT-DRIVEN DELIVERY (EXECUTION)</span>
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-ink">How It Was Shipped Through AI Orchestration</h3>
                     <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
-                      {selectedCaseStudy.solution || "We designed a unified client-side dashboard leveraging highly structured UI tokens, responsive layouts, and automatic reconciliations. The system binds key transactional data directly into React state vectors to provide live auditing capabilities."}
+                      {selectedCaseStudy.aiOrchestration || "I observed the root-cause problem, modeled the business workflow, and directed AI coding agents to ship production-ready software without manual line-by-line coding."}
                     </p>
-                    
-
                   </div>
 
-                  {/* Conflict Quote block */}
-                  <blockquote className="border-l-4 border-accent pl-4 py-1 italic font-serif text-base text-ink bg-surface-container/50">
-                    "Transitioning legacy multi-million dollar data pipelines into modern UI interfaces requires absolute architectural honesty. If the telemetry model fails to map cleanly, the user loses trust in seconds."
-                    <footer className="font-mono text-[10px] text-muted tracking-wider mt-1 uppercase block">
-                      — Arpit Jaiswal, Design Journal
+                  {/* Manifesto Quote block */}
+                  <blockquote className="border-l-4 border-accent pl-4 py-2 italic font-serif text-sm md:text-base text-ink bg-surface-container/50">
+                    "I do not do manual coding. I observe the problem, think strategically, formulate the business solution, and solve &amp; ship it through AI and agent coding."
+                    <footer className="font-mono text-[10px] text-muted tracking-wider mt-1.5 uppercase block not-italic">
+                      — Arpit Jaiswal // Product &amp; Business Operations
                     </footer>
                   </blockquote>
 
@@ -1721,7 +1738,7 @@ export default function App() {
                   
                   {/* Case Study Impact Metrics */}
                   <div id="cs-metrics" className="bg-surface-container p-6 border border-ink/5 space-y-4">
-                    <span className="text-[10px] font-mono text-accent tracking-widest block font-bold uppercase">// 03 / SYSTEM PERFORMANCE METRICS</span>
+                    <span className="text-[10px] font-mono text-accent tracking-widest block font-bold uppercase">// 05 / BUSINESS &amp; OPERATIONAL IMPACT</span>
                     
                     <div className="space-y-4">
                       {(selectedCaseStudy.impactStats || [
@@ -1737,15 +1754,26 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Stack specifications */}
-                  <div className="border border-ink/10 p-5 bg-paper space-y-3">
-                    <span className="text-[10px] font-mono text-muted tracking-wider block uppercase font-bold">// TECH SPECIFICATIONS</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {selectedCaseStudy.stack.map((s, idx) => (
-                        <span key={idx} className="bg-surface-container text-xs font-mono text-muted px-2 py-1">
-                          {s}
-                        </span>
-                      ))}
+                  {/* Beneficiaries & Domain Value */}
+                  <div className="border border-ink/10 p-5 bg-paper space-y-4">
+                    <span className="text-[10px] font-mono text-muted tracking-wider block uppercase font-bold">// TARGET BENEFICIARIES &amp; VALUE</span>
+                    <div className="space-y-3">
+                      <div>
+                        <span className="font-mono text-[10px] text-accent font-bold block uppercase mb-1">WHO BENEFITS:</span>
+                        <p className="text-xs font-sans text-ink leading-relaxed">
+                          {selectedCaseStudy.targetUser || "Operations teams & end-users"}
+                        </p>
+                      </div>
+                      <div className="pt-2.5 border-t border-ink/10">
+                        <span className="font-mono text-[10px] text-muted font-bold block uppercase mb-1.5">DOMAIN &amp; VALUE PILLARS:</span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {(selectedCaseStudy.valueBadges || selectedCaseStudy.stack.slice(0, 4)).map((badge, idx) => (
+                            <span key={idx} className="bg-surface-container text-xs font-mono text-ink px-2 py-1 border border-ink/5">
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
 

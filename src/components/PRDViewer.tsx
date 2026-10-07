@@ -35,11 +35,11 @@ export default function PRDViewer({ project, onBackToCaseStudy }: PRDViewerProps
     status: "SHIPPED & LIVE",
     title: `${project.title} — Product Requirement & Architecture Spec`,
     author: "Arpit Jaiswal (Product & Systems)",
-    targetUsers: `${project.category} stakeholders and end-users`,
+    targetUsers: project.targetUser || `${project.category} stakeholders and end-users`,
     lastUpdated: "2026",
-    executiveSummary: project.longDescription || project.description,
+    executiveSummary: project.buildingLogic || project.cardSummary || project.longDescription || project.description,
     rootCauseAnalysis: [
-      project.problem || "Operational friction in legacy workflows caused significant delay and manual data entry overhead.",
+      project.problemSolved || project.problem || "Operational friction in legacy workflows caused significant delay and manual data entry overhead.",
       "Lack of structured digital validation led to data inconsistency across distributed environments.",
       "Users lacked an automated, responsive interface to manage and audit real-time system changes."
     ],
