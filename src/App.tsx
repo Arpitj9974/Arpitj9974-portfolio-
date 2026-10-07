@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ResumeModal from "./components/ResumeModal";
@@ -41,38 +41,19 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
-// Dynamic Code-Splitting for Case Studies & PRD (reduces initial bundle by ~60%)
-const VyoshaDeepDive = lazy(() => import("./components/case-studies/VyoshaDeepDive"));
-const RawDeepDive = lazy(() => import("./components/case-studies/RawDeepDive"));
-const AspirantFlowDeepDive = lazy(() => import("./components/case-studies/AspirantFlowDeepDive"));
-const CareerLibraryDeepDive = lazy(() => import("./components/case-studies/CareerLibraryDeepDive"));
-const WorkSarthiDeepDive = lazy(() => import("./components/case-studies/WorkSarthiDeepDive"));
-const ArAuAgPtDeepDive = lazy(() => import("./components/case-studies/ArAuAgPtDeepDive"));
-const MedicineExtractionDeepDive = lazy(() => import("./components/case-studies/MedicineExtractionDeepDive"));
-const FarmerConnectDeepDive = lazy(() => import("./components/case-studies/FarmerConnectDeepDive"));
-const FreshStampDeepDive = lazy(() => import("./components/case-studies/FreshStampDeepDive"));
-const FinDharDeepDive = lazy(() => import("./components/case-studies/FinDharDeepDive"));
-const JDFinanceDeepDive = lazy(() => import("./components/case-studies/JDFinanceDeepDive"));
-const PRDViewer = lazy(() => import("./components/PRDViewer"));
-
-function CaseStudySkeleton() {
-  return (
-    <div className="space-y-6 animate-pulse py-8 font-mono border-t border-ink/10">
-      <div className="flex items-center gap-2 text-xs text-muted">
-        <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
-        <span>STREAMING SYSTEM ARCHITECTURE &amp; TELEMETRY...</span>
-      </div>
-      <div className="h-7 bg-surface-container border border-ink/10 w-1/3 rounded-xs" />
-      <div className="h-4 bg-surface-container border border-ink/5 w-2/3 rounded-xs" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-        <div className="h-20 bg-surface-container border border-ink/10 rounded-xs" />
-        <div className="h-20 bg-surface-container border border-ink/10 rounded-xs" />
-        <div className="h-20 bg-surface-container border border-ink/10 rounded-xs" />
-      </div>
-      <div className="h-72 bg-surface-container border border-ink/10 rounded-xs" />
-    </div>
-  );
-}
+// Synchronous imports for instantaneous zero-latency case study rendering
+import VyoshaDeepDive from "./components/case-studies/VyoshaDeepDive";
+import RawDeepDive from "./components/case-studies/RawDeepDive";
+import AspirantFlowDeepDive from "./components/case-studies/AspirantFlowDeepDive";
+import CareerLibraryDeepDive from "./components/case-studies/CareerLibraryDeepDive";
+import WorkSarthiDeepDive from "./components/case-studies/WorkSarthiDeepDive";
+import ArAuAgPtDeepDive from "./components/case-studies/ArAuAgPtDeepDive";
+import MedicineExtractionDeepDive from "./components/case-studies/MedicineExtractionDeepDive";
+import FarmerConnectDeepDive from "./components/case-studies/FarmerConnectDeepDive";
+import FreshStampDeepDive from "./components/case-studies/FreshStampDeepDive";
+import FinDharDeepDive from "./components/case-studies/FinDharDeepDive";
+import JDFinanceDeepDive from "./components/case-studies/JDFinanceDeepDive";
+import PRDViewer from "./components/PRDViewer";
 
 const parseHash = (): { tab: string; project: Project | null; mode: "narrative" | "prd" } => {
   if (typeof window === 'undefined') return { tab: "home", project: null, mode: "narrative" };
@@ -148,7 +129,7 @@ export default function App() {
   const openCaseStudy = (project: Project, mode: "narrative" | "prd" = "narrative") => {
     setCaseStudyMode(mode);
     setSelectedCaseStudy(project);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   };
   
   // Contact state
@@ -239,11 +220,11 @@ export default function App() {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   };
 
   useEffect(() => {
-    scrollToTop();
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [currentTab, selectedCaseStudy]);
 
   // Synchronize active view state with the URL hash
@@ -415,6 +396,18 @@ export default function App() {
           setIsTourOpen(true);
         }}
       />
+
+      {/* Interactive Case Study Reading Progress Bar & Wayfinding */}
+      {selectedCaseStudy && (
+        <CaseStudyReadingBar
+          title={selectedCaseStudy.title}
+          year={selectedCaseStudy.year}
+          category={selectedCaseStudy.category}
+          mode={caseStudyMode}
+          onSwitchMode={(mode) => setCaseStudyMode(mode)}
+          onClose={() => setSelectedCaseStudy(null)}
+        />
+      )}
 
       {/* Main Container Content */}
       <main className="min-h-[70vh]">
@@ -1630,18 +1623,6 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* Interactive Case Study Reading Progress Bar & Wayfinding */}
-          {selectedCaseStudy && (
-            <CaseStudyReadingBar
-              title={selectedCaseStudy.title}
-              year={selectedCaseStudy.year}
-              category={selectedCaseStudy.category}
-              mode={caseStudyMode}
-              onSwitchMode={(mode) => setCaseStudyMode(mode)}
-              onClose={() => setSelectedCaseStudy(null)}
-            />
-          )}
-
           {/* PORTFOLIO CASE STUDY PAGE VIEW */}
           {selectedCaseStudy && (
             <motion.div
@@ -1783,8 +1764,7 @@ export default function App() {
                 </span>
               </div>
 
-              <Suspense fallback={<CaseStudySkeleton />}>
-                {caseStudyMode === "prd" ? (
+              {caseStudyMode === "prd" ? (
                 <PRDViewer 
                   project={selectedCaseStudy} 
                   onBackToCaseStudy={() => setCaseStudyMode("narrative")} 
@@ -1974,7 +1954,7 @@ export default function App() {
               </div>{/* end cs-deepdive */}
               </>
               )}
-              </Suspense>
+
 
               {/* Bottom Navigation */}
               <div className="pt-8 border-t border-ink/10 flex justify-between items-center">
