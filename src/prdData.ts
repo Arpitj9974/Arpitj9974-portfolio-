@@ -38,6 +38,92 @@ export interface PRDSpec {
 }
 
 export const PRD_DATA: Record<string, PRDSpec> = {
+  "jd-finance": {
+    projectId: "jd-finance",
+    docId: "PRD-FINOPS-001",
+    version: "v4.0 (Live Infrastructure)",
+    status: "SHIPPED & LIVE",
+    title: "JD Finance — Lending Operations & Cashflow Reconciliation Infrastructure",
+    author: "Arpit Jaiswal (Finance Operations Lead)",
+    targetUsers: "Lending Executives, Field Collection Agents, Credit Partners, Borrowers",
+    lastUpdated: "2026",
+    executiveSummary: "End-to-end data infrastructure and daily cash reconciliation engine managing borrower loan lifecycles, amortized repayment schedules, and portfolio delinquency tracking across 4+ years of active lending operations.",
+    rootCauseAnalysis: [
+      "Fragmented paper registers and notebooks caused mathematical errors and 90-minute daily accounting close delays.",
+      "Lack of real-time aging analysis masked early borrower distress, delaying recovery action until day 30+.",
+      "Physical cash collections by field agents lacked an automated daily balance check against theoretical ledger dues."
+    ],
+    primaryPersona: {
+      name: "Suresh Bhai",
+      role: "Operations Partner & Lending Manager",
+      context: "Responsible for underwriting micro-loans, verifying field agent collections, and balancing daily firm liquidity.",
+      jtbd: "When field agents return with daily cash collections, I need instant verification against expected dues so that the cash ledger balances to the exact rupee in under 15 minutes."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Master Loan Ledger & Daily Amortization Engine",
+        spec: "Relational data structure calculating exact interest accrual, principal reduction, and remaining dues per borrower account.",
+        acceptanceCriteria: "Zero math discrepancy across varying repayment cycles (daily, weekly, monthly)."
+      },
+      {
+        priority: "P0",
+        title: "Daily Close & Cashflow Balancing Engine",
+        spec: "Automated reconciliation formula comparing total physical cash collected against scheduled dues, highlighting discrepancies immediately.",
+        acceptanceCriteria: "Produces a single closing audit metric; flags uncollected dues by agent and borrower."
+      },
+      {
+        priority: "P1",
+        title: "Delinquency Early Warning & Aging Matrix",
+        spec: "Automated classification of accounts into Current, 1-3 Days Overdue, and Default Risk stages.",
+        acceptanceCriteria: "Highlights overdue accounts on Day 3 of non-payment for proactive borrower outreach."
+      },
+      {
+        priority: "P2",
+        title: "Repayment Automation & Reminder Pipeline",
+        spec: "Google Apps Script automation triggering daily collection summaries and scheduled WhatsApp borrower alerts.",
+        acceptanceCriteria: "Eliminates manual notification phone calls by 60%."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "BorrowerPortfolio",
+          description: "Core borrower KYC, principal disbursed, tenure, and repayment schedule",
+          fields: ["borrowerId", "name", "principal", "interestRate", "tenureDays", "disbursementDate", "status"]
+        },
+        {
+          name: "RepaymentLedger",
+          description: "Atomic transactional log of all cash collections and receipts",
+          fields: ["transactionId", "borrowerId", "collectedAmount", "collectionDate", "agentId", "receiptNumber"]
+        },
+        {
+          name: "DailyReconciliationAudit",
+          description: "Closing day summary balancing cash in hand vs scheduled dues",
+          fields: ["auditDate", "expectedCollection", "actualCollected", "discrepancyDelta", "closedBy"]
+        }
+      ],
+      syncStrategy: "Field collection inputs -> Instant formula reconciliation -> Master portfolio balance update."
+    },
+    edgeCases: [
+      {
+        scenario: "Borrower makes partial payment or extra prepayment",
+        operationalRisk: "Interest calculation distortion or incorrect remaining balance.",
+        systemResolution: "Dynamic amortization logic recalculates interest on remaining principal instantaneously."
+      },
+      {
+        scenario: "Physical cash collected differs from receipt count",
+        operationalRisk: "Cash theft or arithmetic error slipping past daily closing.",
+        systemResolution: "Closing balance cell turns high-visibility red until delta is zeroed out and verified."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Operational Continuity", metric: "4+ Years", businessImpact: "Still the firm's active operating system" },
+      { label: "Daily Cash Balance", metric: "100%", businessImpact: "Zero unaccounted cash leakage" },
+      { label: "Daily Closing Time", metric: "-80%", businessImpact: "Reduced from 90 mins to under 15 mins" },
+      { label: "Software Infrastructure Cost", metric: "$0", businessImpact: "Zero ongoing SaaS licenses" }
+    ]
+  },
   vyosha: {
     projectId: "vyosha",
     docId: "PRD-FIN-001",

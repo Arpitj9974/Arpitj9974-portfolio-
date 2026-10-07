@@ -198,6 +198,46 @@ export const PORTFOLIO_OWNER = {
 
 export const PROJECTS: Project[] = [
   {
+    id: "jd-finance",
+    title: "JD Finance",
+    subtitle: "Lending Operations, Capital Cashflows & Data Infrastructure",
+    description: "4+ years running end-to-end credit operations, loan disbursements, and daily repayments with zero-defect custom data infrastructure.",
+    cardSummary: "4+ years managing credit disbursements, daily repayment reconciliation, and custom financial data infrastructure.",
+    buildingLogic: "In August 2021, when I stepped into JD Finance, loan disbursements and daily repayments were recorded through fragmented paper registers and notebooks. In micro-lending, if your cash collection doesn't balance to the rupee every single evening, risk compounds exponentially. Rather than waiting for expensive enterprise banking software, I observed the ground workflow, mapped the money flow, and built the company's entire data and tracking infrastructure from scratch.",
+    purpose: "Establish an end-to-end financial data engine that tracks borrower portfolios, calculates daily amortized interest, flags overdue accounts in real-time, and guarantees 100% daily cash reconciliation.",
+    problemSolved: "Eliminated cashflow reconciliation leakage (reduced daily discrepancies to 0%), automated delinquency tracking at Day 3 instead of Day 30, and cut evening close time from 90m to under 15m with $0 software cost.",
+    targetUser: "Lending executives, field collection agents, credit partners, and small-business borrowers.",
+    aiOrchestration: "Structured the relational ledger schema, interest calculation formulas, and reconciliation rules; then orchestrated automated Google Apps Script web triggers and automated WhatsApp payment reminder pipelines.",
+    valueBadges: ["FinOps Leadership", "4+ Yrs Continuity", "100% Cash Balanced", "-80% Close Time"],
+    longDescription: "Ran the complete lending operation across 4 years 4 months — loan disbursement, daily repayment tracking, and borrower account portfolios across the full lifecycle. Designed and built the team's Excel data infrastructure from scratch; it's still the system operations runs on today. Returned in 2025 to lead financial operations again, bringing automation tooling and data workflows into a process that had been entirely manual.",
+    year: "2021 – 2026",
+    category: "Internal Tools",
+    stack: [
+      "Financial Modeling",
+      "Loan Ledger Engine",
+      "Cashflow Reconciliation",
+      "Google Apps Script",
+      "Process Automation"
+    ],
+    role: "Finance Operations Lead & Systems Architect",
+    timeline: "4+ Years (Continuous Production System)",
+    client: "JD Finance (Lending Operations)",
+    outcome: "4+ years of uninterrupted operational continuity; 100% daily cash reconciliation; 80% reduction in daily accounting close time; $0 spent on enterprise software licenses.",
+    problem: "Daily lending operations relied on physical paper ledgers and manual memory. In distributed micro-lending, collection agents collect hundreds of daily cash installments. Reconciling physical cash in hand against theoretical ledger balances took 90+ minutes every evening, suffered from frequent mathematical errors, and hid default risks until accounts were severely past due.",
+    solution: "Engineered a master relational loan ledger that automatically computes daily amortization schedules, links disbursements directly to borrower accounts, and compares physical cash collected against expected collections with zero tolerance. Added an automated aging report flagging high-risk borrowers on Day 3 of missed payments, and integrated automated alert triggers.",
+    impactStats: [
+      { label: "Operational Continuity", value: "4+ Yrs" },
+      { label: "Daily Cash Reconciliation", value: "100%" },
+      { label: "Daily Close Time", value: "-80%" },
+      { label: "Enterprise Software Cost", value: "$0" }
+    ],
+    featured: true,
+    liveUrl: "",
+    githubUrl: "",
+    repoStatus: "internal-infra",
+    tag: "flagship-operations"
+  },
+  {
     id: "findhar",
     title: "FinDhar",
     subtitle: "Committed Cashflow & Obligation Intelligence System",

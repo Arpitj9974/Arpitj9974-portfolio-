@@ -52,6 +52,7 @@ const MedicineExtractionDeepDive = lazy(() => import("./components/case-studies/
 const FarmerConnectDeepDive = lazy(() => import("./components/case-studies/FarmerConnectDeepDive"));
 const FreshStampDeepDive = lazy(() => import("./components/case-studies/FreshStampDeepDive"));
 const FinDharDeepDive = lazy(() => import("./components/case-studies/FinDharDeepDive"));
+const JDFinanceDeepDive = lazy(() => import("./components/case-studies/JDFinanceDeepDive"));
 const PRDViewer = lazy(() => import("./components/PRDViewer"));
 
 function CaseStudySkeleton() {
@@ -675,6 +676,219 @@ export default function App() {
                       </span>
                     </div>
                   ))}
+                </div>
+              </motion.section>
+
+              {/* SECTION 03.5: FLAGSHIP FINOPS FOUNDATION */}
+              <motion.section 
+                initial={{ opacity: 0, y: 24 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true, margin: "-80px" }} 
+                transition={{ duration: 0.5, ease: "easeOut" }} 
+                className="p-6 md:p-8 bg-paper border border-ink/15 shadow-xs relative overflow-hidden space-y-6" 
+                id="home-flagship-finops"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-ink/10 pb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+                    <span className="text-xs font-mono font-bold text-accent uppercase tracking-widest">
+                      // FLAGSHIP FOUNDATIONAL CASE STUDY (4+ YEARS REAL-WORLD FINOPS)
+                    </span>
+                  </div>
+                  <span className="font-mono text-[11px] text-muted">
+                    SURAT, GUJARAT · 2021 – 2026 CONTINUOUS RUNTIME
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  <div className="lg:col-span-8 space-y-3">
+                    <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
+                      JD Finance — Lending Operations &amp; Zero-Defect Data Infrastructure
+                    </h2>
+                    <p className="text-sm text-muted font-sans leading-relaxed max-w-2xl">
+                      Ran the complete lending operation across 4+ years — loan disbursements, daily repayment tracking, and borrower account portfolios across the full lifecycle. Designed the team's custom Excel relational infrastructure from scratch that replaced manual paper books and cut daily accounting close time by 80%.
+                    </p>
+                    
+                    {/* Metric Pills */}
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      <span className="px-2.5 py-1 bg-surface-container font-mono text-xs font-bold text-ink border border-ink/5">
+                        <strong className="text-accent">4+ Yrs</strong> Continuity
+                      </span>
+                      <span className="px-2.5 py-1 bg-surface-container font-mono text-xs font-bold text-ink border border-ink/5">
+                        <strong className="text-accent">100%</strong> Cash Balanced
+                      </span>
+                      <span className="px-2.5 py-1 bg-surface-container font-mono text-xs font-bold text-ink border border-ink/5">
+                        <strong className="text-accent">-80%</strong> Daily Close Time
+                      </span>
+                      <span className="px-2.5 py-1 bg-surface-container font-mono text-xs font-bold text-ink border border-ink/5">
+                        <strong className="text-accent">$0</strong> Software License
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-4 flex flex-col gap-2.5">
+                    <button
+                      onClick={() => {
+                        const jdProj = PROJECTS.find(p => p.id === "jd-finance");
+                        if (jdProj) openCaseStudy(jdProj, "narrative");
+                      }}
+                      className="w-full py-3 px-4 bg-ink text-paper hover:bg-accent font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm group"
+                    >
+                      <span>READ FINOPS CASE STUDY</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        const jdProj = PROJECTS.find(p => p.id === "jd-finance");
+                        if (jdProj) openCaseStudy(jdProj, "prd");
+                      }}
+                      className="w-full py-2.5 px-4 bg-accent/5 hover:bg-accent/15 text-accent border border-accent/25 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <FileText size={13} />
+                      <span>VIEW OPERATIONAL PRD</span>
+                    </button>
+                  </div>
+                </div>
+              </motion.section>
+
+              {/* SECTION 03.6: EXECUTIVE OPERATIONS MATRIX */}
+              <motion.section 
+                initial={{ opacity: 0, y: 24 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true, margin: "-80px" }} 
+                transition={{ duration: 0.5, ease: "easeOut" }} 
+                className="space-y-6" 
+                id="home-operations-matrix"
+              >
+                <div className="border-b border-ink/15 pb-4">
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    <span>03.5 // EXECUTIVE OPERATIONS MATRIX</span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink mt-1">
+                    Friction Observed // Solution Shipped via AI // Measured ROI
+                  </h2>
+                  <p className="text-xs md:text-sm text-muted font-sans mt-1 max-w-3xl leading-relaxed">
+                    A high-level cross-industry breakdown proving how operational observation translates into production systems without manual coding.
+                  </p>
+                </div>
+
+                <div className="overflow-x-auto border border-ink/10 bg-paper">
+                  <table className="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr className="bg-surface-container border-b border-ink/10 font-mono text-[10px] text-muted tracking-widest uppercase">
+                        <th className="p-3.5 md:p-4 min-w-[140px]">SECTOR &amp; SYSTEM</th>
+                        <th className="p-3.5 md:p-4 min-w-[200px]">OPERATIONAL BOTTLENECK OBSERVED</th>
+                        <th className="p-3.5 md:p-4 min-w-[220px]">SOLUTION DELIVERED (AI &amp; SYSTEMS)</th>
+                        <th className="p-3.5 md:p-4 min-w-[170px]">MEASURED BUSINESS ROI</th>
+                        <th className="p-3.5 md:p-4 text-right min-w-[110px]">ACTION</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-ink/10 font-sans text-xs">
+                      {[
+                        {
+                          sector: "FinOps & Lending",
+                          name: "JD Finance",
+                          id: "jd-finance",
+                          bottleneck: "Manual paper registers caused 90m evening close times, mathematical errors, and default blindspots.",
+                          solution: "Engineered custom relational loan ledger with automatic daily cash reconciliation and Day 3 aging matrix.",
+                          impact: "100% daily cash balanced, -80% closing time, 4+ yrs continuity."
+                        },
+                        {
+                          sector: "FinTech / Credit",
+                          name: "FinDhar",
+                          id: "findhar",
+                          bottleneck: "Micro-borrowers face opaque fees and hidden compounding charges from informal lenders.",
+                          solution: "Multi-lingual loan amortization engine with forward-looking 12-60 month obligation waterfall forecasts.",
+                          impact: "100% transparent schedules, instant fee audit, zero hidden surprises."
+                        },
+                        {
+                          sector: "HR & Recruitment",
+                          name: "RAW (Dialer)",
+                          id: "arws-raw",
+                          bottleneck: "SME recruiters spend 45–60 mins every evening manually typing candidate call logs into spreadsheets.",
+                          solution: "Invisible Android background service that auto-syncs company SIM calls to Google Sheets in 1.5s.",
+                          impact: "-60 mins daily admin per recruiter, 100% logs captured, $0 cloud cost."
+                        },
+                        {
+                          sector: "Pharma Supply Chain",
+                          name: "Medicine Extraction",
+                          id: "medicine-extraction",
+                          bottleneck: "Stockists manually transcribe tiny text from medicine packaging into databases with high error rates.",
+                          solution: "3-tier OCR vision pipeline turning product packaging photos directly into structured database records.",
+                          impact: "85% faster stock intake, zero manual typing, runs offline."
+                        },
+                        {
+                          sector: "EdTech & Talent",
+                          name: "Work Sarthi",
+                          id: "work-sarthi",
+                          bottleneck: "Recruiters struggle to evaluate talent objectively; psychometric tests are scored manually across silos.",
+                          solution: "Unified RIASEC, Big Five, and Hofstede psychometric scoring engine with localized report generation.",
+                          impact: "20 career clusters mapped across 13 Indian languages."
+                        },
+                        {
+                          sector: "Retail & Perishables",
+                          name: "FreshStamp",
+                          id: "freshstamp",
+                          bottleneck: "Kirana stores lose 8–15% of stock due to unnoticed shelf-life expiration and spoilage.",
+                          solution: "AI vision freshness inspection tool classifying batch shelf-life from smartphone photo.",
+                          impact: "-35% inventory spoilage, real-time expiry alerts for shopkeepers."
+                        },
+                        {
+                          sector: "Agriculture / Mandi",
+                          name: "FarmerConnect",
+                          id: "farmer-connect",
+                          bottleneck: "Smallholder farmers lose up to 25% margin to middlemen due to price opacity in local mandis.",
+                          solution: "Real-time price discovery and direct buyer matchmaking portal with multilingual voice support.",
+                          impact: "Direct farmer-to-buyer pricing, eliminates cartel markups."
+                        }
+                      ].map((row, idx) => {
+                        const proj = PROJECTS.find(p => p.id === row.id);
+                        return (
+                          <tr key={idx} className="hover:bg-surface-container/40 transition-colors">
+                            <td className="p-3.5 md:p-4">
+                              <span className="font-mono text-[10px] text-accent font-bold uppercase block tracking-wider">
+                                {row.sector}
+                              </span>
+                              <span className="font-serif font-bold text-sm text-ink block mt-0.5">
+                                {row.name}
+                              </span>
+                            </td>
+                            <td className="p-3.5 md:p-4 text-muted leading-relaxed">
+                              {row.bottleneck}
+                            </td>
+                            <td className="p-3.5 md:p-4 text-ink leading-relaxed">
+                              {row.solution}
+                            </td>
+                            <td className="p-3.5 md:p-4 font-mono text-[11px] font-bold text-accent">
+                              {row.impact}
+                            </td>
+                            <td className="p-3.5 md:p-4 text-right">
+                              {proj && (
+                                <div className="flex items-center justify-end gap-2 font-mono text-[11px]">
+                                  <button
+                                    onClick={() => openCaseStudy(proj, "prd")}
+                                    className="text-accent hover:underline font-bold cursor-pointer"
+                                    title="View PRD"
+                                  >
+                                    PRD
+                                  </button>
+                                  <span className="text-muted/40">·</span>
+                                  <button
+                                    onClick={() => openCaseStudy(proj, "narrative")}
+                                    className="text-ink hover:text-accent font-bold cursor-pointer inline-flex items-center gap-1"
+                                  >
+                                    <span>Study</span>
+                                    <ChevronRight size={11} />
+                                  </button>
+                                </div>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
               </motion.section>
 
@@ -1783,6 +1997,9 @@ export default function App() {
 
               {/* Deep-Dive Anchor (TOC target) */}
               <div id="cs-deepdive" className="space-y-0">
+              {/* Specialized JD FINANCE Deep-Dive */}
+              {selectedCaseStudy.id === "jd-finance" && <JDFinanceDeepDive />}
+
               {/* Specialized FINDHAR Deep-Dive */}
               {selectedCaseStudy.id === "findhar" && <FinDharDeepDive />}
 
@@ -1901,6 +2118,22 @@ export default function App() {
                         <ul className="space-y-2 text-xs md:text-sm text-muted font-sans list-disc pl-4 leading-relaxed">
                           {job.points.map((p, i) => <li key={i}>{p}</li>)}
                         </ul>
+
+                        {job.company === "JD Finance" && (
+                          <div className="pt-1">
+                            <button
+                              onClick={() => {
+                                const jdProj = PROJECTS.find(p => p.id === "jd-finance");
+                                if (jdProj) openCaseStudy(jdProj, "narrative");
+                              }}
+                              className="inline-flex items-center gap-2 px-3 py-2 bg-accent/10 hover:bg-accent hover:text-paper border border-accent/30 text-accent font-mono text-xs font-bold transition-all cursor-pointer shadow-xs"
+                            >
+                              <FileText size={13} />
+                              <span>READ FULL FINOPS CASE STUDY &amp; OPERATIONAL SPEC</span>
+                              <ArrowRight size={13} />
+                            </button>
+                          </div>
+                        )}
 
                         {job.skills && job.skills.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 pt-2">
