@@ -48,7 +48,7 @@ export default function Header({
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-300">
       {/* Top micro-banner */}
       <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
-        <span>[ OBSERVE FRICTION // FORMULATE LOGIC // SHIP VIA AI AGENTS ]</span>
+        <span>[ OBSERVE FRICTION // MODEL ARCHITECTURE // SHIP PRODUCTION SYSTEMS ]</span>
         <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
           {onStartTour && (
             <button

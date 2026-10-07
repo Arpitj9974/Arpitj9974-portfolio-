@@ -3,7 +3,7 @@ import { Project } from "./types";
 export const PORTFOLIO_OWNER = {
   name: "ARPIT JAISWAL",
   title: "Product & Business Operations, Finance & Systems Architecture",
-  tagline: "Solving operational friction through business strategy, FinOps rigor, and AI agent delivery.",
+  tagline: "Solving operational friction through business strategy, FinOps rigor, and systems architecture.",
   subLine: "Surat, Gujarat, India · MBA in Analytics & Data Science + Project Management (Manipal) · BCA 2026",
   portraitUrl: "/tech_workspace.webp", // Optimized Tech & Analytics workspace image
   location: "Surat, Gujarat, India",
@@ -71,12 +71,12 @@ export const PORTFOLIO_OWNER = {
         ]
       },
       {
-        category: "AI Orchestration",
+        category: "AI & Intelligent Tooling",
         items: [
           "Prompt engineering",
           "Structured output design",
           "Multi-provider AI routing",
-          "AI IDE agents (Antigravity)",
+          "Multimodal vision pipelines",
           "Google Gemini",
           "Claude",
           "Groq",

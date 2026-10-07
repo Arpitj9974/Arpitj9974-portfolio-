@@ -1011,7 +1011,7 @@ export default function App() {
                       <span>Operations, Analytics &amp; AI Tooling</span>
                     </h3>
                     <p className="text-xs text-muted font-sans font-light">
-                      The financial modeling, analytical instruments, and AI agent frameworks I orchestrate to turn operational friction into production software.
+                      The financial modeling, analytical instruments, and systems engineering frameworks I use to turn operational friction into production software.
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2.5">
@@ -1053,7 +1053,7 @@ export default function App() {
                   Production Systems — Shipped Workflow &amp; Financial Architectures
                 </h1>
                 <p className="text-sm text-muted max-w-2xl font-sans leading-relaxed">
-                  Every system originated from ground-level operational observation—diagnosing bottlenecks, modeling business rules, and orchestrating autonomous AI agents to ship production software that permanently eliminates friction.
+                  Every system originated from ground-level operational observation—diagnosing bottlenecks, modeling business rules, and engineering production software architectures that permanently eliminate friction.
                 </p>
               </div>
 

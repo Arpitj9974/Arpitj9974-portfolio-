@@ -9,7 +9,7 @@ export default function FarmerConnectDeepDive() {
                       Deep-Dive: Race-Free Bidding & Provider Failovers
                     </h2>
                     <p className="text-sm text-muted max-w-3xl leading-relaxed">
-                      FarmerConnect orchestrates a highly concurrent marketplace with automated data.gov.in mandi indexes, secure Razorpay verification, and a zero-downtime triple AI-agent matrix.
+                      FarmerConnect orchestrates a highly concurrent marketplace with automated data.gov.in mandi indexes, secure Razorpay verification, and a zero-downtime multi-provider AI failover cascade.
                     </p>
                   </div>
 
