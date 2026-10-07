@@ -522,7 +522,7 @@ export default function App() {
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">CAPABILITY:</span>
-                      <span className="text-ink font-bold">Systems Architecture &amp; Delivery</span>
+                      <span className="text-ink font-bold">Systems Architecture &amp; AI Delivery</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">PROJECTS:</span>
@@ -1050,11 +1050,10 @@ export default function App() {
               {/* Header intro */}
               <div className="space-y-2 border-b border-ink/10 pb-6">
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
-                  Projects — things built and shipped.
+                  Production Systems — Shipped Workflow &amp; Financial Architectures
                 </h1>
                 <p className="text-sm text-muted max-w-2xl font-sans leading-relaxed">
-                  Every product started with a real problem—not a tutorial.<br />
-                  Built to simplify work, automate processes, and create value for the people who use them.
+                  Every system originated from ground-level operational observation—diagnosing bottlenecks, modeling business rules, and orchestrating autonomous AI agents to ship production software that permanently eliminates friction.
                 </p>
               </div>
 
@@ -1997,10 +1996,10 @@ export default function App() {
               {/* Header */}
               <div className="space-y-2 border-b border-ink/10 pb-6">
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
-                  Professional Experience
+                  Executive Experience &amp; Operational Leadership
                 </h1>
                 <p className="text-sm text-muted max-w-2xl font-sans leading-relaxed">
-                  A journey from finance operations to building software—using business experience to create products that solve real-world problems.
+                  4+ years of hands-on FinOps and lending portfolio leadership synthesized with systems architecture and autonomous AI delivery—transforming ground-floor operational friction into high-leverage business software.
                 </p>
               </div>
 
@@ -2136,11 +2135,14 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Systems logic sidebar card */}
+                  {/* Delivery Manifesto & Mobility sidebar card */}
                   <div className="border border-ink/10 p-5 bg-paper space-y-3">
-                    <span className="text-[10px] font-mono text-muted tracking-wider block uppercase font-bold">// Surat Operations</span>
-                    <p className="text-xs text-muted leading-relaxed font-sans">
-                      My work is centered in Surat, Gujarat, India, delivering high-performance, resilient software systems and business integrations to regional and global teams.
+                    <span className="text-[10px] font-mono text-accent tracking-wider block uppercase font-bold">// DELIVERY MANIFESTO &amp; MOBILITY</span>
+                    <p className="text-xs text-ink font-serif italic leading-relaxed">
+                      &quot;I do not do manual line-by-line coding. I observe operational friction on the ground, formulate the business logic, and orchestrate autonomous AI agents to ship production systems.&quot;
+                    </p>
+                    <p className="text-[11px] text-muted font-sans leading-relaxed border-t border-ink/10 pt-2.5">
+                      Available for on-site (Surat / Mumbai / Tier-1 hubs), hybrid, and global remote Product &amp; Operations roles.
                     </p>
                   </div>
 
@@ -2165,10 +2167,10 @@ export default function App() {
               {/* Header */}
               <div className="space-y-2 border-b border-ink/10 pb-6">
                 <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ink">
-                  Let's build better systems.
+                  Solving Operational Friction at Scale
                 </h1>
-                <p className="text-sm text-muted max-w-2xl font-sans">
-                  Whether you are looking to audit an existing reconciliation pipeline, integrate server-side AI, or design a clean operational dashboard, get in touch.
+                <p className="text-sm text-muted max-w-2xl font-sans leading-relaxed">
+                  Targeting high-impact Product Management, Business Operations, and FinTech Strategy opportunities. Let&apos;s discuss your organization&apos;s workflow bottlenecks, ledger integrity, and unit economics.
                 </p>
               </div>
 
