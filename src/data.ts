@@ -3,7 +3,7 @@ import { Project } from "./types";
 export const PORTFOLIO_OWNER = {
   name: "ARPIT JAISWAL",
   title: "Product & Business Operations, Finance & Systems Architecture",
-  tagline: "Product & business operations. Finance background. 10 shipped products.",
+  tagline: "Solving operational friction through business strategy, FinOps rigor, and AI agent delivery.",
   subLine: "Surat, Gujarat, India · MBA in Analytics & Data Science + Project Management (Manipal) · BCA 2026",
   portraitUrl: "/tech_workspace.webp", // Optimized Tech & Analytics workspace image
   location: "Surat, Gujarat, India",

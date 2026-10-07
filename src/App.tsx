@@ -804,18 +804,18 @@ export default function App() {
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12" id="home-philosophy">
                 <div className="lg:col-span-4 space-y-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink">
-                    Rigorous logic, intentional beauty.
+                    Rigorous operational logic, zero manual coding.
                   </h2>
                   <p className="text-sm text-muted font-sans leading-relaxed">
-                    Most enterprise systems are either fast but completely incomprehensible to human eyes, or beautiful but structurally fragile under intense transaction load. I reject this compromise.
+                    Most systems fail not because of syntax errors, but because nobody understood the operational mechanics they were supposed to replace. I design systems around ground-level business reality.
                   </p>
                 </div>
 
                 <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {[
-                    { title: "Numbers first", desc: "No feature exists simply because it is easy or trendy. Every line is justified by transaction speeds, reduction of user friction, or data integrity audits." },
-                    { title: "Then the build", desc: "We convert analytical spreadsheets into strict Type-safe React components. Clean styling systems using tailwind provide robust speed." },
-                    { title: "Always auditing", desc: "A system isn't finished when it compiles. It's finished when we have simulated load, tested API limits, and validated schema pipelines." }
+                    { title: "Ground-Level Observation", desc: "No system begins in an IDE. Every build starts with diagnosing real friction on the floor—bottlenecks, cashflow leakages, and manual data fatigue." },
+                    { title: "Architecture & AI Delivery", desc: "I model the business rules, data schemas, and PRD specifications, then direct autonomous AI coding agents to ship production-ready software without manual line-by-line coding." },
+                    { title: "Continuous Operational Audit", desc: "A system isn't finished when it compiles. It's finished when operational hours are recovered, reconciliations balance to zero delta, and users experience effortless execution." }
                   ].map((card, idx) => (
                     <div key={idx} className="bg-surface-container p-5 border border-ink/5 space-y-2.5">
                       <span className="text-xs font-mono text-accent tracking-widest block font-bold uppercase">0{idx + 1} / {card.title}</span>
