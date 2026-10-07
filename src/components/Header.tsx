@@ -24,7 +24,7 @@ export default function Header({
   onStartTour
 }: HeaderProps) {
   const navItems = [
-    { id: "home", label: "About Me" },
+    { id: "home", label: "Overview" },
     { id: "projects", label: "Projects" },
     { id: "experience", label: "Experience" },
     { id: "contact", label: "Contact" }
@@ -48,7 +48,7 @@ export default function Header({
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-300">
       {/* Top micro-banner */}
       <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
-        <span>[ DESIGNING. BUILDING. IMPROVING. ]</span>
+        <span>[ OBSERVE FRICTION // FORMULATE LOGIC // SHIP VIA AI AGENTS ]</span>
         <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
           {onStartTour && (
             <button

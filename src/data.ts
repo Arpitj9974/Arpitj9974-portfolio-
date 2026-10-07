@@ -95,22 +95,22 @@ export const PORTFOLIO_OWNER = {
       }
     ],
     techBuildWith: [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "MongoDB",
-      "Firebase",
-      "Supabase",
-      "Kotlin (Android)",
-      "Python (FastAPI)",
-      "Tailwind CSS",
-      "Vite",
-      "Git",
-      "Vercel",
-      "Render",
-      "Railway"
+      "Advanced Excel (VBA & Modeling)",
+      "Loan Ledger Architecture",
+      "Cashflow Reconciliation",
+      "Amortization Engines",
+      "SQL",
+      "Python (ETL & Analytics)",
+      "Power BI",
+      "Tableau",
+      "PRD & Technical Specs",
+      "Workflow State Machines",
+      "API & Schema Design",
+      "Google Gemini AI",
+      "Autonomous Coding Agents",
+      "Google Apps Script",
+      "Cloud Firestore",
+      "Zero-Touch Pipelines"
     ]
   },
   experience: [

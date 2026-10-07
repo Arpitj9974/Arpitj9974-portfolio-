@@ -330,45 +330,43 @@ export default function App() {
   const QUICK_TAGS = [
     { id: "All", label: "All Systems (10)" },
     { id: "FinTech", label: "FinTech & Lending" },
-    { id: "EdTech", label: "EdTech & Careers" },
-    { id: "Automation", label: "Operations & Automation" },
-    { id: "AgriRetail", label: "AgriTech & Retail" },
-    { id: "Python", label: "Python & Analytics" },
-    { id: "Mobile", label: "Mobile & Android" }
+    { id: "EdTech", label: "EdTech & Talent Intelligence" },
+    { id: "Operations", label: "Operations & HR Automation" },
+    { id: "RetailSupply", label: "Retail & Supply Chain" },
+    { id: "AgriCommodities", label: "AgriTech & Commodities" },
+    { id: "AIVision", label: "AI Vision & OCR Pipelines" }
   ];
 
   const matchesTag = (p: Project, tag: string): boolean => {
     if (tag === "All") return true;
     if (tag === "FinTech") {
-      return ["findhar", "vyosha", "ar-auagpt", "arws-raw"].includes(p.id) || 
+      return ["findhar", "vyosha", "ar-auagpt"].includes(p.id) || 
              p.title.toLowerCase().includes("findhar") || 
              p.title.toLowerCase().includes("vyosha") || 
+             (p.targetUser || "").toLowerCase().includes("borrower") ||
              p.description.toLowerCase().includes("lending") ||
-             p.description.toLowerCase().includes("cashflow") ||
-             p.description.toLowerCase().includes("finance") ||
-             p.description.toLowerCase().includes("fintech");
+             p.description.toLowerCase().includes("cashflow");
     }
     if (tag === "EdTech") {
-      return ["study-tracker-aj", "career-library"].includes(p.id) || 
+      return ["study-tracker-aj", "career-library", "work-sarthi"].includes(p.id) || 
              p.title.toLowerCase().includes("aspirant") || 
-             p.title.toLowerCase().includes("career");
+             p.title.toLowerCase().includes("career") ||
+             p.title.toLowerCase().includes("sarthi");
     }
-    if (tag === "Automation") {
-      return ["work-sarthi", "medicine-extraction"].includes(p.id) || 
-             p.description.toLowerCase().includes("automat") ||
-             (p.solution || "").toLowerCase().includes("automat");
+    if (tag === "Operations") {
+      return ["arws-raw", "work-sarthi", "medicine-extraction"].includes(p.id) || 
+             (p.valueBadges || []).some(b => b.toLowerCase().includes("operations") || b.toLowerCase().includes("automation") || b.toLowerCase().includes("admin"));
     }
-    if (tag === "AgriRetail") {
-      return ["farmer-connect", "freshstamp"].includes(p.id);
+    if (tag === "RetailSupply") {
+      return ["freshstamp", "medicine-extraction", "vyosha"].includes(p.id);
     }
-    if (tag === "Python") {
-      return p.stack.some(s => /python|pandas|data|streamlit|sql/i.test(s)) ||
-             ["arws-raw", "career-library", "medicine-extraction"].includes(p.id);
+    if (tag === "AgriCommodities") {
+      return ["farmer-connect", "ar-auagpt"].includes(p.id);
     }
-    if (tag === "Mobile") {
-      return p.category === "Mobile" || 
-             p.stack.some(s => /android|kotlin|mobile|pwa/i.test(s)) ||
-             ["work-sarthi", "vyosha", "findhar"].includes(p.id);
+    if (tag === "AIVision") {
+      return ["medicine-extraction", "freshstamp", "findhar"].includes(p.id) ||
+             (p.aiOrchestration || "").toLowerCase().includes("ocr") ||
+             (p.aiOrchestration || "").toLowerCase().includes("vision");
     }
     return p.category === tag;
   };
@@ -1012,12 +1010,17 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Subsection B: Tech I Build With */}
+                {/* Subsection B: Operations, Analytics & AI Tooling */}
                 <div className="space-y-4 border-t border-ink/10 pt-8">
-                  <h3 className="text-xs font-mono font-bold text-muted uppercase tracking-widest flex items-center gap-2">
-                    <span className="h-1 w-3 bg-accent" />
-                    <span>Tech I Build With — Tools & Systems</span>
-                  </h3>
+                  <div className="space-y-1">
+                    <h3 className="text-xs font-mono font-bold text-muted uppercase tracking-widest flex items-center gap-2">
+                      <span className="h-1 w-3 bg-accent" />
+                      <span>Operations, Analytics &amp; AI Tooling</span>
+                    </h3>
+                    <p className="text-xs text-muted font-sans font-light">
+                      The financial modeling, analytical instruments, and AI agent frameworks I orchestrate to turn operational friction into production software.
+                    </p>
+                  </div>
                   <div className="flex flex-wrap gap-2.5">
                     {PORTFOLIO_OWNER.skills.techBuildWith.map((tech, idx) => (
                       <button 
@@ -1073,7 +1076,7 @@ export default function App() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search by technology, domain, or problem... (e.g. FinTech, Amortization, Kotlin, Python, Gemini)"
+                    placeholder="Search by operational problem, domain, or beneficiary... (e.g. Lending, Kirana, HR, Mandi, MSME, Aspirant)"
                     className="w-full pl-10 pr-10 py-3 bg-surface-container border border-ink/15 text-xs md:text-sm font-mono text-ink placeholder:text-muted/60 focus:outline-none focus:border-accent transition-colors"
                   />
                   {searchQuery && (
