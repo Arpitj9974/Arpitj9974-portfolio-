@@ -166,22 +166,7 @@ export default function CommandPalette({
           onClose();
         }
       },
-      {
-        id: "nav-roi",
-        category: "NAVIGATION",
-        title: "Interactive ROI & Automation Calculator",
-        subtitle: "Calculate annual hours and capital saved by automating manual workflows",
-        badge: "TOOL",
-        icon: <Sliders size={14} className="text-accent" />,
-        keywords: ["roi", "calculator", "hours", "automation", "savings", "excel"],
-        run: () => {
-          onSelectTab("home");
-          onClose();
-          setTimeout(() => {
-            document.getElementById("roi-slider")?.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, 200);
-        }
-      },
+
       {
         id: "nav-simulator",
         category: "NAVIGATION",

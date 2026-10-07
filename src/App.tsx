@@ -41,16 +41,6 @@ import {
   Link2
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from "recharts";
 
 // Dynamic Code-Splitting for Case Studies & PRD (reduces initial bundle by ~60%)
 const VyoshaDeepDive = lazy(() => import("./components/case-studies/VyoshaDeepDive"));
@@ -216,8 +206,6 @@ export default function App() {
     }
     return data;
   })();
-
-  const [roiHours, setRoiHours] = useState(3); // ROI slider: hours/day spent in Excel
 
   const [messagesLog, setMessagesLog] = useState<{ name: string; email: string; message: string; date: string }[]>([]);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
@@ -704,85 +692,7 @@ export default function App() {
                 </div>
               </motion.section>
 
-              {/* SECTION 03b: INTERACTIVE ROI CALCULATOR */}
-              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="border border-ink/10 bg-paper p-6 md:p-10 space-y-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                  <div>
-                    <span className="text-xs font-mono text-accent uppercase tracking-widest block font-bold">// INTERACTIVE ROI CALCULATOR</span>
-                    <h2 className="font-serif text-2xl font-bold text-ink mt-1">Manual Ops vs. Automation — What's Your Team Losing?</h2>
-                    <p className="text-xs text-muted font-sans mt-1">Move the slider to see how much time and money I can save your team by automating repetitive workflows.</p>
-                  </div>
-                  <div className="flex flex-col items-center gap-2 min-w-[180px]">
-                    <span className="text-4xl font-mono font-bold text-ink">{roiHours}h</span>
-                    <span className="text-[10px] font-mono text-muted uppercase tracking-widest">DAILY HOURS IN EXCEL/SHEETS</span>
-                    <input
-                      id="roi-slider"
-                      type="range"
-                      min={0.5}
-                      max={10}
-                      step={0.5}
-                      value={roiHours}
-                      onChange={(e) => setRoiHours(Number(e.target.value))}
-                      className="w-full accent-accent cursor-pointer"
-                    />
-                    <div className="flex justify-between w-full text-[9px] font-mono text-muted">
-                      <span>0.5h</span><span>10h</span>
-                    </div>
-                  </div>
-                </div>
-                <div style={{ width: '100%', height: 200 }}>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart
-                      data={[1,2,3,4,5].map(member => ({
-                        team: `${member} person${member > 1 ? 's' : ''}`,
-                        hoursLost: Math.round(member * roiHours * 250),
-                        hoursSaved: Math.round(member * roiHours * 250 * 0.85),
-                        moneySaved: Math.round(member * roiHours * 250 * 0.85 * 600)
-                      }))}
-                      margin={{ top: 8, right: 16, left: 0, bottom: 0 }}
-                    >
-                      <defs>
-                        <linearGradient id="gradLost" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#ef4444" stopOpacity={0.2} />
-                          <stop offset="95%" stopColor="#ef4444" stopOpacity={0.02} />
-                        </linearGradient>
-                        <linearGradient id="gradSaved" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#10b981" stopOpacity={0.25} />
-                          <stop offset="95%" stopColor="#10b981" stopOpacity={0.02} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                      <XAxis dataKey="team" tick={{ fontSize: 10, fontFamily: 'monospace' }} stroke="rgba(0,0,0,0.2)" />
-                      <YAxis tickFormatter={(v) => `${v}h`} tick={{ fontSize: 10, fontFamily: 'monospace' }} stroke="rgba(0,0,0,0.2)" width={44} />
-                      <Tooltip
-                        formatter={(value: number, name: string) => [
-                          name === 'moneySaved' ? `₹${value.toLocaleString('en-IN')}` : `${value} hours`,
-                          name === 'hoursLost' ? 'Annual Hours Lost (Manual)' : name === 'hoursSaved' ? 'Annual Hours Saved (Automated)' : 'Annual Value Recovered (₹600/hr)'
-                        ]}
-                        contentStyle={{ fontFamily: 'monospace', fontSize: 11, border: '1px solid rgba(0,0,0,0.1)', borderRadius: 0 }}
-                      />
-                      <Legend formatter={(val) => val === 'hoursLost' ? 'Manual Hours Lost' : 'Automated Hours Saved'} wrapperStyle={{ fontSize: 11, fontFamily: 'monospace' }} />
-                      <Area type="monotone" dataKey="hoursLost" stroke="#ef4444" strokeWidth={2} fill="url(#gradLost)" dot={false} />
-                      <Area type="monotone" dataKey="hoursSaved" stroke="#10b981" strokeWidth={2} fill="url(#gradSaved)" dot={false} />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center border-t border-ink/10 pt-4">
-                  {[
-                    { label: 'Hours Saved / Year (1 person)', value: `${Math.round(roiHours * 250 * 0.85)}h` },
-                    { label: 'Value Recovered (₹600/hr)', value: `₹${Math.round(roiHours * 250 * 0.85 * 600).toLocaleString('en-IN')}` },
-                    { label: 'Error Rate Reduction', value: '~98%' },
-                    { label: 'Typical Automation Time', value: '2–4 Weeks' }
-                  ].map(stat => (
-                    <div key={stat.label} className="bg-surface-container border border-ink/10 p-3">
-                      <div className="text-[10px] font-mono text-muted uppercase tracking-wider">{stat.label}</div>
-                      <div className="font-serif font-bold text-ink text-lg mt-0.5">{stat.value}</div>
-                    </div>
-                  ))}
-                </div>
-              </motion.section>
-
-              {/* SECTION 03c: LIVE ARCHITECTURE SIMULATOR */}
+              {/* SECTION 03b: LIVE ARCHITECTURE SIMULATOR */}
               <div id="architecture-simulator">
                 <ArchitectureSimulator />
               </div>
