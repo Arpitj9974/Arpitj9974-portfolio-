@@ -18,7 +18,7 @@ export default function Footer({ scrollToTop }: FooterProps) {
             </span>
             <div className="text-[11px] md:text-xs text-muted font-sans max-w-md space-y-1.5 leading-relaxed">
               <p>
-                Every project on this website started with a real operational problem—not a tutorial or a trend. I diagnose business friction, model the operational workflow, and orchestrate AI coding agents to ship production software that quietly removes it.
+                Every project on this website started with a real operational problem—not a tutorial or a trend. I diagnose business friction, model the operational workflow, and architect production systems that quietly solve it.
               </p>
               <p>
                 Grounded in 4+ years of lending operations leadership at JD Finance and an academic foundation in MBA Analytics &amp; Project Management plus BCA. I turn operational observation into systems that teams genuinely rely on.

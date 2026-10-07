@@ -522,7 +522,7 @@ export default function App() {
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">CAPABILITY:</span>
-                      <span className="text-ink font-bold">Systems Architecture &amp; AI Delivery</span>
+                      <span className="text-ink font-bold">Systems Architecture &amp; Delivery</span>
                     </div>
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
                       <span className="text-muted">PROJECTS:</span>
@@ -630,7 +630,7 @@ export default function App() {
                         <span>TECHNICAL DELIVERY &amp; ARCHITECTURE</span>
                       </div>
                       <p className="text-xs leading-relaxed">
-                        My BCA technical foundation provides strong systems architecture and schema literacy. I don't do manual line-by-line coding: I observe operational friction, formulate the business solution, and ship functional software through AI and agent coding.
+                        My BCA technical foundation provides strong systems architecture and schema literacy. I translate operational friction into clear data models, API workflows, and robust state machines, personally driving end-to-end delivery of production software.
                       </p>
                     </div>
                   </div>
@@ -797,7 +797,7 @@ export default function App() {
               <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12" id="home-philosophy">
                 <div className="lg:col-span-4 space-y-4">
                   <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink">
-                    Rigorous operational logic, zero manual coding.
+                    Rigorous operational logic, end-to-end systems delivery.
                   </h2>
                   <p className="text-sm text-muted font-sans leading-relaxed">
                     Most systems fail not because of syntax errors, but because nobody understood the operational mechanics they were supposed to replace. I design systems around ground-level business reality.
@@ -807,7 +807,7 @@ export default function App() {
                 <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {[
                     { title: "Ground-Level Observation", desc: "No system begins in an IDE. Every build starts with diagnosing real friction on the floor—bottlenecks, cashflow leakages, and manual data fatigue." },
-                    { title: "Architecture & AI Delivery", desc: "I model the business rules, data schemas, and PRD specifications, then direct autonomous AI coding agents to ship production-ready software without manual line-by-line coding." },
+                    { title: "Architecture & Systems Engineering", desc: "I translate business rules, relational data schemas, and PRD specifications into robust, full-stack production software designed for operational resilience." },
                     { title: "Continuous Operational Audit", desc: "A system isn't finished when it compiles. It's finished when operational hours are recovered, reconciliations balance to zero delta, and users experience effortless execution." }
                   ].map((card, idx) => (
                     <div key={idx} className="bg-surface-container p-5 border border-ink/5 space-y-2.5">
@@ -833,10 +833,10 @@ export default function App() {
                     <span>EXECUTIVE OPERATIONS MATRIX</span>
                   </div>
                   <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink mt-1">
-                    Friction Observed // Solution Shipped via AI // Measured ROI
+                    Friction Observed // Technical System Delivered // Measured ROI
                   </h2>
                   <p className="text-xs md:text-sm text-muted font-sans mt-1 max-w-3xl leading-relaxed">
-                    A high-level cross-industry breakdown proving how operational observation translates into production systems without manual coding.
+                    A high-level cross-industry breakdown proving how operational observation translates into robust, production-ready software systems.
                   </p>
                 </div>
 
@@ -846,7 +846,7 @@ export default function App() {
                       <tr className="bg-surface-container border-b border-ink/10 font-mono text-[10px] text-muted tracking-widest uppercase">
                         <th className="p-3.5 md:p-4 min-w-[140px]">SECTOR &amp; SYSTEM</th>
                         <th className="p-3.5 md:p-4 min-w-[200px]">OPERATIONAL BOTTLENECK OBSERVED</th>
-                        <th className="p-3.5 md:p-4 min-w-[220px]">SOLUTION DELIVERED (AI &amp; SYSTEMS)</th>
+                        <th className="p-3.5 md:p-4 min-w-[220px]">SYSTEM ARCHITECTURE &amp; SOLUTION DELIVERED</th>
                         <th className="p-3.5 md:p-4 min-w-[170px]">MEASURED BUSINESS ROI</th>
                         <th className="p-3.5 md:p-4 text-right min-w-[110px]">ACTION</th>
                       </tr>
@@ -1845,23 +1845,23 @@ export default function App() {
                     </p>
                   </div>
 
-                  {/* 04 / AI & Agent-Driven Delivery */}
+                  {/* 04 / Technical Architecture & System Delivery */}
                   <div id="cs-delivery" className="space-y-3">
                     <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
                       <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>04 // AI &amp; AGENT-DRIVEN DELIVERY (EXECUTION)</span>
+                      <span>04 // TECHNICAL ARCHITECTURE &amp; SYSTEM DELIVERY</span>
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-ink">How It Was Shipped Through AI Orchestration</h3>
+                    <h3 className="font-serif text-2xl font-bold text-ink">Technical Architecture &amp; Execution</h3>
                     <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
-                      {selectedCaseStudy.aiOrchestration || "I observed the root-cause problem, modeled the business workflow, and directed AI coding agents to ship production-ready software without manual line-by-line coding."}
+                      {selectedCaseStudy.aiOrchestration || "Formulated the operational logic, structured the data schemas, and engineered a production-ready system designed for real-world resilience."}
                     </p>
                   </div>
 
                   {/* Manifesto Quote block */}
                   <blockquote className="border-l-4 border-accent pl-4 py-2 italic font-serif text-sm md:text-base text-ink bg-surface-container/50">
-                    "I do not do manual coding. I observe the problem, think strategically, formulate the business solution, and solve &amp; ship it through AI and agent coding."
+                    "I don&apos;t just write strategy decks or theoretical PRDs. I observe ground-level operational friction, model the business logic and system architecture, and personally ship end-to-end production systems."
                     <footer className="font-mono text-[10px] text-muted tracking-wider mt-1.5 uppercase block not-italic">
-                      — Arpit Jaiswal // Product &amp; Business Operations
+                      — Arpit Jaiswal // Product &amp; Systems Architect
                     </footer>
                   </blockquote>
 
@@ -2137,9 +2137,9 @@ export default function App() {
 
                   {/* Delivery Manifesto & Mobility sidebar card */}
                   <div className="border border-ink/10 p-5 bg-paper space-y-3">
-                    <span className="text-[10px] font-mono text-accent tracking-wider block uppercase font-bold">// DELIVERY MANIFESTO &amp; MOBILITY</span>
+                    <span className="text-[10px] font-mono text-accent tracking-wider block uppercase font-bold">// DELIVERY PHILOSOPHY &amp; MOBILITY</span>
                     <p className="text-xs text-ink font-serif italic leading-relaxed">
-                      &quot;I do not do manual line-by-line coding. I observe operational friction on the ground, formulate the business logic, and orchestrate autonomous AI agents to ship production systems.&quot;
+                      &quot;I bridge business strategy with technical execution: observing ground-level operational bottlenecks, designing relational schemas and logic, and shipping production-ready systems.&quot;
                     </p>
                     <p className="text-[11px] text-muted font-sans leading-relaxed border-t border-ink/10 pt-2.5">
                       Available for on-site (Surat / Mumbai / Tier-1 hubs), hybrid, and global remote Product &amp; Operations roles.

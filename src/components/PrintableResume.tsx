@@ -51,7 +51,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
         <div className="mt-3.5">
           <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-1.5" style={{ color: '#0f3d64', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SUMMARY</h2>
           <p className="text-[9.5pt] leading-normal text-justify" style={{ color: '#1f2937' }}>
-            Product and business operations specialist with 4+ years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the foundational lending data and ledger infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in diagnosing ground-level operational friction, modeling business workflows and financial ledgers, and orchestrating autonomous AI coding agents to ship production-ready software without manual coding.
+            Product and business operations specialist with 4+ years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the foundational lending data and ledger infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in diagnosing ground-level operational friction, modeling business workflows and financial ledgers, and translating specifications into robust system architectures, data schemas, and production-ready applications.
           </p>
         </div>
 
@@ -240,7 +240,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             <div><strong style={{ color: '#0f3d64' }}>Data &amp; Analytics:</strong> SQL, Python, Advanced Excel (Financial Models, Pivot, Dynamic Arrays), Power BI, Tableau, Performance Telemetry, Cohort Analysis, Reporting</div>
             <div><strong style={{ color: '#0f3d64' }}>Automation &amp; Integrations:</strong> Google Apps Script, REST APIs, n8n, Make, Webhooks, Firestore Event Sync, SheetDB</div>
             <div><strong style={{ color: '#0f3d64' }}>AI Orchestration &amp; Tooling:</strong> Prompt Engineering, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM</div>
-            <div><strong style={{ color: '#0f3d64' }}>Systems Architecture &amp; Stacks Orchestrated:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel</div>
+            <div><strong style={{ color: '#0f3d64' }}>Systems Architecture &amp; Technical Stacks:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel</div>
           </div>
         </div>
 

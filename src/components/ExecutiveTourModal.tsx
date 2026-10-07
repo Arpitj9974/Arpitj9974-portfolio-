@@ -244,10 +244,10 @@ export default function ExecutiveTourModal({
     // SLIDE 3: The Synthesis
     {
       id: "synthesis",
-      category: "70% MBA STRATEGY + 30% BCA AI DELIVERY",
+      category: "70% MBA STRATEGY + 30% BCA SYSTEMS ARCHITECTURE",
       stepNumber: "03",
-      title: "70% Business Strategy & FinOps + 30% AI-Native Systems Delivery",
-      subtitle: "I observe operational friction, formulate the business solution, and ship working software through AI and agent coding.",
+      title: "70% Business Strategy & FinOps + 30% Systems Engineering",
+      subtitle: "I observe operational friction, formulate the business solution, and architect & ship production systems.",
       content: (
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -270,22 +270,22 @@ export default function ExecutiveTourModal({
             <div className="border border-ink/10 bg-paper p-4 space-y-3">
               <div className="flex items-center gap-2">
                 <Cpu size={16} className="text-accent" />
-                <span className="font-mono text-xs font-bold text-ink">30% BCA // SYSTEMS LITERACY &amp; AI DELIVERY</span>
+                <span className="font-mono text-xs font-bold text-ink">30% BCA // SYSTEMS ARCHITECTURE &amp; DELIVERY</span>
               </div>
               <p className="text-xs text-muted leading-relaxed font-sans">
-                BCA foundation provides deep schema literacy and systems comprehension. I do not do manual line-by-line coding; instead, I orchestrate AI agents and coding tools to translate specifications directly into working, production-ready software.
+                BCA foundation provides deep schema literacy, systems architecture, and technical comprehension. I translate operational workflows into relational databases, API contracts, and high-performance offline-first applications.
               </p>
               <div className="flex flex-wrap gap-1 font-mono text-[10px] text-ink">
                 <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Systems Architecture</span>
                 <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Data Schemas</span>
-                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">AI Agent Coding</span>
+                <span className="bg-surface-container px-2 py-0.5 border border-ink/5">Offline-First PWAs</span>
                 <span className="bg-surface-container px-2 py-0.5 border border-ink/5">API Workflows</span>
               </div>
             </div>
           </div>
 
           <div className="p-3 border-l-2 border-accent bg-surface-container/60 font-mono text-xs text-ink">
-            <strong>Core Principle:</strong> I do not write manual boilerplate code. I observe friction on the ground, think strategically, formulate the business solution, and solve &amp; ship it through AI and agent coding.
+            <strong>Core Principle:</strong> I don&apos;t just write strategy decks or theoretical PRDs. I observe ground-level friction, model the business logic, and architect &amp; deliver end-to-end production systems.
           </div>
         </div>
       )
