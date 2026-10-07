@@ -118,7 +118,7 @@ export default function App() {
     setIsSoundActive(next);
     setSoundEnabled(next);
     if (next) {
-      playSuccess();
+      playSuccess(true);
     }
   };
 

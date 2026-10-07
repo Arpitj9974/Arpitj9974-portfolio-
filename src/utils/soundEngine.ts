@@ -6,13 +6,12 @@ let audioCtx: AudioContext | null = null;
 function getAudioContext(): AudioContext | null {
   if (typeof window === "undefined") return null;
   if (!audioCtx) {
-    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const AudioContextClass =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     if (AudioContextClass) {
       audioCtx = new AudioContextClass();
     }
-  }
-  if (audioCtx && audioCtx.state === "suspended") {
-    audioCtx.resume().catch(() => {});
   }
   return audioCtx;
 }
@@ -29,109 +28,119 @@ export function setSoundEnabled(enabled: boolean): void {
   localStorage.setItem(SOUND_STORAGE_KEY, enabled ? "true" : "false");
 }
 
-export function playClick(): void {
-  if (!isSoundEnabled()) return;
+function runWithContext(synth: (ctx: AudioContext) => void, force = false): void {
+  if (!force && !isSoundEnabled()) return;
   const ctx = getAudioContext();
   if (!ctx) return;
 
-  try {
+  const execute = () => {
+    try {
+      synth(ctx);
+    } catch {
+      // Ignore audio synthesis errors gracefully
+    }
+  };
+
+  // Modern browsers require resuming AudioContext after user interaction gesture
+  if (ctx.state === "suspended") {
+    ctx.resume().then(execute).catch(() => {});
+  } else {
+    execute();
+  }
+}
+
+export function playClick(): void {
+  runWithContext((ctx) => {
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
-    osc.type = "triangle";
-    osc.frequency.setValueAtTime(680, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.035);
+    osc.type = "sine";
+    const now = ctx.currentTime;
+    osc.frequency.setValueAtTime(800, now);
+    osc.frequency.exponentialRampToValueAtTime(200, now + 0.05);
 
-    gain.gain.setValueAtTime(0.04, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.035);
+    gain.gain.setValueAtTime(0.12, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
 
     osc.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.start();
-    osc.stop(ctx.currentTime + 0.035);
-  } catch {
-    // Ignore audio context errors gracefully
-  }
+    osc.start(now);
+    osc.stop(now + 0.05);
+  });
 }
 
 export function playToggle(isDark: boolean): void {
-  if (!isSoundEnabled()) return;
-  const ctx = getAudioContext();
-  if (!ctx) return;
-
-  try {
+  runWithContext((ctx) => {
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
     osc.type = "sine";
+    const now = ctx.currentTime;
     const startFreq = isDark ? 660 : 440;
     const endFreq = isDark ? 440 : 660;
 
-    osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(endFreq, ctx.currentTime + 0.05);
+    osc.frequency.setValueAtTime(startFreq, now);
+    osc.frequency.exponentialRampToValueAtTime(endFreq, now + 0.09);
 
-    gain.gain.setValueAtTime(0.03, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
 
     osc.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.start();
-    osc.stop(ctx.currentTime + 0.05);
-  } catch {
-    // Ignore audio context errors gracefully
-  }
+    osc.start(now);
+    osc.stop(now + 0.09);
+  });
 }
 
 export function playPalette(): void {
-  if (!isSoundEnabled()) return;
-  const ctx = getAudioContext();
-  if (!ctx) return;
-
-  try {
+  runWithContext((ctx) => {
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
     osc.type = "sine";
-    osc.frequency.setValueAtTime(800, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1400, ctx.currentTime + 0.045);
+    const now = ctx.currentTime;
+    osc.frequency.setValueAtTime(550, now);
+    osc.frequency.exponentialRampToValueAtTime(1100, now + 0.07);
 
-    gain.gain.setValueAtTime(0.03, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.045);
+    gain.gain.setValueAtTime(0.14, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
 
     osc.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.start();
-    osc.stop(ctx.currentTime + 0.045);
-  } catch {
-    // Ignore audio context errors gracefully
-  }
+    osc.start(now);
+    osc.stop(now + 0.07);
+  });
 }
 
-export function playSuccess(): void {
-  if (!isSoundEnabled()) return;
-  const ctx = getAudioContext();
-  if (!ctx) return;
+export function playSuccess(force = false): void {
+  runWithContext((ctx) => {
+    const now = ctx.currentTime;
 
-  try {
-    const osc = ctx.createOscillator();
+    // Harmonic 2-note chime: C5 (523.25Hz) -> G5 (783.99Hz)
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
     const gain = ctx.createGain();
 
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.03); // A5
+    osc1.type = "sine";
+    osc2.type = "sine";
 
-    gain.gain.setValueAtTime(0.035, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.07);
+    osc1.frequency.setValueAtTime(523.25, now);
+    osc2.frequency.setValueAtTime(783.99, now + 0.08);
 
-    osc.connect(gain);
+    gain.gain.setValueAtTime(0.18, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.start();
-    osc.stop(ctx.currentTime + 0.07);
-  } catch {
-    // Ignore audio context errors gracefully
-  }
+    osc1.start(now);
+    osc1.stop(now + 0.12);
+
+    osc2.start(now + 0.08);
+    osc2.stop(now + 0.22);
+  }, force);
 }
