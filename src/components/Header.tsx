@@ -31,12 +31,16 @@ export default function Header({
   ];
 
   const [isResumeDropdownOpen, setIsResumeDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const desktopDropdownRef = useRef<HTMLDivElement>(null);
+  const mobileDropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const insideDesktop = desktopDropdownRef.current && desktopDropdownRef.current.contains(target);
+      const insideMobile = mobileDropdownRef.current && mobileDropdownRef.current.contains(target);
+      if (!insideDesktop && !insideMobile) {
         setIsResumeDropdownOpen(false);
       }
     };
@@ -47,8 +51,9 @@ export default function Header({
   return (
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-300">
       {/* Top micro-banner */}
-      <div className="bg-ink text-paper py-1.5 px-3 sm:px-4 md:px-8 text-[8.5px] sm:text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
-        <span className="truncate mr-2 sm:mr-3 whitespace-nowrap max-w-[170px] sm:max-w-none">[ OBSERVE FRICTION // MODEL ARCHITECTURE // SHIP PRODUCTION SYSTEMS ]</span>
+      <div className="bg-ink text-paper py-1 px-3 sm:px-4 md:px-8 text-[8.5px] sm:text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
+        <span className="truncate mr-2 sm:mr-3 whitespace-nowrap hidden sm:inline">[ OBSERVE FRICTION // MODEL ARCHITECTURE // SHIP PRODUCTION SYSTEMS ]</span>
+        <span className="truncate mr-2 whitespace-nowrap inline sm:hidden">[ OBSERVE // MODEL // SHIP ]</span>
         <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-4 shrink-0 whitespace-nowrap">
           {onStartTour && (
             <button
@@ -69,29 +74,89 @@ export default function Header({
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        {/* Brand Name */}
-        <div 
-          onClick={() => setCurrentTab("home")} 
-          className="cursor-pointer group flex flex-col"
-        >
-          <span className="font-serif text-xl md:text-2xl font-bold tracking-tight text-ink group-hover:text-accent transition-colors duration-150">
-            ARPIT JAISWAL
-          </span>
-          <span className="font-mono text-[9px] md:text-[10px] tracking-wider text-muted mt-0.5 uppercase">
-            Product &amp; Business Operations // MBA (Analytics &amp; PM) // BCA // 4+ Yrs FinOps
-          </span>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-2.5 md:py-5 flex flex-col md:flex-row justify-between items-stretch md:items-center gap-2.5 md:gap-4">
+        {/* Row 1 on mobile: Brand on left, Compact utility actions on right */}
+        <div className="flex items-center justify-between w-full md:w-auto">
+          {/* Brand Name */}
+          <div 
+            onClick={() => setCurrentTab("home")} 
+            className="cursor-pointer group flex flex-col min-w-0 pr-2"
+          >
+            <span className="font-serif text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-ink group-hover:text-accent transition-colors duration-150 truncate">
+              ARPIT JAISWAL
+            </span>
+            <span className="font-mono text-[8.5px] sm:text-[9px] md:text-[10px] tracking-wider text-muted mt-0.5 uppercase line-clamp-1 md:line-clamp-none">
+              Product &amp; Business Operations // MBA (Analytics &amp; PM) // BCA // 4+ Yrs FinOps
+            </span>
+          </div>
+
+          {/* Mobile Utility Controls (Visible only on < md) */}
+          <div className="flex md:hidden items-center gap-1.5 shrink-0 pl-1.5 border-l border-ink/10">
+            {/* Mobile Resume Dropdown */}
+            <div className="relative" ref={mobileDropdownRef}>
+              <button
+                onClick={() => setIsResumeDropdownOpen(!isResumeDropdownOpen)}
+                title="Resume Options"
+                className="flex items-center gap-1 px-2 py-1 border border-ink/30 hover:border-accent hover:text-accent text-muted text-[11px] font-mono tracking-wider transition-all duration-150 cursor-pointer"
+              >
+                <Download size={12} />
+                <span>Resume</span>
+                <ChevronDown size={10} className={`transition-transform duration-200 ${isResumeDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isResumeDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-44 bg-paper border border-ink/15 shadow-lg z-50 overflow-hidden animate-in fade-in slide-in-from-top-1 duration-150">
+                  <button
+                    onClick={() => { onOpenResumeModal(); setIsResumeDropdownOpen(false); }}
+                    className="w-full px-3 py-2.5 text-left text-[11px] font-mono tracking-wider text-ink hover:bg-surface-container hover:text-accent transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <Eye size={12} />
+                    <span>Preview Resume</span>
+                  </button>
+                  <div className="border-t border-ink/8" />
+                  <button
+                    onClick={() => { onDownloadResume(); setIsResumeDropdownOpen(false); }}
+                    className="w-full px-3 py-2.5 text-left text-[11px] font-mono tracking-wider text-ink hover:bg-surface-container hover:text-accent transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <Download size={12} />
+                    <span>Download PDF</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Command Palette Trigger */}
+            {onOpenCommandPalette && (
+              <button
+                onClick={onOpenCommandPalette}
+                title="Search (CMD+K / Ctrl+K)"
+                className="p-1.5 bg-surface-container/60 hover:bg-surface-container border border-ink/15 hover:border-accent text-muted hover:text-ink text-xs transition-all duration-150 cursor-pointer"
+              >
+                <Search size={13} className="text-accent" />
+              </button>
+            )}
+
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={onToggleTheme}
+              title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              className="p-1.5 text-muted hover:text-accent transition-colors duration-200 cursor-pointer"
+            >
+              {isDarkMode ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+          </div>
         </div>
 
-        {/* Navigation & Controls */}
-        <div className="flex items-center justify-between md:justify-end gap-2.5 sm:gap-4 md:gap-5 w-full md:w-auto">
+        {/* Row 2 on mobile: Dedicated Full-Width Navigation Bar */}
+        {/* On desktop: In-line Navigation + Desktop Controls */}
+        <div className="flex items-center justify-between md:justify-end gap-2.5 sm:gap-4 md:gap-5 w-full md:w-auto border-t border-ink/8 md:border-t-0 pt-2 md:pt-0">
           {/* Main Navigation Links */}
-          <nav className="flex items-center gap-2.5 sm:gap-4 md:gap-5 text-[11px] sm:text-xs md:text-sm font-medium overflow-x-auto no-scrollbar py-0.5">
+          <nav className="flex items-center justify-between md:justify-start gap-1 sm:gap-3 md:gap-5 w-full md:w-auto text-[11px] sm:text-xs md:text-sm font-medium py-0.5">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setCurrentTab(item.id)}
-                className={`relative py-1 transition-all duration-150 text-[11px] sm:text-xs md:text-sm font-mono tracking-wider cursor-pointer whitespace-nowrap ${
+                className={`relative py-1.5 px-2 sm:px-2.5 md:px-0 transition-all duration-150 text-[11px] sm:text-xs md:text-sm font-mono tracking-wider cursor-pointer whitespace-nowrap text-center flex-1 md:flex-initial ${
                   currentTab === item.id 
                     ? "text-accent font-bold" 
                     : "text-muted hover:text-ink"
@@ -105,10 +170,10 @@ export default function Header({
             ))}
           </nav>
 
-          {/* Dedicated Utility Actions (Locked non-wrapping flex container) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-2.5 shrink-0 border-l border-ink/15 pl-2 sm:pl-3 md:pl-4">
-            {/* Resume Dropdown */}
-            <div className="relative" ref={dropdownRef}>
+          {/* Dedicated Utility Actions for Desktop (Hidden on mobile) */}
+          <div className="hidden md:flex items-center gap-1.5 sm:gap-2 md:gap-2.5 shrink-0 border-l border-ink/15 pl-2 sm:pl-3 md:pl-4">
+            {/* Desktop Resume Dropdown */}
+            <div className="relative" ref={desktopDropdownRef}>
               <button
                 onClick={() => setIsResumeDropdownOpen(!isResumeDropdownOpen)}
                 title="Resume Options"
@@ -140,7 +205,7 @@ export default function Header({
               )}
             </div>
 
-            {/* Command Palette Trigger */}
+            {/* Desktop Command Palette Trigger */}
             {onOpenCommandPalette && (
               <button
                 onClick={onOpenCommandPalette}
@@ -154,7 +219,7 @@ export default function Header({
               </button>
             )}
 
-            {/* Theme Toggle */}
+            {/* Desktop Theme Toggle */}
             <button
               onClick={onToggleTheme}
               title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
