@@ -453,7 +453,7 @@ export default function App() {
                   </div>
 
                   <h1 className="font-serif text-4xl md:text-6xl font-extrabold tracking-tight text-ink leading-[1.1]">
-                    <TypingText text={PORTFOLIO_OWNER.tagline} speed={14} />
+                    <TypingText text={PORTFOLIO_OWNER.tagline} speed={26} />
                   </h1>
                   <p className="text-sm md:text-base text-muted font-light leading-relaxed max-w-3xl">
                     {PORTFOLIO_OWNER.subLine}
