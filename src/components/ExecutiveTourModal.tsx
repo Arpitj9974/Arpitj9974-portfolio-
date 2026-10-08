@@ -15,7 +15,8 @@ import {
   Sparkles,
   ArrowRight,
   Clock,
-  Linkedin
+  Linkedin,
+  Check
 } from "lucide-react";
 import { playClick, playSuccess } from "../utils/soundEngine";
 import { PORTFOLIO_OWNER } from "../data";
@@ -48,8 +49,28 @@ export default function ExecutiveTourModal({
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0); // 0 to 100
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const progressIntervalRef = useRef<number | null>(null);
   const touchStartXRef = useRef<number | null>(null);
+
+  const handleScheduleIntro = () => {
+    playSuccess();
+
+    // 1. Immediately copy email address to clipboard
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(PORTFOLIO_OWNER.contactInfo.email).catch(() => {});
+    }
+    setCopiedEmail(true);
+    setTimeout(() => {
+      setCopiedEmail(false);
+    }, 3500);
+
+    // 2. Open web mail client (Gmail web compose) directly in browser without OS app prompt
+    const subject = encodeURIComponent("Introductory Call with Arpit Jaiswal");
+    const body = encodeURIComponent("Hi Arpit,\n\nI reviewed your portfolio and would like to schedule a brief introductory call.\n\nBest regards,");
+    const webmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${PORTFOLIO_OWNER.contactInfo.email}&su=${subject}&body=${body}`;
+    window.open(webmailUrl, "_blank", "noopener,noreferrer");
+  };
 
   const goToNextSlide = useCallback(() => {
     if (currentSlide < TOTAL_SLIDES - 1) {
@@ -83,6 +104,7 @@ export default function ExecutiveTourModal({
       setCurrentSlide(0);
       setProgress(0);
       setIsPaused(false);
+      setCopiedEmail(false);
     }
   }, [isOpen]);
 
@@ -386,17 +408,35 @@ export default function ExecutiveTourModal({
               <span className="text-[10px] opacity-80">[PDF]</span>
             </button>
 
-            <a
-              href={`mailto:${PORTFOLIO_OWNER.contactInfo.email}?subject=Introductory%20Call%20with%20Arpit%20Jaiswal`}
-              onClick={() => playClick()}
-              className="p-3.5 border border-ink/20 bg-paper hover:border-ink text-ink transition-all flex items-center justify-between cursor-pointer font-bold text-xs"
+            <button
+              type="button"
+              id="schedule-intro-modal-btn"
+              onClick={handleScheduleIntro}
+              className={`p-3.5 border transition-all flex items-center justify-between cursor-pointer font-bold text-xs ${
+                copiedEmail
+                  ? "border-emerald-600 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                  : "border-ink/20 bg-paper hover:border-ink text-ink"
+              }`}
+              title={copiedEmail ? "Email copied to clipboard!" : `Schedule intro via email (${PORTFOLIO_OWNER.contactInfo.email})`}
             >
-              <div className="flex items-center gap-2">
-                <Mail size={14} />
-                <span>SCHEDULE 15-MIN INTRO</span>
+              <div className="flex items-center gap-2 min-w-0">
+                {copiedEmail ? (
+                  <Check size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                ) : (
+                  <Mail size={14} className="shrink-0" />
+                )}
+                <span className="truncate">
+                  {copiedEmail ? `EMAIL COPIED (${PORTFOLIO_OWNER.contactInfo.email})` : "SCHEDULE 15-MIN INTRO"}
+                </span>
               </div>
-              <ExternalLink size={12} className="text-muted" />
-            </a>
+              {copiedEmail ? (
+                <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 shrink-0 ml-2">
+                  [COPIED]
+                </span>
+              ) : (
+                <ExternalLink size={12} className="text-muted shrink-0 ml-2" />
+              )}
+            </button>
 
             <button
               onClick={() => {
