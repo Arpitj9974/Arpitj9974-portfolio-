@@ -196,7 +196,7 @@ export const PORTFOLIO_OWNER = {
         "Led the AI Career Assessment platform — a psychometric engine combining RIASEC, Big Five, and Hofstede frameworks into one scoring system, generating a personalized career report across 20 career clusters in 13 Indian languages.",
         "Also delivered Career Library, a 225-career exploration platform for Class 11–12 students."
       ],
-      skills: ["Product Management", "PRDs & Specs", "AI Integration", "Prompt Engineering"]
+      skills: ["Product Management", "PRDs & Specs", "AI Integration", "Systems Architecture"]
     },
     {
       role: "Product Operations & AI Systems Specialist (Internship)",

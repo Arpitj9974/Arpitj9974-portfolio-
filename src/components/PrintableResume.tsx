@@ -89,7 +89,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
                 <li>Worked directly under the Founder &amp; CEO to conceptualize, coordinate, and deliver three digital products from scope definition to production release.</li>
                 <li>Led the AI Career Assessment platform: conceptualized a psychometric scoring engine synthesizing RIASEC, Big Five, and Hofstede frameworks to generate comprehensive career reports in 13 Indian languages.</li>
                 <li>Shipped Career Library, a 225-career interactive discovery portal for Class 11–12 students featuring AI-driven academic fit analysis from uploaded marksheets.</li>
-                <li><strong>Skills:</strong> Product Management, PRD &amp; Spec Writing, Google Apps Script, Multi-Language Localization, Prompt Engineering</li>
+                <li><strong>Skills:</strong> Product Management, PRD &amp; Spec Writing, Google Apps Script, Multi-Language Localization, Systems Architecture</li>
               </ul>
             </div>
 
@@ -239,7 +239,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             <div><strong style={{ color: '#0f3d64' }}>Business Operations &amp; Finance:</strong> Lending Operations, Loan Amortization Modeling, Credit &amp; Risk Validation, SOP Creation, Business Process Analysis, Accounting Parity, Collections Workflow</div>
             <div><strong style={{ color: '#0f3d64' }}>Data &amp; Analytics:</strong> SQL, Python, Advanced Excel (Financial Models, Pivot, Dynamic Arrays), Power BI, Tableau, Performance Telemetry, Cohort Analysis, Reporting</div>
             <div><strong style={{ color: '#0f3d64' }}>Automation &amp; Integrations:</strong> Google Apps Script, REST APIs, n8n, Make, Webhooks, Firestore Event Sync, SheetDB</div>
-            <div><strong style={{ color: '#0f3d64' }}>AI Orchestration &amp; Tooling:</strong> Prompt Engineering, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM</div>
+            <div><strong style={{ color: '#0f3d64' }}>AI Orchestration &amp; Tooling:</strong> LLM Systems Architecture, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM</div>
             <div><strong style={{ color: '#0f3d64' }}>Systems Architecture &amp; Technical Stacks:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel</div>
           </div>
         </div>

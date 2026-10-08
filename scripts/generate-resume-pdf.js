@@ -305,7 +305,7 @@ const htmlContent = `<!DOCTYPE html>
           <li>Led the AI Career Assessment platform: engineered a psychometric scoring engine synthesizing RIASEC, Big Five, and Hofstede frameworks to generate comprehensive career reports in 13 Indian languages.</li>
           <li>Shipped Career Library, a 225-career interactive discovery portal for Class 11–12 students featuring AI-driven academic fit analysis from uploaded marksheets.</li>
         </ul>
-        <div class="skills-tag"><strong>Skills:</strong> Product Coordination, PRD &amp; Spec Writing, Google Apps Script, Multi-Language Localization, Prompt Engineering</div>
+        <div class="skills-tag"><strong>Skills:</strong> Product Coordination, PRD &amp; Spec Writing, Google Apps Script, Multi-Language Localization, Systems Architecture</div>
       </div>
 
       <!-- CripcoCode -->
@@ -444,7 +444,7 @@ const htmlContent = `<!DOCTYPE html>
           <strong>Automation &amp; Integrations:</strong> Google Apps Script, REST APIs, n8n, Make, Webhooks, Firestore Event Sync, SheetDB
         </div>
         <div class="skills-category">
-          <strong>AI Orchestration &amp; Tooling:</strong> Prompt Engineering, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM
+          <strong>AI Orchestration &amp; Tooling:</strong> LLM Systems Architecture, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM
         </div>
         <div class="skills-category">
           <strong>Core Technologies:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel
