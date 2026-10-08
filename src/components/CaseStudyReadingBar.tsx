@@ -98,32 +98,32 @@ export default function CaseStudyReadingBar({
         />
       </div>
 
-      {/* 2. Sticky wayfinding sub-bar (appears when scrolled past main hero) */}
+      {/* 2. Floating wayfinding HUD capsule (appears when scrolled past main hero) */}
       <aside 
         aria-label="Case study reading navigation"
-        className={`fixed top-12 left-0 right-0 z-30 bg-paper/95 backdrop-blur-md border-b border-ink/10 py-2 px-4 md:px-8 transition-all duration-200 transform ${
+        className={`fixed bottom-4 left-3 right-3 sm:left-1/2 sm:-translate-x-1/2 sm:w-auto sm:max-w-3xl z-40 bg-paper/95 backdrop-blur-md border border-ink/20 shadow-lg py-2 px-3 sm:px-4 rounded-xs transition-all duration-250 ease-out transform ${
           isScrolledPastHeader 
-            ? "translate-y-0 opacity-100 shadow-xs" 
-            : "-translate-y-full opacity-0 pointer-events-none"
+            ? "translate-y-0 opacity-100" 
+            : "translate-y-16 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 font-mono text-xs">
+        <div className="flex items-center justify-between gap-3 sm:gap-6 font-mono text-xs">
           
-          {/* Left: Breadcrumbs & Active section */}
+          {/* Left: Quick Back button & Title/Section indicator */}
           <div className="flex items-center gap-2 overflow-hidden truncate">
             <button
               onClick={onClose}
-              className="p-1 hover:text-accent transition-colors cursor-pointer shrink-0"
-              title="Back to Projects"
+              className="px-2 py-1 bg-surface-container hover:bg-accent hover:text-paper border border-ink/10 text-ink transition-colors cursor-pointer shrink-0 rounded-xs flex items-center gap-1 font-bold text-[10px]"
+              title="Return to Projects Catalog"
             >
-              <ArrowLeft size={13} />
+              <ArrowLeft size={12} />
+              <span className="hidden sm:inline">PROJECTS</span>
             </button>
-            <span className="text-muted/60 hidden sm:inline">/</span>
-            <span className="font-bold text-ink truncate uppercase">
+            <span className="font-bold text-ink truncate uppercase text-[11px] max-w-[120px] sm:max-w-[200px]">
               {title}
             </span>
-            <span className="text-muted/60">/</span>
-            <span className="text-accent font-bold tracking-wider shrink-0 uppercase">
+            <span className="text-muted/60 hidden sm:inline">/</span>
+            <span className="text-accent font-bold tracking-wider shrink-0 uppercase text-[10px] hidden sm:inline">
               {activeSection}
             </span>
           </div>
@@ -131,10 +131,10 @@ export default function CaseStudyReadingBar({
           {/* Right: Mode switcher & Actions */}
           <div className="flex items-center gap-2 shrink-0">
             {/* PRD vs Narrative Switcher */}
-            <div className="flex items-center border border-ink/10 p-0.5 bg-surface-container/60">
+            <div className="flex items-center border border-ink/10 p-0.5 bg-surface-container/60 rounded-xs">
               <button
                 onClick={() => onSwitchMode("narrative")}
-                className={`px-2 py-0.5 text-[10px] tracking-wider transition-all cursor-pointer ${
+                className={`px-2 py-0.5 text-[10px] tracking-wider transition-all cursor-pointer rounded-xs ${
                   mode === "narrative" 
                     ? "bg-ink text-paper font-bold shadow-xs" 
                     : "text-muted hover:text-ink"
@@ -144,7 +144,7 @@ export default function CaseStudyReadingBar({
               </button>
               <button
                 onClick={() => onSwitchMode("prd")}
-                className={`px-2 py-0.5 text-[10px] tracking-wider transition-all cursor-pointer flex items-center gap-1 ${
+                className={`px-2 py-0.5 text-[10px] tracking-wider transition-all cursor-pointer flex items-center gap-1 rounded-xs ${
                   mode === "prd" 
                     ? "bg-accent text-paper font-bold shadow-xs" 
                     : "text-muted hover:text-ink"
@@ -159,7 +159,7 @@ export default function CaseStudyReadingBar({
             <button
               onClick={handleCopyLink}
               title="Copy Case Study Link"
-              className="p-1.5 border border-ink/10 hover:border-accent hover:text-accent text-muted transition-colors cursor-pointer"
+              className="p-1.5 border border-ink/10 hover:border-accent hover:text-accent text-muted transition-colors cursor-pointer rounded-xs"
             >
               {copiedLink ? <Check size={12} className="text-emerald-500" /> : <Link2 size={12} />}
             </button>
@@ -167,9 +167,10 @@ export default function CaseStudyReadingBar({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="px-2 py-1 bg-surface-container border border-ink/10 hover:border-ink text-ink text-[10px] font-bold tracking-wider uppercase transition-colors cursor-pointer"
+              className="px-2 py-1 bg-surface-container border border-ink/10 hover:border-accent hover:text-accent text-ink text-[10px] font-bold tracking-wider uppercase transition-colors cursor-pointer rounded-xs"
+              title="Close Case Study"
             >
-              EXIT [X]
+              EXIT
             </button>
           </div>
 

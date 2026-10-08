@@ -445,7 +445,7 @@ export default function App() {
               <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start" id="home-hero">
                 <div className="lg:col-span-8 space-y-6">
                   <h1 className="font-serif text-4xl md:text-6xl font-extrabold tracking-tight text-ink leading-[1.1]">
-                    <TypingText text={PORTFOLIO_OWNER.tagline} speed={40} />
+                    {PORTFOLIO_OWNER.tagline}
                   </h1>
                   <p className="text-sm md:text-base text-muted font-light leading-relaxed max-w-3xl">
                     {PORTFOLIO_OWNER.subLine}
@@ -454,7 +454,7 @@ export default function App() {
                   <div className="flex flex-wrap items-center gap-4 pt-2">
                     <button 
                       onClick={() => setCurrentTab("projects")}
-                      className="px-5 py-3 bg-ink hover:bg-accent text-paper text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer"
+                      className="px-5 py-3 bg-ink hover:bg-accent text-paper text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer shadow-xs"
                     >
                       <span>View Work</span>
                       <ArrowRight size={14} />
@@ -465,11 +465,12 @@ export default function App() {
                         playClick();
                         setIsTourOpen(true);
                       }}
-                      className="px-4 py-3 border border-ink/20 hover:border-accent hover:text-accent bg-paper text-ink text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer shadow-xs"
-                      title="5-Slide Executive Story Tour"
+                      className="px-4 py-3 border border-accent/40 hover:border-accent bg-accent/5 hover:bg-accent hover:text-paper text-ink text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2.5 cursor-pointer shadow-xs group"
+                      title="5-Slide Executive Story Briefing (₹10Cr+ Managed, Systems Shift, Shipped Proof)"
                     >
-                      <span>[ 2-MIN EXECUTIVE TOUR ]</span>
-                      <ArrowRight size={13} />
+                      <span className="w-2 h-2 rounded-full bg-accent group-hover:bg-paper inline-block animate-pulse shrink-0" />
+                      <span>[ 2-MIN EXECUTIVE BRIEFING ]</span>
+                      <ArrowRight size={13} className="shrink-0 transition-transform group-hover:translate-x-0.5" />
                     </button>
                     
                     <div className="flex items-center gap-3 sm:ml-2 border-t sm:border-t-0 sm:border-l border-ink/10 pt-4 sm:pt-0 sm:pl-5">
@@ -518,6 +519,12 @@ export default function App() {
                         referrerPolicy="no-referrer"
                       />
                     </picture>
+                  </div>
+                  
+                  {/* Editorial Newspaper Caption */}
+                  <div className="text-[10px] font-mono text-muted/80 border-b border-ink/10 pb-2 italic flex items-center justify-between">
+                    <span>FIG 1.0 — Operations &amp; Systems Desk</span>
+                    <span className="text-accent font-semibold not-italic uppercase text-[9px] tracking-wider">Surat, IN</span>
                   </div>
                   
                   <div className="space-y-2 font-mono text-[10px] md:text-xs">
@@ -1170,16 +1177,16 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Quick Curated Domain Tags */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-[11px] font-mono text-muted uppercase font-bold tracking-wider mr-1">
+                {/* Quick Curated Domain Tags (Single-line horizontal swipe on mobile) */}
+                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 sm:flex-wrap">
+                  <span className="text-[11px] font-mono text-muted uppercase font-bold tracking-wider mr-1 shrink-0">
                     DOMAINS:
                   </span>
                   {QUICK_TAGS.map((tag) => (
                     <button
                       key={tag.id}
                       onClick={() => setProjectFilter(tag.id)}
-                      className={`px-3 py-1.5 text-xs font-mono transition-all border cursor-pointer ${
+                      className={`px-3 py-1.5 text-xs font-mono transition-all border cursor-pointer whitespace-nowrap shrink-0 ${
                         projectFilter === tag.id 
                           ? "bg-ink text-paper border-ink font-bold shadow-sm" 
                           : "bg-surface-container/60 text-muted border-ink/10 hover:border-ink/30 hover:text-ink"
