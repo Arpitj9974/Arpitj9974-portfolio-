@@ -453,7 +453,7 @@ export default function App() {
                   </div>
 
                   <h1 className="font-serif text-4xl md:text-6xl font-extrabold tracking-tight text-ink leading-[1.1]">
-                    {PORTFOLIO_OWNER.tagline}
+                    <TypingText text={PORTFOLIO_OWNER.tagline} speed={14} />
                   </h1>
                   <p className="text-sm md:text-base text-muted font-light leading-relaxed max-w-3xl">
                     {PORTFOLIO_OWNER.subLine}
@@ -529,11 +529,6 @@ export default function App() {
                     </picture>
                   </div>
                   
-                  {/* Editorial Newspaper Caption */}
-                  <div className="text-[10px] font-mono text-muted/80 border-b border-ink/10 pb-2 italic flex items-center justify-between">
-                    <span>FIG 1.0 — Operations &amp; Systems Desk</span>
-                    <span className="text-accent font-semibold not-italic uppercase text-[9px] tracking-wider">Surat, IN</span>
-                  </div>
                   
                   <div className="space-y-2 font-mono text-[10px] md:text-xs">
                     <div className="flex justify-between border-b border-ink/10 pb-1.5">
