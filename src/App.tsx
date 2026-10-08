@@ -120,6 +120,19 @@ export default function App() {
     );
   };
 
+  const allCatalog = [JD_FINANCE_CASE_STUDY, ...PROJECTS];
+
+  const handleOpenDemonstrated = (system: { id: string; mode?: "narrative" | "prd" }) => {
+    const target = allCatalog.find(p => p.id === system.id) || (system.id === "jd-finance" ? JD_FINANCE_CASE_STUDY : null);
+    if (target) {
+      playClick();
+      openCaseStudy(target, system.mode || "narrative");
+    } else {
+      playClick();
+      handleSelectSkill(system.id);
+    }
+  };
+
   const handleSelectSkill = (skill: string) => {
     setActiveSkill((prev) => (prev === skill ? null : skill));
     setCurrentTab("projects");
@@ -367,7 +380,11 @@ export default function App() {
     return inTitle || inSubtitle || inDesc || inLongDesc || inCategory || inStack || inProblem || inSolution || inOutcome;
   };
 
-  const filteredProjects = PROJECTS.filter(p => 
+  const baseProjectsForFilter = (activeSkill || searchQuery.trim() || projectFilter !== "All")
+    ? allCatalog
+    : PROJECTS;
+
+  const filteredProjects = baseProjectsForFilter.filter(p => 
     matchesTag(p, projectFilter) && 
     matchesSearch(p, searchQuery) && 
     (!activeSkill || projectMatchesSkill(p, activeSkill))
@@ -967,71 +984,142 @@ export default function App() {
                 </div>
               </motion.section>
 
-              {/* SECTION 06: SKILLS & ARCHITECTURE */}
-              <motion.section initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, ease: "easeOut" }} className="space-y-10" id="home-toolkit">
-                <div className="space-y-2">
-                  <h2 className="text-2xl md:text-3xl font-serif font-bold text-ink tracking-tight">
+              {/* SECTION 06: PROFESSIONAL CAPABILITIES (10-SECOND HR SCAN MATRIX) */}
+              <motion.section 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true, margin: "-60px" }} 
+                transition={{ duration: 0.4, ease: "easeOut" }} 
+                className="space-y-6" 
+                id="home-toolkit"
+              >
+                {/* Header */}
+                <div className="space-y-1 border-b border-ink/10 pb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 bg-accent rounded-full" />
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-accent font-bold">
+                      // CORE COMPETENCY MATRIX
+                    </span>
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-serif font-bold text-ink tracking-tight">
                     Professional Capabilities
                   </h2>
+                  <p className="text-xs text-muted font-sans max-w-2xl">
+                    Operational execution, product specification, and systems delivery architecture.
+                  </p>
                 </div>
 
-                {/* Subsection A: What I Do */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-mono font-bold text-muted uppercase tracking-widest flex items-center gap-2">
-                    <span className="h-1 w-3 bg-accent" />
-                    <span>What I Do — Strategic Domains</span>
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {PORTFOLIO_OWNER.skills.whatIDo.map((col, idx) => (
-                      <div key={idx} className="border border-ink/10 p-5 bg-paper space-y-4 flex flex-col justify-between">
-                        <div className="space-y-3">
-                          <h4 className="font-mono text-xs font-bold text-ink border-b border-ink/5 pb-2 uppercase tracking-wider flex items-center justify-between">
-                            <span>{col.category}</span>
-                            <span className="text-accent/65 font-light text-[10px]">0{idx + 1}</span>
+                {/* 4 Clean Compact Domain Columns (Single Row on Desktop) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {PORTFOLIO_OWNER.skills.domains?.map((domain, idx) => (
+                    <div 
+                      key={idx} 
+                      className="border border-ink/10 p-4 bg-paper space-y-3 rounded-xs shadow-xs hover:border-accent/30 transition-all flex flex-col justify-between"
+                    >
+                      <div className="space-y-2.5">
+                        {/* Column Header */}
+                        <div className="border-b border-ink/10 pb-2 flex justify-between items-center gap-1.5">
+                          <h4 className="font-serif text-sm font-bold text-ink leading-tight">
+                            {domain.category}
                           </h4>
-                          <ul className="space-y-2">
-                            {col.items.map((item, i) => (
-                              <li key={i} className="flex items-start gap-2 text-xs font-sans text-muted leading-relaxed">
-                                <span className="h-1 w-1 bg-accent/60 rounded-full mt-1.5 shrink-0" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
+                          {domain.badge && (
+                            <span className="font-mono text-[9px] font-bold text-accent bg-accent/5 px-1.5 py-0.5 border border-accent/20 rounded-xs shrink-0 whitespace-nowrap">
+                              {domain.badge}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Crisp 1-Line Bullets */}
+                        <ul className="space-y-1.5">
+                          {domain.items.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2 text-[11px] font-sans text-ink/90 leading-snug">
+                              <span className="h-1 w-1 bg-accent rounded-full mt-1.5 shrink-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Sleek Inline Toolkit Matrix */}
+                <div className="border border-ink/10 bg-surface-container/30 p-4 rounded-xs space-y-2.5">
+                  <div className="flex items-center justify-between border-b border-ink/10 pb-2">
+                    <span className="font-mono text-[10px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="h-1 w-2 bg-accent" />
+                      <span>Technical &amp; Operational Toolkit</span>
+                    </span>
+                    <span className="font-mono text-[9px] text-muted">
+                      Click any tool to filter matching systems
+                    </span>
+                  </div>
+
+                  <div className="space-y-2 pt-1">
+                    {PORTFOLIO_OWNER.skills.toolkitCategories?.map((group, gIdx) => (
+                      <div 
+                        key={gIdx} 
+                        className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 py-1 border-b border-ink/5 last:border-0"
+                      >
+                        <span className="font-mono text-[10px] font-bold text-muted uppercase tracking-wider sm:w-44 shrink-0 flex items-center gap-1.5">
+                          <span className="h-1 w-1 bg-accent/60 rounded-full" />
+                          <span>{group.category}</span>
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {group.tools.map((tool, tIdx) => {
+                            const matchCount = allCatalog.filter(p => projectMatchesSkill(p, tool.query)).length;
+                            const isActive = activeSkill === tool.query;
+                            return (
+                              <button
+                                key={tIdx}
+                                onClick={() => {
+                                  playClick();
+                                  handleSelectSkill(tool.query);
+                                }}
+                                className={`text-[10px] font-mono px-2 py-0.5 rounded-xs transition-all border cursor-pointer inline-flex items-center gap-1 ${
+                                  isActive
+                                    ? "bg-accent text-paper border-accent font-bold shadow-xs"
+                                    : "bg-paper border-ink/10 text-ink hover:border-accent/40 hover:bg-surface-container-high"
+                                }`}
+                                title={`Filter systems matching "${tool.query}" (${matchCount} found)`}
+                              >
+                                <span>{tool.name}</span>
+                                {matchCount > 0 && (
+                                  <span className={`text-[9px] px-1 py-0.1 rounded-xs ${
+                                    isActive ? "bg-paper/20 text-paper" : "bg-ink/5 text-muted"
+                                  }`}>
+                                    {matchCount}
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     ))}
                   </div>
-                </div>
 
-                {/* Subsection B: Operations, Analytics & AI Tooling */}
-                <div className="space-y-4 border-t border-ink/10 pt-8">
-                  <div className="space-y-1">
-                    <h3 className="text-xs font-mono font-bold text-muted uppercase tracking-widest flex items-center gap-2">
-                      <span className="h-1 w-3 bg-accent" />
-                      <span>Operations, Analytics &amp; AI Tooling</span>
-                    </h3>
-                    <p className="text-xs text-muted font-sans font-light">
-                      The financial modeling, analytical instruments, and systems engineering frameworks I use to turn operational friction into production software.
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2.5">
-                    {PORTFOLIO_OWNER.skills.techBuildWith.map((tech, idx) => (
-                      <button 
-                        key={idx} 
-                        onClick={() => handleSelectSkill(tech)}
-                        className={`text-xs font-mono px-3 py-1.5 rounded-sm transition-all border cursor-pointer ${
-                          activeSkill === tech
-                            ? "bg-accent text-paper border-accent font-bold shadow-xs"
-                            : "bg-surface-container border-ink/5 text-ink hover:border-accent/30 hover:bg-surface-container-high"
-                        }`}
-                        title={`Filter systems built with ${tech}`}
+                  {/* Active Skill Filter Reset Notice */}
+                  {activeSkill && (
+                    <div className="flex items-center justify-between text-xs font-mono bg-accent/5 border border-accent/20 px-3 py-1.5 text-ink mt-2">
+                      <span>
+                        Active toolkit filter: <strong className="text-accent underline">"{activeSkill}"</strong>
+                      </span>
+                      <button
+                        onClick={() => {
+                          playClick();
+                          setActiveSkill(null);
+                        }}
+                        className="text-accent hover:underline font-bold cursor-pointer text-[11px]"
                       >
-                        {tech}
+                        Reset Filter
                       </button>
-                    ))}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </motion.section>
+
+
 
             </motion.div>
           )}

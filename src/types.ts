@@ -59,3 +59,29 @@ export interface CareerAssessmentResult {
   }[];
   actionPlan: string;
 }
+
+export interface DemonstratedSystem {
+  name: string;
+  id: string;
+  type: string;
+  mode?: "narrative" | "prd";
+}
+
+export interface CapabilityDomain {
+  category: string;
+  badge?: string;
+  tagline?: string;
+  summary?: string;
+  items: string[];
+  demonstratedIn?: DemonstratedSystem[];
+}
+
+export interface ToolkitTool {
+  name: string;
+  query: string;
+}
+
+export interface ToolkitCategory {
+  category: string;
+  tools: ToolkitTool[];
+}

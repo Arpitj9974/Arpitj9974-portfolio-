@@ -1,4 +1,4 @@
-import { Project } from "./types";
+import { Project, CapabilityDomain, ToolkitCategory } from "./types";
 
 export const PORTFOLIO_OWNER = {
   name: "ARPIT JAISWAL",
@@ -24,93 +24,153 @@ export const PORTFOLIO_OWNER = {
     { label: "HR Call Logs Automated", value: "100%" }
   ],
   skills: {
+    domains: [
+      {
+        category: "FinOps & Lending",
+        badge: "4+ Yrs Proven",
+        items: [
+          "Daily cash parity (0.00% ledger drift)",
+          "Reducing-balance amortization schedules",
+          "Delinquency & aging risk tracking",
+          "Collections SOPs & daily accounting close"
+        ]
+      },
+      {
+        category: "Product & PRD Specs",
+        badge: "End-to-End Specs",
+        items: [
+          "Ground friction diagnostics & interviews",
+          "Functional PRDs, user stories & edge cases",
+          "Scope bounding & phase-gate milestones",
+          "Data schemas & technical specifications"
+        ]
+      },
+      {
+        category: "Systems & Data",
+        badge: "Offline-First",
+        items: [
+          "Relational & NoSQL schemas (Firestore, SQL)",
+          "Offline-first PWA caching & durability",
+          "State machines & running balance reducers",
+          "Low-latency client-side persistence"
+        ]
+      },
+      {
+        category: "Process Automation",
+        badge: "Zero-Touch Sync",
+        items: [
+          "Zero-touch background device & call sync",
+          "Event webhooks & Google Apps Script",
+          "Document & packaging computer vision OCR",
+          "Dynamic NPCI UPI QR & automated alerts"
+        ]
+      }
+    ] as CapabilityDomain[],
+
+    toolkitCategories: [
+      {
+        category: "Financial Modeling & FinOps",
+        tools: [
+          { name: "Financial Modeling", query: "Financial Modeling" },
+          { name: "Loan Ledger Engine", query: "Loan Ledger" },
+          { name: "Cashflow Reconciliation", query: "Cashflow" },
+          { name: "Amortization Engines", query: "Amortization" },
+          { name: "Advanced Excel", query: "Excel" }
+        ]
+      },
+      {
+        category: "Data & Analytics",
+        tools: [
+          { name: "SQL", query: "SQL" },
+          { name: "Python", query: "Python" },
+          { name: "Power BI", query: "Power BI" },
+          { name: "Tableau", query: "Tableau" },
+          { name: "Analytics & Telemetry", query: "Analytics" }
+        ]
+      },
+      {
+        category: "Systems & Architecture",
+        tools: [
+          { name: "TypeScript", query: "TypeScript" },
+          { name: "React", query: "React" },
+          { name: "Cloud Firestore", query: "Firestore" },
+          { name: "Offline PWA & IndexedDB", query: "PWA" },
+          { name: "REST APIs & Schemas", query: "API" }
+        ]
+      },
+      {
+        category: "Automation & Workflows",
+        tools: [
+          { name: "Google Apps Script", query: "Google Apps Script" },
+          { name: "Process Automation", query: "Automation" },
+          { name: "Event Webhooks", query: "Webhook" },
+          { name: "Computer Vision OCR", query: "OCR" }
+        ]
+      }
+    ] as ToolkitCategory[],
+
+    // Legacy fallback mapping
     whatIDo: [
       {
-        category: "Project & Product",
+        category: "FinOps & Business Operations",
         items: [
-          "Project coordination",
-          "Requirement gathering",
-          "Scope definition",
-          "Stakeholder communication",
-          "Product roadmapping",
-          "Documentation & technical specs",
-          "Delivery ownership"
+          "Loan ledger maintenance",
+          "Daily cashflow reconciliation",
+          "Amortization schedule engines",
+          "Borrower delinquency & aging risk",
+          "Standard Operating Procedures (SOPs)"
         ]
       },
       {
-        category: "Systems & Process",
+        category: "Product Strategy & Specifications",
         items: [
-          "Business process analysis",
-          "Process automation",
-          "Workflow design",
-          "Systems design",
-          "Data infrastructure",
-          "Requirements-to-architecture translation"
+          "Ground-level friction observation",
+          "Product Requirement Documents (PRDs)",
+          "Scope bounding & phase-gate design",
+          "Acceptance criteria & edge cases",
+          "Data dictionary & schema specs"
         ]
       },
       {
-        category: "Data & Analysis",
+        category: "Systems Architecture & Data Modeling",
         items: [
-          "SQL",
-          "Python",
-          "Power BI",
-          "Tableau",
-          "Advanced Excel",
-          "Decision-making & analysis",
-          "Reporting"
+          "Relational & document schemas",
+          "Offline-first PWA architectures",
+          "Deterministic state machines",
+          "Running balance reducers",
+          "Low-connectivity local persistence"
         ]
       },
       {
-        category: "Automation",
+        category: "Process Automation & Integration",
         items: [
-          "n8n",
-          "Make",
-          "Google Apps Script",
-          "SheetDB",
-          "API integration"
-        ]
-      },
-      {
-        category: "AI & Intelligent Tooling",
-        items: [
-          "Prompt engineering",
-          "Structured output design",
-          "Multi-provider AI routing",
-          "Multimodal vision pipelines",
-          "Google Gemini",
-          "Claude",
-          "Groq",
-          "NotebookLM"
-        ]
-      },
-      {
-        category: "Domain",
-        items: [
-          "Finance operations",
-          "Lending operations",
-          "EdTech",
-          "AgriTech",
-          "Retail"
+          "Zero-touch background sync",
+          "Google Apps Script webhooks",
+          "Computer vision OCR pipelines",
+          "Dynamic NPCI UPI QR generation",
+          "REST API integrations"
         ]
       }
     ],
     techBuildWith: [
-      "Advanced Excel (VBA & Modeling)",
-      "Loan Ledger Architecture",
+      "Financial Modeling",
+      "Loan Ledger Engine",
       "Cashflow Reconciliation",
       "Amortization Engines",
+      "Advanced Excel",
       "SQL",
-      "Python (ETL & Analytics)",
+      "Python",
       "Power BI",
       "Tableau",
-      "PRD & Technical Specs",
-      "Workflow State Machines",
-      "API & Schema Design",
-      "Google Gemini AI",
-      "Systems Architecture & Delivery",
-      "Google Apps Script",
+      "TypeScript",
+      "React",
       "Cloud Firestore",
-      "Zero-Touch Pipelines"
+      "Offline PWA & IndexedDB",
+      "REST APIs & Schemas",
+      "Google Apps Script",
+      "Process Automation",
+      "Event Webhooks",
+      "Computer Vision OCR"
     ]
   },
   experience: [
