@@ -444,6 +444,14 @@ export default function App() {
               {/* SECTION 01: HERO STATEMENT */}
               <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start" id="home-hero">
                 <div className="lg:col-span-8 space-y-6">
+                  {/* Availability Masthead Badge */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-surface-container/80 border border-ink/15 text-[10px] sm:text-xs font-mono font-bold tracking-wider uppercase text-ink">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                    <span>AVAILABLE FOR PRODUCT &amp; FINOPS ROLES</span>
+                    <span className="text-muted/40 font-normal">|</span>
+                    <span className="text-muted font-normal text-[10px]">Surat · Mumbai · Remote</span>
+                  </div>
+
                   <h1 className="font-serif text-4xl md:text-6xl font-extrabold tracking-tight text-ink leading-[1.1]">
                     {PORTFOLIO_OWNER.tagline}
                   </h1>
@@ -757,7 +765,7 @@ export default function App() {
 
                         {/* Target User / Beneficiary Chip */}
                         {project.targetUser && (
-                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${project.targetUser}`}>
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${project.targetUser}`}>
                             <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{project.targetUser}</span>
                           </div>
                         )}
@@ -789,10 +797,10 @@ export default function App() {
                         <div className="grid grid-cols-2 gap-1.5">
                           <button 
                             onClick={() => openCaseStudy(project, "prd")}
-                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
-                            title="View 1-Page PRD"
+                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-ink bg-surface-container hover:bg-accent hover:text-paper border border-ink/20 hover:border-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-2xs"
+                            title="View 1-Page PRD Specification"
                           >
-                            <FileText size={10} />
+                            <FileText size={10} className="text-accent" />
                             <span>PRD</span>
                           </button>
                           <button 
@@ -851,17 +859,24 @@ export default function App() {
                 className="space-y-6" 
                 id="home-operations-matrix"
               >
-                <div className="border-b border-ink/15 pb-4">
-                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                    <span>EXECUTIVE OPERATIONS MATRIX</span>
+                <div className="border-b border-ink/15 pb-4 flex flex-col md:flex-row md:items-end justify-between gap-3">
+                  <div>
+                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent uppercase tracking-wider">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>EXECUTIVE OPERATIONS MATRIX</span>
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink mt-1">
+                      Friction Observed // Technical System Delivered // Measured ROI
+                    </h2>
+                    <p className="text-xs md:text-sm text-muted font-sans mt-1 max-w-3xl leading-relaxed">
+                      A high-level cross-industry breakdown proving how operational observation translates into robust, production-ready software systems.
+                    </p>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-ink mt-1">
-                    Friction Observed // Technical System Delivered // Measured ROI
-                  </h2>
-                  <p className="text-xs md:text-sm text-muted font-sans mt-1 max-w-3xl leading-relaxed">
-                    A high-level cross-industry breakdown proving how operational observation translates into robust, production-ready software systems.
-                  </p>
+                  <div className="shrink-0 font-mono text-[10px] text-muted bg-surface-container px-2.5 py-1.5 border border-ink/15 flex items-center gap-1.5 self-start md:self-auto font-bold tracking-wider">
+                    <ArrowLeft size={10} className="text-accent" />
+                    <span className="text-accent">SWIPE / SCROLL FOR MEASURED ROI</span>
+                    <ArrowRight size={10} className="text-accent" />
+                  </div>
                 </div>
 
                 <div className="overflow-x-auto border border-ink/10 bg-paper">
@@ -964,21 +979,20 @@ export default function App() {
                             </td>
                             <td className="p-3.5 md:p-4 text-right">
                               {proj && (
-                                <div className="flex items-center justify-end gap-2 font-mono text-[11px]">
+                                <div className="flex items-center justify-end gap-1.5 font-mono text-[11px]">
                                   <button
                                     onClick={() => openCaseStudy(proj, "prd")}
-                                    className="text-accent hover:underline font-bold cursor-pointer"
-                                    title="View PRD"
+                                    className="px-2 py-0.5 bg-surface-container hover:bg-accent hover:text-paper border border-ink/15 text-accent font-bold transition-colors cursor-pointer rounded-xs"
+                                    title="View PRD Specification"
                                   >
                                     PRD
                                   </button>
-                                  <span className="text-muted/40">·</span>
                                   <button
                                     onClick={() => openCaseStudy(proj, "narrative")}
-                                    className="text-ink hover:text-accent font-bold cursor-pointer inline-flex items-center gap-1"
+                                    className="px-2 py-0.5 bg-ink text-paper hover:bg-accent text-[11px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1 rounded-xs"
                                   >
                                     <span>Study</span>
-                                    <ChevronRight size={11} />
+                                    <ChevronRight size={10} />
                                   </button>
                                 </div>
                               )}
@@ -1278,7 +1292,7 @@ export default function App() {
 
                             {/* Target User / Beneficiary Chip */}
                             {p.targetUser && (
-                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
                                 <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                               </div>
                             )}
@@ -1310,10 +1324,10 @@ export default function App() {
                             <div className="grid grid-cols-2 gap-1.5">
                               <button 
                                 onClick={() => openCaseStudy(p, "prd")}
-                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
-                                title="View 1-Page PRD"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-ink bg-surface-container hover:bg-accent hover:text-paper border border-ink/20 hover:border-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-2xs"
+                                title="View 1-Page PRD Specification"
                               >
-                                <FileText size={10} />
+                                <FileText size={10} className="text-accent" />
                                 <span>PRD</span>
                               </button>
                               <button 
@@ -1383,7 +1397,7 @@ export default function App() {
 
                             {/* Target User / Beneficiary Chip */}
                             {p.targetUser && (
-                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
                                 <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                               </div>
                             )}
@@ -1415,10 +1429,10 @@ export default function App() {
                             <div className="grid grid-cols-2 gap-1.5">
                               <button 
                                 onClick={() => openCaseStudy(p, "prd")}
-                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
-                                title="View 1-Page PRD"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-ink bg-surface-container hover:bg-accent hover:text-paper border border-ink/20 hover:border-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-2xs"
+                                title="View 1-Page PRD Specification"
                               >
-                                <FileText size={10} />
+                                <FileText size={10} className="text-accent" />
                                 <span>PRD</span>
                               </button>
                               <button 
@@ -1487,7 +1501,7 @@ export default function App() {
 
                             {/* Target User / Beneficiary Chip */}
                             {p.targetUser && (
-                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
                                 <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                               </div>
                             )}
@@ -1519,10 +1533,10 @@ export default function App() {
                             <div className="grid grid-cols-2 gap-1.5">
                               <button 
                                 onClick={() => openCaseStudy(p, "prd")}
-                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
-                                title="View 1-Page PRD"
+                                className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-ink bg-surface-container hover:bg-accent hover:text-paper border border-ink/20 hover:border-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-2xs"
+                                title="View 1-Page PRD Specification"
                               >
-                                <FileText size={10} />
+                                <FileText size={10} className="text-accent" />
                                 <span>PRD</span>
                               </button>
                               <button 
@@ -1585,7 +1599,7 @@ export default function App() {
 
                         {/* Target User / Beneficiary Chip */}
                         {p.targetUser && (
-                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 truncate" title={`Beneficiary: ${p.targetUser}`}>
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
                             <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                           </div>
                         )}
@@ -1617,10 +1631,10 @@ export default function App() {
                         <div className="grid grid-cols-2 gap-1.5">
                           <button 
                             onClick={() => openCaseStudy(p, "prd")}
-                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-accent bg-accent/5 hover:bg-accent hover:text-paper border border-accent/25 transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
-                            title="View 1-Page PRD"
+                            className="w-full py-1.5 px-1 text-[10px] font-mono font-bold text-ink bg-surface-container hover:bg-accent hover:text-paper border border-ink/20 hover:border-accent transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap shadow-2xs"
+                            title="View 1-Page PRD Specification"
                           >
-                            <FileText size={10} />
+                            <FileText size={10} className="text-accent" />
                             <span>PRD</span>
                           </button>
                           <button 

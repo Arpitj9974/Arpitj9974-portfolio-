@@ -48,8 +48,8 @@ export default function Header({
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-300">
       {/* Top micro-banner */}
       <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
-        <span>[ OBSERVE FRICTION // MODEL ARCHITECTURE // SHIP PRODUCTION SYSTEMS ]</span>
-        <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
+        <span className="truncate mr-3 whitespace-nowrap">[ OBSERVE FRICTION // MODEL ARCHITECTURE // SHIP PRODUCTION SYSTEMS ]</span>
+        <div className="flex items-center space-x-2 md:space-x-4 shrink-0 whitespace-nowrap">
           {onStartTour && (
             <button
               onClick={onStartTour}
@@ -69,7 +69,7 @@ export default function Header({
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         {/* Brand Name */}
         <div 
           onClick={() => setCurrentTab("home")} 
@@ -83,16 +83,17 @@ export default function Header({
           </span>
         </div>
 
-        {/* Navigation */}
-        <div className="flex flex-wrap items-center gap-4 md:gap-6 w-full md:w-auto">
-          <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 md:gap-x-5 text-xs md:text-sm font-medium">
+        {/* Navigation & Controls */}
+        <div className="flex flex-wrap items-center justify-between md:justify-end gap-3 md:gap-5 w-full md:w-auto">
+          {/* Main Navigation Links */}
+          <nav className="flex items-center gap-3 sm:gap-4 md:gap-5 text-xs md:text-sm font-medium">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setCurrentTab(item.id)}
-                className={`relative py-1 transition-all duration-150 text-xs md:text-sm font-mono tracking-wider ${
+                className={`relative py-1 transition-all duration-150 text-xs md:text-sm font-mono tracking-wider cursor-pointer ${
                   currentTab === item.id 
-                    ? "text-accent" 
+                    ? "text-accent font-bold" 
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -102,13 +103,16 @@ export default function Header({
                 )}
               </button>
             ))}
+          </nav>
 
+          {/* Dedicated Utility Actions (Locked non-wrapping flex container) */}
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 border-l border-ink/15 pl-3 sm:pl-4">
             {/* Resume Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsResumeDropdownOpen(!isResumeDropdownOpen)}
                 title="Resume Options"
-                className="flex items-center gap-1.5 px-3 py-1.5 border border-ink/30 hover:border-accent hover:text-accent text-muted text-xs font-mono tracking-wider transition-all duration-150 cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 border border-ink/30 hover:border-accent hover:text-accent text-muted text-xs font-mono tracking-wider transition-all duration-150 cursor-pointer"
               >
                 <Download size={13} />
                 <span>Resume</span>
@@ -154,11 +158,11 @@ export default function Header({
             <button
               onClick={onToggleTheme}
               title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              className="p-2 text-muted hover:text-accent transition-colors duration-200 cursor-pointer"
+              className="p-1.5 text-muted hover:text-accent transition-colors duration-200 cursor-pointer shrink-0"
             >
               {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
             </button>
-          </nav>
+          </div>
         </div>
       </div>
     </header>
