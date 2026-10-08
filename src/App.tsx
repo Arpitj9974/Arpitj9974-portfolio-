@@ -459,10 +459,10 @@ export default function App() {
                     {PORTFOLIO_OWNER.subLine}
                   </p>
                   
-                  <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
                     <button 
                       onClick={() => setCurrentTab("projects")}
-                      className="px-5 py-3 bg-ink hover:bg-accent text-paper text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                      className="w-full sm:w-auto px-5 py-3 bg-ink hover:bg-accent text-paper text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs shrink-0"
                     >
                       <span>View Work</span>
                       <ArrowRight size={14} />
@@ -473,7 +473,7 @@ export default function App() {
                         playClick();
                         setIsTourOpen(true);
                       }}
-                      className="px-4 py-3 border border-accent/40 hover:border-accent bg-accent/5 hover:bg-accent hover:text-paper text-ink text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center gap-2.5 cursor-pointer shadow-xs group"
+                      className="w-full sm:w-auto px-4 py-3 border border-accent/40 hover:border-accent bg-accent/5 hover:bg-accent hover:text-paper text-ink text-xs font-mono font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2.5 cursor-pointer shadow-xs group shrink-0"
                       title="5-Slide Executive Story Briefing (₹10Cr+ Managed, Systems Shift, Shipped Proof)"
                     >
                       <span className="w-2 h-2 rounded-full bg-accent group-hover:bg-paper inline-block animate-pulse shrink-0" />
@@ -481,7 +481,7 @@ export default function App() {
                       <ArrowRight size={13} className="shrink-0 transition-transform group-hover:translate-x-0.5" />
                     </button>
                     
-                    <div className="flex items-center gap-3 sm:ml-2 border-t sm:border-t-0 sm:border-l border-ink/10 pt-4 sm:pt-0 sm:pl-5">
+                    <div className="flex items-center justify-center sm:justify-start gap-3 sm:ml-2 border-t sm:border-t-0 sm:border-l border-ink/10 pt-3 sm:pt-0 sm:pl-5">
                       <a 
                         href={`https://${PORTFOLIO_OWNER.contactInfo.github}`} 
                         target="_blank" 
@@ -747,7 +747,7 @@ export default function App() {
                             {project.title}
                           </h3>
                           {project.subtitle && (
-                            <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={project.subtitle}>
+                            <p className="text-[11px] font-sans text-accent/90 font-medium line-clamp-2 sm:truncate leading-snug" title={project.subtitle}>
                               {project.subtitle}
                             </p>
                           )}
@@ -760,7 +760,7 @@ export default function App() {
 
                         {/* Target User / Beneficiary Chip */}
                         {project.targetUser && (
-                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${project.targetUser}`}>
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 overflow-hidden line-clamp-2 leading-snug" title={`Beneficiary: ${project.targetUser}`}>
                             <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{project.targetUser}</span>
                           </div>
                         )}
@@ -1274,7 +1274,7 @@ export default function App() {
                                 {p.title}
                               </h3>
                               {p.subtitle && (
-                                <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                                <p className="text-[11px] font-sans text-accent/90 font-medium line-clamp-2 sm:truncate leading-snug" title={p.subtitle}>
                                   {p.subtitle}
                                 </p>
                               )}
@@ -1287,7 +1287,7 @@ export default function App() {
 
                             {/* Target User / Beneficiary Chip */}
                             {p.targetUser && (
-                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 overflow-hidden line-clamp-2 leading-snug" title={`Beneficiary: ${p.targetUser}`}>
                                 <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                               </div>
                             )}
@@ -1379,7 +1379,7 @@ export default function App() {
                                 {p.title}
                               </h3>
                               {p.subtitle && (
-                                <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                                <p className="text-[11px] font-sans text-accent/90 font-medium line-clamp-2 sm:truncate leading-snug" title={p.subtitle}>
                                   {p.subtitle}
                                 </p>
                               )}
@@ -1392,7 +1392,7 @@ export default function App() {
 
                             {/* Target User / Beneficiary Chip */}
                             {p.targetUser && (
-                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 overflow-hidden line-clamp-2 leading-snug" title={`Beneficiary: ${p.targetUser}`}>
                                 <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                               </div>
                             )}
@@ -1483,7 +1483,7 @@ export default function App() {
                                 {p.title}
                               </h3>
                               {p.subtitle && (
-                                <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                                <p className="text-[11px] font-sans text-accent/90 font-medium line-clamp-2 sm:truncate leading-snug" title={p.subtitle}>
                                   {p.subtitle}
                                 </p>
                               )}
@@ -1496,7 +1496,7 @@ export default function App() {
 
                             {/* Target User / Beneficiary Chip */}
                             {p.targetUser && (
-                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
+                              <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 overflow-hidden line-clamp-2 leading-snug" title={`Beneficiary: ${p.targetUser}`}>
                                 <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                               </div>
                             )}
@@ -1581,7 +1581,7 @@ export default function App() {
                             {p.title}
                           </h3>
                           {p.subtitle && (
-                            <p className="text-[11px] font-sans text-accent/90 font-medium truncate" title={p.subtitle}>
+                            <p className="text-[11px] font-sans text-accent/90 font-medium line-clamp-2 sm:truncate leading-snug" title={p.subtitle}>
                               {p.subtitle}
                             </p>
                           )}
@@ -1594,7 +1594,7 @@ export default function App() {
 
                         {/* Target User / Beneficiary Chip */}
                         {p.targetUser && (
-                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 line-clamp-2 leading-tight" title={`Beneficiary: ${p.targetUser}`}>
+                          <div className="text-[10px] font-mono px-2 py-1 bg-surface-container/70 border border-ink/5 overflow-hidden line-clamp-2 leading-snug" title={`Beneficiary: ${p.targetUser}`}>
                             <span className="text-accent font-bold">FOR:</span> <span className="text-muted">{p.targetUser}</span>
                           </div>
                         )}

@@ -47,9 +47,9 @@ export default function Header({
   return (
     <header className="sticky top-0 z-40 bg-paper border-b border-ink/10 transition-colors duration-300">
       {/* Top micro-banner */}
-      <div className="bg-ink text-paper py-1.5 px-4 md:px-8 text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
-        <span className="truncate mr-3 whitespace-nowrap">[ OBSERVE FRICTION // MODEL ARCHITECTURE // SHIP PRODUCTION SYSTEMS ]</span>
-        <div className="flex items-center space-x-2 md:space-x-4 shrink-0 whitespace-nowrap">
+      <div className="bg-ink text-paper py-1.5 px-3 sm:px-4 md:px-8 text-[8.5px] sm:text-[9px] md:text-xs font-mono tracking-widest uppercase flex justify-between items-center overflow-hidden">
+        <span className="truncate mr-2 sm:mr-3 whitespace-nowrap max-w-[170px] sm:max-w-none">[ OBSERVE FRICTION // MODEL ARCHITECTURE // SHIP PRODUCTION SYSTEMS ]</span>
+        <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-4 shrink-0 whitespace-nowrap">
           {onStartTour && (
             <button
               onClick={onStartTour}
@@ -59,7 +59,7 @@ export default function Header({
               <span>[ 2-MIN EXECUTIVE TOUR ]</span>
             </button>
           )}
-          <span className="text-accent font-medium flex items-center gap-1.5">
+          <span className="text-accent font-medium flex items-center gap-1 sm:gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block animate-pulse" />
             <span>PORTFOLIO ACTIVE</span>
           </span>
@@ -84,14 +84,14 @@ export default function Header({
         </div>
 
         {/* Navigation & Controls */}
-        <div className="flex flex-wrap items-center justify-between md:justify-end gap-3 md:gap-5 w-full md:w-auto">
+        <div className="flex items-center justify-between md:justify-end gap-2.5 sm:gap-4 md:gap-5 w-full md:w-auto">
           {/* Main Navigation Links */}
-          <nav className="flex items-center gap-3 sm:gap-4 md:gap-5 text-xs md:text-sm font-medium">
+          <nav className="flex items-center gap-2.5 sm:gap-4 md:gap-5 text-[11px] sm:text-xs md:text-sm font-medium overflow-x-auto no-scrollbar py-0.5">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setCurrentTab(item.id)}
-                className={`relative py-1 transition-all duration-150 text-xs md:text-sm font-mono tracking-wider cursor-pointer ${
+                className={`relative py-1 transition-all duration-150 text-[11px] sm:text-xs md:text-sm font-mono tracking-wider cursor-pointer whitespace-nowrap ${
                   currentTab === item.id 
                     ? "text-accent font-bold" 
                     : "text-muted hover:text-ink"
@@ -106,7 +106,7 @@ export default function Header({
           </nav>
 
           {/* Dedicated Utility Actions (Locked non-wrapping flex container) */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 border-l border-ink/15 pl-3 sm:pl-4">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-2.5 shrink-0 border-l border-ink/15 pl-2 sm:pl-3 md:pl-4">
             {/* Resume Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
