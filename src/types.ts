@@ -9,6 +9,7 @@ export interface Project {
   problemSolved?: string;
   targetUser?: string;
   aiOrchestration?: string;
+  systemsArchitecture?: string;
   valueBadges?: string[];
   longDescription?: string;
   year: string;

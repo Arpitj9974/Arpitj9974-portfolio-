@@ -72,7 +72,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
               <ul className="list-disc ml-4 mt-1 text-[9.5pt] space-y-0.5 leading-[1.3]" style={{ color: '#1f2937' }}>
                 <li>Ran end-to-end lending operations across 4 years 4 months: borrower portfolio onboarding, credit validation, loan disbursement, and daily repayment tracking across 120+ active merchant accounts.</li>
                 <li>Designed and built the firm&apos;s foundational Excel data and ledger infrastructure from scratch; remains the core operational system running daily operations today with 100% mathematical accuracy.</li>
-                <li>Returned in 2025 to spearhead automation tooling, reducing daily account reconciliation time from 45 minutes to under 4 minutes using Google Apps Script and automated data workflows.</li>
+                <li>Returned in 2025 to spearhead automation tooling, cutting daily accounting close time by 80%+ (from 90m to under 15m) with automated ledger reconciliation using Google Apps Script and streamlined data workflows.</li>
                 <li>Formulated operational risk checks, delinquency alerts, and EMI schedules to ensure zero accounting discrepancies between field collections and ledger balances.</li>
                 <li><strong>Skills:</strong> Process Automation, Business Operations, Amortization Modeling, Advanced Excel, Google Apps Script, Decision Analysis</li>
               </ul>

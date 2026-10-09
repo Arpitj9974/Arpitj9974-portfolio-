@@ -533,6 +533,416 @@ export const PRD_DATA: Record<string, PRDSpec> = {
         businessImpact: "Air-gapped Cloud Functions isolate Gemini API keys with Google Cloud Secret Manager."
       }
     ]
+  },
+
+  "arws-raw": {
+    projectId: "arws-raw",
+    docId: "PRD-HR-004",
+    version: "v1.4",
+    status: "SHIPPED & LIVE",
+    title: "RAW (ARWS Dialer) — Invisible Android Call Intelligence & Zero-Touch Ingestion",
+    author: "Arpit Jaiswal (Product & Systems Architect)",
+    targetUsers: "SME Recruitment Teams, Headhunters, HR Operations Leads, Dual-SIM Field Executives",
+    lastUpdated: "2026",
+    executiveSummary: "In fast-paced SME recruitment, staff make 40–80 candidate calls daily across dual-SIM Android smartphones. Manually typing call durations and timestamps into spreadsheets consumes 45–60 minutes of overtime every evening and causes 15–25% record loss from memory fatigue. RAW solves this with an invisible, battery-optimized Android background service that detects call completion, strictly isolates personal SIM calls on hardware boundaries, buffers records locally via Room SQLite, and syncs directly to Google Sheets in real-time with zero server infrastructure costs.",
+    rootCauseAnalysis: [
+      "Manual Logging Overhead: Recruiter fatigue from spending 45-60 minutes typing call data after work hours, eroding focus on core candidate sourcing.",
+      "Data Loss & Interaction Amnesia: Call details recorded hours after conversations suffer from forgotten durations, misattributed phone numbers, and missed follow-ups.",
+      "Dual-SIM Privacy Leaks: Generic call tracking tools indiscriminately upload all calls, violating recruiter personal privacy on personal SIM lines.",
+      "Zero Infrastructure Budget: Early-stage SME recruitment agencies lack budgets for heavy enterprise ATS software licenses like Bullhorn or Zoho."
+    ],
+    primaryPersona: {
+      name: "Kavita Patel",
+      role: "Senior Technical Recruiter",
+      context: "Manages active candidate pipelines across 15 engineering openings using a dual-SIM company-issued smartphone.",
+      jtbd: "When I complete a candidate screening call on my company SIM, I need the call timestamp, duration, and status immediately logged into our team's Google Sheet without opening an app, while guaranteeing my personal SIM calls remain strictly untracked."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Hardware-Level Dual-SIM SIM Boundary Gatekeeper",
+        spec: "PhoneStateListener inspects Android subscriptionId upon call completion, enforcing strict cryptographic filtering to verify company SIM ICCID before log creation.",
+        acceptanceCriteria: "100% guarantee that personal SIM calls never trigger log entries or network requests."
+      },
+      {
+        priority: "P0",
+        title: "Local Room SQLite Transactional Buffer",
+        spec: "Foreground service writes raw call records to a local SQLite table before dispatching network calls, with a 1,500ms delay allowing the media service to flush CallLog.Calls.",
+        acceptanceCriteria: "Zero log loss during network drops, airplane mode, or basement interview environments."
+      },
+      {
+        priority: "P0",
+        title: "Zero-Cost Google Apps Script Ingestion Webhook",
+        spec: "133-line Google Apps Script Web App acting as a serverless REST ingestion endpoint appending verified JSON payloads directly to target Google Sheet tabs.",
+        acceptanceCriteria: "Atomic row appends execute in <850ms with $0 monthly cloud hosting cost."
+      },
+      {
+        priority: "P1",
+        title: "Multi-Layered Deduplication Architecture",
+        spec: "Generates an MD5 signature from (phoneNumber + timestamp + durationSeconds) stored locally and verified server-side before sheet appending.",
+        acceptanceCriteria: "0.00% duplicate row insertion rate, even upon network retries or device reboots."
+      },
+      {
+        priority: "P1",
+        title: "WorkManager Periodic Offline Backfill Engine",
+        spec: "Clock-boundary-aligned background worker polling pending un-synced Room records and flushing them upon network reconnection with exponential backoff.",
+        acceptanceCriteria: "All offline queued records successfully reach the Google Sheet within 60 seconds of network restoration."
+      },
+      {
+        priority: "P2",
+        title: "Low-Power Battery-Optimized Service Architecture",
+        spec: "Event-driven architecture activating only during CallLog state changes without continuous GPS or CPU polling.",
+        acceptanceCriteria: "Consumes <1.2% total daily battery life across an 8-hour recruitment shift."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "CallRecordEntity",
+          description: "Local Room SQLite table tracking captured official calls",
+          fields: ["id", "phoneNumber", "callType (INCOMING|OUTGOING|MISSED)", "timestamp", "durationSeconds", "simSubscriptionId", "syncStatus", "hashSignature"]
+        },
+        {
+          name: "SIMFilterRule",
+          description: "Hardware configuration defining authorized corporate SIM parameters",
+          fields: ["slotIndex", "carrierName", "subscriptionId", "isCompanySIM", "autoSyncEnabled"]
+        },
+        {
+          name: "GoogleSheetIngestionRow",
+          description: "Structured row appended to the master recruitment spreadsheet",
+          fields: ["recordId", "recruiterName", "candidateNumber", "callDirection", "durationFormatted", "callDate", "callTime", "verifiedStatus"]
+        }
+      ],
+      syncStrategy: "PhoneStateListener event -> 1500ms Media Flush Buffer -> Dual-SIM Gatekeeper -> Room SQLite Local Commit -> Async HTTP POST to Apps Script -> WorkManager retry on network failure."
+    },
+    edgeCases: [
+      {
+        scenario: "Device abruptly restarted or powered off during an active recruitment call",
+        operationalRisk: "Uncommitted call in memory lost before database write.",
+        systemResolution: "Boot-completed broadcast receiver queries Android CallLog.Calls for recent missed un-synced company SIM calls and hydrates Room."
+      },
+      {
+        scenario: "Recruiter physically swaps SIM cards between slot 1 and slot 2 in device tray",
+        operationalRisk: "Slot-based filtering logs personal calls to company spreadsheet.",
+        systemResolution: "Engine filters by hardware subscriptionId (ICCID) rather than physical slotIndex, ensuring filter integrity regardless of tray position."
+      },
+      {
+        scenario: "Google Apps Script cold start latency exceeds 3000ms",
+        operationalRisk: "UI freeze or ANR (Application Not Responding) crash on recruiter device.",
+        systemResolution: "Background HTTP client operates on Dispatchers.IO with a 5000ms timeout; failed requests cleanly remain in Room for WorkManager retry."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Daily Administrative Overhead", metric: "-60 Minutes Daily", businessImpact: "Completely eliminates end-of-day manual spreadsheet typing for recruiters" },
+      { label: "Call Capture Accuracy", metric: "100% Official Logs Captured", businessImpact: "Zero interaction amnesia across client and candidate hiring pipelines" },
+      { label: "Duplicate Record Rate", metric: "0.00% Duplicates", businessImpact: "Clean, deduplicated spreadsheet rows verified by cryptographic signatures" },
+      { label: "Infrastructure Cost", metric: "$0 Server Cost", businessImpact: "100% serverless Google Apps Script eliminates enterprise ATS subscription bills" }
+    ]
+  },
+
+  "freshstamp": {
+    projectId: "freshstamp",
+    docId: "PRD-FMCG-005",
+    version: "v2.0",
+    status: "SHIPPED & LIVE",
+    title: "FreshStamp — Optical Packaging Scanner & FIFO Household Expiry Prevention Engine",
+    author: "Arpit Jaiswal (Product & Systems Architect)",
+    targetUsers: "Budget-Conscious Households, Elderly Chronic Prescription Users, Local Kirana Grocers",
+    lastUpdated: "2026",
+    executiveSummary: "Indian households and local kirana grocers discard over ₹50,000 worth of groceries, cosmetics, and prescription medicines annually because expiration dates are stamped in tiny, low-contrast dot-matrix fonts and forgotten in cupboards. Existing inventory apps suffer from 95% abandonment because users refuse to manually type product names and dates. FreshStamp eliminates typing entirely with an optical camera scanner that extracts brand, category, batch, and expiry date in under 3 seconds, pairing it with an offline-first derived FIFO batch engine that alerts users before food or medicine spoils.",
+    rootCauseAnalysis: [
+      "Micro-Font Expiration Opacity: Dates stamped on crimped seals, jar bottoms, and blister foils are unreadable without active magnification.",
+      "High Onboarding Keyboard Friction: Manual typing apps require 45–90 seconds per grocery item, causing immediate user abandonment.",
+      "Lack of FIFO Batch Awareness: Households restock newer groceries in front of older items on shelves, allowing older perishables to expire unnoticed."
+    ],
+    primaryPersona: {
+      name: "Meena Shah",
+      role: "Household Manager & Elder Caregiver",
+      context: "Manages weekly groceries for a family of 5 while tracking 8 daily prescription medicines for elderly parents.",
+      jtbd: "When I unpack newly bought groceries and medicines, I need to point my phone camera at the packaging and have the expiry dates instantly recognized and logged into a FIFO alert list in seconds, without typing."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Sub-3s Optical Packaging Ingestion Pipeline",
+        spec: "Client camera captures packaging image, passing it to an optimized Gemini Vision endpoint that returns structured brand, category, and normalized ISO expiry date.",
+        acceptanceCriteria: "Extraction completes in <3000ms with zero manual keyboard data entry."
+      },
+      {
+        priority: "P0",
+        title: "Local-First Dual-Channel Persistence",
+        spec: "Instant write to localStorage with optimistic UI updates, mirrored asynchronously to Firebase Firestore upon user authentication.",
+        acceptanceCriteria: "100% functional for guest users; zero data loss during network dropouts."
+      },
+      {
+        priority: "P0",
+        title: "Zero-DB Derived FIFO Batch-Tracking Engine",
+        spec: "Pure client-side reducer comparing new scans against existing inventory by product name, generating chronological batch ranks and high-visibility 'USE FIRST' visual stamps.",
+        acceptanceCriteria: "Automatically surfaces older-expiring batches at the top of the pantry list."
+      },
+      {
+        priority: "P1",
+        title: "Multi-Threshold Expiration Alerts",
+        spec: "Calculates countdown days using midnight-normalized boundaries; triggers color-coded status badges for Expired (<0d), Critical (1–7d), and Upcoming (8–30d).",
+        acceptanceCriteria: "Zero false-positive alarms on valid shelf-life items."
+      },
+      {
+        priority: "P1",
+        title: "Financial Waste Telemetry Dashboard",
+        spec: "Tracks item purchase price and aggregates cumulative rupees saved by consuming products before expiration thresholds.",
+        acceptanceCriteria: "Visualizes cumulative waste savings and category-wise risk breakdowns."
+      },
+      {
+        priority: "P2",
+        title: "Offline-First PWA Asset Caching",
+        spec: "Service worker caches app shell, vision assets, and icons for instant offline cold start.",
+        acceptanceCriteria: "Sub-200ms cold boot from home screen icon."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "PantryItem",
+          description: "Core household consumable product record",
+          fields: ["id", "name", "category", "brand", "currentQuantity", "unit", "storageLocation", "createdAt"]
+        },
+        {
+          name: "BatchStock",
+          description: "Individual product batch with distinct expiration parameters",
+          fields: ["id", "itemId", "batchNumber", "expiryDate", "purchasePrice", "fifoRank", "isOpened", "status"]
+        },
+        {
+          name: "WasteMetric",
+          description: "Financial telemetry tracking saved vs expired monetary value",
+          fields: ["id", "itemId", "batchId", "itemValueINR", "savedStatus", "resolvedDate"]
+        }
+      ],
+      syncStrategy: "Camera capture -> Local OCR/Vision API -> Optimistic localStorage write -> Firebase Firestore mirror with offline PWA Workbox cache."
+    },
+    edgeCases: [
+      {
+        scenario: "Faded or dot-matrix printed expiration date on curved bottle surface",
+        operationalRisk: "OCR fails to extract reliable date, leaving field blank.",
+        systemResolution: "Client prompts 1-tap calendar picker with smart pre-filled default based on average category shelf-life."
+      },
+      {
+        scenario: "Offline scanning in basement grocery store or pantry without signal",
+        operationalRisk: "Network failure blocking receipt or packaging logging.",
+        systemResolution: "PWA caches captured photo locally in IndexedDB; dispatches extraction queue automatically when connectivity returns."
+      },
+      {
+        scenario: "Identical brand items scanned with two different expiration dates",
+        operationalRisk: "Inventory overwrites earlier batch with newer batch data.",
+        systemResolution: "Derived FIFO engine splits item into distinct batches, applying urgent 'USE FIRST' tag to the earlier-expiring product."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Annual Household Savings", metric: "₹50,000+ Saved/Yr", businessImpact: "Eliminates preventable perishable food and expensive prescription medicine waste" },
+      { label: "Scan Ingestion Speed", metric: "<3 Seconds", businessImpact: "Zero manual keyboard friction drives daily pantry logging compliance" },
+      { label: "Offline Availability", metric: "100% PWA Availability", businessImpact: "Works reliably in basement kitchens and grocery aisles with zero network drops" },
+      { label: "Spoilage Prevention", metric: "35% Spoilage Reduction", businessImpact: "Derived FIFO batch logic ensures older inventory is prioritized for consumption" }
+    ]
+  },
+
+  "medicine-extraction": {
+    projectId: "medicine-extraction",
+    docId: "PRD-PHARMA-006",
+    version: "v1.1",
+    status: "SHIPPED & LIVE",
+    title: "Medicine Image Extraction — Pharmaceutical Packaging Optical Digitizer & Pharmacopoeia Ingestion Engine",
+    author: "Arpit Jaiswal (Product & Systems Architect)",
+    targetUsers: "Retail Pharmacy Chemists, Pharmaceutical Stockists, Hospital Dispensaries, Warehouse Stock Keepers",
+    lastUpdated: "2026",
+    executiveSummary: "Retail pharmacies and pharmaceutical distributors process hundreds of incoming medicine boxes daily, manually typing complex alphanumeric batch numbers, expiration dates, and Maximum Retail Prices (MRPs) into legacy inventory software. This manual entry leads to keyboard transcription errors (such as mistaking '0' for 'O' or '8' for 'B'), resulting in failed drug regulatory audits and expired medicine dispensation. Medicine Image Extraction provides a decoupled, three-tier optical extraction pipeline that converts packaging photos into verified database records in under 5 seconds, maintaining audit compliance and zero client credential leakage.",
+    rootCauseAnalysis: [
+      "Manual Alphanumeric Transcription Fatigue: Typing 10-digit batch codes and expiry dates for 200+ medicine boxes daily causes high error rates.",
+      "Regulatory Drug Audit Compliance Risks: Alphanumeric mismatches between invoices and physical stock lead to regulatory penalties and stock lockups.",
+      "Monolithic System Fragility: Standard inventory tools crash completely when database connections stall, halting entire retail billing counters."
+    ],
+    primaryPersona: {
+      name: "Rajesh Vora",
+      role: "Wholesale Pharmaceutical Distributor & Retail Chemist",
+      context: "Manages inward inventory across 450+ SKUs daily; operates under strict CDSCO drug inventory auditing regulations.",
+      jtbd: "When incoming crates of medicine arrive, I need my staff to photograph the box labels and have batch numbers, expiry dates, and MRPs instantly verified and ingested into our database in seconds, without typing mistakes."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Decoupled Three-Tier Polyglot Microservices",
+        spec: "Separates optical extraction (FastAPI) from data persistence (Node.js/MongoDB) and client interface (React), allowing independent scaling and fault isolation.",
+        acceptanceCriteria: "Extraction continues to function even during database maintenance or network sync delays."
+      },
+      {
+        priority: "P0",
+        title: "Strict Pydantic JSON Schema Validation",
+        spec: "FastAPI enforces structured validation schemas for regulatory medicine data: Brand Name, Generic Composition, Batch Number, Expiry Date, and MRP.",
+        acceptanceCriteria: "Zero untyped or corrupted data writes; automatically rejects malformed OCR outputs."
+      },
+      {
+        priority: "P0",
+        title: "Air-Gapped Credential Gateway",
+        spec: "Client uploads photos via server-side proxy; API secrets reside strictly inside server environment variables.",
+        acceptanceCriteria: "0 API keys or sensitive credentials exposed on client bundle."
+      },
+      {
+        priority: "P1",
+        title: "Graceful Database Degradation Mode",
+        spec: "If MongoDB experiences downtime, extraction engine outputs JSON directly to the client screen with verification badges, queueing database write upon recovery.",
+        acceptanceCriteria: "Zero disruption to pharmacy counter stock intake."
+      },
+      {
+        priority: "P1",
+        title: "3-Tier Multi-Stage File Validation",
+        spec: "Validates MIME types and enforces <5MB payload limits across Client, Multer middleware, and FastAPI request inspectors.",
+        acceptanceCriteria: "Rejects oversized or corrupt image files with actionable feedback in <100ms."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "MedicineRecord",
+          description: "Regulatory pharmaceutical inventory item",
+          fields: ["id", "brandName", "genericComposition", "batchNumber", "expiryDate", "mrp", "manufacturer", "verified"]
+        },
+        {
+          name: "ExtractionSession",
+          description: "Optical processing session metadata",
+          fields: ["sessionId", "rawImageUrl", "latencyMs", "completenessScore", "serviceStatus", "timestamp"]
+        },
+        {
+          name: "AuditLog",
+          description: "Regulatory tracking of verified packaging extractions",
+          fields: ["logId", "medicineId", "originalBatch", "confirmedBatch", "auditedBy", "auditTimestamp"]
+        }
+      ],
+      syncStrategy: "Client image upload -> Multer validation -> FastAPI Vision processing with Pydantic validation -> MongoDB write with graceful offline degradation fallback."
+    },
+    edgeCases: [
+      {
+        scenario: "Foil blister packaging reflecting camera glare directly over the batch code",
+        operationalRisk: "Incomplete optical extraction leading to missing batch numbers.",
+        systemResolution: "Image normalization adjusts gamma curves; confidence score tags uncertain characters for 1-tap chemist confirmation."
+      },
+      {
+        scenario: "Database server maintenance during peak morning delivery hours",
+        operationalRisk: "Failed database writes halting shipment intake.",
+        systemResolution: "Extraction service outputs structured JSON payload directly to the client session with offline export option."
+      },
+      {
+        scenario: "Medicine packaging displays dual dates (Manufacturing vs Expiry)",
+        operationalRisk: "Manufacturing date erroneously recorded as expiration date.",
+        systemResolution: "Pydantic validator inspects prefix tokens ('MFG', 'EXP', 'B.No') to strictly bind correct dates."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Extraction Turnaround", metric: "<5 Seconds per Package", businessImpact: "Over 80% time saved compared to manual keyboard data entry" },
+      { label: "Regulatory Audit Parity", metric: "0 Transcription Mismatches", businessImpact: "Eliminates alphanumeric typos in drug batch and expiration records" },
+      { label: "Client Security Grade", metric: "0 Leaked Credentials", businessImpact: "Strict server-side proxy isolation keeps API secrets air-gapped" },
+      { label: "Operational Resilience", metric: "100% Extraction Uptime", businessImpact: "Decoupled microservice architecture ensures optical ingestion never freezes" }
+    ]
+  },
+
+  "farmer-connect": {
+    projectId: "farmer-connect",
+    docId: "PRD-AGRI-007",
+    version: "v1.3",
+    status: "SHIPPED & LIVE",
+    title: "FarmerConnect — Direct Agricultural Cooperative Marketplace & Concurrency-Safe Auction Engine",
+    author: "Arpit Jaiswal (Product & Systems Architect)",
+    targetUsers: "Smallholder Farmers, Rural Agricultural Cooperatives, Commercial Bulk Buyers, Food Processors",
+    lastUpdated: "2026",
+    executiveSummary: "Smallholder farmers in India lose up to 30–40% of their crop value to cartelized commission middlemen in physical wholesale mandis due to price opacity, auction fixing, and delayed payments. Traditional agri-apps suffer from high latency and concurrency race conditions during live harvest bidding, where simultaneous buyer bids collide. FarmerConnect eliminates intermediary markups by establishing a direct-to-buyer digital marketplace featuring a concurrency-safe auction engine backed by PostgreSQL row-level locks, hybrid 24-hour cached government Mandi benchmark prices (data.gov.in), and a resilient 3-provider multilingual advisory cascade in Gujarati, Hindi, and English.",
+    rootCauseAnalysis: [
+      "Mandi Cartelization & Commission Leakage: Middlemen absorb up to 40% of farmer margins through hidden grading deductions and auction cartels.",
+      "Price Asymmetry & Information Blackout: Farmers lack real-time visibility into official Minimum Support Prices (MSP) and neighboring APMC rates before harvesting.",
+      "Auction Concurrency Race Conditions: Standard digital auction portals lack database locking, allowing multiple buyers bidding in the same millisecond to corrupt transaction states."
+    ],
+    primaryPersona: {
+      name: "Bhavesh Patel",
+      role: "Cotton & Groundnut Cooperative Farmer",
+      context: "Farms 12 acres in Saurashtra, Gujarat; traditionally compelled to sell harvest to local APMC mandi middlemen at discounted rates.",
+      jtbd: "When my crop is harvested, I need to check live government benchmark prices in Gujarati, list my lot for direct competitive bidding, and accept verified buyer bids without losing 30% margin to mandi middlemen."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Concurrency-Safe Auction Bidding Engine",
+        spec: "PostgreSQL transactional row-level lock (SELECT ... FOR UPDATE) serializes incoming bids, verifying bid > highestBid before committing transaction.",
+        acceptanceCriteria: "Zero race condition collisions or duplicate winning bids during peak auction milliseconds."
+      },
+      {
+        priority: "P0",
+        title: "Hybrid 24-Hour Cached Mandi Benchmark Feed",
+        spec: "Integrates official data.gov.in Agmarknet API; warms a 24-hour local cache to serve instant domestic rates by commodity and state.",
+        acceptanceCriteria: "100% price feed availability even when government API servers suffer outages."
+      },
+      {
+        priority: "P0",
+        title: "Multi-Provider AI Advisory Cascade (Krishi Sahayak)",
+        spec: "3-tier automatic failover cascade routing queries across OpenRouter -> Gemini + Search Grounding -> Groq Llama 3.3 for crop advisory and MSP calculations.",
+        acceptanceCriteria: "Advisory assistant remains active with <1.5s latency even during individual provider downtime."
+      },
+      {
+        priority: "P1",
+        title: "Trilingual Localization & Accessibility",
+        spec: "Full system UI and advisory support in Gujarati, Hindi, and English tailored for rural agricultural operators.",
+        acceptanceCriteria: "Zero English-only dead ends; accessible navigation for non-English speakers."
+      },
+      {
+        priority: "P1",
+        title: "7-Tier Security Throttling & Bot Protection",
+        spec: "Rate limiting and token buckets guarding auction endpoints against automated bot bidding and scrapers.",
+        acceptanceCriteria: "Protects farmer auctions from artificial price manipulation."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "CropListing",
+          description: "Farmer harvest lot offered for sale or auction",
+          fields: ["id", "farmerId", "cropName", "variety", "quantityQuintals", "basePriceINR", "auctionType", "status"]
+        },
+        {
+          name: "AuctionBid",
+          description: "Atomic transactional bid placed by verified buyer",
+          fields: ["id", "listingId", "buyerId", "bidAmountINR", "bidTimestamp", "isWinningBid", "lockVersion"]
+        },
+        {
+          name: "MandiPriceCache",
+          description: "Cached APMC benchmark commodity pricing feed",
+          fields: ["apmcCode", "commodity", "minPrice", "maxPrice", "modalPrice", "arrivalDate", "lastFetched"]
+        },
+        {
+          name: "AdvisoryQuery",
+          description: "Multilingual farmer advisory interaction log",
+          fields: ["queryId", "farmerId", "language", "intentCategory", "providerUsed", "responseText"]
+        }
+      ],
+      syncStrategy: "Supabase PostgreSQL row-level transactional lock -> Realtime WebSocket broadcast -> 24h cached Agmarknet API sync -> Multi-provider AI fallback loop."
+    },
+    edgeCases: [
+      {
+        scenario: "Two bulk buyers place the identical winning bid in the exact same millisecond",
+        operationalRisk: "Dual winner conflict and split contract failure.",
+        systemResolution: "PostgreSQL SELECT FOR UPDATE locks the row; the first transaction commits and increments winning bid, immediately rejecting the second."
+      },
+      {
+        scenario: "Official government data.gov.in server suffers weekend downtime",
+        operationalRisk: "Mandi price radar displays blank screens to farmers.",
+        systemResolution: "24-hour hybrid caching layer serves the last-verified APMC rates with a clear 'Cached Benchmark' timestamp badge."
+      },
+      {
+        scenario: "Spotty 2G mobile internet in rural fields during active bidding",
+        operationalRisk: "Buyer bid confirmation stalls or drops.",
+        systemResolution: "Optimistic UI state with socket auto-reconnection and exponential backoff ensures bids persist without duplication."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Farmer Margin Recovery", metric: "30–40% Middleman Fees Saved", businessImpact: "Direct matchmaking eliminates cartelized intermediary commissions" },
+      { label: "Auction Concurrency Parity", metric: "0 Bid Collisions", businessImpact: "Guaranteed transaction serialization via PostgreSQL row-level locks" },
+      { label: "Mandi Price Feed Availability", metric: "100% Benchmark Uptime", businessImpact: "24-hour hybrid caching keeps market intelligence accessible during API outages" },
+      { label: "Advisory Cascade Uptime", metric: "99.9% Advisory Uptime", businessImpact: "3-tier automated failover prevents system blackout during crop season" }
+    ]
   }
 };
 

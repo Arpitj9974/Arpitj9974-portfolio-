@@ -1957,7 +1957,7 @@ export default function App() {
                     </div>
                     <h3 className="font-serif text-2xl font-bold text-ink">Technical Architecture &amp; Execution</h3>
                     <p className="text-sm md:text-base text-muted font-sans leading-relaxed">
-                      {selectedCaseStudy.aiOrchestration || "Formulated the operational logic, structured the data schemas, and engineered a production-ready system designed for real-world resilience."}
+                      {selectedCaseStudy.systemsArchitecture || selectedCaseStudy.aiOrchestration || "Formulated the operational logic, structured the data schemas, and engineered a production-ready system designed for real-world resilience."}
                     </p>
                   </div>
 
