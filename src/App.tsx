@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ResumeModal from "./components/ResumeModal";
-import PrintableResume from "./components/PrintableResume";
 import TypingText from "./components/TypingText";
 import ProjectCardLinks from "./components/ProjectCardLinks";
 import CommandPalette from "./components/CommandPalette";

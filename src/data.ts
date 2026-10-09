@@ -489,7 +489,7 @@ export const PROJECTS: Project[] = [
     client: "Indian High School Guidance Initiative",
     outcome: "Created an open-source, O(1) performance exploration portal delivering interactive maps of 225+ paths, 700+ exams, and 5k+ institutions with zero static page-load latency and 100% offline-tolerant bookmarks.",
     problem: "Indian Class 11-12 students face a complex, multi-tiered decision pipeline with scarce structured resources. Standard tools offer superficial summaries, lack concrete stream-to-college maps, and fail to provide personalized suitability evaluation based on actual academic credentials.",
-    solution: "Engineered a zero-framework, dynamic page-routing engine mapping taxonomy folders through specialized JSON assets. Built a customized document ingestion engine using FileReader API to extract credentials from marksheets. This content dynamically feeds structured prompting payloads to Claude Sonnet to output comprehensive 5-dimensional candidate-role-fit reports.",
+    solution: "Engineered a zero-framework, dynamic page-routing engine mapping taxonomy folders through specialized JSON assets. Built a customized document ingestion engine using FileReader API to extract credentials from marksheets. This content dynamically feeds structured context and schema-constrained inference payloads to Claude Sonnet to output comprehensive 5-dimensional candidate-role-fit reports.",
     impactStats: [
       { label: "Careers Mapped", value: "225" },
       { label: "Mapped Entrance Exams", value: "700+" },

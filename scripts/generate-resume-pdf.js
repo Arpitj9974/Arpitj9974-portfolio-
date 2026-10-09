@@ -269,7 +269,7 @@ const htmlContent = `<!DOCTYPE html>
     <div class="section">
       <div class="section-title">SUMMARY</div>
       <p class="summary-text">
-        Product and business operations specialist with 4+ years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the core lending and data infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in translating complex operational friction into structured PRDs, automated workflows, and high-performance software.
+        Product and business operations specialist with 4+ years of lending operations experience and a technical foundation (BCA + MBA in Analytics &amp; Data Science + Project Management). Built the foundational lending data and ledger infrastructure at JD Finance, and architected 10 production systems across FinTech, EdTech, AgriTech, and Retail. Expert in diagnosing ground-level operational friction, modeling business workflows and financial ledgers, and translating specifications into robust system architectures, data schemas, and production-ready applications.
       </p>
     </div>
 
@@ -287,7 +287,7 @@ const htmlContent = `<!DOCTYPE html>
         <ul class="bullet-list">
           <li>Ran end-to-end lending operations across 4 years 4 months: borrower portfolio onboarding, credit validation, loan disbursement, and daily repayment tracking across 120+ active merchant accounts.</li>
           <li>Designed and built the firm&apos;s foundational Excel data and ledger infrastructure from scratch; remains the core operational system running daily operations today with 100% mathematical accuracy.</li>
-          <li>Returned in 2025 to spearhead automation tooling, reducing daily account reconciliation time from 45 minutes to under 4 minutes using Google Apps Script and automated data workflows.</li>
+          <li>Returned in 2025 to spearhead automation tooling, cutting daily accounting close time by 80%+ (from 90m to under 15m) with automated ledger reconciliation using Google Apps Script and streamlined data workflows.</li>
           <li>Formulated operational risk checks, delinquency alerts, and EMI schedules to ensure zero accounting discrepancies between field collections and ledger balances.</li>
         </ul>
         <div class="skills-tag"><strong>Skills:</strong> Process Automation, Business Operations, Amortization Modeling, Advanced Excel, Google Apps Script, Decision Analysis</div>
@@ -382,7 +382,7 @@ const htmlContent = `<!DOCTYPE html>
             <span class="project-tag">Android / HR Operations, Deployed at ARWS</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/Arpitj9974/RAW" target="_blank">GitHub</a>
+            <a href="https://github.com/Arpitj9974/ARWS-dialer" target="_blank">GitHub</a>
           </div>
         </div>
         <p class="project-desc">
@@ -420,7 +420,7 @@ const htmlContent = `<!DOCTYPE html>
           </div>
         </div>
         <p class="project-desc">
-          Forward-looking committed cashflow &amp; obligation intelligence engine projecting contractual burn across 12-to-60 month horizons. Inverts retrospective budgeting by modeling fixed, variable, and amortized liabilities (reducing bank loans, credit card EMIs, recurring mandates). Engineered with React 19, TypeScript, Firestore, and Workbox PWA. Features deterministic month-end clamping (preventing cycle drift in 28/29/30/31-day months), optimistic state with 10-second transactional undo buffer, 136 passing Vitest unit tests, and air-gapped Gemini 2.0 Flash multimodal receipt OCR.
+          Forward-looking committed cashflow &amp; obligation intelligence engine projecting contractual burn across 12-to-60 month horizons. Inverts retrospective budgeting by modeling fixed, variable, and amortized liabilities (reducing bank loans, credit card EMIs, recurring mandates). Architected with deterministic month-end calendar clamping (eliminating cycle drift across 28- to 31-day months), optimistic state with a 10-second transactional undo buffer, exhaustive test validation, and air-gapped Gemini 2.0 Flash multimodal receipt OCR to safeguard financial data integrity.
         </p>
         <div class="project-stack">Built with: React 19, TypeScript, Cloud Firestore, Workbox PWA, Gemini 2.0 Flash, Zustand, Zod, Vitest</div>
       </div>
@@ -444,10 +444,10 @@ const htmlContent = `<!DOCTYPE html>
           <strong>Automation &amp; Integrations:</strong> Google Apps Script, REST APIs, n8n, Make, Webhooks, Firestore Event Sync, SheetDB
         </div>
         <div class="skills-category">
-          <strong>AI Orchestration &amp; Tooling:</strong> LLM Systems Architecture, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM
+          <strong>Systems Orchestration &amp; Applied AI:</strong> Systems Architecture, Structured Outputs, Multi-Provider Routing, Google Gemini, Claude API, Groq, NotebookLM
         </div>
         <div class="skills-category">
-          <strong>Core Technologies:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel
+          <strong>Systems Architecture &amp; Technical Stacks:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel
         </div>
       </div>
     </div>
