@@ -16,7 +16,7 @@ import {
   Check,
   Sparkles
 } from "lucide-react";
-import { PROJECTS, PORTFOLIO_OWNER } from "../data";
+import { PROJECTS, PORTFOLIO_OWNER, JD_FINANCE_CASE_STUDY } from "../data";
 import { Project } from "../types";
 import { playClick, playPalette, playToggle, playSuccess } from "../utils/soundEngine";
 
@@ -84,7 +84,8 @@ export default function CommandPalette({
     const list: PaletteAction[] = [];
 
     // 1. Projects (Narrative + PRD)
-    PROJECTS.forEach((p) => {
+    const allCatalog = [JD_FINANCE_CASE_STUDY, ...PROJECTS];
+    allCatalog.forEach((p) => {
       // Open Case Study
       list.push({
         id: `case-${p.id}`,

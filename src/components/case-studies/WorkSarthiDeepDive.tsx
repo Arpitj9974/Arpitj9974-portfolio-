@@ -4,7 +4,7 @@ export default function WorkSarthiDeepDive() {
   return (
                 <div className="border-t border-ink/10 pt-10 space-y-12">
                   <div className="space-y-2">
-                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// COGNITIVE AI PIPELINE & MULTILINGUAL PERSISTENCE</span>
+                    <span className="text-xs font-mono text-accent tracking-widest block uppercase">// PSYCHOMETRIC ENGINE &amp; MULTILINGUAL ARCHITECTURE</span>
                     <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
                       Deep-Dive: Multi-Stage Parallel AI & 13-Language i18n
                     </h2>
@@ -81,7 +81,7 @@ export default function WorkSarthiDeepDive() {
                       </div>
                     </div>
 
-                    {/* i18n & Prompt Localization */}
+                    {/* i18n & Context Localization */}
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">LOCALIZATION</span>
@@ -98,9 +98,9 @@ export default function WorkSarthiDeepDive() {
                           </span>
                         </div>
                         <div className="space-y-1">
-                          <span className="font-mono font-bold block text-ink">B. Prompt Language Injection</span>
+                          <span className="font-mono font-bold block text-ink">B. Dynamic Locale System Context</span>
                           <span className="text-muted leading-relaxed block text-[11px]">
-                            The current locale parameter threads directly into the AI orchestrator's system context. This instructs Gemini to emit all advisory outputs natively in the requested language.
+                            The current locale parameter threads directly into the orchestrator's system context. This instructs the generation engine to emit all advisory outputs natively in the requested language.
                           </span>
                         </div>
                       </div>
@@ -110,10 +110,10 @@ export default function WorkSarthiDeepDive() {
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">UTILITIES</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Enterprise-Grade PDF & Control Panel</h4>
+                        <h4 className="font-serif font-bold text-lg text-ink">Enterprise-Grade PDF &amp; Control Panel</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed">
-                        Supports high-fidelity exporting and real-time prompt modification with local administration controls:
+                        Supports high-fidelity exporting and real-time parameter calibration with local administration controls:
                       </p>
                       <div className="space-y-3 text-xs font-mono text-ink">
                         <div className="flex justify-between items-start border-b border-ink/5 pb-2">
@@ -126,9 +126,9 @@ export default function WorkSarthiDeepDive() {
                         </div>
                         <div className="flex justify-between items-start">
                           <div>
-                            <span className="font-bold block">Live Prompt-Tuning Dashboard</span>
+                            <span className="font-bold block">Live Calibration &amp; Scoring Dashboard</span>
                             <span className="text-muted text-[11px] leading-normal">
-                              Provides a password-protected route allowing administrators to edit the active core prompts, persist changes to localStorage, or export responses to clean CSV arrays.
+                              Provides a password-protected route allowing administrators to calibrate scoring thresholds, evaluation criteria, and model instructions, or export responses to clean CSV arrays.
                             </span>
                           </div>
                         </div>

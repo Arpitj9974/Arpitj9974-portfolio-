@@ -66,11 +66,11 @@ export default function CareerLibraryDeepDive() {
                         The platform's flagship feature provides structured career suitability analysis by evaluating academic transcripts or marksheets against a career's exact profile parameters:
                       </p>
                       <div className="border border-accent/10 bg-accent/5 p-3.5 space-y-3 rounded text-xs font-mono">
-                        <span className="text-[10px] text-accent uppercase tracking-wider block font-bold">// CLAUDE PROMPT COMPOSITION</span>
+                        <span className="text-[10px] text-accent uppercase tracking-wider block font-bold">// STRUCTURED CONTEXT &amp; FIT SYNTHESIS PIPELINE</span>
                         <div className="text-[11px] text-ink leading-relaxed space-y-1">
                           <p><strong>1. Parsing:</strong> Web API <code>FileReader</code> processes local files (PDF/TXT/DOCX) on-the-fly.</p>
                           <p><strong>2. Context Assembly:</strong> Dynamically merges parsed raw academic grades with career-specific traits, entrance criteria, and educational pathways.</p>
-                          <p><strong>3. Synthesis:</strong> Claude Sonnet evaluates the candidate on 5 distinct dimensions: <em>academic fit, trait alignment, market viability, timeline readiness, and potential blockers</em>.</p>
+                          <p><strong>3. Synthesis:</strong> Multi-dimensional inference engine evaluates candidate credentials across 5 distinct dimensions: <em>academic fit, trait alignment, market viability, timeline readiness, and potential blockers</em>.</p>
                         </div>
                       </div>
                     </div>

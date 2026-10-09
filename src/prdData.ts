@@ -943,8 +943,252 @@ export const PRD_DATA: Record<string, PRDSpec> = {
       { label: "Mandi Price Feed Availability", metric: "100% Benchmark Uptime", businessImpact: "24-hour hybrid caching keeps market intelligence accessible during API outages" },
       { label: "Advisory Cascade Uptime", metric: "99.9% Advisory Uptime", businessImpact: "3-tier automated failover prevents system blackout during crop season" }
     ]
+  },
+  "career-library": {
+    projectId: "career-library",
+    docId: "PRD-EDTECH-002",
+    version: "v2.0 (Shipped & Live)",
+    status: "SHIPPED & LIVE",
+    title: "Career Library — Interactive Career Discovery & Academic Pathway Taxonomy",
+    author: "Arpit Jaiswal (Product & Systems Architect)",
+    targetUsers: "Class 10–12 High School Students, Parents, School Counselors, Tier-2/3 Aspirants",
+    lastUpdated: "2026",
+    executiveSummary: "An open-access, zero-overhead career discovery portal mapping 225+ career paths, 700+ entrance exams, and 5,000+ institutions. Engineered with zero framework overhead, static edge JSON datasets, and multi-dimensional academic fit synthesis, eliminating reliance on expensive private counseling.",
+    rootCauseAnalysis: [
+      "Over 90% of Indian high school students suffer from narrow career tunnel-vision, recognizing only Engineering or Medicine due to lack of structured guidance.",
+      "Structured career mapping (stream requirements -> entrance exams -> colleges -> occupational outcomes) is locked behind expensive private counseling services (₹10,000–₹50,000 per consultation).",
+      "Standard government career portals are fragmented, difficult to navigate on mobile, and fail to provide personalized suitability evaluation based on student credentials."
+    ],
+    primaryPersona: {
+      name: "Aarav Sharma",
+      role: "Class 11 Science (PCM) Student",
+      context: "Studying in a Tier-2 town, questioning whether to continue preparing for JEE or explore alternative high-growth professions matching his aptitude.",
+      jtbd: "When planning my post-school education, I need transparent, end-to-end pathway maps connecting high school streams to real entrance exams and colleges, so that I can make confident career decisions without expensive private counselors."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Multi-Pathway Navigation & Stream Partitioning",
+        spec: "Deliver 3 independent navigation flows (Stream-Based PCM/PCB/Comm/Hum, 3-tier taxonomy drill-down from Industries to Careers, and sub-millisecond client-side keyword search) across 225 professions.",
+        acceptanceCriteria: "Search query executes in <50ms over pre-indexed JSON registry with zero network roundtrips."
+      },
+      {
+        priority: "P0",
+        title: "9-Section Complete Career Blueprint Templates",
+        spec: "Render structured analytical blueprints for every career: career maps, stream eligibility, 700+ entrance exams paired with 5,000+ colleges, specialty tracks, and aptitude profiles.",
+        acceptanceCriteria: "100% of the 225 mapped careers provide complete stream-to-college pipeline information without missing fields."
+      },
+      {
+        priority: "P1",
+        title: "Academic Marksheet Fit Evaluation Engine",
+        spec: "Process local student transcript uploads (PDF/TXT/DOCX) via Web FileReader API on-device, assemble candidate grade context with career trait criteria, and synthesize a 5-dimensional candidate-role-fit report.",
+        acceptanceCriteria: "Zero server storage of student marksheets; evaluation delivers structured 5-dimensional feedback on academic fit, trait alignment, and market viability."
+      },
+      {
+        priority: "P2",
+        title: "Zero-Framework 14-Theme Dynamic Attribute Styling",
+        spec: "Implement CSS custom properties keyed by HTML body data-industry attributes, enabling one lightweight stylesheet to theme 225 careers with zero CSS-in-JS runtime overhead.",
+        acceptanceCriteria: "Zero stylesheet bloat; instant theme switching across 14 industry categories with perfect Lighthouse 100 performance."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "CareerTaxonomyEntity",
+          description: "Flat-file JSON record detailing one profession across stream requirements, exams, colleges, and trait metrics",
+          fields: ["id", "title", "industry", "streamEligibility", "entranceExams", "topColleges", "traits", "specializations"]
+        },
+        {
+          name: "AcademicFitPayload",
+          description: "Client-side transcript synthesis vector for candidate suitability scoring",
+          fields: ["studentGrades", "targetCareerId", "fitScore", "academicFit", "traitAlignment", "marketViability", "timelineReadiness", "blockers"]
+        }
+      ],
+      syncStrategy: "Static edge flat-file JSON assets pre-indexed at build time -> instant client-side O(1) keyword indexing -> zero background server overhead."
+    },
+    edgeCases: [
+      {
+        scenario: "Student uploads non-standard state board marksheet format or scanned image",
+        operationalRisk: "Client-side text extraction fails or yields partial grade records.",
+        systemResolution: "System falls back to structured manual subject/grade input chips with instant recalculation."
+      },
+      {
+        scenario: "Low-end mobile browser accessing deep 225-career catalog over 2G/3G network",
+        operationalRisk: "Heavy bundle download causes page freeze or high bounce rate.",
+        systemResolution: "Zero-dependency static HTML/JS architecture loads initial shell in under 150ms with 100% offline-tolerant bookmark persistence."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Career Catalog Depth", metric: "225 Professions Mapped", businessImpact: "Broadens career literacy far beyond traditional Engineering and Medicine silos" },
+      { label: "Institutional Coverage", metric: "700+ Exams & 5,000+ Colleges", businessImpact: "Direct actionable path from high school stream to target colleges" },
+      { label: "Catalog Query Latency", metric: "<50ms Client Search", businessImpact: "Sub-millisecond discovery without server infrastructure overhead" },
+      { label: "Guidance Accessibility Cost", metric: "₹0 (100% Open Access)", businessImpact: "Democratizes quality academic counseling for students across Tier-2 and Tier-3 India" }
+    ]
+  },
+  "work-sarthi": {
+    projectId: "work-sarthi",
+    docId: "PRD-EDTECH-003",
+    version: "v2.0 (Shipped & Live)",
+    status: "SHIPPED & LIVE",
+    title: "Work Sarthi (WSCAT) — Multilingual Psychometric Career Assessment Engine",
+    author: "Arpit Jaiswal (Product & Operations Lead)",
+    targetUsers: "High School & College Students, Tier-2/3 Vernacular Aspirants, Vocational Trainees, Counselors",
+    lastUpdated: "2026",
+    executiveSummary: "A scientifically grounded vocational psychometric assessment engine synthesizing RIASEC, Big Five (OCEAN), and Hofstede cultural frameworks. Evaluates 60+ behavioral indicators and executes client-driven parallel inference pipelines to generate personalized 8–10 page career roadmaps in 13 Indian regional languages with 100% browser-level data privacy.",
+    rootCauseAnalysis: [
+      "Existing psychometric platforms are modeled strictly on Western corporate workforce assumptions, failing to account for Indian familial and cultural decision structures.",
+      "Vocational assessments are almost exclusively in English, effectively disenfranchising millions of students in regional vernacular mediums across Tier-2, 3, and rural India.",
+      "High latency in multi-section psychometric reporting leads to 40%+ drop-off rates on mobile devices during traditional assessment flows."
+    ],
+    primaryPersona: {
+      name: "Pooja Patel",
+      role: "First-Generation College Aspirant (Gujarati Medium)",
+      context: "Completing Class 12, seeking scientific career validation in her native tongue without corporate jargon or English language intimidation.",
+      jtbd: "When taking a career aptitude test, I need questions and reports delivered in my native language with culturally aligned occupational recommendations, so that I and my family can understand my strengths and choose the right vocational path."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Tri-Framework Psychometric Vector Normalization",
+        spec: "Unify RIASEC (Holland Codes), Big Five (OCEAN), and Hofstede Cultural Dimensions into a standardized mathematical pipeline tracking 60+ indicators normalized via round((sum / (count * 5)) * 10).",
+        acceptanceCriteria: "Guarantees equivalent weighting and mathematical parity across all 60 behavioral input vectors."
+      },
+      {
+        priority: "P0",
+        title: "13-Language Multilingual Localization Architecture",
+        spec: "Thread active locale parameter directly into UI dictionary keys and AI orchestrator system context, enabling report generation natively in 13 Indian languages (Hindi, Gujarati, Marathi, Tamil, Telugu, Bengali, etc.).",
+        acceptanceCriteria: "Entire 8–10 page diagnostic report emits natively in the student's selected regional mother tongue, not through crude machine post-translation."
+      },
+      {
+        priority: "P1",
+        title: "Multi-Stage Parallel Inference Pipeline",
+        spec: "Structure multi-stage orchestration separating high-level diagnostic clustering (Stage 1) from parallel deep SWOT analysis across career matches (Stage 2 with 4x concurrent calls).",
+        acceptanceCriteria: "Reduces end-to-end report generation turnaround by ~60% (sub-20s total pipeline duration)."
+      },
+      {
+        priority: "P1",
+        title: "Offline Pearson Fallback Engine & Client Data Sovereignty",
+        spec: "Implement client-side trigonometric vector correlation fallback that computes matching arrays if external network drops, generating print-ready 150 DPI vector A4 PDFs entirely inside the browser.",
+        acceptanceCriteria: "Zero student assessment data leaves the local browser environment; 100% data privacy and instant fallback capability."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "PsychometricVectorSet",
+          description: "Normalized psychological scoring profile combining three distinct academic frameworks",
+          fields: ["candidateId", "riasecScores", "oceanScores", "hofstedeScores", "normalizedVector", "assessmentTimestamp"]
+        },
+        {
+          name: "MultilingualReportOutput",
+          description: "Structured report payload rendered to printable A4 canvas and PDF",
+          fields: ["reportId", "candidateId", "locale", "careerClusters", "swotMatrix", "timestampedRoadmap", "pdfBlobUrl"]
+        }
+      ],
+      syncStrategy: "Client-side Likert vector accumulation -> multi-stage parallel inference -> offline Pearson fallback -> direct browser PDF render with zero server data retention."
+    },
+    edgeCases: [
+      {
+        scenario: "Intermittent mobile data connection during multi-stage report inference",
+        operationalRisk: "External API call fails, stranding student after completing 60-question assessment.",
+        systemResolution: "Client-side Pearson correlation engine activates instantly, computing vector match arrays locally without losing assessment progress."
+      },
+      {
+        scenario: "Student provides uniform extreme responses across all questions (all 1s or all 5s)",
+        operationalRisk: "Flat psychometric vector produces undifferentiated recommendations.",
+        systemResolution: "Sanity check flags response bias and presents a lightweight 3-question forced-choice tie-breaker before finalizing vector."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Vernacular Reach", metric: "13 Indian Regional Languages", businessImpact: "Enables non-metro students to receive career guidance in their native language" },
+      { label: "Psychometric Indicator Depth", metric: "60+ Behavioral Vectors", businessImpact: "Scientifically validated triangulation across RIASEC, Big Five, and Hofstede models" },
+      { label: "Inference Speedup", metric: "4x Parallel Acceleration (<20s)", businessImpact: "Prevents drop-offs by generating 8-10 page custom reports under 20 seconds" },
+      { label: "Data Sovereignty Parity", metric: "100% Client-Side Processing", businessImpact: "Guarantees student privacy with zero cloud database persistence of psychological profiles" }
+    ]
+  },
+  "ar-auagpt": {
+    projectId: "ar-auagpt",
+    docId: "PRD-COMMODITY-001",
+    version: "v3.0 (Shipped & Live)",
+    status: "SHIPPED & LIVE",
+    title: "AR-AuAgPt — Domestic Precious Metals Index & Landed Parity Platform",
+    author: "Arpit Jaiswal (Product & Systems Architect)",
+    targetUsers: "Retail Jewelry Buyers, Small Bullion Investors, Local Goldsmiths, Bridal Gift Planners",
+    lastUpdated: "2026",
+    executiveSummary: "A real-time gold, silver, and platinum pricing platform reflecting true Indian landed rates. Layers domestic import duties (6% Basic Duty), 1% AIDC, and 3% GST on top of global COMEX/London spot bids, standardized in 10g and tola units. Features a 5-tier high-availability data source fallback cascade, ensuring 100% feed reliability for local retail transactions.",
+    rootCauseAnalysis: [
+      "Mainstream financial tickers only display raw international USD spot gold rates, completely ignoring India's layered tariff regime (6% Basic Customs Duty, 1% AIDC, and 3% GST).",
+      "Local retail jewelry buyers lack transparency into true landed costs, leaving them vulnerable to arbitrary jeweler margins and undisclosed markups.",
+      "Domestic bullion pricing APIs suffer from frequent midday outages, resulting in blank price widgets during critical retail trading windows.",
+    ],
+    primaryPersona: {
+      name: "Dinesh Parekh",
+      role: "Retail Bullion Buyer & Goldsmith",
+      context: "Buys 24K gold bars and silver bullion in Surat's jewelry bazaar; needs instant confirmation of true domestic landed rate per 10g before settling counter trade.",
+      jtbd: "When evaluating gold or silver purchases, I need instant landed INR rates that include all Indian customs duties and GST per 10g/tola, so that I can verify jeweler quotes against true market parity."
+    },
+    requirements: [
+      {
+        priority: "P0",
+        title: "Domestic Landed Tax & Tariff Mathematical Conversion",
+        spec: "Convert international troy-ounce USD spot bids into true Indian landed rates: (Spot USD * USD/INR / 31.1034768) * Multiplier (6% Customs Duty + 1% AIDC + 3% GST Compounded = 1.0628x factor for Gold, 1.0759x for Silver).",
+        acceptanceCriteria: "Achieves exact mathematical parity with published Indian Bullion and Jewellers Association (IBJA) benchmarks down to the rupee."
+      },
+      {
+        priority: "P0",
+        title: "5-Tier High-Availability Provider Fallback Cascade",
+        spec: "Engineer an Express proxy gateway with sequential automatic fallback across Swissquote, Yahoo Finance, European Central Bank (ECB), historical snapshots, and client localStorage cache.",
+        acceptanceCriteria: "Zero price card blackouts; price display maintains 100% availability even during upstream API outages."
+      },
+      {
+        priority: "P1",
+        title: "Traditional Indian Unit Normalization (10 Grams & Tola)",
+        spec: "Provide instant toggleable pricing views matching local bazaar conventions: 10g, 1 Tola (11.66g), 1 Kilogram, and Troy Ounce, with custom interactive margin simulation sliders.",
+        acceptanceCriteria: "Enables consumers to calculate landed material cost before paying jeweler retail making charges."
+      },
+      {
+        priority: "P2",
+        title: "Cross-Platform Delivery (Web, PWA & Native Build)",
+        spec: "Ship application as a zero-overhead responsive web app, installable offline PWA, and Capacitor-ready mobile application from a single unified codebase.",
+        acceptanceCriteria: "PWA installs cleanly on Android and iOS with sub-second cold boot and offline rate display."
+      }
+    ],
+    dataArchitecture: {
+      entities: [
+        {
+          name: "LandedCommodityRate",
+          description: "Current domestic spot price record computed from international bids and Indian tariff structure",
+          fields: ["metalId", "spotUsd", "usdInrRate", "baseInrPerGram", "dutyInclusivePerGram", "ratePer10g", "ratePerTola", "timestamp"]
+        },
+        {
+          name: "TariffMultiplierConfig",
+          description: "Mathematical duty multiplier parameters reflective of current Union Budget trade policies",
+          fields: ["metalId", "basicImportDuty", "aidcSurcharge", "gstRate", "compositeMultiplier", "effectiveDate"]
+        }
+      ],
+      syncStrategy: "Cron-warmed Express proxy gateway caches foreign exchange and spot feeds -> 5-tier sequential failover -> client localStorage cache fallback."
+    },
+    edgeCases: [
+      {
+        scenario: "Primary upstream financial rate feed (Swissquote) experiences mid-day API failure",
+        operationalRisk: "Live price widget fails or shows blank screen during active jewelry market hours.",
+        systemResolution: "Express proxy switches automatically to Yahoo Finance and ECB within 250ms with zero disruption to active users."
+      },
+      {
+        scenario: "Sudden intra-day currency fluctuation between USD and INR during high market volatility",
+        operationalRisk: "Static calculations display outdated Rupee pricing.",
+        systemResolution: "60-second cron-warmed cache refreshes USD/INR forex vectors continuously and serves real-time landed parity."
+      }
+    ],
+    kpiMetrics: [
+      { label: "Price Feed Availability", metric: "100% Uptime (5-Tier Cascade)", businessImpact: "Guarantees that buyers and merchants never face blank screens during trades" },
+      { label: "Domestic Parity Accuracy", metric: "0.00% Calculation Variance", businessImpact: "Standardized against official Indian Bullion and Jewellers Association (IBJA) landed benchmarks" },
+      { label: "Calculation Latency", metric: "<50ms Real-Time Recalculation", businessImpact: "Instant user feedback when adjusting international spot price or currency sliders" },
+      { label: "Commodity Coverage", metric: "Gold, Silver & Platinum", businessImpact: "Complete coverage of all three primary precious metal retail investment assets in India" }
+    ]
   }
 };
 
 // Ensure direct lookup by project.id ("study-tracker-aj") succeeds
 PRD_DATA["study-tracker-aj"] = PRD_DATA["aspirantflow"];
+

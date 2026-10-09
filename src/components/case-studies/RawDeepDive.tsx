@@ -137,7 +137,7 @@ export default function RawDeepDive() {
                     <div className="bg-surface-container/60 border border-ink/10 p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <span className="bg-accent/10 text-accent font-mono text-xs px-2 py-0.5 font-bold">OS HEURISTIC</span>
-                        <h4 className="font-serif font-bold text-lg text-ink">Native Android Telephony Hacks</h4>
+                        <h4 className="font-serif font-bold text-lg text-ink">Native Android Telephony Event Pipeline &amp; Lifecycle Handlers</h4>
                       </div>
                       <p className="text-xs text-muted leading-relaxed">
                         Android's media layer is notoriously asynchronous. Building real-time background syncs requires overriding typical lifecycle behaviors:

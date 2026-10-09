@@ -181,7 +181,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
                   <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>Android / HR Operations, Deployed at ARWS</span>
                 </div>
                 <div className="text-[9pt]">
-                  <a href="https://github.com/Arpitj9974/RAW" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>GitHub</a>
+                  <a href="https://github.com/Arpitj9974/ARWS-dialer" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>GitHub</a>
                 </div>
               </div>
               <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
@@ -239,7 +239,7 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
             <div><strong style={{ color: '#0f3d64' }}>Business Operations &amp; Finance:</strong> Lending Operations, Loan Amortization Modeling, Credit &amp; Risk Validation, SOP Creation, Business Process Analysis, Accounting Parity, Collections Workflow</div>
             <div><strong style={{ color: '#0f3d64' }}>Data &amp; Analytics:</strong> SQL, Python, Advanced Excel (Financial Models, Pivot, Dynamic Arrays), Power BI, Tableau, Performance Telemetry, Cohort Analysis, Reporting</div>
             <div><strong style={{ color: '#0f3d64' }}>Automation &amp; Integrations:</strong> Google Apps Script, REST APIs, n8n, Make, Webhooks, Firestore Event Sync, SheetDB</div>
-            <div><strong style={{ color: '#0f3d64' }}>AI Orchestration &amp; Tooling:</strong> LLM Systems Architecture, Structured Outputs, Multi-Provider AI Routing, Google Gemini, Claude API, Groq, NotebookLM</div>
+            <div><strong style={{ color: '#0f3d64' }}>Systems Orchestration &amp; Applied AI:</strong> Systems Architecture, Structured Outputs, Multi-Provider Routing, Google Gemini, Claude API, Groq, NotebookLM</div>
             <div><strong style={{ color: '#0f3d64' }}>Systems Architecture &amp; Technical Stacks:</strong> React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Firebase, Supabase, Kotlin (Android), Python (FastAPI), Tailwind CSS, Vite, Git, Vercel</div>
           </div>
         </div>

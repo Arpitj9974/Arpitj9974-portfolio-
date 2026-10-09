@@ -339,29 +339,29 @@ export default function ExecutiveTourModal({
 
             <div className="border border-ink/10 bg-paper p-3.5 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] text-accent font-bold">OPERATIONS &amp; WORKFORCE</span>
-                <span className="font-mono text-[9px] text-muted">2025</span>
+                <span className="font-mono text-[10px] text-accent font-bold">EDTECH &amp; PSYCHOMETRICS</span>
+                <span className="font-mono text-[9px] text-muted">2026</span>
               </div>
               <h4 className="font-serif text-base font-bold text-ink">Work Sarthi</h4>
               <p className="text-[11px] text-muted font-sans line-clamp-3">
-                Field-workforce coordination and automated call logging system eliminating human reporting overhead.
+                Psychometric vocational engine synthesizing RIASEC, Big Five &amp; Hofstede models across 13 Indian languages with client-side PDF roadmaps.
               </p>
               <div className="text-[10px] font-mono text-accent pt-1 border-t border-ink/5 font-bold">
-                Impact: 100% call logs automated
+                Impact: 20 career clusters in 13 languages
               </div>
             </div>
 
             <div className="border border-ink/10 bg-paper p-3.5 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] text-accent font-bold">ETL &amp; DATA ENGINE</span>
-                <span className="font-mono text-[9px] text-muted">2024</span>
+                <span className="font-mono text-[10px] text-accent font-bold">HR TELEPHONY &amp; AUTOMATION</span>
+                <span className="font-mono text-[9px] text-muted">2026</span>
               </div>
-              <h4 className="font-serif text-base font-bold text-ink">ARWS RAW</h4>
+              <h4 className="font-serif text-base font-bold text-ink">RAW (Dialer)</h4>
               <p className="text-[11px] text-muted font-sans line-clamp-3">
-                High-volume transactional ETL pipeline ingesting 10,000+ records with schema validation and real-time reconciliation.
+                Invisible Android background service auto-syncing company-SIM calls to Google Sheets with zero duplicate entries and $0 server cost.
               </p>
               <div className="text-[10px] font-mono text-accent pt-1 border-t border-ink/5 font-bold">
-                Impact: 0 ledger discrepancies
+                Impact: -60m daily admin per recruiter
               </div>
             </div>
           </div>

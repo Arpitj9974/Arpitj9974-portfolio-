@@ -931,7 +931,7 @@ export default function App() {
                           sector: "EdTech & Talent",
                           name: "Work Sarthi",
                           id: "work-sarthi",
-                          bottleneck: "Recruiters struggle to evaluate talent objectively; psychometric tests are scored manually across silos.",
+                          bottleneck: "Non-metro students lack affordable, native-language career counseling; Western tests are English-only and culturally detached.",
                           solution: "Unified RIASEC, Big Five, and Hofstede psychometric scoring engine with localized report generation.",
                           impact: "20 career clusters mapped across 13 Indian languages."
                         },
@@ -1885,7 +1885,7 @@ export default function App() {
                       { id: "cs-origin", label: "01 Origin" },
                       { id: "cs-purpose", label: "02 Purpose" },
                       { id: "cs-problem", label: "03 Problem" },
-                      { id: "cs-delivery", label: "04 AI Delivery" },
+                      { id: "cs-delivery", label: "04 Architecture" },
                       { id: "cs-metrics", label: "05 Impact" },
                       { id: "cs-deepdive", label: "06 Deep-Dive" }
                     ].map(item => (
@@ -2103,7 +2103,7 @@ export default function App() {
                   Executive Experience &amp; Operational Leadership
                 </h1>
                 <p className="text-sm text-muted max-w-2xl font-sans leading-relaxed">
-                  4+ years of hands-on FinOps and lending portfolio leadership synthesized with systems architecture and autonomous AI delivery—transforming ground-floor operational friction into high-leverage business software.
+                  4+ years of hands-on FinOps and lending portfolio leadership synthesized with systems architecture and end-to-end production software delivery—transforming ground-floor operational friction into high-leverage business software.
                 </p>
               </div>
 
