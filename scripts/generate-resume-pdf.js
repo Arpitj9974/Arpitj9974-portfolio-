@@ -23,8 +23,8 @@ const htmlContent = `<!DOCTYPE html>
       background-color: #ffffff;
       color: #1a1a1a;
       font-family: Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      font-size: 9.2pt;
-      line-height: 1.28;
+      font-size: 9.15pt;
+      line-height: 1.27;
       -webkit-font-smoothing: antialiased;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
@@ -33,7 +33,7 @@ const htmlContent = `<!DOCTYPE html>
       width: 210mm;
       height: 297mm;
       max-height: 297mm;
-      padding: 10mm 14mm 8mm 14mm;
+      padding: 8.5mm 13mm 7.5mm 13mm;
       page-break-after: always;
       break-after: page;
       overflow: hidden;
@@ -54,8 +54,8 @@ const htmlContent = `<!DOCTYPE html>
     }
     .header {
       border-bottom: 1.5px solid #1e293b;
-      padding-bottom: 5px;
-      margin-bottom: 7px;
+      padding-bottom: 4.5px;
+      margin-bottom: 5.5px;
     }
     .name {
       font-size: 21pt;
@@ -79,7 +79,7 @@ const htmlContent = `<!DOCTYPE html>
       gap: 12px;
       font-size: 8.6pt;
       color: #4b5563;
-      margin-top: 4px;
+      margin-top: 3.5px;
     }
     .contact-row span.sep {
       color: #9ca3af;
@@ -97,26 +97,26 @@ const htmlContent = `<!DOCTYPE html>
       color: #0f3d64;
     }
     .section {
-      margin-top: 6.5px;
+      margin-top: 5.5px;
     }
     .section-title {
-      font-size: 10pt;
+      font-size: 9.8pt;
       font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: #0f3d64;
       border-bottom: 1px solid #cbd5e1;
       padding-bottom: 1px;
-      margin-bottom: 4.5px;
+      margin-bottom: 4px;
     }
     .summary-text {
-      font-size: 9pt;
-      line-height: 1.32;
+      font-size: 8.95pt;
+      line-height: 1.29;
       text-align: justify;
       color: #1f2937;
     }
     .exp-item {
-      margin-bottom: 5px;
+      margin-bottom: 4.5px;
     }
     .exp-header {
       display: flex;
@@ -125,37 +125,37 @@ const htmlContent = `<!DOCTYPE html>
     }
     .exp-role {
       font-weight: 700;
-      font-size: 9.4pt;
+      font-size: 9.3pt;
       color: #111827;
     }
     .exp-company {
       font-weight: 600;
-      font-size: 8.8pt;
+      font-size: 8.7pt;
       color: #374151;
     }
     .exp-dates {
-      font-size: 8.2pt;
+      font-size: 8.1pt;
       font-style: italic;
       color: #6b7280;
       margin-top: 0.5px;
     }
     ul.bullet-list {
       margin-left: 14px;
-      margin-top: 1.5px;
+      margin-top: 1px;
     }
     ul.bullet-list li {
-      font-size: 8.8pt;
-      line-height: 1.27;
+      font-size: 8.75pt;
+      line-height: 1.26;
       color: #1f2937;
       margin-bottom: 1px;
     }
     .skills-tag {
-      font-size: 8.2pt;
+      font-size: 8.1pt;
       color: #4b5563;
       margin-top: 1px;
     }
     .project-card {
-      margin-bottom: 5.5px;
+      margin-bottom: 4.5px;
     }
     .project-header {
       display: flex;
@@ -164,7 +164,7 @@ const htmlContent = `<!DOCTYPE html>
     }
     .project-title {
       font-weight: 700;
-      font-size: 9.4pt;
+      font-size: 9.3pt;
       color: #111827;
     }
     .project-tag {
@@ -178,72 +178,91 @@ const htmlContent = `<!DOCTYPE html>
       margin-left: 4px;
     }
     .project-links {
-      font-size: 8.5pt;
+      font-size: 8.4pt;
     }
     .project-desc {
-      font-size: 8.7pt;
-      line-height: 1.28;
+      font-size: 8.65pt;
+      line-height: 1.27;
       text-align: justify;
       color: #1f2937;
       margin-top: 1px;
     }
     .project-stack {
-      font-size: 8pt;
+      font-size: 7.9pt;
       font-style: italic;
       color: #64748b;
+      margin-top: 0.5px;
+    }
+
+    /* Page 2 Balanced Spacing */
+    .page-2 .section {
+      margin-top: 10px;
+    }
+    .page-2 .section:first-child {
+      margin-top: 0;
+    }
+    .page-2 .project-card {
+      margin-bottom: 7.5px;
+    }
+    .page-2 .project-desc {
+      font-size: 8.85pt;
+      line-height: 1.31;
+    }
+    .page-2 .project-stack {
+      font-size: 8.1pt;
       margin-top: 1px;
     }
-    .skills-block {
+    .page-2 .skills-block {
       display: flex;
       flex-direction: column;
-      gap: 3px;
-      font-size: 8.7pt;
-      line-height: 1.28;
+      gap: 5px;
+      font-size: 8.85pt;
+      line-height: 1.31;
     }
-    .skills-category {
+    .page-2 .skills-category {
       color: #1f2937;
     }
-    .skills-category strong {
+    .page-2 .skills-category strong {
       color: #0f3d64;
-      font-size: 8.9pt;
+      font-size: 9pt;
     }
-    .edu-item {
+    .page-2 .edu-item {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 3.5px;
+      margin-bottom: 5px;
     }
-    .edu-degree {
+    .page-2 .edu-degree {
       font-weight: 700;
-      font-size: 9.1pt;
+      font-size: 9.15pt;
       color: #111827;
     }
-    .edu-inst {
-      font-size: 8.7pt;
+    .page-2 .edu-inst {
+      font-size: 8.75pt;
       color: #4b5563;
     }
-    .edu-dates {
-      font-size: 8.7pt;
+    .page-2 .edu-dates {
+      font-size: 8.75pt;
       font-weight: 700;
       color: #4b5563;
       white-space: nowrap;
     }
-    .cert-list {
+    .page-2 .cert-list {
       margin-left: 14px;
-      margin-top: 1.5px;
+      margin-top: 2px;
     }
-    .cert-list li {
-      font-size: 8.7pt;
-      line-height: 1.28;
+    .page-2 .cert-list li {
+      font-size: 8.85pt;
+      line-height: 1.31;
       color: #1f2937;
-      margin-bottom: 1.5px;
+      margin-bottom: 3px;
     }
   </style>
 </head>
 <body>
 
   <!-- ==================== PAGE 1 ==================== -->
-  <div class="page">
+  <div class="page page-1">
     
     <!-- HEADER -->
     <div class="header">
@@ -325,7 +344,7 @@ const htmlContent = `<!DOCTYPE html>
 
     </div>
 
-    <!-- SELECTED PROJECTS (PART 1: FINTECH & EDTECH FLAGSHIPS) -->
+    <!-- SELECTED PROJECTS (PART 1: FINTECH, EDTECH & HR OPERATIONS) -->
     <div class="section">
       <div class="section-title">SELECTED PROJECTS</div>
 
@@ -363,17 +382,6 @@ const htmlContent = `<!DOCTYPE html>
         <div class="project-stack">Built with: Vanilla JS (ES6+), Vanilla CSS3 &amp; Tailwind CSS, Firebase Auth &amp; Firestore, Service Worker PWA (v58), LocalStorage API, Node.js Audit Suite</div>
       </div>
 
-    </div>
-
-  </div>
-
-  <!-- ==================== PAGE 2 ==================== -->
-  <div class="page">
-    
-    <!-- SELECTED PROJECTS CONTINUED -->
-    <div class="section" style="margin-top: 0;">
-      <div class="section-title">SELECTED PROJECTS (CONTINUED)</div>
-
       <!-- RAW -->
       <div class="project-card">
         <div class="project-header">
@@ -390,6 +398,17 @@ const htmlContent = `<!DOCTYPE html>
         </p>
         <div class="project-stack">Built with: Kotlin, Room Database, Android WorkManager, Google Apps Script, Google Sheets API</div>
       </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page page-2">
+    
+    <!-- SELECTED PROJECTS CONTINUED -->
+    <div class="section" style="margin-top: 0;">
+      <div class="section-title">SELECTED PROJECTS (CONTINUED)</div>
 
       <!-- FreshStamp -->
       <div class="project-card">

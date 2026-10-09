@@ -152,6 +152,23 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
               </p>
               <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: Vanilla JS (ES6+), Vanilla CSS3 &amp; Tailwind CSS, Firebase Auth &amp; Firestore, Service Worker PWA (v58), LocalStorage API, Node.js Audit Suite</div>
             </div>
+
+            {/* RAW */}
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-[10pt]" style={{ color: '#111827' }}>RAW</span>
+                  <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>Android / HR Operations, Deployed at ARWS</span>
+                </div>
+                <div className="text-[9pt]">
+                  <a href="https://github.com/Arpitj9974/ARWS-dialer" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>GitHub</a>
+                </div>
+              </div>
+              <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
+                Enterprise background call-logging and workforce tracking automation app for high-volume recruitment teams. Captured and logged 100% of recruitment calls in real time, saving HR coordinators 30–60 minutes per day previously lost to manual spreadsheet data entry. Implemented dual-SIM hardware filtering (ensuring personal calls never leave the device), offline-first Room database queuing, and a 4-layer duplicate-prevention system with zero-cost Google Apps Script backend.
+              </p>
+              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: Kotlin, Room Database, Android WorkManager, Google Apps Script, Google Sheets API</div>
+            </div>
           </div>
         </div>
       </div>
@@ -170,26 +187,10 @@ export default function PrintableResume({ isModal = false }: PrintableResumeProp
 
       {/* PAGE 2 CONTENT */}
       <div className={isModal ? "mt-4" : "pt-1"}>
-        {/* Selected Projects Continued (RAW, FreshStamp, FinDhar) */}
+        {/* Selected Projects Continued (FreshStamp, FinDhar) */}
         <div>
-          <div className="space-y-3">
-            {/* RAW */}
-            <div>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-[10pt]" style={{ color: '#111827' }}>RAW</span>
-                  <span className="text-[8pt] border px-1 py-0.2 rounded-xs" style={{ color: '#475569', borderColor: '#cbd5e1', backgroundColor: '#f8fafc' }}>Android / HR Operations, Deployed at ARWS</span>
-                </div>
-                <div className="text-[9pt]">
-                  <a href="https://github.com/Arpitj9974/ARWS-dialer" target="_blank" rel="noreferrer" className="hover:underline" style={{ color: '#0f3d64' }}>GitHub</a>
-                </div>
-              </div>
-              <p className="text-[9.5pt] mt-0.5 leading-snug text-justify" style={{ color: '#1f2937' }}>
-                Enterprise background call-logging and workforce tracking automation app for high-volume recruitment teams. Captured and logged 100% of recruitment calls in real time, saving HR coordinators 30–60 minutes per day previously lost to manual spreadsheet data entry. Implemented dual-SIM hardware filtering (ensuring personal calls never leave the device), offline-first Room database queuing, and a 4-layer duplicate-prevention system with zero-cost Google Apps Script backend.
-              </p>
-              <div className="text-[8.5pt] italic mt-0.5" style={{ color: '#64748b' }}>Built with: Kotlin, Room Database, Android WorkManager, Google Apps Script, Google Sheets API</div>
-            </div>
-
+          <h2 className="text-[10.5pt] font-extrabold tracking-wider border-b pb-0.5 uppercase mb-2.5" style={{ color: '#0f3d64', borderColor: 'rgba(30, 41, 59, 0.2)' }}>SELECTED PROJECTS (CONTINUED)</h2>
+          <div className="space-y-3.5">
             {/* FreshStamp */}
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-2">
