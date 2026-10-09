@@ -266,9 +266,9 @@ export default function ExecutiveTourModal({
     // SLIDE 3: The Synthesis
     {
       id: "synthesis",
-      category: "70% MBA STRATEGY + 30% BCA SYSTEMS ARCHITECTURE",
+      category: "BUSINESS STRATEGY + SYSTEMS ARCHITECTURE",
       stepNumber: "03",
-      title: "70% Business Strategy & FinOps + 30% Systems Engineering",
+      title: "Business Strategy & FinOps + Systems Engineering",
       subtitle: "I observe operational friction, formulate the business solution, and architect & ship production systems.",
       content: (
         <div className="space-y-6">
@@ -276,7 +276,7 @@ export default function ExecutiveTourModal({
             <div className="border border-ink/10 bg-paper p-4 space-y-3">
               <div className="flex items-center gap-2">
                 <Layers size={16} className="text-accent" />
-                <span className="font-mono text-xs font-bold text-ink">70% MBA // STRATEGY, FINOPS &amp; PM</span>
+                <span className="font-mono text-xs font-bold text-ink">STRATEGY, FINOPS &amp; PM (MBA)</span>
               </div>
               <p className="text-xs text-muted leading-relaxed font-sans">
                 Manipal University Jaipur (Analytics, Data Science &amp; PM) backed by 4+ years leading lending operations at JD Finance. I focus on ground-level problem observation, borrower lifecycle unit economics, risk mitigation, and executive roadmaps.
@@ -292,7 +292,7 @@ export default function ExecutiveTourModal({
             <div className="border border-ink/10 bg-paper p-4 space-y-3">
               <div className="flex items-center gap-2">
                 <Cpu size={16} className="text-accent" />
-                <span className="font-mono text-xs font-bold text-ink">30% BCA // SYSTEMS ARCHITECTURE &amp; DELIVERY</span>
+                <span className="font-mono text-xs font-bold text-ink">SYSTEMS ARCHITECTURE &amp; DELIVERY (BCA)</span>
               </div>
               <p className="text-xs text-muted leading-relaxed font-sans">
                 BCA foundation provides deep schema literacy, systems architecture, and technical comprehension. I translate operational workflows into relational databases, API contracts, and high-performance offline-first applications.

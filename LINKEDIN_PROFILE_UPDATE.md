@@ -53,8 +53,8 @@
 "I don’t just write strategy decks or theoretical PRDs. I observe ground-level operational friction, model the business logic and system architecture, and personally ship end-to-end production systems."
 
 Bridging business strategy, financial operations, and systems execution:
-• 70% Strategy & Operations: 4+ years of FinOps and credit leadership at JD Finance. Specialized in cashflow parity (0.00% drift), reducing-balance loan amortization schedules, collections risk mitigation, and institutional PRDs.
-• 30% Systems Architect & Software Delivery: BCA (Graduating 2026) + MBA in Analytics & Data Science + Project Management (Manipal University Jaipur). Architect of 10 production platforms + JD Finance lending infrastructure spanning offline-first PWAs, state machines, and background automation.
+• Strategy, FinOps & Product Operations: 4+ years of FinOps and credit leadership at JD Finance. Specialized in cashflow parity (0.00% drift), reducing-balance loan amortization schedules, collections risk mitigation, and institutional PRDs.
+• Systems Architecture & Software Delivery: BCA (Graduating 2026) + MBA in Analytics & Data Science + Project Management (Manipal University Jaipur). Architect of 10 production platforms + JD Finance lending infrastructure spanning offline-first PWAs, state machines, and background automation.
 
 CORE IMPACT & LEADERSHIP HIGHLIGHTS:
 ✓ FinOps & Lending (JD Finance): Managed loan disbursements, daily reconciliation, and portfolio delinquency across 4+ years. Architected custom financial data infrastructure reducing daily close time by 80% (from 90m to <15m) with 100% cash balancing and $0 ongoing SaaS licensing cost.
@@ -447,8 +447,8 @@ Arpit Jaiswal
 "I don’t just write strategy decks or theoretical PRDs. I observe ground-level operational friction, model the business logic and system architecture, and personally ship end-to-end production systems."
 
 Over the past 4+ years, my work has centered on bridging two worlds:
-1️⃣ 70% Strategy, FinOps & Business Operations: Managing micro-lending portfolios, daily cashflow parity, loan amortization engines, and delinquency tracking at JD Finance.
-2️⃣ 30% Systems Architecture & Technical Delivery: Designing relational schemas, offline-first PWAs, state machines, and shipping working production software.
+1️⃣ Strategy, FinOps & Business Operations: Managing micro-lending portfolios, daily cashflow parity, loan amortization engines, and delinquency tracking at JD Finance.
+2️⃣ Systems Architecture & Technical Delivery: Designing relational schemas, offline-first PWAs, state machines, and shipping working production software.
 
 I have packaged my work into a comprehensive interactive systems portfolio, detailing 10 production software platforms alongside our flagship lending infrastructure:
 
