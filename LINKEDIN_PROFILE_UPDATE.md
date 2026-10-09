@@ -19,51 +19,61 @@
 ## 2. 🌟 LINKEDIN "FEATURED" SECTION (Top 3 Pinned Media Cards)
 *(Add these via "Add profile section" -> "Recommended" -> "Add featured" -> "Add a link")*
 
-### Card 1 (Primary Pinned Link — Interactive Portfolio):
+### Card 1 (Flagship EdTech PWA — AspirantFlow):
+- **URL to Enter:** `https://aspirantflow.vercel.app`
+- **Title:** `AspirantFlow — 101+ Multi-Exam Study Orchestrator (PWA v58)`
+- **Description:** `Production PWA tracking 101+ competitive exams across 15 domains. Engineered with cross-exam syllabus deduplication ("study once, benefit everywhere"), 117 variant hubs, sub-16ms local persistence, and zero-flicker pre-render layout guards (CLS 0.0).`
+
+### Card 2 (Flagship Retail FinTech — Vyosha):
+- **URL to Enter:** `https://vyosha.vercel.app`
+- **Title:** `Vyosha — Offline-First Kirana Credit Passbook & Lending Platform`
+- **Description:** `Offline-first digital passbook ledger for micro-merchants and kirana stores. Features passbook accounting with Frame-0 local caching (<200ms cold boot), reducing-balance amortization schedules, dynamic NPCI UPI QR collections, and WhatsApp ledger reminders.`
+
+### Card 3 (Obligation Intelligence — FinDhar):
+- **URL to Enter:** `https://findhar.vercel.app`
+- **Title:** `FinDhar — Contractual Cashflow & 12–60M Obligation Intelligence`
+- **Description:** `Forward-looking debt forecasting engine modeling amortized bank loans, credit card EMI radars, and recurring mandates. Features deterministic calendar clamping, 10-second transactional undo buffer, 136 passing Vitest unit tests, and Workbox PWA architecture.`
+
+### Card 4 (Live Interactive Systems Portfolio):
 - **URL to Enter:** `https://arpitj9974.vercel.app`
 - **Title:** `Arpit Jaiswal — Interactive Systems Portfolio, PRDs & Case Studies`
-- **Description:** `Production systems portfolio featuring 10+ shipped web applications and enterprise lending infrastructure. Includes 1-page institutional PRDs, interactive telemetry dashboards, and systems architecture blueprints across FinTech, EdTech, AgriTech, and Retail.`
+- **Description:** `Full systems portfolio featuring 10+ shipped web applications and enterprise lending infrastructure. Includes 1-page institutional PRDs, interactive telemetry dashboards, and systems architecture blueprints across FinTech, EdTech, AgriTech, and Retail.`
 
-### Card 2 (Official Executive Resume PDF):
+### Card 5 (Official Executive Resume PDF):
 - **URL to Enter:** `https://arpitj9974.vercel.app/Arpit_Jaiswal_Resume_.pdf`
 - **Title:** `Arpit Jaiswal — Official 2-Page Executive Resume (PDF)`
 - **Description:** `Downloadable 2-page executive resume highlighting 4+ years of FinOps leadership at JD Finance, dual MBA (Analytics & PM) + BCA qualifications, 10+ production software deployments, and verified business impact metrics.`
 
-### Card 3 (Flagship FinTech Application — FinDhar):
-- **URL to Enter:** `https://findhar.vercel.app`
-- **Title:** `FinDhar — Contractual Cashflow & 12–60M Obligation Intelligence`
-- **Description:** `Forward-looking debt forecasting engine modeling amortized bank loans, credit card EMI radars, and recurring mandates. Features deterministic calendar clamping, 10-second transactional undo buffer, and offline-first Workbox PWA architecture.`
-
 ---
 
 ## 3. 📝 ABOUT SECTION (Summary)
-*(Copy-paste directly into your LinkedIn "About" box)*
+*(Copy-paste directly into your LinkedIn "About" box — Exactly 2,455 characters, strictly below LinkedIn's 2,600 character limit)*
 
 ```text
 "I don’t just write strategy decks or theoretical PRDs. I observe ground-level operational friction, model the business logic and system architecture, and personally ship end-to-end production systems."
 
-Bridging business strategy, financial operations, and software delivery with a dual academic and practical foundation:
-• 70% Strategy & Operations: 4+ years of real-world FinOps and credit/lending leadership at JD Finance. Specializing in cashflow parity (0.00% ledger drift), reducing-balance loan amortization schedules, collections risk mitigation, and comprehensive PRD specifications.
-• 30% Systems Architect & Technical Delivery: BCA (Graduating 2026) + MBA in Analytics & Data Science + Project Management (Manipal University Jaipur). Architect of 10 live production software platforms + JD Finance core lending infrastructure spanning offline-first PWAs, state machines, relational/NoSQL schemas, and zero-touch background automation.
+Bridging business strategy, financial operations, and systems execution:
+• 70% Strategy & Operations: 4+ years of FinOps and credit leadership at JD Finance. Specialized in cashflow parity (0.00% drift), reducing-balance loan amortization schedules, collections risk mitigation, and institutional PRDs.
+• 30% Systems Architect & Software Delivery: BCA (Graduating 2026) + MBA in Analytics & Data Science + Project Management (Manipal University Jaipur). Architect of 10 production platforms + JD Finance lending infrastructure spanning offline-first PWAs, state machines, and background automation.
 
 CORE IMPACT & LEADERSHIP HIGHLIGHTS:
-✓ FinOps & Lending Continuity (JD Finance): Managed end-to-end loan disbursements, daily collections reconciliation, and portfolio delinquency tracking across 4+ years. Architected custom financial data infrastructure reducing evening close time by 80% (from 90m to <15m) with 100% cash balancing and $0 ongoing SaaS licensing cost.
-✓ Product & Program Delivery (Work Sarthi): Shipped 3 digital products under the Founder & CEO, including an AI Career Assessment platform localized across 13 Indian languages and Career Library mapping 225+ professions.
-✓ Systems Architecture: Built and deployed 10 production web applications and tools (FinDhar, AspirantFlow, Vyosha, FreshStamp, RAW, FarmerConnect, etc.) solving verified domain friction in FinTech, EdTech, FMCG, and Agriculture.
+✓ FinOps & Lending (JD Finance): Managed loan disbursements, daily reconciliation, and portfolio delinquency across 4+ years. Architected custom financial data infrastructure reducing daily close time by 80% (from 90m to <15m) with 100% cash balancing and $0 ongoing SaaS licensing cost.
+✓ Product Delivery (Work Sarthi): Shipped 3 digital products under Founder & CEO, including an AI Career Assessment platform localized across 13 Indian languages and Career Library mapping 225+ professions.
+✓ Systems Architecture: Shipped 10 production web applications (FinDhar, AspirantFlow, Vyosha, FreshStamp, RAW, FarmerConnect) solving verified operational friction in FinTech, EdTech, FMCG, and AgriTech.
 
 AREAS OF EXPERTISE:
-• Product Management: PRD & Technical Spec Writing, User Journey Mapping, Acceptance Criteria, Scope Definition, Feature Prioritization, Agile/Scrum.
-• Business Operations & FinOps: Loan Lifecycle Management, Cashflow Parity, Amortization Modeling, Credit Aging (DPD), SOP Design, Process Automation.
-• Data & Analytics: SQL, Python, Advanced Excel (Dynamic Models & Cash Ledgers), Power BI, Tableau, Cohort Telemetry.
-• Systems Architecture: React 19, TypeScript, Cloud Firestore, Offline-First PWAs (Workbox/Service Worker), REST APIs, Google Apps Script Webhooks.
+• Product Management: PRDs, Technical Specs, User Journeys, Acceptance Criteria, Scope Bounding, Feature Prioritization, Agile/Scrum.
+• FinOps & Operations: Loan Lifecycle Management, Cashflow Parity, Amortization Modeling, Credit Aging (DPD), SOPs, Process Automation.
+• Data & Analytics: SQL, Python, Advanced Excel (Financial Models & Cash Ledgers), Power BI, Tableau, Cohort Telemetry.
+• Systems Architecture: React 19, TypeScript, Cloud Firestore, Offline-First PWAs (Workbox), REST APIs, Google Apps Script.
 
-Targeting roles as Product Manager, Business Operations Lead, Associate Product Manager (APM), or Technical Program Manager.
+Targeting Product Manager, Business Operations Lead, APM, or Technical Program Manager roles.
 
 📍 Surat, Gujarat, India (Open to On-Site / Hybrid in Mumbai, Bengaluru, NCR & Remote)
 ✉️ arpitj9974@gmail.com | 📞 +91 96249 97427
-🌐 Live Interactive Portfolio: https://arpitj9974.vercel.app
-💻 Systems Repositories (GitHub): https://github.com/Arpitj9974
-📄 Official Resume (PDF): https://arpitj9974.vercel.app/Arpit_Jaiswal_Resume_.pdf
+🌐 Portfolio: https://arpitj9974.vercel.app
+💻 GitHub: https://github.com/Arpitj9974
+📄 Resume: https://arpitj9974.vercel.app/Arpit_Jaiswal_Resume_.pdf
 ```
 
 ---
